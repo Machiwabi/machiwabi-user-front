@@ -1,0 +1,3 @@
+fragment RedirectUriField on RedirectUriEntity {
+  url
+}

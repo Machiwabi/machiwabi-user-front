@@ -1,0 +1,13 @@
+mutation provisionBooster(
+  $boosterUniqueKey: String!
+  $waitingUniqueKey: String!
+) {
+  provisionBooster(
+    input: {
+      boosterUniqueKey: $boosterUniqueKey
+      waitingUniqueKey: $waitingUniqueKey
+    }
+  ) {
+    ...RedirectUriField
+  }
+}

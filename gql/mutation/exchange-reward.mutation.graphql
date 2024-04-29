@@ -1,0 +1,3 @@
+mutation exchangeReward($uniqueKey: String!) {
+  exchangeReward(input: { uniqueKey: $uniqueKey })
+}

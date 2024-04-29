@@ -1,0 +1,18 @@
+query waitings {
+  waitings {
+    uniqueKey
+    waitingPoint
+    totalPoint
+    waitingDuration
+    remainingEventStartDuration
+    waitingName
+    waitingMessage
+    joinAt
+    event {
+      ...EventField
+    }
+    user {
+      ...UserPublicField
+    }
+  }
+}

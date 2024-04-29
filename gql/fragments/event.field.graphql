@@ -1,0 +1,15 @@
+fragment EventField on EventEntity {
+  uniqueKey
+  waitingStartAt
+  startAt
+  endAt
+  name
+  description
+  mdxContent
+  detailMdxContent
+  isJoinable
+  lat
+  lng
+  onlineUrl
+  placeName
+}

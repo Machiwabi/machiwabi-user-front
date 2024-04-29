@@ -1,0 +1,23 @@
+query waiting($uniqueKey: String!) {
+  waiting(uniqueKey: $uniqueKey) {
+    ...WaitingField
+    event {
+      ...EventField
+    }
+    user {
+      ...UserPublicField
+    }
+    waitingBoosters {
+      ...WaitingBoosterField
+      booster {
+        ...BoosterField
+      }
+    }
+    waitingRewards {
+      ...WaitingRewardField
+      reward {
+        ...RewardField
+      }
+    }
+  }
+}

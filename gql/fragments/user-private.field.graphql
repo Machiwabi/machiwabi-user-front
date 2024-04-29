@@ -1,0 +1,8 @@
+fragment UserPrivateField on UserPrivateEntity {
+  uniqueKey
+  eoaAddress
+  isActive
+  name
+  displayName
+  iconImageUrl
+}

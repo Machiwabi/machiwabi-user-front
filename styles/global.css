@@ -1,0 +1,5 @@
+.next-image-auto-aspect-ratio {
+  object-fit: contain;
+  position: relative !important;
+  width: auto !important;
+}

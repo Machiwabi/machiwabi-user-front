@@ -1,0 +1,13 @@
+fragment WaitingField on WaitingEntity {
+  uniqueKey
+  waitingPoint
+  totalPoint
+  waitingDuration
+  remainingEventStartDuration
+  secondsPerWaitingPoint
+  secondPerTotalPoint
+  totalPointMultiplier
+  waitingName
+  waitingMessage
+  joinAt
+}

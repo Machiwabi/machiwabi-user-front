@@ -1,0 +1,11 @@
+fragment RewardField on RewardEntity {
+  uniqueKey
+  name
+  description
+  content
+  requiredWaitingPoint
+  requiredTotalPoint
+  stock
+  stockPerWaiting
+  iconUrl
+}

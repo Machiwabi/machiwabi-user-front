@@ -1,0 +1,15 @@
+fragment BoosterField on BoosterEntity {
+  uniqueKey
+  boosterType
+  name
+  description
+  content
+  durationSeconds
+  multiplier
+  emoji
+  iconUrl
+  missionName
+  missionDescription
+  missionMdxContent
+  price
+}

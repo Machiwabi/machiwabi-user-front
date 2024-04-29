@@ -1,0 +1,5 @@
+fragment UserPublicField on UserPublicEntity {
+  eoaAddress
+  displayName
+  iconImageUrl
+}

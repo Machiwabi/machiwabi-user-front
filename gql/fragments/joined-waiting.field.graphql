@@ -1,0 +1,6 @@
+fragment JoinedWaitingField on JoinedWaitingEntity {
+  uniqueKey
+  waitingName
+  waitingMessage
+  joinAt
+}

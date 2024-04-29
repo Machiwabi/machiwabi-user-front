@@ -1,0 +1,5 @@
+query boosters($eventUniqueKey: String!) {
+  boosters(eventUniqueKey: $eventUniqueKey) {
+    ...BoosterField
+  }
+}

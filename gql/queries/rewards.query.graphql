@@ -1,0 +1,5 @@
+query rewards($eventUniqueKey: String!) {
+  rewards(eventUniqueKey: $eventUniqueKey) {
+    ...RewardField
+  }
+}

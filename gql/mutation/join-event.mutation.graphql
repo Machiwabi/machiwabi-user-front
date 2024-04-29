@@ -1,0 +1,18 @@
+mutation joinEvent(
+  $eventUniqueKey: String!
+  $waitingName: String
+  $waitingMessage: String
+) {
+  joinEvent(
+    input: {
+      eventUniqueKey: $eventUniqueKey
+      waitingName: $waitingName
+      waitingMessage: $waitingMessage
+    }
+  ) {
+    uniqueKey
+    waitingName
+    waitingMessage
+    joinAt
+  }
+}

@@ -1,0 +1,5 @@
+fragment WaitingBoosterField on WaitingBoosterEntity {
+  uniqueKey
+  startAt
+  endAt
+}

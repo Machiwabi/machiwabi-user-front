@@ -1,0 +1,23 @@
+query waitingSiblings($eventUniqueKey: String!) {
+  waitingSiblings(eventUniqueKey: $eventUniqueKey) {
+    ...WaitingField
+    event {
+      ...EventField
+    }
+    user {
+      ...UserPublicField
+    }
+    waitingBoosters {
+      ...WaitingBoosterField
+      booster {
+        ...BoosterField
+      }
+    }
+    waitingRewards {
+      ...WaitingRewardField
+      reward {
+        ...RewardField
+      }
+    }
+  }
+}
