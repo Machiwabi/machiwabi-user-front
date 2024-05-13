@@ -1,4 +1,4 @@
-import { ChakraProvider } from '@chakra-ui/react'
+import { MantineProvider } from '@mantine/core'
 import { ErrorBoundary, Provider } from '@rollbar/react'
 import 'material-icons/iconfont/material-icons.css'
 import { NextPage } from 'next'
@@ -7,12 +7,15 @@ import { Router } from 'next/router'
 import NProgress from 'nprogress'
 import { ReactElement, ReactNode } from 'react'
 import { RecoilRoot } from 'recoil'
+import { AuthenticationProvider } from '../providers/AuthenticationProvider'
 import '../styles/global.css'
 import '../styles/nprogress.css'
-import { theme } from '../utils/theme'
-import GoogleAnalyticsV4, { GoogleAnalyticsId } from './GoogleAnalyticsV4'
+import { mantineTheme } from '../theme/mantineTheme'
 import { googleAnalyticsId } from '../utils/ga4'
-import { AuthenticationProvider } from '../providers/AuthenticationProvider'
+import GoogleAnalyticsV4, { GoogleAnalyticsId } from './GoogleAnalyticsV4'
+
+// mantine
+import '@mantine/core/styles.css'
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start()
@@ -56,12 +59,14 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
       <ErrorBoundary>
         <RecoilRoot>
           <AuthenticationProvider>
-            <ChakraProvider theme={theme.templateTheme}>
+            {/* <ChakraProvider theme={theme.templateTheme}> */}
+            <MantineProvider theme={mantineTheme}>
               <GoogleAnalyticsV4
                 googleAnalyticsId={googleAnalyticsId as GoogleAnalyticsId}
               />
               {getLayout(<Component {...pageProps} key={router.asPath} />)}
-            </ChakraProvider>
+            </MantineProvider>
+            {/* </ChakraProvider> */}
           </AuthenticationProvider>
         </RecoilRoot>
       </ErrorBoundary>
