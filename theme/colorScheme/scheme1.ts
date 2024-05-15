@@ -24,11 +24,11 @@ export const scheme1: ColorSchemeType = {
   surface3: {
     surface: '#000000',
     object: {
-      high: '#000000',
-      mid: '#333333',
-      low: '#999999',
-      inactive: '#CCCCCC',
-      disable: '#EEEEEE',
+      high: '#FFFFFF',
+      mid: '#CCCCCC',
+      low: '#555555',
+      inactive: '#333333',
+      disable: '#222222',
     },
   },
   border: {

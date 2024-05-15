@@ -24,6 +24,7 @@ const Component: FC = () => {
                 h="100%"
                 px={24 * 2}
                 fz={24}
+                c={colorScheme.scheme1.surface1.object.high}
               >
                 home
               </Flex>
@@ -46,7 +47,8 @@ const Component: FC = () => {
                   component="i"
                   className="material-icons-outlined"
                   fz={24}
-                  c={'white'}
+                  // c={'white'}
+                  c={colorScheme.scheme1.surface3.object.high}
                 >
                   add_circle
                 </Box>
@@ -82,6 +84,7 @@ const Component: FC = () => {
                 h="100%"
                 px={24 * 2}
                 fz={24}
+                c={colorScheme.scheme1.surface1.object.high}
               >
                 account_circle
               </Flex>
