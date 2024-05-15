@@ -47,7 +47,9 @@ const Page = () => {
               {
                 name: 'MISSONS',
                 isCurrent: false,
-                action: () => {},
+                action: () => {
+                  router.push('/v2/missions')
+                },
               },
               {
                 name: 'REWARDS',

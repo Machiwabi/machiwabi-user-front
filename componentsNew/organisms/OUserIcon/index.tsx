@@ -1,7 +1,7 @@
-import { Box, BoxProps, Flex, Text } from '@mantine/core'
+import { Box, BoxProps } from '@mantine/core'
+import Image from 'next/image'
 import { FC } from 'react'
 import { colorScheme } from '../../../theme/colorScheme'
-import Image from 'next/image'
 
 type Props = BoxProps & {
   iconImageUrl: string
