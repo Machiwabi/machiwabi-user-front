@@ -9,7 +9,7 @@ type Props = {
 const Component: FC<Props> = ({ tabs }) => {
   return (
     <>
-      <ScrollArea scrollbarSize={0} py={32}>
+      <ScrollArea scrollbarSize={0} my={32}>
         <Flex gap={32}>
           {tabs.map((tab) => (
             <>

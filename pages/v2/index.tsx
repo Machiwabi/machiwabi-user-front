@@ -18,8 +18,11 @@ import { BoosterType } from '../../generated/graphql'
 import { waitingMock } from '../../mocks/waiting.mock'
 import { colorScheme } from '../../theme/colorScheme'
 import { OFooterNav } from '../../componentsNew/organisms/OFooterNav'
+import { Router, useRouter } from 'next/router'
 
 const Page = () => {
+  const router = useRouter()
+
   return (
     <>
       <OHeaderNav />
@@ -37,7 +40,9 @@ const Page = () => {
               {
                 name: 'MEMBERS',
                 isCurrent: false,
-                action: () => {},
+                action: () => {
+                  router.push('/v2/member')
+                },
               },
               {
                 name: 'MISSONS',
