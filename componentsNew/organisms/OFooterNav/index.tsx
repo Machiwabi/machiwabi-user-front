@@ -1,6 +1,8 @@
 import { Box, Flex } from '@mantine/core'
 import { FC } from 'react'
 import { colorScheme } from '../../../theme/colorScheme'
+import Link from 'next/link'
+import styles from './style.module.scss'
 
 const Component: FC = () => {
   return (
@@ -14,38 +16,42 @@ const Component: FC = () => {
             justify="end"
             align="center"
           >
-            <Flex
-              component="i"
-              className="material-icons-outlined"
-              align="center"
-              h="100%"
-              px={24 * 2}
-              fz={24}
-            >
-              home
-            </Flex>
+            <Link href="/" className={styles['o-footer-nav__menu-link']}>
+              <Flex
+                component="i"
+                className={`material-icons-outlined`}
+                align="center"
+                h="100%"
+                px={24 * 2}
+                fz={24}
+              >
+                home
+              </Flex>
+            </Link>
           </Flex>
           <Box pos="relative" w={96} h="100%">
-            <Flex
-              pos="absolute"
-              justify="center"
-              align="center"
-              left={(96 - 68) / 2}
-              top={-68 / 2}
-              bg={colorScheme.scheme1.surface3.surface}
-              w={68}
-              h={68}
-              style={{ borderRadius: 68 / 2 }}
-            >
-              <Box
-                component="i"
-                className="material-icons-outlined"
-                fz={24}
-                c={'white'}
+            <Link href="/" className={styles['o-footer-nav__menu-link']}>
+              <Flex
+                pos="absolute"
+                justify="center"
+                align="center"
+                left={(96 - 68) / 2}
+                top={-68 / 2}
+                bg={colorScheme.scheme1.surface3.surface}
+                w={68}
+                h={68}
+                style={{ borderRadius: 68 / 2 }}
               >
-                add_circle
-              </Box>
-            </Flex>
+                <Box
+                  component="i"
+                  className="material-icons-outlined"
+                  fz={24}
+                  c={'white'}
+                >
+                  add_circle
+                </Box>
+              </Flex>
+            </Link>
             <svg
               width="96"
               height="80"
@@ -68,16 +74,18 @@ const Component: FC = () => {
             justify="start"
             align="center"
           >
-            <Flex
-              component="i"
-              className="material-icons-outlined"
-              align="center"
-              h="100%"
-              px={24 * 2}
-              fz={24}
-            >
-              account_circle
-            </Flex>
+            <Link href="/" className={styles['o-footer-nav__menu-link']}>
+              <Flex
+                component="i"
+                className="material-icons-outlined"
+                align="center"
+                h="100%"
+                px={24 * 2}
+                fz={24}
+              >
+                account_circle
+              </Flex>
+            </Link>
           </Flex>
         </Flex>
       </Box>
