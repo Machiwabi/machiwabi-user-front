@@ -1,15 +1,17 @@
-import { AspectRatio, Box, Container, Flex } from '@mantine/core'
+import { AspectRatio, Box, Container, Divider, Flex } from '@mantine/core'
 import { EHeading } from '../../componentsNew/elements/EHeading/base'
 import { ERollTabs } from '../../componentsNew/elements/ERollTabs/ERollTabs'
 import { EText } from '../../componentsNew/elements/EText/base'
 import { colorScheme } from '../../theme/colorScheme'
 import { OUserIconWithStatuses } from '../../componentsNew/organisms/OUserIconWithStatuses'
 import { OUserWaitingStatuses } from '../../componentsNew/organisms/OUserWaitingStatuses'
+import { OBoostersStatuses } from '../../componentsNew/organisms/OBoostersStatuses'
+import { BoosterType } from '../../generated/graphql'
 
 const Page = () => {
   return (
     <>
-      <Container size="xs" p={0}>
+      <Container size="xs" px={16} py={0}>
         <EHeading.PageHeading>
           ツイートをするツイートをするツイートをするツイートをするツイートをする
         </EHeading.PageHeading>
@@ -80,6 +82,40 @@ const Page = () => {
               isBoosting={false}
             />
           </Flex>
+          <Divider my={16} />
+          <OBoostersStatuses
+            secondPerTotalPoints={10}
+            secondsPerWaitingPoint={10}
+            boosters={[
+              {
+                name: 'booster1',
+                uniqueKey: 'booster1',
+                iconUrl: '/assets/images/_sample/picture_ranking_01.png',
+                boosterType: BoosterType.Mission,
+                durationSeconds: 10,
+                emoji: '😄',
+                multiplier: 1.5,
+              },
+              {
+                name: 'booster2',
+                uniqueKey: 'booster2',
+                iconUrl: '/assets/images/_sample/picture_ranking_02.png',
+                boosterType: BoosterType.Mission,
+                durationSeconds: 10,
+                emoji: '😄',
+                multiplier: 1.5,
+              },
+              {
+                name: 'booster3',
+                uniqueKey: 'booster3',
+                iconUrl: '/assets/images/_sample/picture_ranking_03.png',
+                boosterType: BoosterType.Mission,
+                durationSeconds: 10,
+                emoji: '😄',
+                multiplier: 1.5,
+              },
+            ]}
+          />
         </Box>
       </Container>
     </>
