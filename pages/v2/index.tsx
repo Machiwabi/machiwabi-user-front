@@ -1,4 +1,11 @@
-import { AspectRatio, Box, Container, Divider, Flex } from '@mantine/core'
+import {
+  AspectRatio,
+  Box,
+  Container,
+  Divider,
+  Flex,
+  ScrollArea,
+} from '@mantine/core'
 import { EHeading } from '../../componentsNew/elements/EHeading/base'
 import { ERollTabs } from '../../componentsNew/elements/ERollTabs/ERollTabs'
 import { EText } from '../../componentsNew/elements/EText/base'
@@ -7,20 +14,18 @@ import { OUserIconWithStatuses } from '../../componentsNew/organisms/OUserIconWi
 import { OUserWaitingStatuses } from '../../componentsNew/organisms/OUserWaitingStatuses'
 import { OBoostersStatuses } from '../../componentsNew/organisms/OBoostersStatuses'
 import { BoosterType } from '../../generated/graphql'
+import { OWaitingListItem } from '../../componentsNew/organisms/OWaitingListItem'
+import { waitingMock } from '../../mocks/waiting.mock'
+import { ESectionHeading } from '../../componentsNew/elements/ESectionHeading'
+import { OUserIcon } from '../../componentsNew/organisms/OUserIcon'
+import { OWaitingHeader } from '../../componentsNew/organisms/OWaitingHeader'
 
 const Page = () => {
   return (
     <>
-      <Container size="xs" px={16} py={0}>
-        <EHeading.PageHeading>
-          ツイートをするツイートをするツイートをするツイートをするツイートをする
-        </EHeading.PageHeading>
-        <EHeading.SectionHeading>FORECAST</EHeading.SectionHeading>
-        <EText.Desc1>
-          ＊＊を推しています。＊＊を推しています。＊＊を推しています。＊＊を推しています。＊＊を推しています。＊＊を推しています。
-        </EText.Desc1>
-
-        <Box py={40}>
+      <Container maw={410} p={0}>
+        <OWaitingHeader />
+        <Box py={24}>
           <ERollTabs
             tabs={[
               {
@@ -69,19 +74,9 @@ const Page = () => {
         >
           <Box w="100%" h="100%" />
         </AspectRatio>
+
         <Box p={16} bg={colorScheme.scheme1.surface2.surface}>
-          <Flex justify="space-between" align="center">
-            <OUserIconWithStatuses
-              displayName="danichang"
-              waitingDuration={2000}
-            />
-            <OUserWaitingStatuses
-              totalPoints={100000}
-              secondPerTotalPoints={10}
-              secondsPerWaitingPoint={10}
-              isBoosting={false}
-            />
-          </Flex>
+          <OWaitingListItem waiting={waitingMock} />
           <Divider my={16} />
           <OBoostersStatuses
             secondPerTotalPoints={10}
@@ -116,6 +111,44 @@ const Page = () => {
               },
             ]}
           />
+        </Box>
+        <Box component="section" my={40}>
+          <ESectionHeading
+            heading="WAITING MEMBERS - 32"
+            tooltip={<>同じイベントを待っているユーザー一覧です</>}
+            moreAction={() => {
+              alert('more')
+            }}
+          />
+          <Box mt={8}>
+            <ScrollArea scrollbarSize={0}>
+              <Flex gap={4}>
+                {[...Array(26)].map((_, index) => {
+                  return (
+                    <OUserIcon
+                      displayName="a"
+                      w={32}
+                      h={32}
+                      iconImageUrl={`/assets/images/_sample/picture_ranking_0${
+                        (index % 9) + 1
+                      }.png`}
+                    />
+                  )
+                })}
+              </Flex>
+            </ScrollArea>
+          </Box>
+        </Box>
+        <Box component="section" my={40}>
+          <ESectionHeading
+            heading="MESSAGE"
+            tooltip={<>hanzochangさんがイベントにかける思いです</>}
+          />
+          <Box mt={8}>
+            <EText.Desc1>
+              ＊＊を推しています。＊＊を推しています。＊＊を推しています。＊＊を推しています。＊＊を推しています。＊＊を推しています。
+            </EText.Desc1>
+          </Box>
         </Box>
       </Container>
     </>

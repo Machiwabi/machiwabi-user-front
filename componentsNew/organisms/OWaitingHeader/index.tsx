@@ -1,6 +1,5 @@
-import { Box, Flex, Stack, Text } from '@mantine/core'
+import { Box, Flex, Text } from '@mantine/core'
 import { FC, ReactNode } from 'react'
-import { mantineTheme } from '../../../theme/mantineTheme'
 import { colorScheme } from '../../../theme/colorScheme'
 
 type Props = { children?: ReactNode }
@@ -11,13 +10,10 @@ const Component: FC<Props> = ({ children }) => {
       <Flex justify="space-between">
         <Box>
           <Text lh={'100%'} fz={14} fw={900}>
-            ホームスクリーン。各個人のマチワビルームです。
-            残り時間と推しのアイコンを中心に配置、もどってくればあとどのくらいで夢のような時間に出会えるのかがわかります。
-            他にポイントの蓄積もリアルタイムに表示され、裁縫してみたくなる動機づけを与えます。
-            さらに、他のユーザーと一緒に待ちわびることができ、ささやかな同調とささかやかな競争でマチワビストを楽しませます。
+            各個人のマチワビルームです。
           </Text>
           <Text
-            mt={4}
+            mt={6}
             lh={'100%'}
             fz={10}
             fw="black"
@@ -41,4 +37,4 @@ const Component: FC<Props> = ({ children }) => {
   )
 }
 
-export { Component as WaitingHeader }
+export { Component as OWaitingHeader }

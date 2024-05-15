@@ -10,4 +10,4 @@ const Component: FC<HeadingBaseProps> = ({ children, ...props }) => {
   )
 }
 
-export { Component as SectionHeading }
+export { Component as Section }
