@@ -55,7 +55,6 @@ const WaitingsListItem: FC<WaitingsListItemProps> = ({ waiting, index }) => {
           <Flex flex="1" align="center">
             <Box borderRadius={32} overflow="hidden" w="56px">
               <Image
-                // src={`/assets/images/_sample/picture_ranking_0${index}.png`}
                 src={
                   waiting.user.iconImageUrl ||
                   '/assets/images/_sample/picture_ranking_10.png'

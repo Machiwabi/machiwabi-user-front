@@ -17,6 +17,7 @@ import { OWaitingListItem } from '../../componentsNew/organisms/OWaitingListItem
 import { BoosterType } from '../../generated/graphql'
 import { waitingMock } from '../../mocks/waiting.mock'
 import { colorScheme } from '../../theme/colorScheme'
+import { OFooterNav } from '../../componentsNew/organisms/OFooterNav'
 
 const Page = () => {
   return (
@@ -154,6 +155,7 @@ const Page = () => {
           </Box>
         </Box>
       </Container>
+      <OFooterNav />
     </>
   )
 }
