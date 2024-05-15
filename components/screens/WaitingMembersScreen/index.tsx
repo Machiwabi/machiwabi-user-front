@@ -52,7 +52,7 @@ const WaitingsListItem: FC<WaitingsListItemProps> = ({ waiting, index }) => {
       <Link href={`/waitings/${waiting.uniqueKey}`}>
         <Flex mb={3} px={6} align="center" justify="space-between">
           {/* 名前 */}
-          <Flex align="center" flex="1">
+          <Flex flex="1" align="center">
             <Box borderRadius={32} overflow="hidden" w="56px">
               <Image
                 // src={`/assets/images/_sample/picture_ranking_0${index}.png`}
