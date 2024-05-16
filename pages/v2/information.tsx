@@ -1,4 +1,4 @@
-import { Box, Container } from '@mantine/core'
+import { Box, Container, Flex } from '@mantine/core'
 import { Fragment } from 'react'
 import { EButton } from '../../componentsNew/elements/EButton'
 import { EHeading } from '../../componentsNew/elements/EHeading/base'
@@ -16,6 +16,18 @@ const Page = () => {
       <Container maw={410} pt={56} p={0} mb={160}>
         <OWaitingHeader mt={24} px={16} />
         <OWaitingTabs px={16} current="INFORMATION" />
+
+        <Box mt={24} mb={16} px={16}>
+          <EHeading.Page>イベント名</EHeading.Page>
+          <Flex align="center" my={4}>
+            <Box className="material-icons-outlined" component="i" fz={16}>
+              location_on
+            </Box>
+            <Box pb={2} fz={10}>
+              {eventMock.placeName}
+            </Box>
+          </Flex>
+        </Box>
 
         <Box mb={40} px={16}>
           <EText.Desc1>{eventMock.description}</EText.Desc1>
