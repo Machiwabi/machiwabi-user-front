@@ -6,74 +6,26 @@ import {
   Flex,
   ScrollArea,
 } from '@mantine/core'
-import { ERollTabs } from '../../componentsNew/elements/ERollTabs/ERollTabs'
 import { ESectionHeading } from '../../componentsNew/elements/ESectionHeading'
 import { EText } from '../../componentsNew/elements/EText/base'
 import { OBoostersStatuses } from '../../componentsNew/organisms/OBoostersStatuses'
+import { OFooterNav } from '../../componentsNew/organisms/OFooterNav'
 import { OHeaderNav } from '../../componentsNew/organisms/OHeaderNav'
 import { OUserIcon } from '../../componentsNew/organisms/OUserIcon'
 import { OWaitingHeader } from '../../componentsNew/organisms/OWaitingHeader'
 import { OWaitingListItem } from '../../componentsNew/organisms/OWaitingListItem'
+import { OWaitingTabs } from '../../componentsNew/organisms/OWaitingTabs'
 import { BoosterType } from '../../generated/graphql'
 import { waitingMock } from '../../mocks/waiting.mock'
 import { colorScheme } from '../../theme/colorScheme'
-import { OFooterNav } from '../../componentsNew/organisms/OFooterNav'
-import { Router, useRouter } from 'next/router'
 
 const Page = () => {
-  const router = useRouter()
-
   return (
     <>
       <OHeaderNav />
       <Container maw={410} pt={56} p={0} mb={160}>
         <OWaitingHeader mt={24} px={16} />
-
-        <Box px={16}>
-          <ERollTabs
-            tabs={[
-              {
-                name: 'HOME',
-                isCurrent: true,
-                action: () => {},
-              },
-              {
-                name: 'MEMBERS',
-                isCurrent: false,
-                action: () => {
-                  router.push('/v2/member')
-                },
-              },
-              {
-                name: 'MISSONS',
-                isCurrent: false,
-                action: () => {
-                  router.push('/v2/missions')
-                },
-              },
-              {
-                name: 'REWARDS',
-                isCurrent: false,
-                action: () => {},
-              },
-              {
-                name: 'BOOSTERS',
-                isCurrent: false,
-                action: () => {},
-              },
-              {
-                name: 'AQUIRES',
-                isCurrent: false,
-                action: () => {},
-              },
-              {
-                name: 'INFORMATION',
-                isCurrent: false,
-                action: () => {},
-              },
-            ]}
-          />
-        </Box>
+        <OWaitingTabs px={16} current="HOME" />
 
         <Box px={16}>
           <AspectRatio
