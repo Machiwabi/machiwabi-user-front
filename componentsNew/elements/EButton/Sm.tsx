@@ -8,6 +8,7 @@ const Component: FC<EButtonProps> = ({
   href,
   hrefOutbound,
   onClick,
+  children,
   ...props
 }) => {
   const buttonStyle = {
@@ -28,20 +29,20 @@ const Component: FC<EButtonProps> = ({
     return (
       <Link href={href}>
         <Button {...buttonStyle} {...props}>
-          Detail
+          {children}
         </Button>
       </Link>
     )
   } else if (href && !hrefOutbound) {
     return (
       <Button component="a" href="hr ef" {...buttonStyle} {...props}>
-        Detail
+        {children}
       </Button>
     )
   } else {
     return (
       <Button {...buttonStyle} onClick={onClick} {...props}>
-        Detail
+        {children}
       </Button>
     )
   }
