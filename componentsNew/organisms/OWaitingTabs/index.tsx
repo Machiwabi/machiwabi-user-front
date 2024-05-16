@@ -1,7 +1,7 @@
+import { Box, BoxProps } from '@mantine/core'
+import { useRouter } from 'next/router'
 import { FC } from 'react'
 import { ERollTabs } from '../../elements/ERollTabs/ERollTabs'
-import { useRouter } from 'next/router'
-import { Box, BoxProps } from '@mantine/core'
 
 type Props = BoxProps & {
   current: string
@@ -51,10 +51,10 @@ const Component: FC<Props> = ({ current, ...props }) => {
               },
             },
             {
-              name: 'AQUIRES',
-              isCurrent: current === 'AQUIRES',
+              name: 'AQUIRED',
+              isCurrent: current === 'AQUIRED',
               action: () => {
-                router.push('/v2/aquires')
+                router.push('/v2/aquired')
               },
             },
             {
