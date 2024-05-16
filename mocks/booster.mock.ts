@@ -7,12 +7,15 @@ export const boosterMock: BoosterEntity = {
   multiplier: 0,
   name: 'name',
   uniqueKey: 'uniqueKey',
-  missionName: 'ツイートをする',
+  missionName:
+    'ツイートをするツイートをするツイートをするツイートをするツイートをする',
   missionDescription:
     '既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。',
-  missionMdxContent:
-    '既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。',
-  iconUrl: '/assets/images/_sample/picture_ranking_01.png',
+  missionMdxContent: `
+❶#machiwabiと#誕生祭というハッシュタグをつけて呟いてください。例）「#machiwabi #誕生祭 に参加中！」
+❷ツイートしたURLを下記のフォームに投稿してください。確認が取れ次第ブースターを付与します。※即時には反映されません。
+`,
+  iconUrl: '/assets/images/_sample/picture_ranking_10.png',
 }
 
 export const boosterMocks: BoosterEntity[] = [

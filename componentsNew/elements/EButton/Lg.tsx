@@ -30,17 +30,24 @@ const Component: FC<EButtonProps> = ({
 
   if (href && hrefOutbound) {
     return (
+      <Button
+        component="a"
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        {...buttonStyle}
+        {...props}
+      >
+        {children}
+      </Button>
+    )
+  } else if (href && !hrefOutbound) {
+    return (
       <Link href={href}>
         <Button {...buttonStyle} {...props}>
           {children}
         </Button>
       </Link>
-    )
-  } else if (href && !hrefOutbound) {
-    return (
-      <Button component="a" href="hr ef" {...buttonStyle} {...props}>
-        {children}
-      </Button>
     )
   } else {
     return (

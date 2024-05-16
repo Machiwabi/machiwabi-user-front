@@ -5,6 +5,8 @@ import Image from 'next/image'
 import { colorScheme } from '../../../theme/colorScheme'
 import { msToMMDDSS } from '../../../utils/msToMMDDSS'
 import { EButton } from '../../elements/EButton'
+import { missionShowUrl } from '../../../helpers/url.helper'
+import { OBoosterMultiplier } from '../OBoosterMultiplier'
 
 type Props = {
   booster: BoosterEntity
@@ -50,25 +52,12 @@ const Component: FC<Props> = ({ booster, isFirst = false, isLast = false }) => {
           </Flex>
         </Flex>
 
-        <Flex align="center">
-          <Box fz={10} lh={1} fw={700}>
-            {msToMMDDSS(booster.durationSeconds)}
-          </Box>
-          <Box ml={8} ff="outfit" fw={700}>
-            +{booster.multiplier}pt{' '}
-          </Box>
-          <Box px={4} ff="outfit" fw={700}>
-            /
-          </Box>
-          <Box ff="outfit" fw={700}>
-            10sec
-          </Box>{' '}
-        </Flex>
+        <OBoosterMultiplier booster={booster} />
       </Flex>
       <Box mt={8} fz={12} c={colorScheme.scheme1.surface1.object.mid}>
         {booster.missionDescription}
       </Box>
-      <EButton.Sm mt={16} onClick={() => {}}>
+      <EButton.Sm mt={16} href={missionShowUrl(booster.uniqueKey)}>
         Detail
       </EButton.Sm>
     </Box>
