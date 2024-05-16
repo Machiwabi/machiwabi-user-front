@@ -1,11 +1,11 @@
-import { Container } from '@mantine/core'
-import { OAquiredRewardCells } from '../../componentsNew/organisms/OAquiredRewardCells'
+import { Box, Container } from '@mantine/core'
+import { EHeading } from '../../componentsNew/elements/EHeading/base'
+import { OBoosters } from '../../componentsNew/organisms/OBoosters'
 import { OFooterNav } from '../../componentsNew/organisms/OFooterNav'
 import { OHeaderNav } from '../../componentsNew/organisms/OHeaderNav'
 import { OWaitingHeader } from '../../componentsNew/organisms/OWaitingHeader'
 import { OWaitingTabs } from '../../componentsNew/organisms/OWaitingTabs'
-import { rewardMock, rewardMocks } from '../../mocks/reward.mock'
-import { waitingRewardMocks } from '../../mocks/waitingReward.mock'
+import { boosterMocks } from '../../mocks/booster.mock'
 
 const Page = () => {
   return (
@@ -15,11 +15,15 @@ const Page = () => {
         <OWaitingHeader mt={24} px={16} />
         <OWaitingTabs px={16} current="BOOSTERS" />
 
-        <OAquiredRewardCells
-          px={16}
-          cellingRewards={rewardMocks}
-          aquiredWaitingRewards={waitingRewardMocks}
-        />
+        <Box mb={40} px={16}>
+          <EHeading.ParagraphJa>有効なブースター</EHeading.ParagraphJa>
+          <OBoosters mt={12} boosters={boosterMocks} />
+        </Box>
+
+        <Box my={40} px={16}>
+          <EHeading.ParagraphJa>効果が終了したブースター</EHeading.ParagraphJa>
+          <OBoosters mt={12} boosters={boosterMocks} />
+        </Box>
       </Container>
       <OFooterNav />
     </>
