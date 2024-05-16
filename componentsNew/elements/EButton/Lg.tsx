@@ -15,16 +15,17 @@ const Component: FC<EButtonProps> = ({
 
   const buttonStyle = {
     pt: 0,
-    h: 40,
+    h: 50,
     bg: bg,
     c: c,
     style: {
-      borderRadius: 32,
+      borderRadius: 25,
       borderWidth: 1,
       borderColor: borderColor,
     },
     ff: 'outfit',
-    fw: 500,
+    fw: 700,
+    fz: 14,
   }
 
   if (href && hrefOutbound) {
@@ -50,4 +51,4 @@ const Component: FC<EButtonProps> = ({
   }
 }
 
-export { Component as Sm }
+export { Component as Lg }

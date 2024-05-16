@@ -209,7 +209,6 @@ const Page = () => {
       <Flex
         pos="fixed"
         w="100%"
-        // left={calc('50% - 205px')}
         bottom={0}
         mb={32}
         justify="center"
