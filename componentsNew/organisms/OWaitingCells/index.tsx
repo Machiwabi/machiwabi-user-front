@@ -1,9 +1,8 @@
+import { AspectRatio, Box, SimpleGrid, SimpleGridProps } from '@mantine/core'
+import Link from 'next/link'
 import { FC, Fragment } from 'react'
 import { WaitingEntity } from '../../../generated/graphql'
-import { AspectRatio, Box, SimpleGrid, SimpleGridProps } from '@mantine/core'
 import { colorScheme } from '../../../theme/colorScheme'
-import Link from 'next/link'
-import { textDecoration } from '@chakra-ui/react'
 
 type Props = SimpleGridProps & {
   waitings: WaitingEntity[]
