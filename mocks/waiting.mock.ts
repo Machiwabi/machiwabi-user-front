@@ -21,3 +21,14 @@ export const waitingMock: WaitingEntity = {
   waitingPoint: 1239102,
   waitingRewards: [waitingRewardMock],
 }
+
+export const waitingMocks: WaitingEntity[] = [
+  { ...waitingMock, uniqueKey: 'uniqueKey1' },
+  { ...waitingMock, uniqueKey: 'uniqueKey2' },
+  { ...waitingMock, uniqueKey: 'uniqueKey3' },
+  { ...waitingMock, uniqueKey: 'uniqueKey4' },
+  { ...waitingMock, uniqueKey: 'uniqueKey5' },
+  { ...waitingMock, uniqueKey: 'uniqueKey6' },
+  { ...waitingMock, uniqueKey: 'uniqueKey7' },
+  { ...waitingMock, uniqueKey: 'uniqueKey8' },
+]
