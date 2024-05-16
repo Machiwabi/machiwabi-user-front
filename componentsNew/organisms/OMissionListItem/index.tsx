@@ -68,7 +68,9 @@ const Component: FC<Props> = ({ booster, isFirst = false, isLast = false }) => {
       <Box mt={8} fz={12} c={colorScheme.scheme1.surface1.object.mid}>
         {booster.missionDescription}
       </Box>
-      <EButton.Sm mt={16} onClick={() => {}} />
+      <EButton.Sm mt={16} onClick={() => {}}>
+        Detail
+      </EButton.Sm>
     </Box>
   )
 }

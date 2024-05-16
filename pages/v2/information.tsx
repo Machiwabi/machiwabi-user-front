@@ -1,4 +1,6 @@
-import { Box, Container, Flex } from '@mantine/core'
+import { Box, Container } from '@mantine/core'
+import { Fragment } from 'react'
+import { EButton } from '../../componentsNew/elements/EButton'
 import { EHeading } from '../../componentsNew/elements/EHeading/base'
 import { EText } from '../../componentsNew/elements/EText/base'
 import { OFooterNav } from '../../componentsNew/organisms/OFooterNav'
@@ -6,8 +8,6 @@ import { OHeaderNav } from '../../componentsNew/organisms/OHeaderNav'
 import { OWaitingHeader } from '../../componentsNew/organisms/OWaitingHeader'
 import { OWaitingTabs } from '../../componentsNew/organisms/OWaitingTabs'
 import { eventMock } from '../../mocks/event.mock'
-import { Fragment } from 'react'
-import { EButton } from '../../componentsNew/elements/EButton'
 
 const Page = () => {
   return (

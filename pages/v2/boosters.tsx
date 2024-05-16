@@ -1,10 +1,11 @@
 import { Container } from '@mantine/core'
+import { OAquiredRewardCells } from '../../componentsNew/organisms/OAquiredRewardCells'
 import { OFooterNav } from '../../componentsNew/organisms/OFooterNav'
 import { OHeaderNav } from '../../componentsNew/organisms/OHeaderNav'
-import { OMissionList } from '../../componentsNew/organisms/OMissionList'
 import { OWaitingHeader } from '../../componentsNew/organisms/OWaitingHeader'
 import { OWaitingTabs } from '../../componentsNew/organisms/OWaitingTabs'
-import { boosterMock } from '../../mocks/booster.mock'
+import { rewardMock, rewardMocks } from '../../mocks/reward.mock'
+import { waitingRewardMocks } from '../../mocks/waitingReward.mock'
 
 const Page = () => {
   return (
@@ -12,11 +13,12 @@ const Page = () => {
       <OHeaderNav />
       <Container maw={410} pt={56} p={0} mb={160}>
         <OWaitingHeader mt={24} px={16} />
-        <OWaitingTabs px={16} current="MISSIONS" />
+        <OWaitingTabs px={16} current="BOOSTERS" />
 
-        <OMissionList
+        <OAquiredRewardCells
           px={16}
-          boosters={[boosterMock, boosterMock, boosterMock]}
+          cellingRewards={rewardMocks}
+          aquiredWaitingRewards={waitingRewardMocks}
         />
       </Container>
       <OFooterNav />

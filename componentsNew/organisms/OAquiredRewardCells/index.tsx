@@ -15,7 +15,7 @@ const Component: FC<Props> = ({
 }) => {
   return (
     <>
-      <SimpleGrid spacing={2} cols={3} {...props}>
+      <SimpleGrid spacing={2} cols={6} {...props}>
         {cellingRewards.map((cellingReward) => {
           const matchedAquiredWaitingRewards = aquiredWaitingRewards.filter(
             (aquiredWaitingReward) => {
