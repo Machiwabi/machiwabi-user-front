@@ -8,6 +8,7 @@ import { boosterMock } from '../../../mocks/booster.mock'
 import { rewardMock } from '../../../mocks/reward.mock'
 import { waitingMock } from '../../../mocks/waiting.mock'
 import { truncator } from '../../../utils/truncator'
+import { TAquiredRewardShowTemplate } from '../../../componentsNew/templates/TAquiredRewardShowTemplate'
 
 const Page = () => {
   return (
@@ -34,7 +35,7 @@ const Page = () => {
             },
           ]}
         />
-        <TRewardShowTemplate mt={24} reward={rewardMock} />
+        <TAquiredRewardShowTemplate mt={24} reward={rewardMock} />
       </Container>
       <OFooterNav />
     </>

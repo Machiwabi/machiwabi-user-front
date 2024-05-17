@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 import { RewardEntity } from '../../../generated/graphql'
-import { rewardShowUrl } from '../../../helpers/url.helper'
+import { rewardShowUrl, waitingAquiredUrl } from '../../../helpers/url.helper'
 import { colorScheme } from '../../../theme/colorScheme'
 import styles from './style.module.scss'
 
@@ -44,7 +44,7 @@ const Component: FC<Props> = ({ reward, isAquired, count, ...props }) => {
       {isAquired && (
         <Box pos="absolute">
           <Link
-            href={rewardShowUrl(reward.uniqueKey)}
+            href={waitingAquiredUrl(reward.uniqueKey)}
             className={styles['o-reward-cell-item']}
             style={{ textDecoration: 'none' }}
           >
