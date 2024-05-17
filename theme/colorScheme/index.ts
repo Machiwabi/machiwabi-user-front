@@ -2,10 +2,10 @@ import { scheme1 } from './scheme1'
 
 type ObjectType = {
   high: string
-  mid?: string
-  low?: string
-  inactive?: string
-  disable?: string
+  mid: string
+  low: string
+  inactive: string
+  disable: string
 }
 
 type SurfaceType = {

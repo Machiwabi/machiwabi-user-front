@@ -35,6 +35,8 @@ export const scheme1: ColorSchemeType = {
     high: '#000000',
     mid: '#CCCCCC',
     low: '#E8E8E8',
+    inactive: '#E8E8E8',
+    disable: '#E8E8E8',
   },
   accent: {
     accent1: '#2E7CF6',
