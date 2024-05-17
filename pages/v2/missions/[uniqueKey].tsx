@@ -1,20 +1,44 @@
 import { Box, Container, Flex, TextInput } from '@mantine/core'
 import Image from 'next/image'
+import { EBreadcrumb } from '../../../componentsNew/elements/EBreadcrumb'
+import { EButton } from '../../../componentsNew/elements/EButton'
 import { EDefinitionTerm } from '../../../componentsNew/elements/EDefinitionTerm'
 import { EHeading } from '../../../componentsNew/elements/EHeading/base'
 import { EText } from '../../../componentsNew/elements/EText/base'
 import { OBoosterMultiplier } from '../../../componentsNew/organisms/OBoosterMultiplier'
 import { OFooterNav } from '../../../componentsNew/organisms/OFooterNav'
 import { OHeaderNav } from '../../../componentsNew/organisms/OHeaderNav'
+import { waitingMissionsUrl, waitingUrl } from '../../../helpers/url.helper'
 import { boosterMock } from '../../../mocks/booster.mock'
+import { waitingMock } from '../../../mocks/waiting.mock'
 import { colorScheme } from '../../../theme/colorScheme'
-import { EButton } from '../../../componentsNew/elements/EButton'
+import { truncator } from '../../../utils/truncator'
 
 const Page = () => {
   return (
     <>
       <OHeaderNav />
       <Container maw={410} pt={56} p={0} mb={160}>
+        <EBreadcrumb
+          mt={24}
+          px={16}
+          breadcrumbs={[
+            {
+              title: waitingMock.event.name || '',
+              href: waitingUrl(waitingMock.uniqueKey),
+            },
+            {
+              title: 'MISSIONS',
+              href: waitingMissionsUrl(waitingMock.uniqueKey),
+            },
+            {
+              title: truncator.truncateString(
+                boosterMock.missionName || '',
+                10
+              ),
+            },
+          ]}
+        />
         <Box mt={24} px={16}>
           <EHeading.Page>{boosterMock.missionName}</EHeading.Page>
           <EText.Desc1 mt={16}>{boosterMock.missionDescription}</EText.Desc1>
