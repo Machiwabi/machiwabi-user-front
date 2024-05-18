@@ -1,18 +1,16 @@
-import { Box, Button, Container } from '@mantine/core'
+import { Box, Container } from '@mantine/core'
 import { useState } from 'react'
 import { EBreadcrumb } from '../../../componentsNew/elements/EBreadcrumb'
-import { EHeading } from '../../../componentsNew/elements/EHeading/base'
-import { EModal } from '../../../componentsNew/elements/EModal'
-import { EText } from '../../../componentsNew/elements/EText/base'
+import { EButton } from '../../../componentsNew/elements/EButton'
 import { OFooterNav } from '../../../componentsNew/organisms/OFooterNav'
 import { OHeaderNav } from '../../../componentsNew/organisms/OHeaderNav'
+import { TModalDailyMissionTemplate } from '../../../componentsNew/templates/TModalDailyMissionTemplate'
+import { TModalWaitingFirstTemplate } from '../../../componentsNew/templates/TModalWaitingFirstTemplate'
 import { waitingMissionsUrl, waitingUrl } from '../../../helpers/url.helper'
 import { boosterMock } from '../../../mocks/booster.mock'
 import { waitingMock } from '../../../mocks/waiting.mock'
 import { truncator } from '../../../utils/truncator'
-import { EButton } from '../../../componentsNew/elements/EButton'
-import { TModalWaitingFirstTemplate } from '../../../componentsNew/templates/TModalWaitingFirstTemplate'
-import { TModalDailyMissionTemplate } from '../../../componentsNew/templates/TModalDailyMissionTemplate'
+import { TModalGuidePwaTemplate } from '../../../componentsNew/templates/TModalGuidePwaTemplate'
 
 const Page = () => {
   return (
@@ -41,6 +39,7 @@ const Page = () => {
         />
         <WaitingFirstScreen />
         <DailyMissionScreen />
+        <GuidePwaScreen />
       </Container>
       <OFooterNav />
     </>
@@ -86,6 +85,27 @@ const DailyMissionScreen = () => {
         </EButton.Lg>
 
         <TModalDailyMissionTemplate isOpen={isOpen} setIsOpen={setIsOpen} />
+      </Box>
+    </>
+  )
+}
+
+const GuidePwaScreen = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <>
+      <Box mt={24} px={16}>
+        <EButton.Lg
+          w="100%"
+          onClick={() => {
+            setIsOpen(true)
+          }}
+        >
+          GuidePwaScreen
+        </EButton.Lg>
+
+        <TModalGuidePwaTemplate isOpen={isOpen} setIsOpen={setIsOpen} />
       </Box>
     </>
   )
