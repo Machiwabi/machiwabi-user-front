@@ -9,9 +9,10 @@ const Component: FC<EButtonProps> = ({
   onClick,
   children,
   type = 'outline',
+  surface = 'surface1',
   ...props
 }) => {
-  const { bg, c, borderColor } = generateButtonStyles(type)
+  const { bg, c, borderColor } = generateButtonStyles(type, surface)
 
   const buttonStyle = {
     pt: 0,

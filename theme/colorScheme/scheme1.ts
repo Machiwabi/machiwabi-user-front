@@ -48,6 +48,16 @@ export const scheme1: ColorSchemeType = {
       disable: '#222222',
     },
   },
+  accent2: {
+    surface: '#F62E2E',
+    object: {
+      high: '#FFFFFF',
+      mid: '#CCCCCC',
+      low: '#555555',
+      inactive: '#333333',
+      disable: '#222222',
+    },
+  },
   notice: {
     alert: '#F62E2E',
     info: '#2ED2F6',

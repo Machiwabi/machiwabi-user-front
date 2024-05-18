@@ -30,6 +30,7 @@ export type ColorSchemeType = {
   surface2: SurfaceType
   surface3: SurfaceType
   accent1: AccentType
+  accent2: AccentType
   border: BorderType
   notice: NoticeType
 }

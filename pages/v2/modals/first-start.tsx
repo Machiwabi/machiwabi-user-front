@@ -5,12 +5,14 @@ import { EButton } from '../../../componentsNew/elements/EButton'
 import { OFooterNav } from '../../../componentsNew/organisms/OFooterNav'
 import { OHeaderNav } from '../../../componentsNew/organisms/OHeaderNav'
 import { TModalDailyMissionTemplate } from '../../../componentsNew/templates/TModalDailyMissionTemplate'
+import { TModalGuidePwaTemplate } from '../../../componentsNew/templates/TModalGuidePwaTemplate'
+import { TModalRewardConsumptionTemplate } from '../../../componentsNew/templates/TModalRewardConsumptionTemplate'
 import { TModalWaitingFirstTemplate } from '../../../componentsNew/templates/TModalWaitingFirstTemplate'
 import { waitingMissionsUrl, waitingUrl } from '../../../helpers/url.helper'
 import { boosterMock } from '../../../mocks/booster.mock'
 import { waitingMock } from '../../../mocks/waiting.mock'
 import { truncator } from '../../../utils/truncator'
-import { TModalGuidePwaTemplate } from '../../../componentsNew/templates/TModalGuidePwaTemplate'
+import { rewardMock } from '../../../mocks/reward.mock'
 
 const Page = () => {
   return (
@@ -40,6 +42,7 @@ const Page = () => {
         <WaitingFirstScreen />
         <DailyMissionScreen />
         <GuidePwaScreen />
+        <ModalRewardConsumptionScreen />
       </Container>
       <OFooterNav />
     </>
@@ -106,6 +109,31 @@ const GuidePwaScreen = () => {
         </EButton.Lg>
 
         <TModalGuidePwaTemplate isOpen={isOpen} setIsOpen={setIsOpen} />
+      </Box>
+    </>
+  )
+}
+
+const ModalRewardConsumptionScreen = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <>
+      <Box mt={24} px={16}>
+        <EButton.Lg
+          w="100%"
+          onClick={() => {
+            setIsOpen(true)
+          }}
+        >
+          RewardConsumptionScreen
+        </EButton.Lg>
+
+        <TModalRewardConsumptionTemplate
+          reward={rewardMock}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
       </Box>
     </>
   )
