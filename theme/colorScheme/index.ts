@@ -15,7 +15,10 @@ type SurfaceType = {
 
 type BorderType = ObjectType
 
-type AccentType = Record<string, string>
+type AccentType = {
+  surface: string
+  object: ObjectType
+}
 
 type NoticeType = {
   alert: string
@@ -26,8 +29,8 @@ export type ColorSchemeType = {
   surface1: SurfaceType
   surface2: SurfaceType
   surface3: SurfaceType
+  accent1: AccentType
   border: BorderType
-  accent: AccentType
   notice: NoticeType
 }
 

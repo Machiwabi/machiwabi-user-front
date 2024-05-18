@@ -11,9 +11,10 @@ import { boosterMock } from '../../../mocks/booster.mock'
 import { waitingMock } from '../../../mocks/waiting.mock'
 import { truncator } from '../../../utils/truncator'
 import { EButton } from '../../../componentsNew/elements/EButton'
+import { TModalWaitingFirstTemplate } from '../../../componentsNew/templates/TModalWaitingFirstTemplate'
+import { TModalDailyMissionTemplate } from '../../../componentsNew/templates/TModalDailyMissionTemplate'
 
 const Page = () => {
-  const [isOpen, setIsOpen] = useState(false)
   return (
     <>
       <OHeaderNav />
@@ -38,32 +39,8 @@ const Page = () => {
             },
           ]}
         />
-
-        <Box mt={24} px={16}>
-          <EButton.Lg
-            w="100%"
-            onClick={() => {
-              setIsOpen(true)
-            }}
-          >
-            WaitingHomeScreen_初回
-          </EButton.Lg>
-
-          <EModal
-            isOpen={isOpen}
-            closedCallback={() => setIsOpen(false)}
-            showCloseButton={true}
-          >
-            <EHeading.Page ta="center">
-              aiueoの
-              <br />
-              待ち侘びルームに参加しました！
-            </EHeading.Page>
-            <EText.Desc2 mt={8} ta="center">
-              イベント開催までにポイントが貯まっていきます。定期的にチェックしましょう！
-            </EText.Desc2>
-          </EModal>
-        </Box>
+        <WaitingFirstScreen />
+        <DailyMissionScreen />
       </Container>
       <OFooterNav />
     </>
@@ -71,3 +48,45 @@ const Page = () => {
 }
 
 export default Page
+
+const WaitingFirstScreen = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <>
+      <Box mt={24} px={16}>
+        <EButton.Lg
+          w="100%"
+          onClick={() => {
+            setIsOpen(true)
+          }}
+        >
+          WaitingHomeScreen_初回
+        </EButton.Lg>
+
+        <TModalWaitingFirstTemplate isOpen={isOpen} setIsOpen={setIsOpen} />
+      </Box>
+    </>
+  )
+}
+
+const DailyMissionScreen = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <>
+      <Box mt={24} px={16}>
+        <EButton.Lg
+          w="100%"
+          onClick={() => {
+            setIsOpen(true)
+          }}
+        >
+          WaitingHomeScreen_DailyMission
+        </EButton.Lg>
+
+        <TModalDailyMissionTemplate isOpen={isOpen} setIsOpen={setIsOpen} />
+      </Box>
+    </>
+  )
+}

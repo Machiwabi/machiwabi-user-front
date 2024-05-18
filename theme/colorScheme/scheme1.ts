@@ -38,8 +38,15 @@ export const scheme1: ColorSchemeType = {
     inactive: '#E8E8E8',
     disable: '#E8E8E8',
   },
-  accent: {
-    accent1: '#2E7CF6',
+  accent1: {
+    surface: '#2E7CF6',
+    object: {
+      high: '#FFFFFF',
+      mid: '#CCCCCC',
+      low: '#555555',
+      inactive: '#333333',
+      disable: '#222222',
+    },
   },
   notice: {
     alert: '#F62E2E',
