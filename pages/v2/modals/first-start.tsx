@@ -6,13 +6,14 @@ import { OFooterNav } from '../../../componentsNew/organisms/OFooterNav'
 import { OHeaderNav } from '../../../componentsNew/organisms/OHeaderNav'
 import { TModalDailyMissionTemplate } from '../../../componentsNew/templates/TModalDailyMissionTemplate'
 import { TModalGuidePwaTemplate } from '../../../componentsNew/templates/TModalGuidePwaTemplate'
-import { TModalRewardConsumptionTemplate } from '../../../componentsNew/templates/TModalRewardConsumptionTemplate'
+import { TModalRewardConfirmConsumptionTemplate } from '../../../componentsNew/templates/TModalRewardConfirmConsumptionTemplate'
 import { TModalWaitingFirstTemplate } from '../../../componentsNew/templates/TModalWaitingFirstTemplate'
 import { waitingMissionsUrl, waitingUrl } from '../../../helpers/url.helper'
 import { boosterMock } from '../../../mocks/booster.mock'
 import { waitingMock } from '../../../mocks/waiting.mock'
 import { truncator } from '../../../utils/truncator'
 import { rewardMock } from '../../../mocks/reward.mock'
+import { TModalRewardConsumedTemplate } from '../../../componentsNew/templates/TModalRewardConsumedTemplate'
 
 const Page = () => {
   return (
@@ -43,6 +44,7 @@ const Page = () => {
         <DailyMissionScreen />
         <GuidePwaScreen />
         <ModalRewardConsumptionScreen />
+        <ModalRewardConfirmConsumptionScreen />
       </Container>
       <OFooterNav />
     </>
@@ -129,11 +131,32 @@ const ModalRewardConsumptionScreen = () => {
           RewardConsumptionScreen
         </EButton.Lg>
 
-        <TModalRewardConsumptionTemplate
+        <TModalRewardConfirmConsumptionTemplate
           reward={rewardMock}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
         />
+      </Box>
+    </>
+  )
+}
+
+const ModalRewardConfirmConsumptionScreen = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <>
+      <Box mt={24} px={16}>
+        <EButton.Lg
+          w="100%"
+          onClick={() => {
+            setIsOpen(true)
+          }}
+        >
+          RewardConfirmConsumptionScreen
+        </EButton.Lg>
+
+        <TModalRewardConsumedTemplate isOpen={isOpen} setIsOpen={setIsOpen} />
       </Box>
     </>
   )

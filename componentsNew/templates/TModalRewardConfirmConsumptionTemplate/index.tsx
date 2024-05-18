@@ -75,4 +75,4 @@ const Component: FC<Props> = ({ reward, isOpen, setIsOpen }) => {
   )
 }
 
-export { Component as TModalRewardConsumptionTemplate }
+export { Component as TModalRewardConfirmConsumptionTemplate }
