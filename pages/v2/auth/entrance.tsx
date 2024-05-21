@@ -1,15 +1,16 @@
 import { Box, Button, Flex } from '@mantine/core'
-import LGuestUserLayout from '../../componentsNew/layouts/LGuestUserLayout'
-import { NextPageWithLayout } from '../_app'
+import LGuestUserLayout from '../../../componentsNew/layouts/LGuestUserLayout'
+import { NextPageWithLayout } from '../../_app'
 import Image from 'next/image'
-import { EText } from '../../componentsNew/elements/EText/base'
-import { EButton } from '../../componentsNew/elements/EButton'
-import { useWeb3Auth } from '../../hooks/useWeb3Auth'
+import { EText } from '../../../componentsNew/elements/EText/base'
+import { EButton } from '../../../componentsNew/elements/EButton'
+import { useWeb3Auth } from '../../../hooks/useWeb3Auth'
+import { applicationProperties } from '../../../constants/applicationProperties'
 
 const Page: NextPageWithLayout = () => {
   const { connectWeb3Auth, isWeb3AuthConnected, eoaAddress, web3AuthLogout } =
     useWeb3Auth({
-      redirectUrl: `/callback`,
+      redirectUrl: `${applicationProperties.HOSTING_URL}/v2/auth/entrance`,
     })
   return (
     <>
@@ -40,13 +41,15 @@ const Page: NextPageWithLayout = () => {
         >
           ログインして参加する
         </EButton.Sm>
-        <Button
-          onClick={() => {
-            web3AuthLogout('/auth/logout')
-          }}
-        >
-          ログアウト
-        </Button>
+        {isWeb3AuthConnected && (
+          <Button
+            onClick={() => {
+              web3AuthLogout('/auth/log')
+            }}
+          >
+            ログアウト
+          </Button>
+        )}
       </Flex>
     </>
   )

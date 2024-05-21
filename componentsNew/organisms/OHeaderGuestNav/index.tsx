@@ -4,9 +4,12 @@ import { FC } from 'react'
 import { colorScheme } from '../../../theme/colorScheme'
 import { useMenuOpeningStatus } from '../../../recoil/openingStatus/useMenuOpeningStatus'
 import Link from 'next/link'
+import { useWeb3Auth } from '../../../hooks/useWeb3Auth'
+import { truncator } from '../../../utils/truncator'
 
 const Component: FC = () => {
   const { menuOpenGlobalMenuStart } = useMenuOpeningStatus()
+  const { isWeb3AuthConnected, eoaAddress } = useWeb3Auth()
 
   return (
     <>
@@ -20,30 +23,59 @@ const Component: FC = () => {
           borderBottom: `0.5px solid ${colorScheme.scheme1.border.mid}`,
         }}
       >
-        <Flex justify="space-between" align="center" h={'100%'}>
+        <Flex pos="relative" justify="space-between" align="center" h={'100%'}>
           <Box
+            pos="relative"
             px={16}
             className="material-icons-outlined"
             onClick={() => {
               menuOpenGlobalMenuStart()
             }}
+            style={{ zIndex: 100 }}
           >
             menu
           </Box>
-          <Link
-            href="/waitings"
-            style={{ display: 'block', width: 173, height: 24 }}
-          >
-            <Image
-              src="/assets/images/logo/logo_machiwabi.svg"
-              alt="logo"
-              width={173}
-              height={24}
-            />
-          </Link>
-          <Box px={16} fz={12}>
-            guest
-          </Box>
+          <Flex pos="absolute" w="100%" justify="center">
+            <Link
+              href="/waitings"
+              style={{ display: 'block', width: 173, height: 24 }}
+            >
+              <Image
+                src="/assets/images/logo/logo_machiwabi.svg"
+                alt="logo"
+                width={173}
+                height={24}
+              />
+            </Link>
+          </Flex>
+          {isWeb3AuthConnected && eoaAddress ? (
+            <Box mr={16}>
+              <Box
+                px={8}
+                fz={10}
+                ff="outfit"
+                fw="bold"
+                bg={colorScheme.scheme1.surface2.surface}
+                style={{ borderRadius: 16 }}
+              >
+                {truncator.truncateString(eoaAddress, 8, 'middle')}
+              </Box>
+            </Box>
+          ) : (
+            <Box mr={16}>
+              <Box
+                px={8}
+                fz={10}
+                ff="outfit"
+                fw="bold"
+                bg={colorScheme.scheme1.surface2.surface}
+                c={colorScheme.scheme1.surface2.object.low}
+                style={{ borderRadius: 16 }}
+              >
+                GUEST
+              </Box>
+            </Box>
+          )}
         </Flex>
       </Box>
     </>

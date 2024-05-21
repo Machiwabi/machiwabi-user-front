@@ -3,12 +3,12 @@ import { Web3Auth, Web3AuthOptions } from '@web3auth/modal'
 import { OpenloginAdapter } from '@web3auth/openlogin-adapter'
 import { ethers } from 'ethers'
 import { useEffect, useRef, useState } from 'react'
-import { applicationProperties } from '../../constants/applicationProperties'
+import { applicationProperties } from '../constants/applicationProperties'
 import {
   Web3AuthAlreadyConnectedError,
   Web3AuthNotConnectedError,
-} from '../../exceptions/exceptions'
-import { Web3AuthConnectedRepository } from '../../repositories/Web3AuthConnectedRepository'
+} from '../exceptions/exceptions'
+import { Web3AuthConnectedRepository } from '../repositories/Web3AuthConnectedRepository'
 
 type Props = {
   redirectUrl?: string
