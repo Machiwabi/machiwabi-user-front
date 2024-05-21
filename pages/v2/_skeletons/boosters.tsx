@@ -2,7 +2,7 @@ import { Box, Container } from '@mantine/core'
 import { EHeading } from '../../componentsNew/elements/EHeading/base'
 import { OBoosters } from '../../componentsNew/organisms/OBoosters'
 import { OFooterNav } from '../../componentsNew/organisms/OFooterNav'
-import { OHeaderGuestNav } from '../../componentsNew/organisms/OHeaderGuestNav'
+import { OHeaderNav } from '../../componentsNew/organisms/OHeaderNav'
 import { OWaitingHeader } from '../../componentsNew/organisms/OWaitingHeader'
 import { OWaitingTabs } from '../../componentsNew/organisms/OWaitingTabs'
 import { boosterMocks } from '../../mocks/booster.mock'
@@ -10,7 +10,7 @@ import { boosterMocks } from '../../mocks/booster.mock'
 const Page = () => {
   return (
     <>
-      <OHeaderGuestNav />
+      <OHeaderNav />
       <Container maw={410} pt={56} p={0} mb={160}>
         <OWaitingHeader mt={24} px={16} />
         <OWaitingTabs px={16} current="BOOSTERS" />

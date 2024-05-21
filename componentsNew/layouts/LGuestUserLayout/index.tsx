@@ -1,5 +1,5 @@
 import { JSXElementConstructor, ReactElement } from 'react'
-import { OHeaderGuestNav } from '../../organisms/OHeaderGuestNav'
+import { OHeaderNav } from '../../organisms/OHeaderNav'
 import { OOverlayedMenu } from '../../organisms/OOverlayedMenu'
 import { Container } from '@mantine/core'
 
@@ -9,7 +9,7 @@ export default function LGuestUserLayout(
   return (
     <>
       <OOverlayedMenu />
-      <OHeaderGuestNav />
+      <OHeaderNav />
       <Container maw={410} pt={56} p={0} mb={160}>
         {page}
       </Container>

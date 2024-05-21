@@ -10,13 +10,13 @@ import {
 import Image from 'next/image'
 import { EButton } from '../../componentsNew/elements/EButton'
 import { EHeading } from '../../componentsNew/elements/EHeading/base'
-import { OHeaderGuestNav } from '../../componentsNew/organisms/OHeaderGuestNav'
+import { OHeaderNav } from '../../componentsNew/organisms/OHeaderNav'
 import { colorScheme } from '../../theme/colorScheme'
 
 const Page = () => {
   return (
     <>
-      <OHeaderGuestNav />
+      <OHeaderNav />
       <Container maw={410} pt={56} p={0} mb={160}>
         <EHeading.Page mt={24} px={16}>
           新規ユーザー登録

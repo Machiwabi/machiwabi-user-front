@@ -10,7 +10,7 @@ import { ESectionHeading } from '../../../componentsNew/elements/ESectionHeading
 import { EText } from '../../../componentsNew/elements/EText/base'
 import { OBoostersStatuses } from '../../../componentsNew/organisms/OBoostersStatuses'
 import { OFooterNav } from '../../../componentsNew/organisms/OFooterNav'
-import { OHeaderGuestNav } from '../../../componentsNew/organisms/OHeaderGuestNav'
+import { OHeaderNav } from '../../../componentsNew/organisms/OHeaderNav'
 import { OUserIcon } from '../../../componentsNew/organisms/OUserIcon'
 import { OWaitingHeader } from '../../../componentsNew/organisms/OWaitingHeader'
 import { OWaitingListItem } from '../../../componentsNew/organisms/OWaitingListItem'
@@ -22,7 +22,7 @@ import { colorScheme } from '../../../theme/colorScheme'
 const Page = () => {
   return (
     <>
-      <OHeaderGuestNav />
+      <OHeaderNav />
       <Container maw={410} pt={56} p={0} mb={160}>
         <OWaitingHeader mt={24} px={16} />
         <OWaitingTabs px={16} current="HOME" />

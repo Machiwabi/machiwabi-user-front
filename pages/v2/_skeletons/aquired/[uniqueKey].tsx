@@ -1,7 +1,7 @@
 import { Container } from '@mantine/core'
 import { EBreadcrumb } from '../../../componentsNew/elements/EBreadcrumb'
 import { OFooterNav } from '../../../componentsNew/organisms/OFooterNav'
-import { OHeaderGuestNav } from '../../../componentsNew/organisms/OHeaderGuestNav'
+import { OHeaderNav } from '../../../componentsNew/organisms/OHeaderNav'
 import { TRewardShowTemplate } from '../../../componentsNew/templates/TRewardShowTemplate'
 import { waitingMissionsUrl, waitingUrl } from '../../../helpers/url.helper'
 import { boosterMock } from '../../../mocks/booster.mock'
@@ -13,7 +13,7 @@ import { TAquiredRewardShowTemplate } from '../../../componentsNew/templates/TAq
 const Page = () => {
   return (
     <>
-      <OHeaderGuestNav />
+      <OHeaderNav />
       <Container maw={410} pt={56} p={0} mb={160}>
         <EBreadcrumb
           mt={24}

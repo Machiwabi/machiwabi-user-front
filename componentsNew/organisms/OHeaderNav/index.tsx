@@ -82,4 +82,4 @@ const Component: FC = () => {
   )
 }
 
-export { Component as OHeaderGuestNav }
+export { Component as OHeaderNav }

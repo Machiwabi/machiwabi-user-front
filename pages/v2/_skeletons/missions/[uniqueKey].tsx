@@ -7,7 +7,7 @@ import { EHeading } from '../../../componentsNew/elements/EHeading/base'
 import { EText } from '../../../componentsNew/elements/EText/base'
 import { OBoosterMultiplier } from '../../../componentsNew/organisms/OBoosterMultiplier'
 import { OFooterNav } from '../../../componentsNew/organisms/OFooterNav'
-import { OHeaderGuestNav } from '../../../componentsNew/organisms/OHeaderGuestNav'
+import { OHeaderNav } from '../../../componentsNew/organisms/OHeaderNav'
 import { waitingMissionsUrl, waitingUrl } from '../../../helpers/url.helper'
 import { boosterMock } from '../../../mocks/booster.mock'
 import { waitingMock } from '../../../mocks/waiting.mock'
@@ -17,7 +17,7 @@ import { truncator } from '../../../utils/truncator'
 const Page = () => {
   return (
     <>
-      <OHeaderGuestNav />
+      <OHeaderNav />
       <Container maw={410} pt={56} p={0} mb={160}>
         <EBreadcrumb
           mt={24}

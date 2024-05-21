@@ -1,13 +1,13 @@
 import { Box, Container, Flex } from '@mantine/core'
 import { EButton } from '../../componentsNew/elements/EButton'
-import { OHeaderGuestNav } from '../../componentsNew/organisms/OHeaderGuestNav'
+import { OHeaderNav } from '../../componentsNew/organisms/OHeaderNav'
 import { TEventShowTemplate } from '../../componentsNew/templates/TEventShowTemplate'
 import { eventMock } from '../../mocks/event.mock'
 
 const Page = () => {
   return (
     <>
-      <OHeaderGuestNav />
+      <OHeaderNav />
       <Container maw={410} pt={56} p={0} mb={160}>
         <TEventShowTemplate event={eventMock} />
       </Container>
