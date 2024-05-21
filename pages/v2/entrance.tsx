@@ -2,12 +2,12 @@ import { Box, Container, Flex } from '@mantine/core'
 import Image from 'next/image'
 import { EButton } from '../../componentsNew/elements/EButton'
 import { EText } from '../../componentsNew/elements/EText/base'
-import { OHeaderNav } from '../../componentsNew/organisms/OHeaderNav'
+import { OHeaderGuestNav } from '../../componentsNew/organisms/OHeaderGuestNav'
 
 const Page = () => {
   return (
     <>
-      <OHeaderNav />
+      <OHeaderGuestNav />
       <Container maw={410} pt={56} p={0} mb={160}>
         <Flex
           direction="column"

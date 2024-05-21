@@ -1,7 +1,7 @@
 import { Container } from '@mantine/core'
 import { EBreadcrumb } from '../../../componentsNew/elements/EBreadcrumb'
 import { OFooterNav } from '../../../componentsNew/organisms/OFooterNav'
-import { OHeaderNav } from '../../../componentsNew/organisms/OHeaderNav'
+import { OHeaderGuestNav } from '../../../componentsNew/organisms/OHeaderGuestNav'
 import { TRewardShowTemplate } from '../../../componentsNew/templates/TRewardShowTemplate'
 import { waitingMissionsUrl, waitingUrl } from '../../../helpers/url.helper'
 import { boosterMock } from '../../../mocks/booster.mock'
@@ -12,7 +12,7 @@ import { truncator } from '../../../utils/truncator'
 const Page = () => {
   return (
     <>
-      <OHeaderNav />
+      <OHeaderGuestNav />
       <Container maw={410} pt={56} p={0} mb={160}>
         <EBreadcrumb
           mt={24}

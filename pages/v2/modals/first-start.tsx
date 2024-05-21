@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { EBreadcrumb } from '../../../componentsNew/elements/EBreadcrumb'
 import { EButton } from '../../../componentsNew/elements/EButton'
 import { OFooterNav } from '../../../componentsNew/organisms/OFooterNav'
-import { OHeaderNav } from '../../../componentsNew/organisms/OHeaderNav'
+import { OHeaderGuestNav } from '../../../componentsNew/organisms/OHeaderGuestNav'
 import { TModalDailyMissionTemplate } from '../../../componentsNew/templates/TModalDailyMissionTemplate'
 import { TModalGuidePwaTemplate } from '../../../componentsNew/templates/TModalGuidePwaTemplate'
 import { TModalRewardConfirmConsumptionTemplate } from '../../../componentsNew/templates/TModalRewardConfirmConsumptionTemplate'
@@ -18,7 +18,7 @@ import { TModalRewardConsumedTemplate } from '../../../componentsNew/templates/T
 const Page = () => {
   return (
     <>
-      <OHeaderNav />
+      <OHeaderGuestNav />
       <Container maw={410} pt={56} p={0} mb={160}>
         <EBreadcrumb
           mt={24}

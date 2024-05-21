@@ -2,7 +2,7 @@ import { Box, Container, SimpleGrid } from '@mantine/core'
 import { useRouter } from 'next/router'
 import { ERollTabs } from '../../componentsNew/elements/ERollTabs/ERollTabs'
 import { OFooterNav } from '../../componentsNew/organisms/OFooterNav'
-import { OHeaderNav } from '../../componentsNew/organisms/OHeaderNav'
+import { OHeaderGuestNav } from '../../componentsNew/organisms/OHeaderGuestNav'
 import { OWaitingHeader } from '../../componentsNew/organisms/OWaitingHeader'
 import { OWaitingListItem } from '../../componentsNew/organisms/OWaitingListItem'
 import { OWaitingTabs } from '../../componentsNew/organisms/OWaitingTabs'
@@ -13,7 +13,7 @@ const Page = () => {
 
   return (
     <>
-      <OHeaderNav />
+      <OHeaderGuestNav />
       <Container maw={410} pt={56} p={0} mb={160}>
         <OWaitingHeader mt={24} px={16} />
         <OWaitingTabs px={16} current="MEMBERS" />
