@@ -6,18 +6,18 @@ import {
   Flex,
   ScrollArea,
 } from '@mantine/core'
-import { ESectionHeading } from '../../componentsNew/elements/ESectionHeading'
-import { EText } from '../../componentsNew/elements/EText/base'
-import { OBoostersStatuses } from '../../componentsNew/organisms/OBoostersStatuses'
-import { OFooterNav } from '../../componentsNew/organisms/OFooterNav'
-import { OHeaderGuestNav } from '../../componentsNew/organisms/OHeaderGuestNav'
-import { OUserIcon } from '../../componentsNew/organisms/OUserIcon'
-import { OWaitingHeader } from '../../componentsNew/organisms/OWaitingHeader'
-import { OWaitingListItem } from '../../componentsNew/organisms/OWaitingListItem'
-import { OWaitingTabs } from '../../componentsNew/organisms/OWaitingTabs'
-import { BoosterType } from '../../generated/graphql'
-import { waitingMock } from '../../mocks/waiting.mock'
-import { colorScheme } from '../../theme/colorScheme'
+import { ESectionHeading } from '../../../componentsNew/elements/ESectionHeading'
+import { EText } from '../../../componentsNew/elements/EText/base'
+import { OBoostersStatuses } from '../../../componentsNew/organisms/OBoostersStatuses'
+import { OFooterNav } from '../../../componentsNew/organisms/OFooterNav'
+import { OHeaderGuestNav } from '../../../componentsNew/organisms/OHeaderGuestNav'
+import { OUserIcon } from '../../../componentsNew/organisms/OUserIcon'
+import { OWaitingHeader } from '../../../componentsNew/organisms/OWaitingHeader'
+import { OWaitingListItem } from '../../../componentsNew/organisms/OWaitingListItem'
+import { OWaitingTabs } from '../../../componentsNew/organisms/OWaitingTabs'
+import { BoosterType } from '../../../generated/graphql'
+import { waitingMock } from '../../../mocks/waiting.mock'
+import { colorScheme } from '../../../theme/colorScheme'
 
 const Page = () => {
   return (

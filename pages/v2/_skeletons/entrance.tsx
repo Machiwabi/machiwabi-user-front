@@ -1,8 +1,8 @@
 import { Box, Container, Flex } from '@mantine/core'
 import Image from 'next/image'
-import { EButton } from '../../componentsNew/elements/EButton'
-import { EText } from '../../componentsNew/elements/EText/base'
-import { OHeaderGuestNav } from '../../componentsNew/organisms/OHeaderGuestNav'
+import { EButton } from '../../../componentsNew/elements/EButton'
+import { EText } from '../../../componentsNew/elements/EText/base'
+import { OHeaderGuestNav } from '../../../componentsNew/organisms/OHeaderGuestNav'
 
 const Page = () => {
   return (
