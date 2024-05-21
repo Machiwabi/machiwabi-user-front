@@ -3,12 +3,16 @@ import { Web3Auth, Web3AuthOptions } from '@web3auth/modal'
 import { OpenloginAdapter } from '@web3auth/openlogin-adapter'
 import { ethers } from 'ethers'
 import { useEffect, useRef, useState } from 'react'
+import { SiweMessage } from 'siwe'
 import { applicationProperties } from '../constants/applicationProperties'
 import {
   Web3AuthAlreadyConnectedError,
   Web3AuthNotConnectedError,
 } from '../exceptions/exceptions'
 import { Web3AuthConnectedRepository } from '../repositories/Web3AuthConnectedRepository'
+import { getNonce } from '../usecases/authentication/getNonce'
+import { signOutEoa } from '../usecases/authentication/signOutEoa'
+import { verifyEoa } from '../usecases/authentication/verifyEoa'
 
 type Props = {
   redirectUrl?: string
@@ -107,11 +111,13 @@ export const useWeb3Auth = ({
     }
   }
 
+  // web3Authのログアウト処理
   const web3AuthLogout = async (redirectUrl: string) => {
     try {
       if (!isWeb3AuthConnected) throw new Web3AuthNotConnectedError()
       await web3Auth?.logout()
       await Web3AuthConnectedRepository.removeWeb3AuthConnected()
+      await signOutEoa()
       setWeb3Auth(null)
       window.location.href = redirectUrl
     } catch (e) {
@@ -120,6 +126,7 @@ export const useWeb3Auth = ({
     }
   }
 
+  // web3Authのユーザー情報取得処理
   const getUserInfo = async () => {
     try {
       if (!isWeb3AuthConnected) throw new Web3AuthNotConnectedError()
@@ -130,6 +137,7 @@ export const useWeb3Auth = ({
     }
   }
 
+  // web3Authに接続しウォレットでログインする処理
   const connectWeb3Auth = async () => {
     try {
       if (isWeb3AuthConnected) throw new Web3AuthAlreadyConnectedError()
@@ -142,6 +150,7 @@ export const useWeb3Auth = ({
     }
   }
 
+  // ログインしたユーザーのEOAアドレスを取得する関数
   const getUserEoaAddress = async () => {
     // Provider経由してEOAを取得してキャッシュするのに時間がかかる
     // ゆえ、ステートにからな場合があるゆえ、取得を直接awaitで走らせて取得する
@@ -152,6 +161,7 @@ export const useWeb3Auth = ({
     }
   }
 
+  // web3authにログインしているかどうかを判定する
   const isCheckConnectedAync = async () => {
     const { connected } =
       await Web3AuthConnectedRepository.getWeb3AuthConnected()
@@ -159,8 +169,51 @@ export const useWeb3Auth = ({
     return !!connected
   }
 
+  // web3Authでログインを行った上でSIWEする
+  const connectWeb3AuthAndSignInWithEthereum = async () => {
+    if (isWeb3AuthConnected) throw new Web3AuthAlreadyConnectedError()
+    if (!web3Auth) return
+    try {
+      const web3AuthProvider: IProvider | null = await web3Auth?.connect()
+      if (!web3AuthProvider) return
+
+      // 1.web3AuthProviderをethers.jsのProviderに変換する
+      const provider = new ethers.providers.Web3Provider(web3AuthProvider)
+      // 2.変換したProviderからSignerを取得する
+      const signer = await provider.getSigner()
+      // 3.SignerからEOAアドレスを取得する
+      const signinedEoaAddress = await signer.getAddress()
+      // 4.接続先サーバーよりnonceを取得する
+      const nonce = await getNonce()
+      // 5.SIWEメッセージを生成する
+      const siweMessage = new SiweMessage({
+        domain: applicationProperties.HOSTING_DOMAIN,
+        address: signinedEoaAddress,
+        statement: 'Sign in with Ethereum to the app.',
+        uri: applicationProperties.HOSTING_URL,
+        version: '1',
+        chainId: 1,
+        nonce,
+      })
+      // 6.メッセージをstring化し、署名を行う
+      const message = siweMessage.prepareMessage()
+      const signature = await signer.signMessage(message)
+      // 7.署名したメッセージをサーバーに送信し、検証を行ったのち、JWTをキャッシュする
+      await verifyEoa(siweMessage, signature)
+      setEoaAddress(signinedEoaAddress)
+
+      return signinedEoaAddress
+    } catch (e) {
+      console.error(e)
+      if (!`${e}`.includes('User closed the modal')) {
+        throw e
+      }
+    }
+  }
+
   return {
     connectWeb3Auth,
+    connectWeb3AuthAndSignInWithEthereum,
     web3Auth,
     initializeWeb3Auth,
     getUserInfo,

@@ -1,17 +1,20 @@
-import { Box, Button, Flex } from '@mantine/core'
-import LGuestUserLayout from '../../../componentsNew/layouts/LGuestUserLayout'
-import { NextPageWithLayout } from '../../_app'
+import { Box, Flex } from '@mantine/core'
 import Image from 'next/image'
-import { EText } from '../../../componentsNew/elements/EText/base'
 import { EButton } from '../../../componentsNew/elements/EButton'
-import { useWeb3Auth } from '../../../hooks/useWeb3Auth'
+import { EText } from '../../../componentsNew/elements/EText/base'
+import LGuestUserLayout from '../../../componentsNew/layouts/LGuestUserLayout'
 import { applicationProperties } from '../../../constants/applicationProperties'
+import { useWeb3Auth } from '../../../hooks/useWeb3Auth'
+import { NextPageWithLayout } from '../../_app'
 
 const Page: NextPageWithLayout = () => {
-  const { connectWeb3Auth, isWeb3AuthConnected, eoaAddress, web3AuthLogout } =
-    useWeb3Auth({
-      redirectUrl: `${applicationProperties.HOSTING_URL}/v2/auth/entrance`,
-    })
+  const {
+    isWeb3AuthConnected,
+    connectWeb3AuthAndSignInWithEthereum,
+    web3AuthLogout,
+  } = useWeb3Auth({
+    redirectUrl: `${applicationProperties.HOSTING_URL}/v2/auth/entrance`,
+  })
   return (
     <>
       <Flex
@@ -33,22 +36,25 @@ const Page: NextPageWithLayout = () => {
             イーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイーハトーヴォイー
           </EText.Desc1>
         </Box>
-        <EButton.Sm
-          mt={24}
-          onClick={() => {
-            connectWeb3Auth()
-          }}
-        >
-          ログインして参加する
-        </EButton.Sm>
-        {isWeb3AuthConnected && (
-          <Button
+
+        {isWeb3AuthConnected ? (
+          <EButton.Sm
+            mt={24}
             onClick={() => {
-              web3AuthLogout('/auth/log')
+              web3AuthLogout('/auth/signout-completed')
             }}
           >
             ログアウト
-          </Button>
+          </EButton.Sm>
+        ) : (
+          <EButton.Sm
+            mt={24}
+            onClick={() => {
+              connectWeb3AuthAndSignInWithEthereum()
+            }}
+          >
+            ログインして参加する
+          </EButton.Sm>
         )}
       </Flex>
     </>
