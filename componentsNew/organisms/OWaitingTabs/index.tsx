@@ -1,7 +1,7 @@
-import { Box, BoxProps } from '@mantine/core'
+import { BoxProps, Tabs } from '@mantine/core'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
-import { ERollTabs } from '../../elements/ERollTabs/ERollTabs'
+import { ERollTabs } from '../../elements/ERollTabs'
 
 type Props = BoxProps & {
   current: string
@@ -12,21 +12,23 @@ const Component: FC<Props> = ({ current, ...props }) => {
 
   return (
     <>
-      <Box {...props}>
+      <Tabs.List {...props}>
         <ERollTabs
           tabs={[
             {
               name: 'HOME',
               isCurrent: current === 'HOME',
               action: () => {
-                router.push('/v2/')
+                router.replace('/v2/')
+                // router.push('/v2/')
               },
             },
             {
               name: 'MEMBERS',
               isCurrent: current === 'MEMBERS',
               action: () => {
-                router.push('/v2/member')
+                router.replace('/v2/member')
+                // router.push('/v2/member')
               },
             },
             {
@@ -66,7 +68,7 @@ const Component: FC<Props> = ({ current, ...props }) => {
             },
           ]}
         />
-      </Box>
+      </Tabs.List>
     </>
   )
 }

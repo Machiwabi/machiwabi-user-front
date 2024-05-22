@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { ERollTab, ERollTabProps } from './ERolltab'
+import { ERollTab, ERollTabProps } from '../ERollTab'
 import { Flex, ScrollArea } from '@mantine/core'
 
 type Props = {
@@ -9,8 +9,8 @@ type Props = {
 const Component: FC<Props> = ({ tabs }) => {
   return (
     <>
-      <ScrollArea scrollbarSize={0} my={32}>
-        <Flex gap={32}>
+      <ScrollArea scrollbarSize={0} my={16}>
+        <Flex gap={0}>
           {tabs.map((tab) => (
             <>
               <ERollTab

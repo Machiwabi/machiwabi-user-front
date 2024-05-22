@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { FC, Fragment } from 'react'
 import { WaitingEntity } from '../../../generated/graphql'
 import { colorScheme } from '../../../theme/colorScheme'
+import { waitingUrl } from '../../../helpers/url.helper'
 
 type Props = SimpleGridProps & {
   waitings: WaitingEntity[]
@@ -15,7 +16,10 @@ const Component: FC<Props> = ({ waitings, ...props }) => {
         {waitings.map((waiting) => {
           return (
             <Fragment key={waiting.uniqueKey}>
-              <Link href="/" style={{ textDecoration: 'none' }}>
+              <Link
+                href={waitingUrl(waiting.uniqueKey)}
+                style={{ textDecoration: 'none' }}
+              >
                 <Box>
                   <AspectRatio pos="relative">
                     <Box
