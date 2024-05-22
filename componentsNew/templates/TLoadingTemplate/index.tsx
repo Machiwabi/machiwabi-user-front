@@ -19,4 +19,4 @@ const Component: FC = () => {
   )
 }
 
-export { Component as SLoadingScreen }
+export { Component as TLoadingTemplate }

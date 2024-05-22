@@ -39,4 +39,4 @@ const Component: FC<Props> = ({
   )
 }
 
-export { Component as SErrorScreen }
+export { Component as TErrorTemplate }
