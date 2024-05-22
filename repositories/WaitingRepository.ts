@@ -14,10 +14,12 @@ import {
   WaitingsQuery,
 } from '../generated/graphql'
 
-const findMany = async (accessToken: string): Promise<WaitingsQuery> => {
-  return await graphqlApiClient(accessToken).request<WaitingsQuery>(
-    WaitingsDocument
-  )
+const findMany = async (accessToken: string): Promise<WaitingEntity[]> => {
+  const waitingsQuery = await graphqlApiClient(
+    accessToken
+  ).request<WaitingsQuery>(WaitingsDocument)
+
+  return waitingsQuery.waitings
 }
 
 const findOne = async (

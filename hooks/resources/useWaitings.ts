@@ -1,10 +1,10 @@
 import useSWR from 'swr'
-import { WaitingsQuery } from '../../generated/graphql'
+import { WaitingEntity } from '../../generated/graphql'
 import { SiweJwtRepository } from '../../repositories/SiweJwtRepository'
 import { WaitingRepository } from '../../repositories/WaitingRepository'
 
 export const useWaitings = () => {
-  const { data, error, isLoading } = useSWR<WaitingsQuery>(
+  const { data, error, isLoading } = useSWR<WaitingEntity[]>(
     'WaitingsDocument',
     async () => {
       const secretJwt = await SiweJwtRepository.getSiweJwtFromBrowser()
@@ -13,7 +13,7 @@ export const useWaitings = () => {
   )
 
   return {
-    waitings: data?.waitings,
+    waitings: data,
     waitingsError: error,
     waitingsIsLoading: isLoading,
   }

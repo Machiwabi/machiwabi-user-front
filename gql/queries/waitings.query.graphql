@@ -1,18 +1,23 @@
 query waitings {
   waitings {
-    uniqueKey
-    waitingPoint
-    totalPoint
-    waitingDuration
-    remainingEventStartDuration
-    waitingName
-    waitingMessage
-    joinAt
+    ...WaitingField
     event {
       ...EventField
     }
     user {
       ...UserPublicField
+    }
+    waitingBoosters {
+      ...WaitingBoosterField
+      booster {
+        ...BoosterField
+      }
+    }
+    waitingRewards {
+      ...WaitingRewardField
+      reward {
+        ...RewardField
+      }
     }
   }
 }

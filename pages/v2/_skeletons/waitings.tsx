@@ -1,23 +1,25 @@
-import { Box, Container } from '@mantine/core'
-import { EHeading } from '../../componentsNew/elements/EHeading/base'
-import { OFooterNav } from '../../componentsNew/organisms/OFooterNav'
-import { OHeaderNav } from '../../componentsNew/organisms/OHeaderNav'
-import { OWaitingCells } from '../../componentsNew/organisms/OWaitingCells'
-import { waitingMocks } from '../../mocks/waiting.mock'
+import { Container } from '@mantine/core'
+import { OFooterNav } from '../../../componentsNew/organisms/OFooterNav'
+import { OHeaderNav } from '../../../componentsNew/organisms/OHeaderNav'
+import { TWaitingEventsTemplate } from '../../../componentsNew/templates/TWaitingEventsTemplate'
+import { waitingMocks } from '../../../mocks/waiting.mock'
 
 const Page = () => {
   return (
     <>
       <OHeaderNav />
       <Container maw={410} pt={56} p={0} mb={160}>
-        <Box mt={24} mb={40}>
-          <EHeading.Section>WAITING EVENTS</EHeading.Section>
-          <OWaitingCells mt={12} waitings={waitingMocks} />
-        </Box>
-        <Box my={40}>
-          <EHeading.Section>PAST EVENTS</EHeading.Section>
-          <OWaitingCells mt={12} waitings={waitingMocks} />
-        </Box>
+        <TWaitingEventsTemplate
+          mt={24}
+          mb={40}
+          heading="WAITING EVENTS"
+          waitings={waitingMocks}
+        />
+        <TWaitingEventsTemplate
+          my={40}
+          heading="PAST EVENTS"
+          waitings={waitingMocks}
+        />
       </Container>
       <OFooterNav />
     </>
