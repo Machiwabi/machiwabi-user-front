@@ -1,11 +1,11 @@
 import { Container } from '@mantine/core'
-import { OAquiredRewardCells } from '../../componentsNew/organisms/OAquiredRewardCells'
-import { OFooterNav } from '../../componentsNew/organisms/OFooterNav'
-import { OHeaderNav } from '../../componentsNew/organisms/OHeaderNav'
-import { OWaitingHeader } from '../../componentsNew/organisms/OWaitingHeader'
-import { OWaitingTabs } from '../../componentsNew/organisms/OWaitingTabs'
-import { rewardMock, rewardMocks } from '../../mocks/reward.mock'
-import { waitingRewardMocks } from '../../mocks/waitingReward.mock'
+import { OAquiredRewardCells } from '../../../componentsNew/organisms/OAquiredRewardCells'
+import { OFooterNav } from '../../../componentsNew/organisms/OFooterNav'
+import { OHeaderNav } from '../../../componentsNew/organisms/OHeaderNav'
+import { OWaitingHeader } from '../../../componentsNew/organisms/OWaitingHeader'
+import { OWaitingTabs } from '../../../componentsNew/organisms/OWaitingTabs'
+import { rewardMock, rewardMocks } from '../../../mocks/reward.mock'
+import { waitingRewardMocks } from '../../../mocks/waitingReward.mock'
 
 const Page = () => {
   return (
