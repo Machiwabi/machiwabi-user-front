@@ -3,12 +3,14 @@ import { useWaitings } from '../../../hooks/resources/useWaitings'
 import { TErrorTemplate } from '../../templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../templates/TLoadingTemplate'
 import { TWaitingEventsTemplate } from '../../templates/TWaitingEventsTemplate'
+import { TNoWaitingsTemplate } from '../../templates/TNoWaitingsTemplate'
 
 const Component: FC = () => {
   const { waitings, waitingsError, waitingsIsLoading } = useWaitings()
 
   if (waitingsError) return <TErrorTemplate />
   if (waitingsIsLoading || !waitings) return <TLoadingTemplate />
+  if (waitings.length === 0) return <TNoWaitingsTemplate />
 
   const currentWaitings = waitings.filter(
     (waiting) => new Date(waiting.event?.startAt) > new Date()

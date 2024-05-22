@@ -2,14 +2,11 @@ import LGuestUserLayout from '../../../componentsNew/layouts/LGuestUserLayout'
 import { SRecommendSignInScreen } from '../../../componentsNew/screens/SRecommendSignInScreen'
 import { SWaitingsScreen } from '../../../componentsNew/screens/SWaitingsScreen'
 import { applicationProperties } from '../../../constants/applicationProperties'
-import { useWeb3Auth } from '../../../hooks/useWeb3Auth'
 import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
 import { NextPageWithLayout } from '../../_app'
 
 const Page: NextPageWithLayout = () => {
   const { authenticated } = useAuthenticatedStore()
-
-  // return <>{authenticated}</>
 
   if (authenticated !== 'authenticated') {
     return (

@@ -14,7 +14,7 @@ const Component: FC = () => {
     >
       <Box>
         <EText.Desc2 ta="center">
-          マチワビているイベントは
+          現在マチワビているイベントが
           <br />
           ありません
         </EText.Desc2>
