@@ -13,6 +13,8 @@ import { Web3AuthConnectedRepository } from '../repositories/Web3AuthConnectedRe
 import { getNonce } from '../usecases/authentication/getNonce'
 import { signOutEoa } from '../usecases/authentication/signOutEoa'
 import { verifyEoa } from '../usecases/authentication/verifyEoa'
+import { useUserPrivate } from './resources/useUserPrivate'
+import { SiweJwtRepository } from '../repositories/SiweJwtRepository'
 
 type Props = {
   redirectUrl?: string
@@ -29,6 +31,8 @@ export const useWeb3Auth = ({
   const [isWeb3AuthConnected, setWeb3AuthIsConnected] = useState<boolean>(false)
 
   const initializing = useRef(false) // useRefを使って初期化の状態を追跡
+
+  const { upsertUser } = useUserPrivate()
 
   // 初期化処理
   useEffect(() => {
@@ -170,13 +174,43 @@ export const useWeb3Auth = ({
   }
 
   // web3Authでログインを行った上でSIWEする
-  const connectWeb3AuthAndSignInWithEthereum = async () => {
+  const connectWeb3AuthAndSignInWithEthereum = async (redirectUrl: string) => {
     if (isWeb3AuthConnected) throw new Web3AuthAlreadyConnectedError()
     if (!web3Auth) return
     try {
       const web3AuthProvider: IProvider | null = await web3Auth?.connect()
       if (!web3AuthProvider) return
 
+      await _signInWithEthereum(web3AuthProvider, redirectUrl)
+    } catch (e) {
+      console.error(e)
+      if (!`${e}`.includes('User closed the modal')) {
+        throw e
+      }
+    }
+  }
+
+  // SNSログイン後にcallbackした時にSIWEする
+  const callbackedSignInWithEthereum = async (redirectUrl: string) => {
+    if (!web3Auth) return
+    try {
+      const web3AuthProvider: IProvider | null = await web3Auth?.connect()
+      if (!web3AuthProvider) return
+
+      await _signInWithEthereum(web3AuthProvider, redirectUrl)
+    } catch (e) {
+      console.error(e)
+      if (!`${e}`.includes('User closed the modal')) {
+        throw e
+      }
+    }
+  }
+
+  const _signInWithEthereum = async (
+    web3AuthProvider: IProvider,
+    redirectUrl: string
+  ) => {
+    try {
       // 1.web3AuthProviderをethers.jsのProviderに変換する
       const provider = new ethers.providers.Web3Provider(web3AuthProvider)
       // 2.変換したProviderからSignerを取得する
@@ -198,22 +232,26 @@ export const useWeb3Auth = ({
       // 6.メッセージをstring化し、署名を行う
       const message = siweMessage.prepareMessage()
       const signature = await signer.signMessage(message)
+
       // 7.署名したメッセージをサーバーに送信し、検証を行ったのち、JWTをキャッシュする
       await verifyEoa(siweMessage, signature)
       setEoaAddress(signinedEoaAddress)
 
-      return signinedEoaAddress
+      // 8.ログイン後のユーザーアップデート処理
+      const jwt = await SiweJwtRepository.getSiweJwtFromBrowser()
+      if (jwt) await upsertUser(jwt.accessToken)
+
+      // 9.リダイレクト
+      window.location.href = redirectUrl
     } catch (e) {
       console.error(e)
-      if (!`${e}`.includes('User closed the modal')) {
-        throw e
-      }
     }
   }
 
   return {
     connectWeb3Auth,
     connectWeb3AuthAndSignInWithEthereum,
+    callbackedSignInWithEthereum,
     web3Auth,
     initializeWeb3Auth,
     getUserInfo,

@@ -1,6 +1,6 @@
+import { BoxProps, Flex } from '@mantine/core'
 import { FC } from 'react'
 import { OverlayedMenuListItem } from './OverlayedMenuListItem'
-import { BoxProps, Flex } from '@mantine/core'
 
 type Props = BoxProps
 
@@ -13,7 +13,7 @@ const Component: FC<Props> = ({ ...props }) => {
         <OverlayedMenuListItem href="/posts" title="特定商取引法に基づく表記" />
         <OverlayedMenuListItem href="/posts" title="利用規約" />
         <OverlayedMenuListItem href="/" title="プライバシーポリシー" />
-        <OverlayedMenuListItem href="/" title="ログアウト" />
+        <OverlayedMenuListItem href="/v2/signout" title="ログアウト" />
       </Flex>
     </>
   )

@@ -13,8 +13,9 @@ const Page: NextPageWithLayout = () => {
     connectWeb3AuthAndSignInWithEthereum,
     web3AuthLogout,
   } = useWeb3Auth({
-    redirectUrl: `${applicationProperties.HOSTING_URL}/v2/auth/entrance`,
+    redirectUrl: `${applicationProperties.HOSTING_URL}/v2/auth/callback`,
   })
+
   return (
     <>
       <Flex
@@ -50,7 +51,7 @@ const Page: NextPageWithLayout = () => {
           <EButton.Sm
             mt={24}
             onClick={() => {
-              connectWeb3AuthAndSignInWithEthereum()
+              connectWeb3AuthAndSignInWithEthereum('/v2/waitings')
             }}
           >
             ログインして参加する

@@ -1,11 +1,9 @@
 import { Box, Flex } from '@mantine/core'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { IconClose } from '../../../components/assets/icon/IconClose'
 import { useMenuOpeningStatus } from '../../../recoil/openingStatus/useMenuOpeningStatus'
-import { OverlayedMenuList } from './OverlayedMenuList'
 import { colorScheme } from '../../../theme/colorScheme'
+import { OverlayedMenuList } from './OverlayedMenuList'
 
 const Component: React.FC = () => {
   const { isMenuOpening, menuOpenGlobalMenuEnd, menuOpenGlobalMenuStart } =
@@ -65,4 +63,4 @@ const Component: React.FC = () => {
   )
 }
 
-export { Component as OOverlayedMenu }
+export { Component as SOverlayedMenuScreen }

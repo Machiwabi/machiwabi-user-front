@@ -1,14 +1,23 @@
 import LGuestUserLayout from '../../../componentsNew/layouts/LGuestUserLayout'
 import { SRecommendSignInScreen } from '../../../componentsNew/screens/SRecommendSignInScreen'
 import { SWaitingsScreen } from '../../../componentsNew/screens/SWaitingsScreen'
+import { applicationProperties } from '../../../constants/applicationProperties'
 import { useWeb3Auth } from '../../../hooks/useWeb3Auth'
+import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
 import { NextPageWithLayout } from '../../_app'
 
 const Page: NextPageWithLayout = () => {
-  const { isWeb3AuthConnected } = useWeb3Auth()
+  const { authenticated } = useAuthenticatedStore()
 
-  if (!isWeb3AuthConnected) return <SRecommendSignInScreen />
+  // return <>{authenticated}</>
 
+  if (authenticated !== 'authenticated') {
+    return (
+      <SRecommendSignInScreen
+        redirectUrl={`${applicationProperties.HOSTING_URL}/v2/waitings`}
+      />
+    )
+  }
   return <SWaitingsScreen />
 }
 

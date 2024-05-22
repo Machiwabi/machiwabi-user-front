@@ -1,19 +1,15 @@
 import { Box, Flex } from '@mantine/core'
 import { FC } from 'react'
-import { applicationProperties } from '../../../constants/applicationProperties'
-import { useWeb3Auth } from '../../../hooks/useWeb3Auth'
 import { EButton } from '../../elements/EButton'
 import { EText } from '../../elements/EText/base'
+import { useWeb3Auth } from '../../../hooks/useWeb3Auth'
 
 type Props = {
-  redirectUrl?: string
+  redirectUrl: string
 }
 
-const Component: FC<Props> = ({}) => {
-  const { connectWeb3AuthAndSignInWithEthereum } = useWeb3Auth({
-    redirectUrl: `${applicationProperties.HOSTING_URL}/v2/waitings`,
-  })
-
+const Component: FC<Props> = ({ redirectUrl }) => {
+  const { connectWeb3AuthAndSignInWithEthereum } = useWeb3Auth()
   return (
     <Flex
       pos="relative"
@@ -31,12 +27,12 @@ const Component: FC<Props> = ({}) => {
       </Box>
 
       <EButton.Sm
-        mt={16}
+        mt={24}
         onClick={() => {
-          connectWeb3AuthAndSignInWithEthereum()
+          connectWeb3AuthAndSignInWithEthereum(redirectUrl)
         }}
       >
-        ログイン／会員登録
+        ログイ参加する
       </EButton.Sm>
     </Flex>
   )

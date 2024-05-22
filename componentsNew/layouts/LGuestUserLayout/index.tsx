@@ -1,6 +1,6 @@
 import { JSXElementConstructor, ReactElement } from 'react'
 import { OHeaderNav } from '../../organisms/OHeaderNav'
-import { OOverlayedMenu } from '../../organisms/OOverlayedMenu'
+import { SOverlayedMenuScreen } from '../../screens/SOverlayedMenuScreen'
 import { Container } from '@mantine/core'
 
 export default function LGuestUserLayout(
@@ -8,7 +8,7 @@ export default function LGuestUserLayout(
 ) {
   return (
     <>
-      <OOverlayedMenu />
+      <SOverlayedMenuScreen />
       <OHeaderNav />
       <Container maw={410} pt={56} p={0} mb={160}>
         {page}
