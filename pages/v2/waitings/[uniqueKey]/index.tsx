@@ -1,18 +1,16 @@
-import { Container, Tabs } from '@mantine/core'
+import { Tabs } from '@mantine/core'
 import LGuestUserLayout from '../../../../componentsNew/layouts/LGuestUserLayout'
-import { OHeaderNav } from '../../../../componentsNew/organisms/OHeaderNav'
-import { SWaitingScreen } from '../../../../componentsNew/screens/SWaitingScreen'
-import { useAuthenticatedStore } from '../../../../recoil/authenticatedStore/useAuthenticatedStore'
-import { NextPageWithLayout } from '../../../_app'
 import { OWaitingHeader } from '../../../../componentsNew/organisms/OWaitingHeader'
 import { OWaitingTabs } from '../../../../componentsNew/organisms/OWaitingTabs'
-import { OFooterNav } from '../../../../componentsNew/organisms/OFooterNav'
 import { SMembersScreen } from '../../../../componentsNew/screens/SMembersScreen'
-import { useWaiting } from '../../../../hooks/resources/useWaiting'
+import { SMissionsScreen } from '../../../../componentsNew/screens/SMissionsScreen'
+import { SRewardsScreen } from '../../../../componentsNew/screens/SRewardsScreen'
+import { SWaitingScreen } from '../../../../componentsNew/screens/SWaitingScreen'
 import { TErrorTemplate } from '../../../../componentsNew/templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../../../componentsNew/templates/TLoadingTemplate'
+import { useWaiting } from '../../../../hooks/resources/useWaiting'
 import { WaitingRepository } from '../../../../repositories/WaitingRepository'
-import { SMissionsScreen } from '../../../../componentsNew/screens/SMissionsScreen'
+import { NextPageWithLayout } from '../../../_app'
 
 type Props = {
   uniqueKey: string
@@ -46,6 +44,10 @@ const Page: NextPageWithLayout<Props> = ({ uniqueKey }) => {
 
         <Tabs.Panel value="MISSIONS">
           <SMissionsScreen eventUniqueKey={waiting.event.uniqueKey} />
+        </Tabs.Panel>
+
+        <Tabs.Panel value="REWARDS">
+          <SRewardsScreen eventUniqueKey={waiting.event.uniqueKey} />
         </Tabs.Panel>
       </Tabs>
     </>
