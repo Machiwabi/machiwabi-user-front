@@ -16,6 +16,7 @@ const Component: FC<ERollTabProps> = ({ isCurrent = false, action, name }) => {
         align="center"
         px={0}
         py={16}
+        onClick={action}
         style={{ cursor: 'pointer' }}
       >
         <Box h={24}>

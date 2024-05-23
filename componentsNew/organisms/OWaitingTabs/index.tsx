@@ -1,15 +1,20 @@
 import { BoxProps, Tabs } from '@mantine/core'
-import { useRouter } from 'next/router'
 import { FC } from 'react'
+import {
+  waitingInformationUrl,
+  waitingMembersUrl,
+  waitingMissionsUrl,
+  waitingRewardsUrl,
+  waitingUrl,
+} from '../../../helpers/url.helper'
 import { ERollTabs } from '../../elements/ERollTabs'
 
 type Props = BoxProps & {
+  waitingUniqueKey: string
   current: string
 }
 
-const Component: FC<Props> = ({ current, ...props }) => {
-  const router = useRouter()
-
+const Component: FC<Props> = ({ waitingUniqueKey, current, ...props }) => {
   return (
     <>
       <Tabs.List {...props}>
@@ -19,51 +24,57 @@ const Component: FC<Props> = ({ current, ...props }) => {
               name: 'HOME',
               isCurrent: current === 'HOME',
               action: () => {
-                router.replace('/v2/')
-                // router.push('/v2/')
+                history.pushState(null, '', waitingUrl(waitingUniqueKey))
               },
             },
             {
               name: 'MEMBERS',
               isCurrent: current === 'MEMBERS',
               action: () => {
-                router.replace('/v2/member')
-                // router.push('/v2/member')
+                history.pushState(null, '', waitingMembersUrl(waitingUniqueKey))
               },
             },
             {
               name: 'MISSIONS',
               isCurrent: current === 'MISSIONS',
               action: () => {
-                router.push('/v2/missions')
+                history.pushState(
+                  null,
+                  '',
+                  waitingMissionsUrl(waitingUniqueKey)
+                )
               },
             },
             {
               name: 'REWARDS',
               isCurrent: current === 'REWARDS',
               action: () => {
-                router.push('/v2/rewards')
+                history.pushState(null, '', waitingRewardsUrl(waitingUniqueKey))
               },
             },
             {
               name: 'BOOSTERS',
               isCurrent: current === 'BOOSTERS',
               action: () => {
-                router.push('/v2/boosters')
+                history.pushState(null, '', waitingMembersUrl(waitingUniqueKey))
               },
             },
             {
               name: 'AQUIRED',
               isCurrent: current === 'AQUIRED',
               action: () => {
-                router.push('/v2/aquired')
+                history.pushState(null, '', waitingMembersUrl(waitingUniqueKey))
               },
             },
             {
               name: 'INFORMATION',
               isCurrent: current === 'INFORMATION',
               action: () => {
-                router.push('/v2/information')
+                history.pushState(
+                  null,
+                  '',
+                  waitingInformationUrl(waitingUniqueKey)
+                )
               },
             },
           ]}

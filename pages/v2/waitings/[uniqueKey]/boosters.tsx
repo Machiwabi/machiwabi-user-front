@@ -8,14 +8,11 @@ type Props = {
 }
 
 const Page: NextPageWithLayout<Props> = ({ uniqueKey }) => {
-  // const { authenticated } = useAuthenticatedStore()
-
-  // if (authenticated !== 'authenticated') {
-  //   return <>TODO WaitingsGuestScreen</>
-  // }
-
   return (
-    <SWaitingTabsScreen waitingUniqueKey={uniqueKey} currentTabValue="HOME" />
+    <SWaitingTabsScreen
+      waitingUniqueKey={uniqueKey}
+      currentTabValue="BOOSTERS"
+    />
   )
 }
 
