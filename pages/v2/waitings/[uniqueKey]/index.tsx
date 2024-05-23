@@ -11,6 +11,7 @@ import { TLoadingTemplate } from '../../../../componentsNew/templates/TLoadingTe
 import { useWaiting } from '../../../../hooks/resources/useWaiting'
 import { WaitingRepository } from '../../../../repositories/WaitingRepository'
 import { NextPageWithLayout } from '../../../_app'
+import { SInformationScreen } from '../../../../componentsNew/screens/SInformationScreen'
 
 type Props = {
   uniqueKey: string
@@ -48,6 +49,10 @@ const Page: NextPageWithLayout<Props> = ({ uniqueKey }) => {
 
         <Tabs.Panel value="REWARDS">
           <SRewardsScreen eventUniqueKey={waiting.event.uniqueKey} />
+        </Tabs.Panel>
+
+        <Tabs.Panel value="INFORMATION">
+          <SInformationScreen waitingUniqueKey={waiting.uniqueKey} />
         </Tabs.Panel>
       </Tabs>
     </>
