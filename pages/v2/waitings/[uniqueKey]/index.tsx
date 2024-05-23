@@ -8,17 +8,27 @@ import { OWaitingHeader } from '../../../../componentsNew/organisms/OWaitingHead
 import { OWaitingTabs } from '../../../../componentsNew/organisms/OWaitingTabs'
 import { OFooterNav } from '../../../../componentsNew/organisms/OFooterNav'
 import { SMembersScreen } from '../../../../componentsNew/screens/SMembersScreen'
+import { useWaiting } from '../../../../hooks/resources/useWaiting'
+import { TErrorTemplate } from '../../../../componentsNew/templates/TErrorTemplate'
+import { TLoadingTemplate } from '../../../../componentsNew/templates/TLoadingTemplate'
+import { WaitingRepository } from '../../../../repositories/WaitingRepository'
 
 type Props = {
   uniqueKey: string
 }
 
-const Page: NextPageWithLayout = () => {
-  const { authenticated } = useAuthenticatedStore()
+const Page: NextPageWithLayout<Props> = ({ uniqueKey }) => {
+  // const { authenticated } = useAuthenticatedStore()
 
-  if (authenticated !== 'authenticated') {
-    return <>TODO WaitingsGuestScreen</>
-  }
+  // if (authenticated !== 'authenticated') {
+  //   return <>TODO WaitingsGuestScreen</>
+  // }
+
+  const { waiting, waitingError, waitingIsLoading } = useWaiting({ uniqueKey })
+
+  if (waitingError) return <TErrorTemplate />
+  if (waitingIsLoading || !waiting) return <TLoadingTemplate />
+
   return (
     <>
       <Tabs variant="pills" defaultValue={'HOME'}>
@@ -26,11 +36,11 @@ const Page: NextPageWithLayout = () => {
         <OWaitingTabs current="HOME" />
 
         <Tabs.Panel value="HOME">
-          <SWaitingScreen />
+          <SWaitingScreen waitingUniqueKey={uniqueKey} />
         </Tabs.Panel>
 
         <Tabs.Panel value="MEMBERS">
-          <SMembersScreen />
+          <SMembersScreen eventUniqueKey={waiting.event.uniqueKey} />
         </Tabs.Panel>
       </Tabs>
     </>
@@ -48,6 +58,16 @@ type Params = {
 }
 
 export const getServerSideProps = async ({ params }: Params) => {
+  const waiting = await WaitingRepository.findOne({
+    uniqueKey: params.uniqueKey,
+  })
+
+  if (!waiting) {
+    return {
+      notFound: true,
+    }
+  }
+
   try {
     return {
       props: {

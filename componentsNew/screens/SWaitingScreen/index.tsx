@@ -1,15 +1,28 @@
 import { AspectRatio, Box, Divider, Flex, ScrollArea } from '@mantine/core'
 import { FC } from 'react'
 import { BoosterType } from '../../../generated/graphql'
-import { waitingMock } from '../../../mocks/waiting.mock'
 import { colorScheme } from '../../../theme/colorScheme'
 import { ESectionHeading } from '../../elements/ESectionHeading'
 import { EText } from '../../elements/EText/base'
 import { OBoostersStatuses } from '../../organisms/OBoostersStatuses'
 import { OUserIcon } from '../../organisms/OUserIcon'
-import { OWaitingListItem } from '../../organisms/OWaitingListItem'
+import { OWaitingUserListItem } from '../../organisms/OWaitingUserListItem'
+import { useWaiting } from '../../../hooks/resources/useWaiting'
+import { TErrorTemplate } from '../../templates/TErrorTemplate'
+import { TLoadingTemplate } from '../../templates/TLoadingTemplate'
 
-const Component: FC = () => {
+type Props = {
+  waitingUniqueKey: string
+}
+
+const Component: FC<Props> = ({ waitingUniqueKey }) => {
+  const { waiting, waitingError, waitingIsLoading } = useWaiting({
+    uniqueKey: waitingUniqueKey,
+  })
+
+  if (waitingError) return <TErrorTemplate />
+  if (waitingIsLoading || !waiting) return <TLoadingTemplate />
+
   return (
     <>
       <Box px={16}>
@@ -22,7 +35,7 @@ const Component: FC = () => {
         </AspectRatio>
 
         <Box p={16} bg={colorScheme.scheme1.surface2.surface}>
-          <OWaitingListItem waiting={waitingMock} />
+          <OWaitingUserListItem waiting={waiting} />
           <Divider my={16} />
           <OBoostersStatuses
             secondPerTotalPoints={10}

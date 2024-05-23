@@ -1,12 +1,10 @@
 import { graphqlApiClient } from '../apis/GraphqlApiClient'
 import { NotFoundError } from '../exceptions/exceptions'
 import {
-  WaitingBoosterEntity,
   WaitingDocument,
   WaitingEntity,
   WaitingQuery,
   WaitingQueryVariables,
-  WaitingRewardEntity,
   WaitingSiblingsDocument,
   WaitingSiblingsQuery,
   WaitingSiblingsQueryVariables,
@@ -23,13 +21,13 @@ const findMany = async (accessToken: string): Promise<WaitingEntity[]> => {
 }
 
 const findOne = async (
-  variables: WaitingQueryVariables,
-  accessToken: string
+  variables: WaitingQueryVariables
 ): Promise<WaitingEntity> => {
   try {
-    const waitingQuery = await graphqlApiClient(
-      accessToken
-    ).request<WaitingQuery>(WaitingDocument, variables)
+    const waitingQuery = await graphqlApiClient().request<WaitingQuery>(
+      WaitingDocument,
+      variables
+    )
 
     return waitingQuery.waiting
   } catch (e: any) {

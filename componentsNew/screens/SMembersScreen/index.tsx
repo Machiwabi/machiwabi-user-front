@@ -1,27 +1,31 @@
-import { SimpleGrid } from '@mantine/core'
 import { FC } from 'react'
-import { OWaitingListItem } from '../../organisms/OWaitingListItem'
-import { waitingMock } from '../../../mocks/waiting.mock'
+import { useWaitingSiblings } from '../../../hooks/resources/useWaitingSiblings'
+import { OWaitingUserList } from '../../organisms/OWaitingUserList'
+import { TErrorTemplate } from '../../templates/TErrorTemplate'
+import { TLoadingTemplate } from '../../templates/TLoadingTemplate'
 
-const Component: FC = () => {
+type Props = {
+  eventUniqueKey: string
+}
+
+const Component: FC<Props> = ({ eventUniqueKey }) => {
+  const { waitingSiblings, waitingSiblingError, waitingSiblingsIsLoading } =
+    useWaitingSiblings({
+      eventUniqueKey,
+    })
+
+  if (waitingSiblingError) return <TErrorTemplate />
+  if (waitingSiblingsIsLoading || !waitingSiblings) return <TLoadingTemplate />
+
+  const waitings = waitingSiblings.sort((a, b) => {
+    if (a.totalPoint < b.totalPoint) return 1
+    if (a.totalPoint > b.totalPoint) return -1
+    return 0
+  })
+
   return (
     <>
-      <SimpleGrid px={16} spacing={16}>
-        <OWaitingListItem waiting={waitingMock} />
-        <OWaitingListItem waiting={waitingMock} />
-        <OWaitingListItem waiting={waitingMock} />
-        <OWaitingListItem waiting={waitingMock} />
-        <OWaitingListItem waiting={waitingMock} />
-        <OWaitingListItem waiting={waitingMock} />
-        <OWaitingListItem waiting={waitingMock} />
-        <OWaitingListItem waiting={waitingMock} />
-        <OWaitingListItem waiting={waitingMock} />
-        <OWaitingListItem waiting={waitingMock} />
-        <OWaitingListItem waiting={waitingMock} />
-        <OWaitingListItem waiting={waitingMock} />
-        <OWaitingListItem waiting={waitingMock} />
-        <OWaitingListItem waiting={waitingMock} />
-      </SimpleGrid>
+      <OWaitingUserList waitings={waitings} />
     </>
   )
 }
