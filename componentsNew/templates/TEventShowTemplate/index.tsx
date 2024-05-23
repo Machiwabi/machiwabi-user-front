@@ -12,7 +12,7 @@ type Props = {
 const Component: FC<Props> = ({ event }) => {
   return (
     <>
-      <Box mt={24} mb={16} px={16}>
+      <Box mb={16} px={16}>
         <EHeading.Page>イベント名</EHeading.Page>
         <Flex align="center" my={4}>
           <Box className="material-icons-outlined" component="i" fz={16}>
