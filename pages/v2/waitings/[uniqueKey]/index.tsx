@@ -12,6 +12,7 @@ import { useWaiting } from '../../../../hooks/resources/useWaiting'
 import { WaitingRepository } from '../../../../repositories/WaitingRepository'
 import { NextPageWithLayout } from '../../../_app'
 import { SInformationScreen } from '../../../../componentsNew/screens/SInformationScreen'
+import { SBoostersScreen } from '../../../../componentsNew/screens/SBoostersScreen'
 
 type Props = {
   uniqueKey: string
@@ -49,6 +50,10 @@ const Page: NextPageWithLayout<Props> = ({ uniqueKey }) => {
 
         <Tabs.Panel value="REWARDS">
           <SRewardsScreen eventUniqueKey={waiting.event.uniqueKey} />
+        </Tabs.Panel>
+
+        <Tabs.Panel value="BOOSTERS">
+          <SBoostersScreen waitingUniqueKey={waiting.uniqueKey} />
         </Tabs.Panel>
 
         <Tabs.Panel value="INFORMATION">
