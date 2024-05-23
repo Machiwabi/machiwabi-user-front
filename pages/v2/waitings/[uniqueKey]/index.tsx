@@ -13,6 +13,7 @@ import { WaitingRepository } from '../../../../repositories/WaitingRepository'
 import { NextPageWithLayout } from '../../../_app'
 import { SInformationScreen } from '../../../../componentsNew/screens/SInformationScreen'
 import { SBoostersScreen } from '../../../../componentsNew/screens/SBoostersScreen'
+import { SAquiredRewardsScreen } from '../../../../componentsNew/screens/SAquiredRewardsScreen'
 
 type Props = {
   uniqueKey: string
@@ -54,6 +55,13 @@ const Page: NextPageWithLayout<Props> = ({ uniqueKey }) => {
 
         <Tabs.Panel value="BOOSTERS">
           <SBoostersScreen waitingUniqueKey={waiting.uniqueKey} />
+        </Tabs.Panel>
+
+        <Tabs.Panel value="AQUIRED">
+          <SAquiredRewardsScreen
+            waitingUniqueKey={waiting.uniqueKey}
+            eventUniqueKey={waiting.event.uniqueKey}
+          />
         </Tabs.Panel>
 
         <Tabs.Panel value="INFORMATION">
