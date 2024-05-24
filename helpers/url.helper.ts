@@ -6,6 +6,10 @@ export const waitingMembersUrl = (uniqueKey: string) =>
   `/v2/waitings/${uniqueKey}/members`
 export const waitingMissionsUrl = (uniqueKey: string) =>
   `/v2/waitings/${uniqueKey}/missions`
+export const waitingMissionUrl = (
+  uniqueKey: string,
+  boosterUniqueKey: string
+) => `/v2/waitings/${uniqueKey}/missions/${boosterUniqueKey}`
 export const waitingRewardsUrl = (uniqueKey: string) =>
   `/v2/waitings/${uniqueKey}/rewards`
 export const waitingBoostersUrl = (uniqueKey: string) =>

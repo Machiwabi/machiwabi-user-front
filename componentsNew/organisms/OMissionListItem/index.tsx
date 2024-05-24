@@ -1,20 +1,25 @@
-import { FC } from 'react'
-import { BoosterEntity } from '../../../generated/graphql'
 import { Box, Flex, Text } from '@mantine/core'
 import Image from 'next/image'
+import { FC } from 'react'
+import { BoosterEntity, WaitingEntity } from '../../../generated/graphql'
+import { waitingMissionUrl } from '../../../helpers/url.helper'
 import { colorScheme } from '../../../theme/colorScheme'
-import { msToMMDDSS } from '../../../utils/msToMMDDSS'
 import { EButton } from '../../elements/EButton'
-import { missionShowUrl } from '../../../helpers/url.helper'
 import { OBoosterMultiplier } from '../OBoosterMultiplier'
 
 type Props = {
+  waiting: WaitingEntity
   booster: BoosterEntity
   isFirst?: boolean
   isLast?: boolean
 }
 
-const Component: FC<Props> = ({ booster, isFirst = false, isLast = false }) => {
+const Component: FC<Props> = ({
+  waiting,
+  booster,
+  isFirst = false,
+  isLast = false,
+}) => {
   return (
     <Box
       pt={isFirst ? 0 : 24}
@@ -57,7 +62,10 @@ const Component: FC<Props> = ({ booster, isFirst = false, isLast = false }) => {
       <Box mt={8} fz={12} c={colorScheme.scheme1.surface1.object.mid}>
         {booster.missionDescription}
       </Box>
-      <EButton.Sm mt={16} href={missionShowUrl(booster.uniqueKey)}>
+      <EButton.Sm
+        mt={16}
+        href={waitingMissionUrl(waiting.uniqueKey, booster.uniqueKey)}
+      >
         Detail
       </EButton.Sm>
     </Box>

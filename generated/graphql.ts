@@ -190,6 +190,7 @@ export type ProvisionBoosterInput = {
 
 export type Query = {
   __typename?: 'Query';
+  booster: BoosterEntity;
   boosters: Array<BoosterEntity>;
   event: EventEntity;
   events: Array<EventEntity>;
@@ -197,6 +198,11 @@ export type Query = {
   waiting: WaitingEntity;
   waitingSiblings: Array<WaitingEntity>;
   waitings: Array<WaitingEntity>;
+};
+
+
+export type QueryBoosterArgs = {
+  uniqueKey: Scalars['String']['input'];
 };
 
 
@@ -359,6 +365,13 @@ export type UpsertUserMutationVariables = Exact<{
 
 
 export type UpsertUserMutation = { __typename?: 'Mutation', upsertUser: { __typename?: 'UserPrivateEntity', uniqueKey: string, eoaAddress?: string | null, isActive?: boolean | null, name?: string | null, displayName?: string | null, iconImageUrl?: string | null } };
+
+export type BoosterQueryVariables = Exact<{
+  uniqueKey: Scalars['String']['input'];
+}>;
+
+
+export type BoosterQuery = { __typename?: 'Query', booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null } };
 
 export type BoostersQueryVariables = Exact<{
   eventUniqueKey: Scalars['String']['input'];
@@ -556,6 +569,13 @@ export const UpsertUserDocument = gql`
   }
 }
     ${UserPrivateFieldFragmentDoc}`;
+export const BoosterDocument = gql`
+    query booster($uniqueKey: String!) {
+  booster(uniqueKey: $uniqueKey) {
+    ...BoosterField
+  }
+}
+    ${BoosterFieldFragmentDoc}`;
 export const BoostersDocument = gql`
     query boosters($eventUniqueKey: String!) {
   boosters(eventUniqueKey: $eventUniqueKey) {
@@ -699,6 +719,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     upsertUser(variables?: UpsertUserMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpsertUserMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<UpsertUserMutation>(UpsertUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'upsertUser', 'mutation');
+    },
+    booster(variables: BoosterQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<BoosterQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<BoosterQuery>(BoosterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'booster', 'query');
     },
     boosters(variables: BoostersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<BoostersQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<BoostersQuery>(BoostersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'boosters', 'query');
