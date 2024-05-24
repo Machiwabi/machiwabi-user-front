@@ -3,11 +3,12 @@ import { FC } from 'react'
 import { colorScheme } from '../../../theme/colorScheme'
 import Link from 'next/link'
 import styles from './style.module.scss'
+import { waitingsUrl } from '../../../helpers/url.helper'
 
 const Component: FC = () => {
   return (
     <>
-      <Box pos="fixed" w="100%" bottom={0}>
+      <Box pos="fixed" w="100%" left={0} bottom={0}>
         <Flex w="100%" h={80}>
           <Flex
             w={`calc(50% - ${96 / 2}px)`}
@@ -16,13 +17,17 @@ const Component: FC = () => {
             justify="end"
             align="center"
           >
-            <Link href="/" className={styles['o-footer-nav__menu-link']}>
+            <Link
+              href={waitingsUrl()}
+              className={styles['o-footer-nav__menu-link']}
+            >
               <Flex
                 component="i"
                 className={`material-icons-outlined`}
                 align="center"
                 h="100%"
                 px={24 * 2}
+                py={24}
                 fz={24}
                 c={colorScheme.scheme1.surface1.object.high}
               >
@@ -47,6 +52,8 @@ const Component: FC = () => {
                   component="i"
                   className="material-icons-outlined"
                   fz={24}
+                  px={24}
+                  py={24}
                   // c={'white'}
                   c={colorScheme.scheme1.surface3.object.high}
                 >
@@ -83,6 +90,7 @@ const Component: FC = () => {
                 align="center"
                 h="100%"
                 px={24 * 2}
+                py={24}
                 fz={24}
                 c={colorScheme.scheme1.surface1.object.high}
               >

@@ -12,6 +12,7 @@ import { SRewardsScreen } from '../SRewardsScreen'
 import { SBoostersScreen } from '../SBoostersScreen'
 import { SAquiredRewardsScreen } from '../SAquiredRewardsScreen'
 import { SInformationScreen } from '../SInformationScreen'
+import { OFooterNav } from '../../organisms/OFooterNav'
 
 type WaitingTabValues =
   | 'HOME'
@@ -74,6 +75,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, currentTabValue }) => {
           <SInformationScreen waitingUniqueKey={waiting.uniqueKey} />
         </Tabs.Panel>
       </Tabs>
+      <OFooterNav />
     </>
   )
 }
