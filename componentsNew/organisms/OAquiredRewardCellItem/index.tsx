@@ -2,18 +2,29 @@ import { AspectRatio, Box, BoxProps, Flex } from '@mantine/core'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
-import { RewardEntity } from '../../../generated/graphql'
-import { rewardShowUrl, waitingAquiredUrl } from '../../../helpers/url.helper'
+import { RewardEntity, WaitingEntity } from '../../../generated/graphql'
+import {
+  rewardShowUrl,
+  waitingAquiredRewardUrl,
+  waitingAquiredUrl,
+} from '../../../helpers/url.helper'
 import { colorScheme } from '../../../theme/colorScheme'
 import styles from './style.module.scss'
 
 type Props = BoxProps & {
+  waiting: WaitingEntity
   reward: RewardEntity
   isAquired?: boolean
   count?: number
 }
 
-const Component: FC<Props> = ({ reward, isAquired, count, ...props }) => {
+const Component: FC<Props> = ({
+  waiting,
+  reward,
+  isAquired,
+  count,
+  ...props
+}) => {
   return (
     <Flex
       pos="relative"
@@ -44,7 +55,7 @@ const Component: FC<Props> = ({ reward, isAquired, count, ...props }) => {
       {isAquired && (
         <Box pos="absolute">
           <Link
-            href={waitingAquiredUrl(reward.uniqueKey)}
+            href={waitingAquiredRewardUrl(waiting.uniqueKey, reward.uniqueKey)}
             className={styles['o-reward-cell-item']}
             style={{ textDecoration: 'none' }}
           >

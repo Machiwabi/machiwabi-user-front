@@ -26,6 +26,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, eventUniqueKey }) => {
     <>
       <OAquiredRewardCells
         px={16}
+        waiting={waiting}
         cellingRewards={rewards}
         aquiredWaitingRewards={waiting.waitingRewards}
       />
