@@ -1,6 +1,8 @@
 import { BoxProps, Tabs } from '@mantine/core'
 import { FC } from 'react'
 import {
+  waitingAquiredUrl,
+  waitingBoostersUrl,
   waitingInformationUrl,
   waitingMembersUrl,
   waitingMissionsUrl,
@@ -56,14 +58,18 @@ const Component: FC<Props> = ({ waitingUniqueKey, current, ...props }) => {
               name: 'BOOSTERS',
               isCurrent: current === 'BOOSTERS',
               action: () => {
-                history.pushState(null, '', waitingMembersUrl(waitingUniqueKey))
+                history.pushState(
+                  null,
+                  '',
+                  waitingBoostersUrl(waitingUniqueKey)
+                )
               },
             },
             {
               name: 'AQUIRED',
               isCurrent: current === 'AQUIRED',
               action: () => {
-                history.pushState(null, '', waitingMembersUrl(waitingUniqueKey))
+                history.pushState(null, '', waitingAquiredUrl(waitingUniqueKey))
               },
             },
             {
