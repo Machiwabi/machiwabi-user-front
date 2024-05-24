@@ -1,0 +1,5 @@
+query reward($uniqueKey: String!) {
+  reward(uniqueKey: $uniqueKey) {
+    ...RewardField
+  }
+}

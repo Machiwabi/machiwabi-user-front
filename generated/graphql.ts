@@ -194,6 +194,7 @@ export type Query = {
   boosters: Array<BoosterEntity>;
   event: EventEntity;
   events: Array<EventEntity>;
+  reward: RewardEntity;
   rewards: Array<RewardEntity>;
   waiting: WaitingEntity;
   waitingSiblings: Array<WaitingEntity>;
@@ -212,6 +213,11 @@ export type QueryBoostersArgs = {
 
 
 export type QueryEventArgs = {
+  uniqueKey: Scalars['String']['input'];
+};
+
+
+export type QueryRewardArgs = {
   uniqueKey: Scalars['String']['input'];
 };
 
@@ -391,6 +397,13 @@ export type EventsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type EventsQuery = { __typename?: 'Query', events: Array<{ __typename?: 'EventEntity', uniqueKey: string, waitingStartAt: any, startAt: any, endAt: any, name?: string | null, description?: string | null, mdxContent?: string | null, detailMdxContent?: string | null, isJoinable: boolean, lat?: number | null, lng?: number | null, onlineUrl?: string | null, placeName?: string | null }> };
+
+export type RewardQueryVariables = Exact<{
+  uniqueKey: Scalars['String']['input'];
+}>;
+
+
+export type RewardQuery = { __typename?: 'Query', reward: { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null } };
 
 export type RewardsQueryVariables = Exact<{
   eventUniqueKey: Scalars['String']['input'];
@@ -597,6 +610,13 @@ export const EventsDocument = gql`
   }
 }
     ${EventFieldFragmentDoc}`;
+export const RewardDocument = gql`
+    query reward($uniqueKey: String!) {
+  reward(uniqueKey: $uniqueKey) {
+    ...RewardField
+  }
+}
+    ${RewardFieldFragmentDoc}`;
 export const RewardsDocument = gql`
     query rewards($eventUniqueKey: String!) {
   rewards(eventUniqueKey: $eventUniqueKey) {
@@ -731,6 +751,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     events(variables?: EventsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<EventsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<EventsQuery>(EventsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'events', 'query');
+    },
+    reward(variables: RewardQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<RewardQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RewardQuery>(RewardDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'reward', 'query');
     },
     rewards(variables: RewardsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<RewardsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<RewardsQuery>(RewardsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'rewards', 'query');

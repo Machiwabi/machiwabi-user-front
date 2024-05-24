@@ -1,20 +1,21 @@
 import { FC } from 'react'
-import { RewardEntity } from '../../../generated/graphql'
+import { RewardEntity, WaitingEntity } from '../../../generated/graphql'
 import { ORewardCellItem } from '../ORewardCellItem'
 import { SimpleGrid, SimpleGridProps } from '@mantine/core'
 
 type Props = SimpleGridProps & {
+  waiting: WaitingEntity
   rewards: RewardEntity[]
 }
 
-const Component: FC<Props> = ({ rewards, ...props }) => {
+const Component: FC<Props> = ({ waiting, rewards, ...props }) => {
   return (
     <>
       <SimpleGrid verticalSpacing="xl" cols={2} {...props}>
         {rewards.map((reward) => {
           return (
             <>
-              <ORewardCellItem reward={reward} />
+              <ORewardCellItem waiting={waiting} reward={reward} />
             </>
           )
         })}

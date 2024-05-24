@@ -1,21 +1,22 @@
 import { Box, BoxProps, Flex } from '@mantine/core'
 import { FC } from 'react'
 import Image from 'next/image'
-import { RewardEntity } from '../../../generated/graphql'
+import { RewardEntity, WaitingEntity } from '../../../generated/graphql'
 import { colorScheme } from '../../../theme/colorScheme'
 import Link from 'next/link'
-import { rewardShowUrl } from '../../../helpers/url.helper'
+import { rewardShowUrl, waitingRewardUrl } from '../../../helpers/url.helper'
 import styles from './style.module.scss'
 
 type Props = BoxProps & {
+  waiting: WaitingEntity
   reward: RewardEntity
 }
 
-const Component: FC<Props> = ({ reward, ...props }) => {
+const Component: FC<Props> = ({ waiting, reward, ...props }) => {
   return (
     <Flex direction="column" component="li" justify="center" align="center">
       <Link
-        href={rewardShowUrl(reward.uniqueKey)}
+        href={waitingRewardUrl(waiting.uniqueKey, reward.uniqueKey)}
         className={styles['o-reward-cell-item']}
         style={{ textDecoration: 'none' }}
       >

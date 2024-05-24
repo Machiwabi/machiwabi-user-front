@@ -3,21 +3,28 @@ import { ORewardCells } from '../../organisms/ORewardCells'
 import { useRewards } from '../../../hooks/resources/useRewards'
 import { TErrorTemplate } from '../../templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../templates/TLoadingTemplate'
+import { useWaiting } from '../../../hooks/resources/useWaiting'
 
 type Props = {
+  waitingUniqueKey: string
   eventUniqueKey: string
 }
 
-const Component: FC<Props> = ({ eventUniqueKey }) => {
+const Component: FC<Props> = ({ waitingUniqueKey, eventUniqueKey }) => {
   const { rewards, rewardsError, rewardsIsLoading } = useRewards({
     eventUniqueKey,
   })
-  if (rewardsError) return <TErrorTemplate />
-  if (rewardsIsLoading || !rewards) return <TLoadingTemplate />
+  const { waiting, waitingIsLoading, waitingError } = useWaiting({
+    uniqueKey: waitingUniqueKey,
+  })
+
+  if (waitingError || rewardsError) return <TErrorTemplate />
+  if (waitingIsLoading || rewardsIsLoading || !rewards || !waiting)
+    return <TLoadingTemplate />
 
   return (
     <>
-      <ORewardCells px={16} rewards={rewards} />
+      <ORewardCells px={16} waiting={waiting} rewards={rewards} />
     </>
   )
 }
