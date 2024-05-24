@@ -16,7 +16,7 @@ const Component: FC<Props> = ({
 }) => {
   return (
     <Flex justify="space-between" align="center">
-      <Box fz={10} ff="outfit" fw="bold">
+      <Box fz={12} ff="outfit" fw="bold">
         boosters
       </Box>
       <Flex align="center">

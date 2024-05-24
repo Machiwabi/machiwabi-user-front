@@ -1,15 +1,14 @@
-import { AspectRatio, Box, Divider, Flex, ScrollArea } from '@mantine/core'
+import { AspectRatio, Box, Divider } from '@mantine/core'
 import { FC } from 'react'
-import { BoosterType } from '../../../generated/graphql'
+import { useWaiting } from '../../../hooks/resources/useWaiting'
 import { colorScheme } from '../../../theme/colorScheme'
 import { ESectionHeading } from '../../elements/ESectionHeading'
 import { EText } from '../../elements/EText/base'
 import { OBoostersStatuses } from '../../organisms/OBoostersStatuses'
-import { OUserIcon } from '../../organisms/OUserIcon'
 import { OWaitingUserListItem } from '../../organisms/OWaitingUserListItem'
-import { useWaiting } from '../../../hooks/resources/useWaiting'
 import { TErrorTemplate } from '../../templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../templates/TLoadingTemplate'
+import { WaitingMembersSubComponent } from './WaitingMembersSubComponent'
 
 type Props = {
   waitingUniqueKey: string
@@ -40,66 +39,18 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
           <OBoostersStatuses
             secondPerTotalPoints={10}
             secondsPerWaitingPoint={10}
-            boosters={[
-              {
-                name: 'booster1',
-                uniqueKey: 'booster1',
-                iconUrl: '/assets/images/_sample/picture_ranking_01.png',
-                boosterType: BoosterType.Mission,
-                durationSeconds: 10,
-                emoji: '😄',
-                multiplier: 1.5,
-              },
-              {
-                name: 'booster2',
-                uniqueKey: 'booster2',
-                iconUrl: '/assets/images/_sample/picture_ranking_02.png',
-                boosterType: BoosterType.Mission,
-                durationSeconds: 10,
-                emoji: '😄',
-                multiplier: 1.5,
-              },
-              {
-                name: 'booster3',
-                uniqueKey: 'booster3',
-                iconUrl: '/assets/images/_sample/picture_ranking_03.png',
-                boosterType: BoosterType.Mission,
-                durationSeconds: 10,
-                emoji: '😄',
-                multiplier: 1.5,
-              },
-            ]}
+            boosters={waiting.waitingBoosters.map((wb) => wb.booster)} // TODO waitingBoosterを引数にする
           />
         </Box>
       </Box>
 
-      <Box component="section" my={40} px={16}>
-        <ESectionHeading
-          heading="WAITING MEMBERS - 32"
-          tooltip={<>同じイベントを待っているユーザー一覧です</>}
-          moreAction={() => {
-            alert('more')
-          }}
-        />
-        <Box mt={8}>
-          <ScrollArea scrollbarSize={0}>
-            <Flex gap={4}>
-              {[...Array(26)].map((_, index) => {
-                return (
-                  <OUserIcon
-                    displayName="a"
-                    w={32}
-                    h={32}
-                    iconImageUrl={`/assets/images/_sample/picture_ranking_0${
-                      (index % 9) + 1
-                    }.png`}
-                  />
-                )
-              })}
-            </Flex>
-          </ScrollArea>
-        </Box>
-      </Box>
+      <WaitingMembersSubComponent
+        eventUniqueKey={waiting.event.uniqueKey}
+        waitingUniqueKey={waiting.uniqueKey}
+        my={40}
+        px={16}
+      />
+
       <Box component="section" my={40} px={16}>
         <ESectionHeading
           heading="MESSAGE"
