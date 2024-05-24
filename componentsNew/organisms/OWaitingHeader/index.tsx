@@ -1,15 +1,16 @@
 import { Box, Flex, FlexProps, Text } from '@mantine/core'
-import { FC, ReactNode } from 'react'
+import { FC } from 'react'
+import { WaitingEntity } from '../../../generated/graphql'
 import { colorScheme } from '../../../theme/colorScheme'
 
-type Props = FlexProps & { children?: ReactNode }
+type Props = FlexProps & { waiting: WaitingEntity }
 
-const Component: FC<Props> = ({ children, ...props }) => {
+const Component: FC<Props> = ({ waiting, ...props }) => {
   return (
     <Flex justify="space-between" {...props}>
       <Box>
         <Text lh={'100%'} fz={14} fw={900}>
-          各個人のマチワビルームです。
+          {waiting.event.name}
         </Text>
         <Text
           mt={6}
@@ -18,7 +19,7 @@ const Component: FC<Props> = ({ children, ...props }) => {
           fw="black"
           c={colorScheme.scheme1.surface1.object.low}
         >
-          WaitWaitWaitWaitWait
+          {waiting.event.placeName}
         </Text>
       </Box>
       <Text
@@ -29,7 +30,7 @@ const Component: FC<Props> = ({ children, ...props }) => {
         ta="right"
         c={colorScheme.scheme1.surface1.object.low}
       >
-        2024-06-23 12:30
+        {waiting.event.startAt}
       </Text>
     </Flex>
   )

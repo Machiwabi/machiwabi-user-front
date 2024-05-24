@@ -34,7 +34,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, currentTabValue }) => {
   return (
     <>
       <Tabs variant="pills" defaultValue={currentTabValue}>
-        <OWaitingHeader mt={24} px={16} />
+        <OWaitingHeader waiting={waiting} mt={24} px={16} />
         <OWaitingTabs current="HOME" waitingUniqueKey={waitingUniqueKey} />
 
         <Tabs.Panel value="HOME">
