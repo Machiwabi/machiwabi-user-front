@@ -4,6 +4,7 @@ import { EText } from '../../elements/EText/base'
 import { useWeb3Auth } from '../../../hooks/useWeb3Auth'
 import { applicationProperties } from '../../../constants/applicationProperties'
 import { EButton } from '../../elements/EButton'
+import { web3AuthEntranceUrl } from '../../../helpers/url.helper'
 
 const Component: FC = () => {
   const { web3AuthLogout } = useWeb3Auth()
@@ -24,7 +25,7 @@ const Component: FC = () => {
             mt={24}
             onClick={() => {
               web3AuthLogout(
-                `${applicationProperties.HOSTING_URL}/v2/auth/entrance`
+                `${applicationProperties.HOSTING_URL}${web3AuthEntranceUrl()}`
               )
             }}
           >

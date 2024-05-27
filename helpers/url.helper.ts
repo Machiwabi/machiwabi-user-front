@@ -1,36 +1,38 @@
-export const rewardShowUrl = (uniqueKey: string) => `/v2/rewards/${uniqueKey}`
-export const missionShowUrl = (uniqueKey: string) => `/v2/missions/${uniqueKey}`
+export const rewardShowUrl = (uniqueKey: string) => `/rewards/${uniqueKey}`
+export const missionShowUrl = (uniqueKey: string) => `/missions/${uniqueKey}`
 
-export const userNewUrl = () => '/v2/users/new'
-export const userEditUrl = () => '/v2/users/edit'
+export const userNewUrl = () => '/users/new'
+export const userEditUrl = () => '/users/edit'
 
-export const waitingsUrl = () => '/v2/waitings'
-export const waitingUrl = (uniqueKey: string) => `/v2/waitings/${uniqueKey}`
+export const waitingsUrl = () => '/waitings'
+export const waitingUrl = (uniqueKey: string) => `/waitings/${uniqueKey}`
 export const waitingMembersUrl = (uniqueKey: string) =>
-  `/v2/waitings/${uniqueKey}/members`
+  `/waitings/${uniqueKey}/members`
 export const waitingMissionsUrl = (uniqueKey: string) =>
-  `/v2/waitings/${uniqueKey}/missions`
+  `/waitings/${uniqueKey}/missions`
 export const waitingMissionUrl = (
   uniqueKey: string,
   boosterUniqueKey: string
-) => `/v2/waitings/${uniqueKey}/missions/${boosterUniqueKey}`
+) => `/waitings/${uniqueKey}/missions/${boosterUniqueKey}`
 
 export const waitingRewardsUrl = (uniqueKey: string) =>
-  `/v2/waitings/${uniqueKey}/rewards`
+  `/waitings/${uniqueKey}/rewards`
 export const waitingRewardUrl = (uniqueKey: string, rewardUniqueKey: string) =>
-  `/v2/waitings/${uniqueKey}/rewards/${rewardUniqueKey}`
+  `/waitings/${uniqueKey}/rewards/${rewardUniqueKey}`
 
 export const waitingBoostersUrl = (uniqueKey: string) =>
-  `/v2/waitings/${uniqueKey}/boosters`
+  `/waitings/${uniqueKey}/boosters`
 export const waitingAquiredUrl = (uniqueKey: string) =>
-  `/v2/waitings/${uniqueKey}/aquired`
+  `/waitings/${uniqueKey}/aquired`
 
 export const waitingAquiredRewardUrl = (
   uniqueKey: string,
   rewardUniqueKey: string
-) => `/v2/waitings/${uniqueKey}/aquired/${rewardUniqueKey}`
+) => `/waitings/${uniqueKey}/aquired/${rewardUniqueKey}`
 
 export const waitingInformationUrl = (uniqueKey: string) =>
-  `/v2/waitings/${uniqueKey}/information`
+  `/waitings/${uniqueKey}/information`
 
-export const web3AuthCallbackUrl = () => '/v2/auth/callback'
+export const web3AuthCallbackUrl = () => '/auth/callback'
+export const web3AuthEntranceUrl = () => '/auth/entrance'
+export const web3AuthSignOutUrl = () => '/signout'

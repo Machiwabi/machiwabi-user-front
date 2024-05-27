@@ -9,7 +9,10 @@ type Props = {
 
 const Page: NextPageWithLayout<Props> = ({ uniqueKey }) => {
   return (
-    <SWaitingTabsScreen waitingUniqueKey={uniqueKey} currentTabValue="HOME" />
+    <SWaitingTabsScreen
+      waitingUniqueKey={uniqueKey}
+      currentTabValue="MISSIONS"
+    />
   )
 }
 
