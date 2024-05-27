@@ -1,5 +1,5 @@
-import LGuestUserLayout from '../../../componentsNew/layouts/LGuestUserLayout'
-import { SWaitingTabsScreen } from '../../../componentsNew/screens/SWaitingTabsScreen'
+import LGuestUserLayout from '../../../komponents/layouts/LGuestUserLayout'
+import { SWaitingTabsScreen } from '../../../komponents/screens/SWaitingTabsScreen'
 import { WaitingRepository } from '../../../repositories/WaitingRepository'
 import { NextPageWithLayout } from '../../_app'
 

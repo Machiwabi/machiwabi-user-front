@@ -1,5 +1,5 @@
-import LGuestUserLayout from '../../../../../componentsNew/layouts/LGuestUserLayout'
-import { SAquiredRewardScreen } from '../../../../../componentsNew/screens/SAquiredRewardScreen'
+import LGuestUserLayout from '../../../../../komponents/layouts/LGuestUserLayout'
+import { SAquiredRewardScreen } from '../../../../../komponents/screens/SAquiredRewardScreen'
 import { RewardRepository } from '../../../../../repositories/RewardRepository'
 import { WaitingRepository } from '../../../../../repositories/WaitingRepository'
 import { NextPageWithLayout } from '../../../../_app'
