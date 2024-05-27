@@ -1,5 +1,5 @@
-import LGuestUserLayout from '../../components/layouts/LGuestUserLayout'
-import { SSignOutScreen } from '../../components/screens/SSignOutScreen'
+import LGuestUserLayout from '../../components/00_layouts/LGuestUserLayout'
+import { SSignOutScreen } from '../../components/04_screens/SSignOutScreen'
 import { NextPageWithLayout } from '../_app'
 
 const Page: NextPageWithLayout = () => {
