@@ -47,7 +47,7 @@ const Component: FC<Props> = ({ reward, ...props }) => {
       </Box>
 
       <Flex direction="column" my={0} px={16} justify="center" align="center">
-        <EButton.Sm type="filled">利用する</EButton.Sm>
+        <EButton.Sm fillType="filled">利用する</EButton.Sm>
         <Box mt={8} fz={12} fw={500} ff="outfit">
           あと4回
         </Box>

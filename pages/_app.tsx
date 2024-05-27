@@ -16,6 +16,8 @@ import GoogleAnalyticsV4, { GoogleAnalyticsId } from './GoogleAnalyticsV4'
 
 // mantine
 import '@mantine/core/styles.css'
+import '@mantine/notifications/styles.css'
+import { Notifications } from '@mantine/notifications'
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start()
@@ -60,7 +62,8 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
         <RecoilRoot>
           <AuthenticationProvider>
             {/* <ChakraProvider theme={theme.templateTheme}> */}
-            <MantineProvider theme={mantineTheme}>
+            <MantineProvider theme={mantineTheme} withGlobalClasses>
+              <Notifications />
               <GoogleAnalyticsV4
                 googleAnalyticsId={googleAnalyticsId as GoogleAnalyticsId}
               />

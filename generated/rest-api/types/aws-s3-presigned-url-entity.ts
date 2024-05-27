@@ -14,7 +14,23 @@
 
 
 
-export * from './api/booster-payments-api';
-export * from './api/v1-authentication-api';
-export * from './api/v1-s3-images-api';
+/**
+ * 
+ * @export
+ * @interface AwsS3PresignedUrlEntity
+ */
+export interface AwsS3PresignedUrlEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof AwsS3PresignedUrlEntity
+     */
+    'key': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AwsS3PresignedUrlEntity
+     */
+    'url': string;
+}
 

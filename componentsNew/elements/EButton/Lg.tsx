@@ -8,11 +8,12 @@ const Component: FC<EButtonProps> = ({
   hrefOutbound,
   onClick,
   children,
-  type = 'outline',
+  fillType = 'outline',
   surface = 'surface1',
+  type,
   ...props
 }) => {
-  const { bg, c, borderColor } = generateButtonStyles(type, surface)
+  const { bg, c, borderColor } = generateButtonStyles(fillType, surface)
 
   const buttonStyle = {
     pt: 0,
@@ -52,7 +53,7 @@ const Component: FC<EButtonProps> = ({
     )
   } else {
     return (
-      <Button {...buttonStyle} onClick={onClick} {...props}>
+      <Button type={type} {...buttonStyle} onClick={onClick} {...props}>
         {children}
       </Button>
     )

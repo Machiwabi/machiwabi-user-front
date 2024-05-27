@@ -9,8 +9,9 @@ export type EButtonProps = ButtonProps & {
   href?: string
   hrefOutbound?: boolean
   onClick?: () => void
-  type?: 'filled' | 'outline' | 'disabled'
+  fillType?: 'filled' | 'outline' | 'disabled'
   surface?: surface
+  type?: 'button' | 'submit' | 'reset'
 }
 
 export const EButton = { Sm, Lg }

@@ -20,7 +20,7 @@ const Page = () => {
         align="center"
       >
         <Box w="100%" maw={410} px={16}>
-          <EButton.Lg w="100%" type="filled">
+          <EButton.Lg w="100%" fillType="filled">
             ログインして参加する
           </EButton.Lg>
         </Box>

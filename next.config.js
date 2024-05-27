@@ -10,6 +10,8 @@ const nextConfig = {
       'cloudflare-ipfs.com',
       'hanzochang-template.s3.ap-northeast-1.amazonaws.com',
       'loremflickr.com',
+      'matiwabi-stg.s3.ap-northeast-1.amazonaws.com',
+      'matiwabi-prd.s3.ap-northeast-1.amazonaws.com',
     ],
   },
 }

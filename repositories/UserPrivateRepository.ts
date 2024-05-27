@@ -1,9 +1,17 @@
 import { graphqlApiClient } from '../apis/GraphqlApiClient'
-import { UpsertUserDocument, UpsertUserMutation } from '../generated/graphql'
+import {
+  UpsertUserDocument,
+  UpsertUserMutation,
+  UpsertUserMutationVariables,
+} from '../generated/graphql'
 
-const upsert = async (secretJwt: string): Promise<UpsertUserMutation> => {
+const upsert = async (
+  secretJwt: string,
+  variables?: UpsertUserMutationVariables
+): Promise<UpsertUserMutation> => {
   return await graphqlApiClient(secretJwt).request<UpsertUserMutation>(
-    UpsertUserDocument
+    UpsertUserDocument,
+    variables
   )
 }
 

@@ -62,7 +62,7 @@ const Component: FC<Props> = ({ reward, ...props }) => {
       </Box>
 
       <Flex direction="column" my={0} px={16} justify="center" align="center">
-        <EButton.Sm type="disabled">Insufficient points</EButton.Sm>
+        <EButton.Sm fillType="disabled">Insufficient points</EButton.Sm>
         <Box mt={8} fz={10} c={colorScheme.scheme1.surface1.object.mid}>
           アカウントあたり1つまで引換可 ／ 残り32個
         </Box>

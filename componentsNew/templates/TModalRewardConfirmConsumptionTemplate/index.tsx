@@ -64,10 +64,10 @@ const Component: FC<Props> = ({ reward, isOpen, setIsOpen }) => {
         「利用する」押下後の取り消しはできません
       </EText.Desc2>
       <SimpleGrid mt={16} cols={2} spacing={4}>
-        <EButton.Sm w="100%" surface="surface2" type="filled">
+        <EButton.Sm w="100%" surface="surface2" fillType="filled">
           キャンセル
         </EButton.Sm>
-        <EButton.Sm w="100%" surface="accent2" type="filled">
+        <EButton.Sm w="100%" surface="accent2" fillType="filled">
           利用する
         </EButton.Sm>
       </SimpleGrid>

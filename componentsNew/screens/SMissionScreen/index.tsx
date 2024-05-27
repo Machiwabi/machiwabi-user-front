@@ -100,7 +100,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, boosterUniqueKey }) => {
       <Box my={40} px={16}>
         <EHeading.SectionJa>ミッション報告フォーム</EHeading.SectionJa>
         <TextInput mt={8} placeholder="Input placeholder" />
-        <EButton.Sm mt={16} type="filled">
+        <EButton.Sm mt={16} fillType="filled">
           報告する
         </EButton.Sm>
       </Box>
