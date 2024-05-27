@@ -6,10 +6,12 @@ import { useMenuOpeningStatus } from '../../../recoil/openingStatus/useMenuOpeni
 import Link from 'next/link'
 import { useWeb3Auth } from '../../../hooks/useWeb3Auth'
 import { truncator } from '../../../utils/truncator'
+import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
 
 const Component: FC = () => {
   const { menuOpenGlobalMenuStart } = useMenuOpeningStatus()
   const { isWeb3AuthConnected, eoaAddress } = useWeb3Auth()
+  const { authenticated, isAuthenticated } = useAuthenticatedStore()
 
   return (
     <>
@@ -48,7 +50,7 @@ const Component: FC = () => {
               />
             </Link>
           </Flex>
-          {isWeb3AuthConnected && eoaAddress ? (
+          {isAuthenticated() && eoaAddress ? (
             <Box mr={16}>
               <Box
                 px={8}

@@ -175,7 +175,6 @@ export const useWeb3Auth = ({
 
   // web3Authでログインを行った上でSIWEする
   const connectWeb3AuthAndSignInWithEthereum = async (redirectUrl: string) => {
-    if (isWeb3AuthConnected) throw new Web3AuthAlreadyConnectedError()
     if (!web3Auth) return
     try {
       const web3AuthProvider: IProvider | null = await web3Auth?.connect()

@@ -56,5 +56,9 @@ export const useAuthenticatedStore = () => {
     setAuthenticated('loading')
   }
 
-  return { secretJwt, authenticated, markAsLoading }
+  const isAuthenticated = () => {
+    return authenticated === 'authenticated'
+  }
+
+  return { secretJwt, authenticated, isAuthenticated, markAsLoading }
 }

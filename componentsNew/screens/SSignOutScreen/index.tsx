@@ -43,7 +43,7 @@ const Component: FC = () => {
             <EButton.Sm
               mt={24}
               onClick={() => {
-                connectWeb3AuthAndSignInWithEthereum()
+                connectWeb3AuthAndSignInWithEthereum('/v2/waitings')
               }}
             >
               ログインする
