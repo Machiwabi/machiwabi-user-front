@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import LGuestUserLayout from '../../komponents/layouts/LGuestUserLayout'
-import { TLoadingTemplate } from '../../komponents/templates/TLoadingTemplate'
+import LGuestUserLayout from '../../components/layouts/LGuestUserLayout'
+import { TLoadingTemplate } from '../../components/templates/TLoadingTemplate'
 import { useWeb3Auth } from '../../hooks/useWeb3Auth'
 import { NextPageWithLayout } from '../_app'
 import { waitingsUrl } from '../../helpers/url.helper'

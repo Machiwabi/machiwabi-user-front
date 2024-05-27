@@ -1,5 +1,5 @@
-import LGuestUserLayout from '../../komponents/layouts/LGuestUserLayout'
-import { SUserEditScreen } from '../../komponents/screens/SUserEditScreen'
+import LGuestUserLayout from '../../components/layouts/LGuestUserLayout'
+import { SUserEditScreen } from '../../components/screens/SUserEditScreen'
 import { NextPageWithLayout } from '../_app'
 
 const Page: NextPageWithLayout = () => {
