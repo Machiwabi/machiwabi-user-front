@@ -22,7 +22,6 @@ type Props = {
 const Page: NextPageWithLayout<Props> = ({ uniqueKey, event, fallback }) => {
   return (
     <>
-      {/* <Seo offer={offer['offer']} /> */}
       <SWRConfig value={{ fallback }}>
         <MainBlock uniqueKey={uniqueKey} />
       </SWRConfig>
