@@ -1,7 +1,7 @@
 import { Box, Button, Flex, Heading } from '@chakra-ui/react'
 import { FC, Fragment } from 'react'
 import { SWRConfig, unstable_serialize } from 'swr'
-import { LoadingTemplate } from '../../../../components/templates/LoadingTemplate'
+import { LoadingTemplate } from '../../../../_old-cmp/templates/LoadingTemplate'
 import { EventQuery, EventQueryVariables } from '../../../../generated/graphql'
 import { useEvent } from '../../../../hooks/resources/useEvent'
 import { useJoinWaiting } from '../../../../hooks/resources/useJoinWaiting'

@@ -1,15 +1,15 @@
 import { Box, Button, Flex, Heading, SimpleGrid } from '@chakra-ui/react'
 import Link from 'next/link'
 import { FC } from 'react'
-import { WaitingProgressCircle } from '../../../components/organisms/WaitingProgressCircle'
-import { LoadingTemplate } from '../../../components/templates/LoadingTemplate'
+import { WaitingProgressCircle } from '../../../_old-cmp/organisms/WaitingProgressCircle'
+import { LoadingTemplate } from '../../../_old-cmp/templates/LoadingTemplate'
 import { useWaitings } from '../../../hooks/resources/useWaitings'
 import ApplicationLayout from '../../../partials/common/ApplicationLayout'
 import { msToMMDDSS } from '../../../utils/msToMMDDSS'
 import { NextPageWithLayout } from '../../_app'
 import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
-import { WalletLoginTemplate } from '../../../components/templates/WalletLoginTemplate'
-import { Wrapper } from '../../../components/elements/Wrapper'
+import { WalletLoginTemplate } from '../../../_old-cmp/templates/WalletLoginTemplate'
+import { Wrapper } from '../../../_old-cmp/elements/Wrapper'
 
 const Page: NextPageWithLayout = () => {
   return (
