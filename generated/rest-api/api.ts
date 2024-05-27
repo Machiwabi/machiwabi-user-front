@@ -14,5 +14,7 @@
 
 
 
+export * from './api/booster-payments-api';
 export * from './api/v1-authentication-api';
+export * from './api/v1-s3-images-api';
 

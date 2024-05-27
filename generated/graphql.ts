@@ -15,6 +15,7 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  DateTime: { input: any; output: any; }
   ISO8601DateTime: { input: any; output: any; }
   Json: { input: any; output: any; }
 };
@@ -42,6 +43,53 @@ export enum BoosterType {
   Mission = 'MISSION',
   Pay = 'PAY'
 }
+
+export type CreateBoosterInput = {
+  boosterType: BoosterType;
+  content?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  durationSeconds: Scalars['Float']['input'];
+  emoji: Scalars['String']['input'];
+  eventUniqueKey: Scalars['String']['input'];
+  iconUrl?: InputMaybe<Scalars['String']['input']>;
+  missionDescription?: InputMaybe<Scalars['String']['input']>;
+  missionMdxContent?: InputMaybe<Scalars['String']['input']>;
+  missionName?: InputMaybe<Scalars['String']['input']>;
+  multiplier: Scalars['Float']['input'];
+  name: Scalars['String']['input'];
+  price?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type CreateEventInput = {
+  description: Scalars['String']['input'];
+  detailMdxContent?: InputMaybe<Scalars['String']['input']>;
+  endAt: Scalars['DateTime']['input'];
+  eventUniqueKey: Scalars['String']['input'];
+  isEnable: Scalars['Boolean']['input'];
+  lat?: InputMaybe<Scalars['Float']['input']>;
+  lng?: InputMaybe<Scalars['Float']['input']>;
+  mdxContent?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  onlineUrl?: InputMaybe<Scalars['String']['input']>;
+  placeName?: InputMaybe<Scalars['String']['input']>;
+  startAt: Scalars['DateTime']['input'];
+  waitingStartAt: Scalars['DateTime']['input'];
+};
+
+export type CreateRewardInput = {
+  content: Scalars['String']['input'];
+  description: Scalars['String']['input'];
+  endAt: Scalars['DateTime']['input'];
+  eventUniqueKey: Scalars['String']['input'];
+  iconUrl: Scalars['String']['input'];
+  multiplier: Scalars['Float']['input'];
+  name: Scalars['String']['input'];
+  requiredTotalPoint: Scalars['Float']['input'];
+  requiredWaitingPoint: Scalars['Float']['input'];
+  startAt: Scalars['DateTime']['input'];
+  stock: Scalars['Float']['input'];
+  stockPerWaiting: Scalars['Float']['input'];
+};
 
 export type EventEntity = {
   __typename?: 'EventEntity';
@@ -84,12 +132,30 @@ export type JoinedWaitingEntity = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createBooster: BoosterEntity;
+  createEvent: EventEntity;
+  createReward: RewardEntity;
   exchangeBooster: WaitingBoosterEntity;
   exchangeReward: Scalars['Boolean']['output'];
   joinEvent: JoinedWaitingEntity;
   provisionBooster: RedirectUriEntity;
   upsertUser: UserPrivateEntity;
   upsertUserDevice: Scalars['Boolean']['output'];
+};
+
+
+export type MutationCreateBoosterArgs = {
+  input: CreateBoosterInput;
+};
+
+
+export type MutationCreateEventArgs = {
+  input: CreateEventInput;
+};
+
+
+export type MutationCreateRewardArgs = {
+  input: CreateRewardInput;
 };
 
 
@@ -124,13 +190,21 @@ export type ProvisionBoosterInput = {
 
 export type Query = {
   __typename?: 'Query';
+  booster: BoosterEntity;
   boosters: Array<BoosterEntity>;
   event: EventEntity;
   events: Array<EventEntity>;
+  reward: RewardEntity;
   rewards: Array<RewardEntity>;
+  userPrivate?: Maybe<UserPrivateEntity>;
   waiting: WaitingEntity;
   waitingSiblings: Array<WaitingEntity>;
   waitings: Array<WaitingEntity>;
+};
+
+
+export type QueryBoosterArgs = {
+  uniqueKey: Scalars['String']['input'];
 };
 
 
@@ -140,6 +214,11 @@ export type QueryBoostersArgs = {
 
 
 export type QueryEventArgs = {
+  uniqueKey: Scalars['String']['input'];
+};
+
+
+export type QueryRewardArgs = {
   uniqueKey: Scalars['String']['input'];
 };
 
@@ -179,6 +258,7 @@ export type RewardEntity = {
 
 export type UpsertUserInput = {
   displayName?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
   iconImageUrl?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
 };
@@ -186,6 +266,7 @@ export type UpsertUserInput = {
 export type UserPrivateEntity = {
   __typename?: 'UserPrivateEntity';
   displayName?: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
   eoaAddress?: Maybe<Scalars['String']['output']>;
   iconImageUrl?: Maybe<Scalars['String']['output']>;
   isActive?: Maybe<Scalars['Boolean']['output']>;
@@ -244,7 +325,7 @@ export type RedirectUriFieldFragment = { __typename?: 'RedirectUriEntity', url: 
 
 export type RewardFieldFragment = { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null };
 
-export type UserPrivateFieldFragment = { __typename?: 'UserPrivateEntity', uniqueKey: string, eoaAddress?: string | null, isActive?: boolean | null, name?: string | null, displayName?: string | null, iconImageUrl?: string | null };
+export type UserPrivateFieldFragment = { __typename?: 'UserPrivateEntity', uniqueKey: string, eoaAddress?: string | null, isActive?: boolean | null, name?: string | null, displayName?: string | null, iconImageUrl?: string | null, email?: string | null };
 
 export type UserPublicFieldFragment = { __typename?: 'UserPublicEntity', eoaAddress?: string | null, displayName?: string | null, iconImageUrl?: string | null };
 
@@ -289,10 +370,18 @@ export type UpsertUserMutationVariables = Exact<{
   name?: InputMaybe<Scalars['String']['input']>;
   displayName?: InputMaybe<Scalars['String']['input']>;
   iconImageUrl?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type UpsertUserMutation = { __typename?: 'Mutation', upsertUser: { __typename?: 'UserPrivateEntity', uniqueKey: string, eoaAddress?: string | null, isActive?: boolean | null, name?: string | null, displayName?: string | null, iconImageUrl?: string | null } };
+export type UpsertUserMutation = { __typename?: 'Mutation', upsertUser: { __typename?: 'UserPrivateEntity', uniqueKey: string, eoaAddress?: string | null, isActive?: boolean | null, name?: string | null, displayName?: string | null, iconImageUrl?: string | null, email?: string | null } };
+
+export type BoosterQueryVariables = Exact<{
+  uniqueKey: Scalars['String']['input'];
+}>;
+
+
+export type BoosterQuery = { __typename?: 'Query', booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null } };
 
 export type BoostersQueryVariables = Exact<{
   eventUniqueKey: Scalars['String']['input'];
@@ -313,12 +402,24 @@ export type EventsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type EventsQuery = { __typename?: 'Query', events: Array<{ __typename?: 'EventEntity', uniqueKey: string, waitingStartAt: any, startAt: any, endAt: any, name?: string | null, description?: string | null, mdxContent?: string | null, detailMdxContent?: string | null, isJoinable: boolean, lat?: number | null, lng?: number | null, onlineUrl?: string | null, placeName?: string | null }> };
 
+export type RewardQueryVariables = Exact<{
+  uniqueKey: Scalars['String']['input'];
+}>;
+
+
+export type RewardQuery = { __typename?: 'Query', reward: { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null } };
+
 export type RewardsQueryVariables = Exact<{
   eventUniqueKey: Scalars['String']['input'];
 }>;
 
 
 export type RewardsQuery = { __typename?: 'Query', rewards: Array<{ __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null }> };
+
+export type UserPrivateQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UserPrivateQuery = { __typename?: 'Query', userPrivate?: { __typename?: 'UserPrivateEntity', uniqueKey: string, eoaAddress?: string | null, isActive?: boolean | null, name?: string | null, displayName?: string | null, iconImageUrl?: string | null, email?: string | null } | null };
 
 export type WaitingSiblingsQueryVariables = Exact<{
   eventUniqueKey: Scalars['String']['input'];
@@ -337,7 +438,7 @@ export type WaitingQuery = { __typename?: 'Query', waiting: { __typename?: 'Wait
 export type WaitingsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type WaitingsQuery = { __typename?: 'Query', waitings: Array<{ __typename?: 'WaitingEntity', uniqueKey: string, waitingPoint: number, totalPoint: number, waitingDuration: number, remainingEventStartDuration: number, waitingName?: string | null, waitingMessage?: string | null, joinAt: any, event: { __typename?: 'EventEntity', uniqueKey: string, waitingStartAt: any, startAt: any, endAt: any, name?: string | null, description?: string | null, mdxContent?: string | null, detailMdxContent?: string | null, isJoinable: boolean, lat?: number | null, lng?: number | null, onlineUrl?: string | null, placeName?: string | null }, user: { __typename?: 'UserPublicEntity', eoaAddress?: string | null, displayName?: string | null, iconImageUrl?: string | null } }> };
+export type WaitingsQuery = { __typename?: 'Query', waitings: Array<{ __typename?: 'WaitingEntity', uniqueKey: string, waitingPoint: number, totalPoint: number, waitingDuration: number, remainingEventStartDuration: number, secondsPerWaitingPoint: number, secondPerTotalPoint: number, totalPointMultiplier: number, waitingName?: string | null, waitingMessage?: string | null, joinAt: any, event: { __typename?: 'EventEntity', uniqueKey: string, waitingStartAt: any, startAt: any, endAt: any, name?: string | null, description?: string | null, mdxContent?: string | null, detailMdxContent?: string | null, isJoinable: boolean, lat?: number | null, lng?: number | null, onlineUrl?: string | null, placeName?: string | null }, user: { __typename?: 'UserPublicEntity', eoaAddress?: string | null, displayName?: string | null, iconImageUrl?: string | null }, waitingBoosters: Array<{ __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null } }>, waitingRewards: Array<{ __typename?: 'WaitingRewardEntity', uniqueKey: string, withdrawedTotalPoint: number, reward: { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null } }> }> };
 
 export const BoosterFieldFragmentDoc = gql`
     fragment BoosterField on BoosterEntity {
@@ -407,6 +508,7 @@ export const UserPrivateFieldFragmentDoc = gql`
   name
   displayName
   iconImageUrl
+  email
 }
     `;
 export const UserPublicFieldFragmentDoc = gql`
@@ -482,14 +584,21 @@ export const ProvisionBoosterDocument = gql`
 }
     ${RedirectUriFieldFragmentDoc}`;
 export const UpsertUserDocument = gql`
-    mutation upsertUser($name: String, $displayName: String, $iconImageUrl: String) {
+    mutation upsertUser($name: String, $displayName: String, $iconImageUrl: String, $email: String) {
   upsertUser(
-    input: {name: $name, displayName: $displayName, iconImageUrl: $iconImageUrl}
+    input: {name: $name, displayName: $displayName, iconImageUrl: $iconImageUrl, email: $email}
   ) {
     ...UserPrivateField
   }
 }
     ${UserPrivateFieldFragmentDoc}`;
+export const BoosterDocument = gql`
+    query booster($uniqueKey: String!) {
+  booster(uniqueKey: $uniqueKey) {
+    ...BoosterField
+  }
+}
+    ${BoosterFieldFragmentDoc}`;
 export const BoostersDocument = gql`
     query boosters($eventUniqueKey: String!) {
   boosters(eventUniqueKey: $eventUniqueKey) {
@@ -511,6 +620,13 @@ export const EventsDocument = gql`
   }
 }
     ${EventFieldFragmentDoc}`;
+export const RewardDocument = gql`
+    query reward($uniqueKey: String!) {
+  reward(uniqueKey: $uniqueKey) {
+    ...RewardField
+  }
+}
+    ${RewardFieldFragmentDoc}`;
 export const RewardsDocument = gql`
     query rewards($eventUniqueKey: String!) {
   rewards(eventUniqueKey: $eventUniqueKey) {
@@ -518,6 +634,13 @@ export const RewardsDocument = gql`
   }
 }
     ${RewardFieldFragmentDoc}`;
+export const UserPrivateDocument = gql`
+    query userPrivate {
+  userPrivate {
+    ...UserPrivateField
+  }
+}
+    ${UserPrivateFieldFragmentDoc}`;
 export const WaitingSiblingsDocument = gql`
     query waitingSiblings($eventUniqueKey: String!) {
   waitingSiblings(eventUniqueKey: $eventUniqueKey) {
@@ -583,24 +706,34 @@ ${RewardFieldFragmentDoc}`;
 export const WaitingsDocument = gql`
     query waitings {
   waitings {
-    uniqueKey
-    waitingPoint
-    totalPoint
-    waitingDuration
-    remainingEventStartDuration
-    waitingName
-    waitingMessage
-    joinAt
+    ...WaitingField
     event {
       ...EventField
     }
     user {
       ...UserPublicField
     }
+    waitingBoosters {
+      ...WaitingBoosterField
+      booster {
+        ...BoosterField
+      }
+    }
+    waitingRewards {
+      ...WaitingRewardField
+      reward {
+        ...RewardField
+      }
+    }
   }
 }
-    ${EventFieldFragmentDoc}
-${UserPublicFieldFragmentDoc}`;
+    ${WaitingFieldFragmentDoc}
+${EventFieldFragmentDoc}
+${UserPublicFieldFragmentDoc}
+${WaitingBoosterFieldFragmentDoc}
+${BoosterFieldFragmentDoc}
+${WaitingRewardFieldFragmentDoc}
+${RewardFieldFragmentDoc}`;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -624,6 +757,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     upsertUser(variables?: UpsertUserMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpsertUserMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<UpsertUserMutation>(UpsertUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'upsertUser', 'mutation');
     },
+    booster(variables: BoosterQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<BoosterQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<BoosterQuery>(BoosterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'booster', 'query');
+    },
     boosters(variables: BoostersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<BoostersQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<BoostersQuery>(BoostersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'boosters', 'query');
     },
@@ -633,8 +769,14 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     events(variables?: EventsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<EventsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<EventsQuery>(EventsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'events', 'query');
     },
+    reward(variables: RewardQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<RewardQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RewardQuery>(RewardDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'reward', 'query');
+    },
     rewards(variables: RewardsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<RewardsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<RewardsQuery>(RewardsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'rewards', 'query');
+    },
+    userPrivate(variables?: UserPrivateQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UserPrivateQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UserPrivateQuery>(UserPrivateDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'userPrivate', 'query');
     },
     waitingSiblings(variables: WaitingSiblingsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<WaitingSiblingsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<WaitingSiblingsQuery>(WaitingSiblingsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'waitingSiblings', 'query');

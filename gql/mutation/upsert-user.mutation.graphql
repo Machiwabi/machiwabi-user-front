@@ -2,12 +2,14 @@ mutation upsertUser(
   $name: String
   $displayName: String
   $iconImageUrl: String
+  $email: String
 ) {
   upsertUser(
     input: {
       name: $name
       displayName: $displayName
       iconImageUrl: $iconImageUrl
+      email: $email
     }
   ) {
     ...UserPrivateField

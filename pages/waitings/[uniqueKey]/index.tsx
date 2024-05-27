@@ -1,13 +1,6 @@
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
-import { FC } from 'react'
-import { WaitingMainScreen } from '../../../components/screens/WaitingMainScreen'
-import { WaitingMembersScreen } from '../../../components/screens/WaitingMembersScreen'
-import { WaitingMissionsScreen } from '../../../components/screens/WaitingMissionsScreen'
-import { WaitingRewardScreen } from '../../../components/screens/WaitingRewardScreen'
-import { LoadingTemplate } from '../../../components/templates/LoadingTemplate'
-import { useWaiting } from '../../../hooks/resources/useWaiting'
-import { NewHeaderSection } from '../../../partials/common/NewHeaderSection'
-import RevisedLayout from '../../../partials/common/RevisedLayout'
+import LGuestUserLayout from '../../../components/00_layouts/LGuestUserLayout'
+import { SWaitingTabsScreen } from '../../../components/04_screens/SWaitingTabsScreen'
+import { WaitingRepository } from '../../../repositories/WaitingRepository'
 import { NextPageWithLayout } from '../../_app'
 
 type Props = {
@@ -16,69 +9,13 @@ type Props = {
 
 const Page: NextPageWithLayout<Props> = ({ uniqueKey }) => {
   return (
-    <>
-      <MainBlock uniqueKey={uniqueKey} />
-    </>
+    <SWaitingTabsScreen waitingUniqueKey={uniqueKey} currentTabValue="HOME" />
   )
 }
 
-Page.getLayout = RevisedLayout
+Page.getLayout = LGuestUserLayout
 
 export default Page
-
-// private components -------------------------
-
-type MainBlockProps = {
-  uniqueKey: string
-}
-
-const MainBlock: FC<MainBlockProps> = ({ uniqueKey }) => {
-  const { waiting, waitingError, waitingIsLoading } = useWaiting({ uniqueKey })
-
-  if (waitingError) return <>読み込みエラー</>
-  if (!waiting || !waiting.event || waitingIsLoading) return <LoadingTemplate />
-
-  return (
-    <>
-      <NewHeaderSection
-        waitingPoint={waiting.totalPoint}
-        userDisplayName={waiting.user?.displayName}
-      />
-      <Tabs>
-        <Box pos="relative" bg="white" zIndex={10}>
-          <TabList maxW="lg" w="100%" mx="auto">
-            <Tab w="33.33%" fontSize={12}>
-              ホーム
-            </Tab>
-            <Tab w="33.33%" fontSize={12}>
-              メンバー
-            </Tab>
-            <Tab w="33.33%" fontSize={12}>
-              ミッション
-            </Tab>
-            <Tab w="33.33%" fontSize={12}>
-              リワード
-            </Tab>
-          </TabList>
-        </Box>
-        <TabPanels minH={'600px'}>
-          <TabPanel p={0}>
-            <WaitingMainScreen waitingUniqueKey={waiting.uniqueKey} />
-          </TabPanel>
-          <TabPanel p={0}>
-            <WaitingMembersScreen eventUniqueKey={waiting.event.uniqueKey} />
-          </TabPanel>
-          <TabPanel p={0}>
-            <WaitingMissionsScreen waitingUniqueKey={waiting.uniqueKey} />
-          </TabPanel>
-          <TabPanel p={0}>
-            <WaitingRewardScreen waitingUniqueKey={waiting.uniqueKey} />
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
-    </>
-  )
-}
 
 type Params = {
   params: {
@@ -87,6 +24,16 @@ type Params = {
 }
 
 export const getServerSideProps = async ({ params }: Params) => {
+  const waiting = await WaitingRepository.findOne({
+    uniqueKey: params.uniqueKey,
+  })
+
+  if (!waiting) {
+    return {
+      notFound: true,
+    }
+  }
+
   try {
     return {
       props: {

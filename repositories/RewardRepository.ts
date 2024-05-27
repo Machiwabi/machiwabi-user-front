@@ -1,9 +1,24 @@
 import { graphqlApiClient } from '../apis/GraphqlApiClient'
 import {
+  RewardDocument,
+  RewardEntity,
+  RewardQuery,
+  RewardQueryVariables,
   RewardsDocument,
   RewardsQuery,
   RewardsQueryVariables,
 } from '../generated/graphql'
+
+const findOne = async (
+  variables: RewardQueryVariables
+): Promise<RewardEntity> => {
+  const rewardQuery = await graphqlApiClient().request<RewardQuery>(
+    RewardDocument,
+    variables
+  )
+
+  return rewardQuery.reward
+}
 
 const findMany = async (
   variables: RewardsQueryVariables,
@@ -15,4 +30,4 @@ const findMany = async (
   )
 }
 
-export const RewardRepository = { findMany }
+export const RewardRepository = { findOne, findMany }

@@ -1,5 +1,9 @@
 import { applicationProperties } from '../constants/applicationProperties'
-import { V1AuthenticationApi, Configuration } from '../generated/rest-api'
+import {
+  V1AuthenticationApi,
+  Configuration,
+  V1S3ImagesApi,
+} from '../generated/rest-api'
 
 export class RestApiClient {
   private config = new Configuration({
@@ -7,4 +11,5 @@ export class RestApiClient {
   })
 
   public authentication = new V1AuthenticationApi(this.config)
+  public v1s3Image = new V1S3ImagesApi(this.config)
 }

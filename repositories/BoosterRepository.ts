@@ -1,5 +1,9 @@
 import { graphqlApiClient } from '../apis/GraphqlApiClient'
 import {
+  BoosterDocument,
+  BoosterEntity,
+  BoosterQuery,
+  BoosterQueryVariables,
   BoostersDocument,
   BoostersQuery,
   BoostersQueryVariables,
@@ -8,6 +12,17 @@ import {
   ProvisionBoosterMutationVariables,
   RedirectUriEntity,
 } from '../generated/graphql'
+
+const findOne = async (
+  variables: BoosterQueryVariables
+): Promise<BoosterEntity> => {
+  const boosterQuery = await graphqlApiClient().request<BoosterQuery>(
+    BoosterDocument,
+    variables
+  )
+
+  return boosterQuery.booster
+}
 
 const findMany = async (
   variables: BoostersQueryVariables,
@@ -30,4 +45,4 @@ const provision = async (
   return mutation.provisionBooster
 }
 
-export const BoosterRepository = { findMany, provision }
+export const BoosterRepository = { findOne, findMany, provision }
