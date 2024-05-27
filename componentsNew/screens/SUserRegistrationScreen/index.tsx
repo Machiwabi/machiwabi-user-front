@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { showNotification } from '@mantine/notifications'
 import { useRouter } from 'next/router'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { UpsertUserMutationVariables } from '../../../generated/graphql'
@@ -12,12 +12,15 @@ import { RedirectUrlRepository } from '../../../repositories/RedirectUrlReposito
 import { colorScheme } from '../../../theme/colorScheme'
 import { registerUserSchema } from '../../../validations/registerUserSchema'
 import { EHeading } from '../../elements/EHeading/base'
+import { TErrorTemplate } from '../../templates/TErrorTemplate'
+import { TLoadingTemplate } from '../../templates/TLoadingTemplate'
 import { TUserRegisterFormTemplate } from '../../templates/TUserRegisterFormTemplate'
 
 const schema = z.object(registerUserSchema)
 
 const Component: FC = () => {
-  const { upsertUser } = useUserPrivate()
+  const { userPrivate, userPrivateIsLoading, userPrivateError, upsertUser } =
+    useUserPrivate()
   const { secretJwt } = useAuthenticatedStore()
   const router = useRouter()
 
@@ -55,6 +58,13 @@ const Component: FC = () => {
       })
     }
   })
+
+  useEffect(() => {
+    if (userPrivate) router.push(waitingsUrl())
+  }, [userPrivate])
+
+  if (userPrivateIsLoading) return <TLoadingTemplate />
+  if (userPrivateError) return <TErrorTemplate />
 
   return (
     <>
