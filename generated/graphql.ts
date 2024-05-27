@@ -196,6 +196,7 @@ export type Query = {
   events: Array<EventEntity>;
   reward: RewardEntity;
   rewards: Array<RewardEntity>;
+  userPrivate: UserPrivateEntity;
   waiting: WaitingEntity;
   waitingSiblings: Array<WaitingEntity>;
   waitings: Array<WaitingEntity>;
@@ -412,6 +413,11 @@ export type RewardsQueryVariables = Exact<{
 
 export type RewardsQuery = { __typename?: 'Query', rewards: Array<{ __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null }> };
 
+export type UserPrivateQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UserPrivateQuery = { __typename?: 'Query', userPrivate: { __typename?: 'UserPrivateEntity', uniqueKey: string, eoaAddress?: string | null, isActive?: boolean | null, name?: string | null, displayName?: string | null, iconImageUrl?: string | null } };
+
 export type WaitingSiblingsQueryVariables = Exact<{
   eventUniqueKey: Scalars['String']['input'];
 }>;
@@ -624,6 +630,13 @@ export const RewardsDocument = gql`
   }
 }
     ${RewardFieldFragmentDoc}`;
+export const UserPrivateDocument = gql`
+    query userPrivate {
+  userPrivate {
+    ...UserPrivateField
+  }
+}
+    ${UserPrivateFieldFragmentDoc}`;
 export const WaitingSiblingsDocument = gql`
     query waitingSiblings($eventUniqueKey: String!) {
   waitingSiblings(eventUniqueKey: $eventUniqueKey) {
@@ -757,6 +770,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     rewards(variables: RewardsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<RewardsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<RewardsQuery>(RewardsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'rewards', 'query');
+    },
+    userPrivate(variables?: UserPrivateQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UserPrivateQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UserPrivateQuery>(UserPrivateDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'userPrivate', 'query');
     },
     waitingSiblings(variables: WaitingSiblingsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<WaitingSiblingsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<WaitingSiblingsQuery>(WaitingSiblingsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'waitingSiblings', 'query');

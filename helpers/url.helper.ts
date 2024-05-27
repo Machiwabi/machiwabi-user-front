@@ -1,6 +1,8 @@
 export const rewardShowUrl = (uniqueKey: string) => `/v2/rewards/${uniqueKey}`
 export const missionShowUrl = (uniqueKey: string) => `/v2/missions/${uniqueKey}`
 
+export const userNewUrl = () => '/v2/users/new'
+
 export const waitingsUrl = () => '/v2/waitings'
 export const waitingUrl = (uniqueKey: string) => `/v2/waitings/${uniqueKey}`
 export const waitingMembersUrl = (uniqueKey: string) =>
@@ -29,3 +31,5 @@ export const waitingAquiredRewardUrl = (
 
 export const waitingInformationUrl = (uniqueKey: string) =>
   `/v2/waitings/${uniqueKey}/information`
+
+export const web3AuthCallbackUrl = () => '/v2/auth/callback'

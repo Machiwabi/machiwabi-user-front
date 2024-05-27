@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { EButton } from '../../../componentsNew/elements/EButton'
 import { EText } from '../../../componentsNew/elements/EText/base'
 import LGuestUserLayout from '../../../componentsNew/layouts/LGuestUserLayout'
-import { applicationProperties } from '../../../constants/applicationProperties'
+import { waitingsUrl } from '../../../helpers/url.helper'
 import { useWeb3Auth } from '../../../hooks/useWeb3Auth'
 import { NextPageWithLayout } from '../../_app'
 
@@ -12,9 +12,7 @@ const Page: NextPageWithLayout = () => {
     isWeb3AuthConnected,
     connectWeb3AuthAndSignInWithEthereum,
     web3AuthLogout,
-  } = useWeb3Auth({
-    redirectUrl: `${applicationProperties.HOSTING_URL}/v2/auth/callback`,
-  })
+  } = useWeb3Auth()
 
   return (
     <>
@@ -51,7 +49,7 @@ const Page: NextPageWithLayout = () => {
           <EButton.Sm
             mt={24}
             onClick={() => {
-              connectWeb3AuthAndSignInWithEthereum('/v2/waitings')
+              connectWeb3AuthAndSignInWithEthereum(waitingsUrl())
             }}
           >
             ログインして参加する

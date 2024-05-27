@@ -6,8 +6,10 @@ import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { UpsertUserMutationVariables } from '../../../generated/graphql'
+import { waitingsUrl } from '../../../helpers/url.helper'
 import { useUserPrivate } from '../../../hooks/resources/useUserPrivate'
 import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
+import { RedirectUrlRepository } from '../../../repositories/RedirectUrlRepository'
 import { colorScheme } from '../../../theme/colorScheme'
 import { registerUserSchema } from '../../../validations/registerUserSchema'
 import { EButton } from '../../elements/EButton'
@@ -28,22 +30,24 @@ const Component: FC = () => {
   })
 
   const sendOnSubmit = methods.handleSubmit(async (data) => {
-    console.log(data)
     const dto: UpsertUserMutationVariables = {
       displayName: data.displayName,
       iconImageUrl: data.iconImageUrl,
     }
 
     try {
-      await upsertUser(secretJwt, dto)
+      await upsertUser(dto)
       showNotification({
         message: 'プロフィールを登録しました',
         color: colorScheme.scheme1.accent1.surface,
       })
 
-      // setTimeout(() => {
-      //   router.push(waitingsUrl())
-      // }, 1000)
+      setTimeout(async () => {
+        const redirectUrl = await RedirectUrlRepository.get()
+        await RedirectUrlRepository.remove()
+
+        router.push(redirectUrl || waitingsUrl())
+      }, 1000)
     } catch (error) {
       console.error(error)
       showNotification({

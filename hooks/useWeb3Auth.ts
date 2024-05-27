@@ -9,22 +9,26 @@ import {
   Web3AuthAlreadyConnectedError,
   Web3AuthNotConnectedError,
 } from '../exceptions/exceptions'
+import {
+  userNewUrl,
+  waitingsUrl,
+  web3AuthCallbackUrl,
+} from '../helpers/url.helper'
+import { RedirectUrlRepository } from '../repositories/RedirectUrlRepository'
+import { SiweJwtRepository } from '../repositories/SiweJwtRepository'
+import { UserPrivateRepository } from '../repositories/UserPrivateRepository'
 import { Web3AuthConnectedRepository } from '../repositories/Web3AuthConnectedRepository'
 import { getNonce } from '../usecases/authentication/getNonce'
 import { signOutEoa } from '../usecases/authentication/signOutEoa'
 import { verifyEoa } from '../usecases/authentication/verifyEoa'
 import { useUserPrivate } from './resources/useUserPrivate'
-import { SiweJwtRepository } from '../repositories/SiweJwtRepository'
 
 type Props = {
   redirectUrl?: string
   forceInitialize?: boolean
 }
 
-export const useWeb3Auth = ({
-  redirectUrl = `${applicationProperties.HOSTING_URL}`,
-  forceInitialize = false,
-}: Props = {}) => {
+export const useWeb3Auth = ({ forceInitialize = false }: Props = {}) => {
   const [web3Auth, setWeb3Auth] = useState<Web3Auth | null>()
   const [eoaAddress, setEoaAddress] = useState<string | null>(null)
   // TODO persistしたisCheckConnectedAyncに置き換える
@@ -71,7 +75,9 @@ export const useWeb3Auth = ({
     },
     adapterSettings: {
       uxMode: 'redirect', // safariは　popup が使えないため明示的に redirect を指定する
-      redirectUrl: redirectUrl,
+      redirectUrl: `${
+        applicationProperties.HOSTING_URL
+      }/${web3AuthCallbackUrl()}`,
     },
   })
 
@@ -118,15 +124,19 @@ export const useWeb3Auth = ({
   // web3Authのログアウト処理
   const web3AuthLogout = async (redirectUrl: string) => {
     try {
+      // siweの削除
+      await signOutEoa()
+
+      // web3Authのログアウト処理
       if (!isWeb3AuthConnected) throw new Web3AuthNotConnectedError()
       await web3Auth?.logout()
-      await Web3AuthConnectedRepository.removeWeb3AuthConnected()
-      await signOutEoa()
-      setWeb3Auth(null)
-      window.location.href = redirectUrl
     } catch (e) {
       console.error(e)
       throw e
+    } finally {
+      // ログアウト後の処理
+      setWeb3Auth(null)
+      window.location.href = redirectUrl
     }
   }
 
@@ -175,6 +185,8 @@ export const useWeb3Auth = ({
 
   // web3Authでログインを行った上でSIWEする
   const connectWeb3AuthAndSignInWithEthereum = async (redirectUrl: string) => {
+    await RedirectUrlRepository.save(redirectUrl)
+
     if (!web3Auth) return
     try {
       const web3AuthProvider: IProvider | null = await web3Auth?.connect()
@@ -238,10 +250,20 @@ export const useWeb3Auth = ({
 
       // 8.ログイン後のユーザーアップデート処理
       const jwt = await SiweJwtRepository.getSiweJwtFromBrowser()
-      if (jwt) await upsertUser(jwt.accessToken)
+      if (!jwt) throw new Error('jwt is not found')
 
-      // 9.リダイレクト
-      window.location.href = redirectUrl
+      const userPrivate = await UserPrivateRepository.findOneByJwt(
+        jwt.accessToken
+      )
+
+      if (userPrivate) {
+        const redirectUrl = await RedirectUrlRepository.get()
+        await RedirectUrlRepository.remove()
+
+        window.location.href = redirectUrl || waitingsUrl()
+      } else {
+        window.location.href = userNewUrl()
+      }
     } catch (e) {
       console.error(e)
     }

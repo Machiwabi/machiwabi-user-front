@@ -1,14 +1,32 @@
-import { UpsertUserMutationVariables } from '../../generated/graphql'
+import useSWR from 'swr'
+import {
+  UpsertUserMutationVariables,
+  UserPrivateEntity,
+} from '../../generated/graphql'
+import { SiweJwtRepository } from '../../repositories/SiweJwtRepository'
 import { UserPrivateRepository } from '../../repositories/UserPrivateRepository'
 
 export const useUserPrivate = () => {
-  const upsertUser = async (
-    secretJwt: string,
-    variables?: UpsertUserMutationVariables
-  ) => {
-    console.log(secretJwt, variables)
-    return await UserPrivateRepository.upsert(secretJwt, variables)
+  const { data, error, isLoading } = useSWR<UserPrivateEntity>(
+    ['UserPrivateDocument'],
+    async () => {
+      const secretJwt = await SiweJwtRepository.getSiweJwtFromBrowser()
+      return UserPrivateRepository.findOneByJwt(`${secretJwt?.accessToken}`)
+    }
+  )
+
+  const upsertUser = async (variables?: UpsertUserMutationVariables) => {
+    const secretJwt = await SiweJwtRepository.getSiweJwtFromBrowser()
+    return await UserPrivateRepository.upsert(
+      `${secretJwt?.accessToken}`,
+      variables
+    )
   }
 
-  return { upsertUser }
+  return {
+    userPrivate: data,
+    userPrivateError: error,
+    userPrivateIsLoading: isLoading,
+    upsertUser,
+  }
 }
