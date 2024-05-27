@@ -7,7 +7,7 @@ import { SiweJwtRepository } from '../../repositories/SiweJwtRepository'
 import { UserPrivateRepository } from '../../repositories/UserPrivateRepository'
 
 export const useUserPrivate = () => {
-  const { data, error, isLoading } = useSWR<UserPrivateEntity>(
+  const { data, error, isLoading } = useSWR<UserPrivateEntity | null>(
     ['UserPrivateDocument'],
     async () => {
       const secretJwt = await SiweJwtRepository.getSiweJwtFromBrowser()

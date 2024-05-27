@@ -8,12 +8,14 @@ import {
   UserPrivateQuery,
 } from '../generated/graphql'
 
-const findOneByJwt = async (secretJwt: string): Promise<UserPrivateEntity> => {
+const findOneByJwt = async (
+  secretJwt: string
+): Promise<UserPrivateEntity | null> => {
   const userPrivateQuery = await graphqlApiClient(
     secretJwt
   ).request<UserPrivateQuery>(UserPrivateDocument)
 
-  return userPrivateQuery.userPrivate
+  return userPrivateQuery.userPrivate || null
 }
 
 const upsert = async (
