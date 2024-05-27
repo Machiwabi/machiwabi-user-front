@@ -40,7 +40,6 @@ export const useAuthenticatedStore = () => {
         )
         setSecretJwt(jwtObject.accessToken)
         setAuthenticated('authenticated')
-        upsertUser(jwtObject.accessToken)
       } else {
         setAuthenticated('unauthenticated')
       }
@@ -56,5 +55,9 @@ export const useAuthenticatedStore = () => {
     setAuthenticated('loading')
   }
 
-  return { secretJwt, authenticated, markAsLoading }
+  const isAuthenticated = () => {
+    return authenticated === 'authenticated'
+  }
+
+  return { secretJwt, authenticated, isAuthenticated, markAsLoading }
 }

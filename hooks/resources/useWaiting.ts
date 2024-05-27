@@ -7,8 +7,7 @@ export const useWaiting = (variables: WaitingQueryVariables) => {
   const { data, error, isLoading } = useSWR<WaitingEntity>(
     ['WaitingDocument', variables],
     async () => {
-      const secretJwt = await SiweJwtRepository.getSiweJwtFromBrowser()
-      return WaitingRepository.findOne(variables, `${secretJwt?.accessToken}`)
+      return WaitingRepository.findOne(variables)
     }
     // {
     //   refreshInterval: 6000,

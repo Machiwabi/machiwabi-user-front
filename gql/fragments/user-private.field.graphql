@@ -5,4 +5,5 @@ fragment UserPrivateField on UserPrivateEntity {
   name
   displayName
   iconImageUrl
+  email
 }

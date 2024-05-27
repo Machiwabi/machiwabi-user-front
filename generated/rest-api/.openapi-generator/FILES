@@ -1,12 +1,14 @@
 .gitignore
 .npmignore
-.openapi-generator-ignore
 api.ts
+api/booster-payments-api.ts
 api/v1-authentication-api.ts
+api/v1-s3-images-api.ts
 base.ts
 common.ts
 configuration.ts
 git_push.sh
 index.ts
+types/aws-s3-presigned-url-entity.ts
 types/index.ts
 types/siwe-jwt-entity.ts

@@ -1,0 +1,8 @@
+.o-footer-nav__menu-link {
+  transition: 0.2s;
+  text-decoration: none !important;
+
+  &:hover {
+    opacity: 0.2;
+  }
+}

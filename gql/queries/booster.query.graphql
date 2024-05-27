@@ -1,0 +1,5 @@
+query booster($uniqueKey: String!) {
+  booster(uniqueKey: $uniqueKey) {
+    ...BoosterField
+  }
+}
