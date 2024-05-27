@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { colorScheme } from '../../../theme/colorScheme'
 import Link from 'next/link'
 import styles from './style.module.scss'
-import { waitingsUrl } from '../../../helpers/url.helper'
+import { userEditUrl, waitingsUrl } from '../../../helpers/url.helper'
 
 const Component: FC = () => {
   return (
@@ -83,7 +83,10 @@ const Component: FC = () => {
             justify="start"
             align="center"
           >
-            <Link href="/" className={styles['o-footer-nav__menu-link']}>
+            <Link
+              href={userEditUrl()}
+              className={styles['o-footer-nav__menu-link']}
+            >
               <Flex
                 component="i"
                 className="material-icons-outlined"

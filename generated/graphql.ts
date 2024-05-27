@@ -196,7 +196,7 @@ export type Query = {
   events: Array<EventEntity>;
   reward: RewardEntity;
   rewards: Array<RewardEntity>;
-  userPrivate: UserPrivateEntity;
+  userPrivate?: Maybe<UserPrivateEntity>;
   waiting: WaitingEntity;
   waitingSiblings: Array<WaitingEntity>;
   waitings: Array<WaitingEntity>;
@@ -258,6 +258,7 @@ export type RewardEntity = {
 
 export type UpsertUserInput = {
   displayName?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
   iconImageUrl?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
 };
@@ -265,6 +266,7 @@ export type UpsertUserInput = {
 export type UserPrivateEntity = {
   __typename?: 'UserPrivateEntity';
   displayName?: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
   eoaAddress?: Maybe<Scalars['String']['output']>;
   iconImageUrl?: Maybe<Scalars['String']['output']>;
   isActive?: Maybe<Scalars['Boolean']['output']>;
@@ -323,7 +325,7 @@ export type RedirectUriFieldFragment = { __typename?: 'RedirectUriEntity', url: 
 
 export type RewardFieldFragment = { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null };
 
-export type UserPrivateFieldFragment = { __typename?: 'UserPrivateEntity', uniqueKey: string, eoaAddress?: string | null, isActive?: boolean | null, name?: string | null, displayName?: string | null, iconImageUrl?: string | null };
+export type UserPrivateFieldFragment = { __typename?: 'UserPrivateEntity', uniqueKey: string, eoaAddress?: string | null, isActive?: boolean | null, name?: string | null, displayName?: string | null, iconImageUrl?: string | null, email?: string | null };
 
 export type UserPublicFieldFragment = { __typename?: 'UserPublicEntity', eoaAddress?: string | null, displayName?: string | null, iconImageUrl?: string | null };
 
@@ -368,10 +370,11 @@ export type UpsertUserMutationVariables = Exact<{
   name?: InputMaybe<Scalars['String']['input']>;
   displayName?: InputMaybe<Scalars['String']['input']>;
   iconImageUrl?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type UpsertUserMutation = { __typename?: 'Mutation', upsertUser: { __typename?: 'UserPrivateEntity', uniqueKey: string, eoaAddress?: string | null, isActive?: boolean | null, name?: string | null, displayName?: string | null, iconImageUrl?: string | null } };
+export type UpsertUserMutation = { __typename?: 'Mutation', upsertUser: { __typename?: 'UserPrivateEntity', uniqueKey: string, eoaAddress?: string | null, isActive?: boolean | null, name?: string | null, displayName?: string | null, iconImageUrl?: string | null, email?: string | null } };
 
 export type BoosterQueryVariables = Exact<{
   uniqueKey: Scalars['String']['input'];
@@ -416,7 +419,7 @@ export type RewardsQuery = { __typename?: 'Query', rewards: Array<{ __typename?:
 export type UserPrivateQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type UserPrivateQuery = { __typename?: 'Query', userPrivate: { __typename?: 'UserPrivateEntity', uniqueKey: string, eoaAddress?: string | null, isActive?: boolean | null, name?: string | null, displayName?: string | null, iconImageUrl?: string | null } };
+export type UserPrivateQuery = { __typename?: 'Query', userPrivate?: { __typename?: 'UserPrivateEntity', uniqueKey: string, eoaAddress?: string | null, isActive?: boolean | null, name?: string | null, displayName?: string | null, iconImageUrl?: string | null, email?: string | null } | null };
 
 export type WaitingSiblingsQueryVariables = Exact<{
   eventUniqueKey: Scalars['String']['input'];
@@ -505,6 +508,7 @@ export const UserPrivateFieldFragmentDoc = gql`
   name
   displayName
   iconImageUrl
+  email
 }
     `;
 export const UserPublicFieldFragmentDoc = gql`
@@ -580,9 +584,9 @@ export const ProvisionBoosterDocument = gql`
 }
     ${RedirectUriFieldFragmentDoc}`;
 export const UpsertUserDocument = gql`
-    mutation upsertUser($name: String, $displayName: String, $iconImageUrl: String) {
+    mutation upsertUser($name: String, $displayName: String, $iconImageUrl: String, $email: String) {
   upsertUser(
-    input: {name: $name, displayName: $displayName, iconImageUrl: $iconImageUrl}
+    input: {name: $name, displayName: $displayName, iconImageUrl: $iconImageUrl, email: $email}
   ) {
     ...UserPrivateField
   }

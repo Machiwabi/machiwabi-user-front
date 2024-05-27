@@ -13,7 +13,7 @@ type Props = FlexProps & {
   schemaName: string
   secretJwt: string
   label?: React.ReactNode
-  initialImage?: string
+  initialImage?: string | null
 }
 
 const Component: React.FC<Props> = ({
@@ -31,7 +31,7 @@ const Component: React.FC<Props> = ({
   // const toast = useToast()
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   // const [images, setImages] = useState<ImageItem[]>(initialImages)
-  const [image, setImage] = useState<string | undefined>(initialImage)
+  const [image, setImage] = useState<string | undefined | null>(initialImage)
 
   // アップロードボタンをタップした時に、hiddenにしたinputタグを
   const fileInputRef = useRef<HTMLInputElement>(null)
