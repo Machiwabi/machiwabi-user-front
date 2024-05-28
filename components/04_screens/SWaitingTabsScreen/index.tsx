@@ -75,7 +75,6 @@ const Component: FC<Props> = ({ waitingUniqueKey, currentTabValue }) => {
           <SInformationScreen waitingUniqueKey={waiting.uniqueKey} />
         </Tabs.Panel>
       </Tabs>
-      <OFooterNav />
     </>
   )
 }

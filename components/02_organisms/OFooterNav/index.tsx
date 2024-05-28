@@ -4,8 +4,13 @@ import { colorScheme } from '../../../theme/colorScheme'
 import Link from 'next/link'
 import styles from './style.module.scss'
 import { userEditUrl, waitingsUrl } from '../../../helpers/url.helper'
+import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
 
 const Component: FC = () => {
+  const { isAuthenticated } = useAuthenticatedStore()
+
+  if (!isAuthenticated()) return <></>
+
   return (
     <>
       <Box pos="fixed" w="100%" left={0} bottom={0}>
