@@ -1,9 +1,11 @@
 import { Box, BoxProps } from '@mantine/core'
-import { FC, useEffect } from 'react'
+import { notifications } from '@mantine/notifications'
+import { FC } from 'react'
 import { BoosterEntity, WaitingEntity } from '../../../generated/graphql'
-import { EButton } from '../../01_elements/EButton'
-import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
+import { useProvisionBooster } from '../../../hooks/resources/useProvisionOffer'
 import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
+import { colorScheme } from '../../../theme/colorScheme'
+import { EButton } from '../../01_elements/EButton'
 
 type Props = BoxProps & {
   waiting: WaitingEntity
@@ -11,15 +13,40 @@ type Props = BoxProps & {
 }
 
 const Component: FC<Props> = ({ waiting, booster, ...props }) => {
-  // const { isAuthenticated } = useAuthenticatedStore()
   const { isSiweWallet } = useSiweEoaAddress(waiting.user.eoaAddress)
+  const { provisionBooster } = useProvisionBooster()
+
+  const buyBooster = async (eventUniqueKey: string) => {
+    if (!isSiweWallet) {
+      notifications.show({
+        message: '他の人のブースターのため購入できません',
+        color: colorScheme.scheme1.notice.alert,
+      })
+    }
+
+    try {
+      const redirectUri = await provisionBooster({
+        boosterUniqueKey: booster.uniqueKey,
+        waitingUniqueKey: waiting.uniqueKey,
+      })
+
+      window.location.href = redirectUri.url
+    } catch (e) {
+      console.error(e)
+    }
+  }
 
   return (
     <>
       <Box {...props}>
         {isSiweWallet ? (
           <>
-            <EButton.Lg fillType="filled" surface="accent1" w="100%">
+            <EButton.Lg
+              fillType="filled"
+              surface="accent1"
+              w="100%"
+              onClick={() => buyBooster(waiting.event.uniqueKey)}
+            >
               購入画面(クレジットカード)
             </EButton.Lg>
           </>

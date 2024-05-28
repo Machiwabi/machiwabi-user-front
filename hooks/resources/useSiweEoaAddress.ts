@@ -16,13 +16,6 @@ export const useSiweEoaAddress = (compairEoaAddress?: string | null) => {
             ethers.utils.getAddress(eoaAddress) ===
               ethers.utils.getAddress(compairEoaAddress)
           )
-
-        console.log(
-          'eoaAddress',
-          eoaAddress,
-          'compairEoaAddress',
-          compairEoaAddress
-        )
       }
     })()
   }, [])

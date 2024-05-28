@@ -8,12 +8,16 @@ type Props = {
   heading?: string
   description?: string
   displayReloadButton?: boolean
+  href?: string
+  hrefButtonText?: string
 }
 
 const Component: FC<Props> = ({
   heading = 'エラー',
   description = '再読み込みをしてください',
   displayReloadButton = true,
+  href,
+  hrefButtonText,
 }) => {
   const handleReload = () => {
     window.location.reload()
@@ -33,6 +37,11 @@ const Component: FC<Props> = ({
       {displayReloadButton && (
         <EButton.Sm mt={12} onClick={handleReload}>
           再読み込み
+        </EButton.Sm>
+      )}
+      {href && (
+        <EButton.Sm mt={12} href={href}>
+          {hrefButtonText || '戻る'}
         </EButton.Sm>
       )}
     </Flex>
