@@ -17,18 +17,18 @@ export type EButtonProps = ButtonProps & {
 export const EButton = { Sm, Lg }
 
 export const generateButtonStyles = (
-  type: 'filled' | 'outline' | 'disabled',
+  fillType: 'filled' | 'outline' | 'disabled',
   surface: surface = 'surface1'
 ) => {
   let bg = ''
   let c = ''
   let borderColor = ''
 
-  if (type === 'filled') {
+  if (fillType === 'filled') {
     bg = colorScheme.scheme1[surface].surface
     c = colorScheme.scheme1[surface].object.high
     borderColor = colorScheme.scheme1[surface].surface
-  } else if (type === 'disabled') {
+  } else if (fillType === 'disabled') {
     bg = colorScheme.scheme1[surface].surface
     c = colorScheme.scheme1[surface].object.inactive
     borderColor = colorScheme.scheme1[surface].object.inactive

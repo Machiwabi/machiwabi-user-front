@@ -1,17 +1,17 @@
-import { Box, Flex } from '@mantine/core'
+import { Box, BoxProps, Flex } from '@mantine/core'
 import { FC, Fragment } from 'react'
 import { EHeading } from '../../01_elements/EHeading/base'
 import { EText } from '../../01_elements/EText/base'
 import { EventEntity } from '../../../generated/graphql'
 import { EButton } from '../../01_elements/EButton'
 
-type Props = {
+type Props = BoxProps & {
   event: EventEntity
 }
 
-const Component: FC<Props> = ({ event }) => {
+const Component: FC<Props> = ({ event, ...props }) => {
   return (
-    <>
+    <Box {...props}>
       <Box mb={16} px={16}>
         <EHeading.Page>イベント名</EHeading.Page>
         <Flex align="center" my={4}>
@@ -64,7 +64,7 @@ const Component: FC<Props> = ({ event }) => {
         <EHeading.Section>オンライン</EHeading.Section>
         <EText.Desc1 mt={8}>{event.onlineUrl}</EText.Desc1>
       </Box>
-    </>
+    </Box>
   )
 }
 

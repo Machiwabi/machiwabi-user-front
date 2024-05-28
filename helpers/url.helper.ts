@@ -36,3 +36,5 @@ export const waitingInformationUrl = (uniqueKey: string) =>
 export const web3AuthCallbackUrl = () => '/auth/callback'
 export const web3AuthEntranceUrl = () => '/auth/entrance'
 export const web3AuthSignOutUrl = () => '/signout'
+
+export const eventUrl = (uniqueKey: string) => `/events/${uniqueKey}`
