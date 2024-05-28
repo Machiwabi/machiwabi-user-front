@@ -1,11 +1,9 @@
-import { AspectRatio, Box, Divider } from '@mantine/core'
+import { Box } from '@mantine/core'
 import { FC } from 'react'
 import { useWaiting } from '../../../hooks/resources/useWaiting'
-import { colorScheme } from '../../../theme/colorScheme'
 import { ESectionHeading } from '../../01_elements/ESectionHeading'
 import { EText } from '../../01_elements/EText/base'
-import { OBoostersStatuses } from '../../02_organisms/OBoostersStatuses'
-import { OWaitingUserListItem } from '../../02_organisms/OWaitingUserListItem'
+import { OWaitingCounterWithUser } from '../../02_organisms/OWaitingCounterWithUser'
 import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
 import { WaitingMembersSubComponent } from './WaitingMembersSubComponent'
@@ -24,25 +22,7 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
 
   return (
     <>
-      <Box px={16}>
-        <AspectRatio
-          w="100%"
-          bg="black"
-          style={{ borderRadiusTopleft: 16, MozBorderRadiusTopright: 16 }}
-        >
-          <Box w="100%" h="100%" />
-        </AspectRatio>
-
-        <Box p={16} bg={colorScheme.scheme1.surface2.surface}>
-          <OWaitingUserListItem waiting={waiting} />
-          <Divider my={16} />
-          <OBoostersStatuses
-            secondPerTotalPoints={10}
-            secondsPerWaitingPoint={10}
-            boosters={waiting.waitingBoosters.map((wb) => wb.booster)} // TODO waitingBoosterを引数にする
-          />
-        </Box>
-      </Box>
+      <OWaitingCounterWithUser waiting={waiting} px={16} />
 
       <WaitingMembersSubComponent
         eventUniqueKey={waiting.event.uniqueKey}
