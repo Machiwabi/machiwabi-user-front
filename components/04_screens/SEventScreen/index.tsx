@@ -10,6 +10,7 @@ import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TEventShowTemplate } from '../../03_templates/TEventShowTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
 import { useJoinWaiting } from '../../../hooks/resources/useJoinWaiting'
+import { OEventJoinButton } from '../../02_organisms/OEventJoinButton'
 
 type Props = {
   uniqueKey: string
@@ -45,7 +46,13 @@ const Component: FC<Props> = ({ uniqueKey }) => {
         justify="center"
         align="center"
       >
-        {isAuthenticated() ? (
+        <OEventJoinButton
+          event={event}
+          redirectUrl={`${applicationProperties.HOSTING_URL}${eventUrl(
+            uniqueKey
+          )}`}
+        />
+        {/* {isAuthenticated() ? (
           <>
             <Box w="100%" maw={410} px={16}>
               <EButton.Lg
@@ -83,13 +90,13 @@ const Component: FC<Props> = ({ uniqueKey }) => {
               <>
                 <Box w="100%" maw={410} px={16}>
                   <EButton.Lg w="100%" fillType="disabled" disabled>
-                    期日が過ぎたため参加できません
+                    終了しました
                   </EButton.Lg>
                 </Box>
               </>
             )}
           </>
-        )}
+        )} */}
       </Flex>
     </>
   )
