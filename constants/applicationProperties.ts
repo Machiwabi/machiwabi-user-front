@@ -11,7 +11,7 @@ export const applicationProperties = {
     process.env.NEXT_PUBLIC_API_REST_URL || 'http://localhost:4000/',
   WEB3AUTH_CLIENT_ID: process.env.NEXT_PUBLIC_WEB3_AUTH_CLIENT_ID || '',
   WEB3AUTH_AUTH_NETWORK:
-    process.env.NEXT_PUBLIC_AUTH0_AUTH_NETWORK || 'sapphire_devnet',
+    process.env.NEXT_PUBLIC_WEB3_AUTH_NETWORK || 'sapphire_devnet',
   MAX_WRAPPER_WIDTH: 416,
   ALCHEMY: {
     API_KEY: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY,
