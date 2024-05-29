@@ -3,6 +3,7 @@ import { FC } from 'react'
 import { colorScheme } from '../../theme/colorScheme'
 import { CtaButton } from './elements/CtaButton'
 import { NormalButton } from './elements/NormalButton'
+import { applicationUrls } from '../../constants/applicationUrls'
 
 type Props = BoxProps
 
@@ -56,7 +57,7 @@ const Component: FC<Props> = ({ ...props }) => {
             </Box>
 
             <CtaButton
-              href={''}
+              href={applicationUrls.campaign.icr240603}
               value={'マチワビる'}
               w={335}
               mt={{ base: 16, lg: 30 }}

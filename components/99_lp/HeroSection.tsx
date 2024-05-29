@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { FC } from 'react'
 import { CtaButton } from './elements/CtaButton'
 import { colorScheme } from '../../theme/colorScheme'
+import { applicationUrls } from '../../constants/applicationUrls'
 
 type Props = BoxProps
 
@@ -70,7 +71,10 @@ const Component: FC<Props> = ({ ...props }) => {
 
             {/* cta */}
             <Box pos="absolute" bottom={160}>
-              <CtaButton href={''} value={'マチワビる'} />
+              <CtaButton
+                href={applicationUrls.campaign.icr240603}
+                value={'マチワビる'}
+              />
             </Box>
 
             <Flex
@@ -197,7 +201,11 @@ const Component: FC<Props> = ({ ...props }) => {
             px={{ base: 24, lg: 0 }}
           >
             <Center>
-              <CtaButton href={''} value={'マチワビる'} w={330} />
+              <CtaButton
+                href={applicationUrls.campaign.icr240603}
+                value={'マチワビる'}
+                w={330}
+              />
             </Center>
           </Container>
         </Box>

@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { FC, ReactNode } from 'react'
 import { colorScheme } from '../../theme/colorScheme'
 import { CtaButton } from './elements/CtaButton'
+import { applicationUrls } from '../../constants/applicationUrls'
 
 type Props = BoxProps
 
@@ -197,7 +198,7 @@ const Component: FC<Props> = ({ ...props }) => {
         />
         <Center>
           <CtaButton
-            href={''}
+            href={applicationUrls.campaign.icr240603}
             value={'マチワビる'}
             w={330}
             mt={{ base: 40, lg: 64 }}
