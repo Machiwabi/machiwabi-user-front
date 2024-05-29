@@ -4,6 +4,7 @@ import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
 import { TWaitingEventsTemplate } from '../../03_templates/TWaitingEventsTemplate'
 import { TNoWaitingsTemplate } from '../../03_templates/TNoWaitingsTemplate'
+import { OFooterNav } from '../../02_organisms/OFooterNav'
 
 const Component: FC = () => {
   const { waitings, waitingsError, waitingsIsLoading } = useWaitings()
@@ -37,6 +38,8 @@ const Component: FC = () => {
           waitings={pastWaitings}
         />
       )}
+
+      <OFooterNav />
     </>
   )
 }
