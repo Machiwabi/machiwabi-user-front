@@ -1,4 +1,4 @@
-import { Box, BoxProps, Container, Flex } from '@mantine/core'
+import { Box, BoxProps, Center, Container, Flex } from '@mantine/core'
 import { FC } from 'react'
 import { colorScheme } from '../../theme/colorScheme'
 import { CtaButton } from './elements/CtaButton'
@@ -28,6 +28,7 @@ const Component: FC<Props> = ({ ...props }) => {
             推しの応援になったら？
           </Box>
           <Box
+            w={330}
             mt={{ base: 44, lg: 24 }}
             fz={{ base: 22, lg: 32 }}
             ff="RocknRoll One"
@@ -48,7 +49,14 @@ const Component: FC<Props> = ({ ...props }) => {
             <Box mt={'1.5rem'} hiddenFrom="lg" />
             費やした時間を少しも無駄にしない、そんな「待ち活」専用アプリです！
           </Box>
-          <CtaButton href={''} value={'マチワビる'} mt={{ base: 40, lg: 64 }} />
+          <Center>
+            <CtaButton
+              href={''}
+              value={'マチワビる'}
+              w={330}
+              mt={{ base: 40, lg: 64 }}
+            />
+          </Center>
         </Flex>
       </Container>
     </>

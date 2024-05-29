@@ -1,7 +1,8 @@
-import { Box, BoxProps, Container, Flex } from '@mantine/core'
+import { Box, BoxProps, Center, Container, Flex } from '@mantine/core'
 import Image from 'next/image'
 import { FC, ReactNode } from 'react'
 import { colorScheme } from '../../theme/colorScheme'
+import { CtaButton } from './elements/CtaButton'
 
 type Props = BoxProps
 
@@ -194,6 +195,14 @@ const Component: FC<Props> = ({ ...props }) => {
             </>
           }
         />
+        <Center>
+          <CtaButton
+            href={''}
+            value={'マチワビる'}
+            w={330}
+            mt={{ base: 40, lg: 64 }}
+          />
+        </Center>
       </Container>
     </>
   )

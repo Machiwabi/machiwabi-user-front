@@ -1,5 +1,5 @@
 import { Carousel } from '@mantine/carousel'
-import { Box, BoxProps, Container, Flex } from '@mantine/core'
+import { Box, BoxProps, Center, Container, Flex } from '@mantine/core'
 import Image from 'next/image'
 import { FC } from 'react'
 import { CtaButton } from './elements/CtaButton'
@@ -196,9 +196,9 @@ const Component: FC<Props> = ({ ...props }) => {
             mt={{ base: 42, lg: 0 }}
             px={{ base: 24, lg: 0 }}
           >
-            <Box pos="relative" px={{ base: 24, lg: 0 }}>
-              <CtaButton href={''} value={'マチワビる'} />
-            </Box>
+            <Center>
+              <CtaButton href={''} value={'マチワビる'} w={330} />
+            </Center>
           </Container>
         </Box>
       </Box>
