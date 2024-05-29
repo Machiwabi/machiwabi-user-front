@@ -58,6 +58,7 @@ const Component: FC<Props> = ({ ...props }) => {
             <CtaButton
               href={''}
               value={'マチワビる'}
+              w={335}
               mt={{ base: 16, lg: 30 }}
             />
             <NormalButton
@@ -75,8 +76,8 @@ const Component: FC<Props> = ({ ...props }) => {
                   </Box>
                 </>
               }
-              w={{ base: '100%', lg: 600 }}
-              mt={{ base: 16, lg: 30 }}
+              w={{ base: '100%', sm: 600 }}
+              mt={{ base: 24, lg: 30 }}
             />
           </Flex>
         </Box>
