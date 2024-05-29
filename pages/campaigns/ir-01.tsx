@@ -18,7 +18,7 @@ const Page: NextPageWithLayout = () => {
       <FeatureSection my={{ base: 62, lg: 300 }} />
       <CtaSection my={{ base: 62, lg: 300 }} />
       <HowToSection my={{ base: 62, lg: 300 }} />
-      <FooterSection />
+      <FooterSection mt={120} />
     </>
   )
 }

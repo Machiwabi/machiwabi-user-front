@@ -1,9 +1,11 @@
-import { Box, Center, Container, Flex } from '@mantine/core'
+import { Box, Center, Container, ContainerProps, Flex } from '@mantine/core'
+import Image from 'next/image'
 import { FC } from 'react'
 import { colorScheme } from '../../theme/colorScheme'
-import Image from 'next/image'
 
-const Component: FC = () => {
+type Props = ContainerProps
+
+const Component: FC<Props> = ({ ...props }) => {
   return (
     <>
       <Container
@@ -12,6 +14,7 @@ const Component: FC = () => {
         px={{ base: 24, lg: 0 }}
         pb={30}
         bg={colorScheme.schemeLp.surface1.surface}
+        {...props}
       >
         <Center>
           <Box
