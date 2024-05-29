@@ -3,6 +3,7 @@ import { CtaSection } from '../../components/99_lp/CtaSection'
 import { FeatureSection } from '../../components/99_lp/FeatureSection'
 import { HeadingSection } from '../../components/99_lp/HeadingSection'
 import { HeroSection } from '../../components/99_lp/HeroSection'
+import { HowToSection } from '../../components/99_lp/HowToSection'
 import { StickyHeaderSection } from '../../components/99_lp/StickyHeaderSection'
 import { NextPageWithLayout } from '../_app'
 
@@ -15,6 +16,7 @@ const Page: NextPageWithLayout = () => {
       <HeroSection mt={120} mb={80} />
       <FeatureSection my={{ base: 62, lg: 300 }} />
       <CtaSection my={{ base: 62, lg: 300 }} />
+      <HowToSection my={{ base: 62, lg: 300 }} />
     </>
   )
 }
