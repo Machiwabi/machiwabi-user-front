@@ -1,16 +1,17 @@
 import LLandingPageLayout from '../../components/00_layouts/LLandingPageLayout'
-import { NextPageWithLayout } from '../_app'
+import { BgSection } from '../../components/99_lp/BgSection'
 import { HeadingSection } from '../../components/99_lp/HeadingSection'
-import { Container } from '@mantine/core'
+import { HeroSection } from '../../components/99_lp/HeroSection'
 import { StickyHeaderSection } from '../../components/99_lp/StickyHeaderSection'
+import { NextPageWithLayout } from '../_app'
 
 const Page: NextPageWithLayout = () => {
   return (
     <>
-      <Container maw={{ base: 640, lg: 1440 }} px={{ base: 24, lg: 0 }}>
-        <StickyHeaderSection />
-        <HeadingSection mt={120} mb={80} />
-      </Container>
+      <StickyHeaderSection />
+      {/* <BgSection /> */}
+      <HeadingSection mt={120} mb={80} />
+      <HeroSection mt={120} mb={80} />
     </>
   )
 }

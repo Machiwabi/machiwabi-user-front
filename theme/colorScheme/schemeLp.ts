@@ -2,7 +2,7 @@ import { ColorSchemeType } from '.'
 
 export const schemeLp: ColorSchemeType = {
   surface1: {
-    surface: '#0A0808',
+    surface: '#000000',
     object: {
       high: '#FFFFFF',
       mid: '#FFFFFF',

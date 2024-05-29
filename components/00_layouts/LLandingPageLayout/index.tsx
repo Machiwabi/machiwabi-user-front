@@ -9,7 +9,7 @@ export default function LLandingPageLayout(
       <Head>
         <style>{`
           body {
-            background-color: #0A0808!important; 
+            background-color: #000000!important; 
             color: #ffffff!important;
           }
         `}</style>

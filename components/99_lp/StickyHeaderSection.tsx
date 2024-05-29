@@ -14,6 +14,7 @@ const Component: FC<Props> = ({ ...props }) => {
         left={0}
         py={48}
         justify="center"
+        style={{ zIndex: 100 }}
         {...props}
       >
         <Image
