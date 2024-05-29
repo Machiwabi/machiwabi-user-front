@@ -1,4 +1,5 @@
 import { scheme1 } from './scheme1'
+import { schemeLp } from './schemeLp'
 
 type ObjectType = {
   high: string
@@ -37,4 +38,5 @@ export type ColorSchemeType = {
 
 export const colorScheme = {
   scheme1,
+  schemeLp,
 }
