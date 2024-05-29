@@ -28,7 +28,7 @@ const Component: FC<Props> = ({ ...props }) => {
             推しの応援になったら？
           </Box>
           <Box
-            w={330}
+            w={{ base: 330, lg: 'auto' }}
             mt={{ base: 44, lg: 24 }}
             fz={{ base: 22, lg: 32 }}
             ff="RocknRoll One"
