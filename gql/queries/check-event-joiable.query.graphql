@@ -1,0 +1,3 @@
+query checkEventJoinable($uniqueKey: String!) {
+  checkEventJoinable(uniqueKey: $uniqueKey)
+}

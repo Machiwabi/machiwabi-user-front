@@ -1,7 +1,5 @@
 import LGuestUserLayout from '../../../../../components/00_layouts/LGuestUserLayout'
 import { SMissionScreen } from '../../../../../components/04_screens/SMissionScreen'
-import { SMissionsScreen } from '../../../../../components/04_screens/SMissionsScreen'
-import { SWaitingTabsScreen } from '../../../../../components/04_screens/SWaitingTabsScreen'
 import { BoosterRepository } from '../../../../../repositories/BoosterRepository'
 import { WaitingRepository } from '../../../../../repositories/WaitingRepository'
 import { NextPageWithLayout } from '../../../../_app'

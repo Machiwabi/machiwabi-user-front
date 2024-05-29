@@ -55,6 +55,10 @@ class MyDocument extends Document<Props> {
             href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
             rel="stylesheet"
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap"
+            rel="stylesheet"
+          />
         </Head>
 
         <body>

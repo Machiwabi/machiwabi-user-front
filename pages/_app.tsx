@@ -17,6 +17,7 @@ import GoogleAnalyticsV4, { GoogleAnalyticsId } from './GoogleAnalyticsV4'
 // mantine
 import '@mantine/core/styles.css'
 import '@mantine/notifications/styles.css'
+import '@mantine/carousel/styles.css'
 import { Notifications } from '@mantine/notifications'
 
 Router.events.on('routeChangeStart', () => {

@@ -60,22 +60,6 @@ export type CreateBoosterInput = {
   price?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type CreateEventInput = {
-  description: Scalars['String']['input'];
-  detailMdxContent?: InputMaybe<Scalars['String']['input']>;
-  endAt: Scalars['DateTime']['input'];
-  eventUniqueKey: Scalars['String']['input'];
-  isEnable: Scalars['Boolean']['input'];
-  lat?: InputMaybe<Scalars['Float']['input']>;
-  lng?: InputMaybe<Scalars['Float']['input']>;
-  mdxContent?: InputMaybe<Scalars['String']['input']>;
-  name: Scalars['String']['input'];
-  onlineUrl?: InputMaybe<Scalars['String']['input']>;
-  placeName?: InputMaybe<Scalars['String']['input']>;
-  startAt: Scalars['DateTime']['input'];
-  waitingStartAt: Scalars['DateTime']['input'];
-};
-
 export type CreateRewardInput = {
   content: Scalars['String']['input'];
   description: Scalars['String']['input'];
@@ -133,7 +117,6 @@ export type JoinedWaitingEntity = {
 export type Mutation = {
   __typename?: 'Mutation';
   createBooster: BoosterEntity;
-  createEvent: EventEntity;
   createReward: RewardEntity;
   exchangeBooster: WaitingBoosterEntity;
   exchangeReward: Scalars['Boolean']['output'];
@@ -146,11 +129,6 @@ export type Mutation = {
 
 export type MutationCreateBoosterArgs = {
   input: CreateBoosterInput;
-};
-
-
-export type MutationCreateEventArgs = {
-  input: CreateEventInput;
 };
 
 
@@ -192,6 +170,7 @@ export type Query = {
   __typename?: 'Query';
   booster: BoosterEntity;
   boosters: Array<BoosterEntity>;
+  checkEventJoinable: Scalars['Boolean']['output'];
   event: EventEntity;
   events: Array<EventEntity>;
   reward: RewardEntity;
@@ -210,6 +189,11 @@ export type QueryBoosterArgs = {
 
 export type QueryBoostersArgs = {
   eventUniqueKey: Scalars['String']['input'];
+};
+
+
+export type QueryCheckEventJoinableArgs = {
+  uniqueKey: Scalars['String']['input'];
 };
 
 
@@ -389,6 +373,13 @@ export type BoostersQueryVariables = Exact<{
 
 
 export type BoostersQuery = { __typename?: 'Query', boosters: Array<{ __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null }> };
+
+export type CheckEventJoinableQueryVariables = Exact<{
+  uniqueKey: Scalars['String']['input'];
+}>;
+
+
+export type CheckEventJoinableQuery = { __typename?: 'Query', checkEventJoinable: boolean };
 
 export type EventQueryVariables = Exact<{
   uniqueKey: Scalars['String']['input'];
@@ -606,6 +597,11 @@ export const BoostersDocument = gql`
   }
 }
     ${BoosterFieldFragmentDoc}`;
+export const CheckEventJoinableDocument = gql`
+    query checkEventJoinable($uniqueKey: String!) {
+  checkEventJoinable(uniqueKey: $uniqueKey)
+}
+    `;
 export const EventDocument = gql`
     query event($uniqueKey: String!) {
   event(uniqueKey: $uniqueKey) {
@@ -762,6 +758,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     boosters(variables: BoostersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<BoostersQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<BoostersQuery>(BoostersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'boosters', 'query');
+    },
+    checkEventJoinable(variables: CheckEventJoinableQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CheckEventJoinableQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CheckEventJoinableQuery>(CheckEventJoinableDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'checkEventJoinable', 'query');
     },
     event(variables: EventQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<EventQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<EventQuery>(EventDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'event', 'query');

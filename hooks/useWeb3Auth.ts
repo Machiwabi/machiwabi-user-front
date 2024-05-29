@@ -22,6 +22,7 @@ import { getNonce } from '../usecases/authentication/getNonce'
 import { signOutEoa } from '../usecases/authentication/signOutEoa'
 import { verifyEoa } from '../usecases/authentication/verifyEoa'
 import { useUserPrivate } from './resources/useUserPrivate'
+import { SiweEoaAddressRepository } from '../repositories/SiweEoaAddressRepository'
 
 type Props = {
   redirectUrl?: string
@@ -129,6 +130,7 @@ export const useWeb3Auth = ({ forceInitialize = false }: Props = {}) => {
 
       // web3Authのログアウト処理
       if (!isWeb3AuthConnected) throw new Web3AuthNotConnectedError()
+      await SiweEoaAddressRepository.remove()
       await web3Auth?.logout()
     } catch (e) {
       console.error(e)
@@ -250,6 +252,7 @@ export const useWeb3Auth = ({ forceInitialize = false }: Props = {}) => {
 
       // 8.ログイン後のユーザーアップデート処理
       const jwt = await SiweJwtRepository.getSiweJwtFromBrowser()
+      await SiweEoaAddressRepository.save(signinedEoaAddress)
       if (!jwt) throw new Error('jwt is not found')
 
       const userPrivate = await UserPrivateRepository.findOneByJwt(
