@@ -1,12 +1,12 @@
-import { AspectRatio, Box, BoxProps, Flex, Overlay } from '@mantine/core'
+import { Box, BoxProps, Flex, Overlay } from '@mantine/core'
+import Image from 'next/image'
 import { FC, Fragment } from 'react'
+import { EventEntity } from '../../../generated/graphql'
+import { colorScheme } from '../../../theme/colorScheme'
+import { dateHumanizer } from '../../../utils/datetimeHumanizer'
+import { EButton } from '../../01_elements/EButton'
 import { EHeading } from '../../01_elements/EHeading/base'
 import { EText } from '../../01_elements/EText/base'
-import { EventEntity } from '../../../generated/graphql'
-import { EButton } from '../../01_elements/EButton'
-import { dateHumanizer } from '../../../utils/datetimeHumanizer'
-import Image from 'next/image'
-import { colorScheme } from '../../../theme/colorScheme'
 
 type Props = BoxProps & {
   event: EventEntity

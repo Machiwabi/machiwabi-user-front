@@ -8,6 +8,8 @@ import {
   WaitingSiblingsDocument,
   WaitingSiblingsQuery,
   WaitingSiblingsQueryVariables,
+  WaitingsAllDocument,
+  WaitingsAllQuery,
   WaitingsDocument,
   WaitingsQuery,
 } from '../generated/graphql'
@@ -47,4 +49,13 @@ const siblings = async (
   )
 }
 
-export const WaitingRepository = { findMany, findOne, siblings }
+// TODO Cache用の関数 別なInterfaceに分けて取得する
+const findAll = async (): Promise<WaitingEntity[]> => {
+  const waitingsAllQuery = await graphqlApiClient().request<WaitingsAllQuery>(
+    WaitingsAllDocument
+  )
+
+  return waitingsAllQuery.waitingsAll
+}
+
+export const WaitingRepository = { findMany, findOne, siblings, findAll }

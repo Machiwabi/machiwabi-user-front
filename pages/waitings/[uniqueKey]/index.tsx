@@ -23,7 +23,7 @@ type Params = {
   }
 }
 
-export const getServerSideProps = async ({ params }: Params) => {
+export const getStaticProps = async ({ params }: Params) => {
   const waiting = await WaitingRepository.findOne({
     uniqueKey: params.uniqueKey,
   })
@@ -42,5 +42,23 @@ export const getServerSideProps = async ({ params }: Params) => {
     }
   } catch (e) {
     throw e
+  }
+}
+
+// Next.jsのISRレンダー用のパスを提供
+export const getStaticPaths = async () => {
+  const waitings = await WaitingRepository.findAll()
+
+  if (waitings != null) {
+    return {
+      paths: waitings.map((waiting) => {
+        if (waiting != null) {
+          return { params: { uniqueKey: waiting.uniqueKey } }
+        }
+      }),
+      // generateしていない場合、404を出すのではなく
+      // 再生成するように変更
+      fallback: 'blocking',
+    }
   }
 }
