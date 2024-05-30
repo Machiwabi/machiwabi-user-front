@@ -6,12 +6,14 @@ import { OBoostersStatuses } from '../OBoostersStatuses'
 import { OWaitingCounter } from '../OWaitingCounter'
 import { OWaitingUserListItem } from '../OWaitingUserListItem'
 import styles from './style.module.scss'
+import { WaitingService } from '../../../domains/services/waiting.service'
 
 type Props = BoxProps & {
   waiting: WaitingEntity
 }
 
 const Component: FC<Props> = ({ waiting, ...props }) => {
+  const waitingService = new WaitingService(waiting)
   return (
     <>
       <Box {...props}>
@@ -23,12 +25,16 @@ const Component: FC<Props> = ({ waiting, ...props }) => {
             className={styles['']}
           >
             <OWaitingUserListItem waiting={waiting} />
-            <Divider my={16} />
-            <OBoostersStatuses
-              secondPerTotalPoints={10}
-              secondsPerWaitingPoint={10}
-              boosters={waiting.waitingBoosters.map((wb) => wb.booster)} // TODO waitingBoosterを引数にする
-            />
+            {waitingService.isBoosting() && (
+              <>
+                <Divider my={16} />
+                <OBoostersStatuses
+                  secondPerTotalPoints={waitingService.addableSumPoint()}
+                  secondsPerWaitingPoint={waiting.secondsPerWaitingPoint}
+                  waitingBoosters={waitingService.enableBoosters()}
+                />
+              </>
+            )}
           </Box>
         </Box>
       </Box>
