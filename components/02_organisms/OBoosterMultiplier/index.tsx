@@ -12,7 +12,7 @@ const Component: FC<Props> = ({ booster }) => {
     <>
       <Flex align="center">
         <Box fz={10} lh={1} fw={700}>
-          {dateConverter.msToMMDDSS(booster.durationSeconds * 1000)}
+          {dateConverter.msToMMDDSS(booster.durationSeconds * 1000)}の間
         </Box>
         <Box ml={8} ff="outfit" fw={700}>
           +{booster.multiplier}pt{' '}

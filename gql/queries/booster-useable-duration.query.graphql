@@ -1,0 +1,8 @@
+query boosterUseableDuration($uniqueKey: String!, $waitingUniqueKey: String!) {
+  boosterUseableDuration(
+    uniqueKey: $uniqueKey
+    waitingUniqueKey: $waitingUniqueKey
+  ) {
+    ...BoosterUseableDurationField
+  }
+}

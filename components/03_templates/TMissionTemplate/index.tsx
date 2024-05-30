@@ -13,6 +13,8 @@ import { EText } from '../../01_elements/EText/base'
 import { OBoosterMultiplier } from '../../02_organisms/OBoosterMultiplier'
 import { Pay } from './Pay'
 import { Mission } from './Mission'
+import { useBoosterUseableDuration } from '../../../hooks/resources/useBoosterUseableDuration'
+import { dateConverter } from '../../../utils/dateConverter'
 
 type Props = BoxProps & {
   booster: BoosterEntity
@@ -50,20 +52,27 @@ const Component: FC<Props> = ({ waiting, booster, ...props }) => {
           </Flex>
           <Box mt={16}>
             <Flex justify="space-between" align="center">
-              <EDefinitionTerm term="効果" tooltip="ツイートの印" />
+              <EDefinitionTerm term="ポイント上昇数" tooltip="ツイートの印" />
               <OBoosterMultiplier booster={booster} />
             </Flex>
             <Flex mt={4} justify="space-between" align="center">
-              <EDefinitionTerm term="重複利用" tooltip="ツイートの印" />
-              <EText.Desc1 fz={10} c={colorScheme.scheme1.surface1.object.low}>
-                不可
-              </EText.Desc1>
-            </Flex>
-            <Flex mt={4} justify="space-between" align="center">
-              <EDefinitionTerm term="利用上限" tooltip="ツイートの印" />
-              <EText.Desc1 fz={10} c={colorScheme.scheme1.surface1.object.low}>
-                なし
-              </EText.Desc1>
+              <EDefinitionTerm
+                term="利用可能間隔"
+                tooltip="再びチャレンジするまでの待ち時間です"
+              />
+              <Flex align="center">
+                {booster.recoveryDurationSeconds > 0 ? (
+                  <Box fz={10} lh={1} fw={700}>
+                    {dateConverter.msToMMDDSS(
+                      booster.recoveryDurationSeconds * 1000
+                    )}
+                  </Box>
+                ) : (
+                  <Box fz={10} lh={1} fw={700}>
+                    待たずに何度でも
+                  </Box>
+                )}
+              </Flex>
             </Flex>
           </Box>
         </Box>
