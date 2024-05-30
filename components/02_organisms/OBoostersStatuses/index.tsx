@@ -1,18 +1,18 @@
 import { Box, Flex } from '@mantine/core'
 import Image from 'next/image'
 import { FC } from 'react'
-import { BoosterEntity } from '../../../generated/graphql'
+import { WaitingBoosterEntity } from '../../../generated/graphql'
 
 type Props = {
   secondPerTotalPoints: number
   secondsPerWaitingPoint: number
-  boosters: BoosterEntity[]
+  waitingBoosters: WaitingBoosterEntity[]
 }
 
 const Component: FC<Props> = ({
   secondPerTotalPoints,
   secondsPerWaitingPoint,
-  boosters,
+  waitingBoosters,
 }) => {
   return (
     <Flex justify="space-between" align="center">
@@ -24,11 +24,11 @@ const Component: FC<Props> = ({
           +{secondPerTotalPoints}/{secondsPerWaitingPoint}sec
         </Box>
         <Flex>
-          {boosters.map((booster) => (
-            <Box key={booster.uniqueKey}>
+          {waitingBoosters.map((wb) => (
+            <Box key={wb.booster.uniqueKey}>
               <Image
                 src={
-                  booster.iconUrl ||
+                  wb.booster.iconUrl ||
                   '/assets/images/_sample/picture_ranking_01.png'
                 }
                 width={18}

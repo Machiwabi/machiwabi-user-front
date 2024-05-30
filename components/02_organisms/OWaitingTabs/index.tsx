@@ -33,54 +33,42 @@ const Component: FC<Props> = ({ waitingUniqueKey, current, ...props }) => {
               name: 'MEMBERS',
               isCurrent: current === 'MEMBERS',
               action: () => {
-                history.pushState(null, '', waitingMembersUrl(waitingUniqueKey))
+                history.pushState(null, '', waitingUrl(waitingUniqueKey))
               },
             },
             {
               name: 'MISSIONS',
               isCurrent: current === 'MISSIONS',
               action: () => {
-                history.pushState(
-                  null,
-                  '',
-                  waitingMissionsUrl(waitingUniqueKey)
-                )
+                history.pushState(null, '', waitingUrl(waitingUniqueKey))
               },
             },
             {
               name: 'REWARDS',
               isCurrent: current === 'REWARDS',
               action: () => {
-                history.pushState(null, '', waitingRewardsUrl(waitingUniqueKey))
+                history.pushState(null, '', waitingUrl(waitingUniqueKey))
               },
             },
             {
               name: 'BOOSTERS',
               isCurrent: current === 'BOOSTERS',
               action: () => {
-                history.pushState(
-                  null,
-                  '',
-                  waitingBoostersUrl(waitingUniqueKey)
-                )
+                history.pushState(null, '', waitingUrl(waitingUniqueKey))
               },
             },
             {
               name: 'AQUIRED',
               isCurrent: current === 'AQUIRED',
               action: () => {
-                history.pushState(null, '', waitingAquiredUrl(waitingUniqueKey))
+                history.pushState(null, '', waitingUrl(waitingUniqueKey))
               },
             },
             {
               name: 'INFORMATION',
               isCurrent: current === 'INFORMATION',
               action: () => {
-                history.pushState(
-                  null,
-                  '',
-                  waitingInformationUrl(waitingUniqueKey)
-                )
+                history.pushState(null, '', waitingUrl(waitingUniqueKey))
               },
             },
           ]}

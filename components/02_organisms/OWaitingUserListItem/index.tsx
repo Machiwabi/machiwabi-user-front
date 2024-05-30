@@ -4,6 +4,7 @@ import { WaitingEntity } from '../../../generated/graphql'
 import { OUserIconWithStatuses } from '../OUserIconWithStatuses'
 import { OUserWaitingStatuses } from '../OUserWaitingStatuses'
 import { colorScheme } from '../../../theme/colorScheme'
+import { WaitingService } from '../../../domains/services/waiting.service'
 
 type Props = {
   waiting: WaitingEntity
@@ -11,6 +12,8 @@ type Props = {
 }
 
 const Component: FC<Props> = ({ waiting, rank }) => {
+  const waitingService = new WaitingService(waiting)
+
   return (
     <Flex align="center">
       {rank && (
@@ -46,9 +49,12 @@ const Component: FC<Props> = ({ waiting, rank }) => {
         />
         <OUserWaitingStatuses
           totalPoints={waiting.totalPoint}
-          secondPerTotalPoints={waiting.secondPerTotalPoint}
+          secondPerTotalPoints={
+            waitingService.addableSumPoint() +
+            waitingService.earnableTotalPoint()
+          }
           secondsPerWaitingPoint={waiting.secondsPerWaitingPoint}
-          isBoosting={false}
+          isBoosting={waitingService.isBoosting()}
         />
       </Flex>
     </Flex>
