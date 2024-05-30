@@ -49,7 +49,7 @@ const Component: FC<Props> = ({ waiting, reward, ...props }) => {
             ta="center"
             c={colorScheme.scheme1.surface1.object.high}
           >
-            {reward.requiredTotalPoint} pt
+            {reward.requiredTotalPoint?.toLocaleString()} pt
           </Box>
         </Box>
       </Link>

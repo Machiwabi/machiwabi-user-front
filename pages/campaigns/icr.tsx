@@ -1,5 +1,6 @@
 import LLandingPageLayout from '../../components/00_layouts/LLandingPageLayout'
 import { BgSection } from '../../components/99_lp/BgSection'
+import { CheckFirstLandingSection } from '../../components/99_lp/CheckFirstLandingSection'
 import { CtaSection } from '../../components/99_lp/CtaSection'
 import { FeatureSection } from '../../components/99_lp/FeatureSection'
 import { FooterSection } from '../../components/99_lp/FooterSection'
@@ -15,6 +16,7 @@ const Page: NextPageWithLayout = () => {
       <StickyHeaderSection />
       <BgSection />
       <HeadingSection mt={120} mb={80} />
+      <CheckFirstLandingSection />
       <HeroSection mt={120} mb={80} />
       <FeatureSection my={{ base: 62, lg: 300 }} />
       <CtaSection my={{ base: 62, lg: 300 }} />
