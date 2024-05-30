@@ -1,15 +1,21 @@
 import { AspectRatio, Box, BoxProps, Flex } from '@mantine/core'
 import Image from 'next/image'
 import { FC } from 'react'
-import { BoosterEntity } from '../../../generated/graphql'
+import { BoosterEntity, WaitingBoosterEntity } from '../../../generated/graphql'
 import { colorScheme } from '../../../theme/colorScheme'
+import { WaitingBoostersService } from '../../../domains/services/waiting-boosters.service'
+import { dateHumanizer } from '../../../utils/dateHumanizer'
 
 type Props = BoxProps & {
-  booster: BoosterEntity
+  waitingBooster: WaitingBoosterEntity
   isEnable?: boolean
 }
 
-const Component: FC<Props> = ({ booster, isEnable, ...props }) => {
+const Component: FC<Props> = ({ waitingBooster, isEnable, ...props }) => {
+  const waitingBoostersService = new WaitingBoostersService()
+
+  const leftSeconds = waitingBoostersService.enableLeftDurations(waitingBooster)
+
   return (
     <Flex
       pos="relative"
@@ -29,19 +35,22 @@ const Component: FC<Props> = ({ booster, isEnable, ...props }) => {
         >
           <Image
             src={
-              booster.iconUrl || '/assets/images/_sample/picture_ranking_01.png'
+              waitingBooster.booster.iconUrl ||
+              '/assets/images/picture/picture_fallback.png'
             } // TODO fallback image
-            alt={booster.name}
+            alt={waitingBooster.booster.name}
             fill={true}
           />
         </Flex>
       </AspectRatio>
       <Box mt={8}>
         <Box lh={1} fz={10} ta="center">
-          ツイート
+          あと
         </Box>
         <Box mt={2} lh={1} fz={10} ta="center">
-          あと240秒
+          {/* {datetimeHumanizer} */}
+          {Math.round(leftSeconds / 1000).toLocaleString()}秒
+          {/* {dateHumanizer.jaFullLength(leftSeconds)} */}
         </Box>
       </Box>
     </Flex>

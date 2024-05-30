@@ -6,6 +6,7 @@ import { boosterMocks } from '../../../mocks/booster.mock'
 import { useWaiting } from '../../../hooks/resources/useWaiting'
 import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
+import { WaitingBoostersService } from '../../../domains/services/waiting-boosters.service'
 
 type Props = {
   waitingUniqueKey: string
@@ -19,19 +20,28 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
   if (waitingError) return <TErrorTemplate />
   if (waitingIsLoading || !waiting) return <TLoadingTemplate />
 
+  const waitingBoostersService = new WaitingBoostersService()
+
   return (
     <>
       <Box mb={40} px={16}>
         <EHeading.ParagraphJa>有効なブースター</EHeading.ParagraphJa>
         <OBoosters
           mt={12}
-          boosters={waiting.waitingBoosters.map((wb) => wb.booster)}
+          waitingBoosters={waitingBoostersService.enableBoosters(
+            waiting.waitingBoosters
+          )}
         />
       </Box>
 
       <Box my={40} px={16}>
         <EHeading.ParagraphJa>効果が終了したブースター</EHeading.ParagraphJa>
-        <OBoosters mt={12} boosters={boosterMocks} />
+        <OBoosters
+          mt={12}
+          waitingBoosters={waitingBoostersService.finishedBoosters(
+            waiting.waitingBoosters
+          )}
+        />
       </Box>
     </>
   )
