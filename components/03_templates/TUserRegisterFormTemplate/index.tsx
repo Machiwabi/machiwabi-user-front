@@ -43,7 +43,6 @@ const Component: FC<Props> = ({ secretJwt, methods, onSubmit }) => {
         </Box>
 
         <Box my={24} px={16}>
-          <EHeading.Section>表示名</EHeading.Section>
           <Checkbox
             {...methods.register('termsAgreement')}
             mt={8}
