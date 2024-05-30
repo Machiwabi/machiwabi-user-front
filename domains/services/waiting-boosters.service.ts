@@ -31,12 +31,25 @@ export class WaitingBoostersService {
     })
   }
 
-  public enableLeftDurations(waitingBooster: WaitingBoosterEntity) {
+  public enableLeftDuration(waitingBooster: WaitingBoosterEntity) {
     if (new Date(waitingBooster.endAt).getTime() <= new Date().getTime()) {
       return 0
     } else {
       return Math.floor(
         new Date(waitingBooster.endAt).getTime() - new Date().getTime()
+      )
+    }
+  }
+
+  public enableLeftDurationPersentage(waitingBooster: WaitingBoosterEntity) {
+    if (new Date(waitingBooster.endAt).getTime() <= new Date().getTime()) {
+      return 0
+    } else {
+      return Math.floor(
+        ((new Date(waitingBooster.endAt).getTime() - new Date().getTime()) /
+          (new Date(waitingBooster.endAt).getTime() -
+            new Date(waitingBooster.startAt).getTime())) *
+          100
       )
     }
   }
