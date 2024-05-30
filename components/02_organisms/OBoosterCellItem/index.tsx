@@ -1,10 +1,9 @@
-import { AspectRatio, Box, BoxProps, Flex } from '@mantine/core'
+import { AspectRatio, Box, BoxProps, Flex, RingProgress } from '@mantine/core'
 import Image from 'next/image'
 import { FC } from 'react'
-import { BoosterEntity, WaitingBoosterEntity } from '../../../generated/graphql'
-import { colorScheme } from '../../../theme/colorScheme'
 import { WaitingBoostersService } from '../../../domains/services/waiting-boosters.service'
-import { dateHumanizer } from '../../../utils/dateHumanizer'
+import { WaitingBoosterEntity } from '../../../generated/graphql'
+import { colorScheme } from '../../../theme/colorScheme'
 
 type Props = BoxProps & {
   waitingBooster: WaitingBoosterEntity
@@ -14,7 +13,9 @@ type Props = BoxProps & {
 const Component: FC<Props> = ({ waitingBooster, isEnable, ...props }) => {
   const waitingBoostersService = new WaitingBoostersService()
 
-  const leftSeconds = waitingBoostersService.enableLeftDurations(waitingBooster)
+  const leftSeconds = waitingBoostersService.enableLeftDuration(waitingBooster)
+  const leftPersentage =
+    100 - waitingBoostersService.enableLeftDurationPersentage(waitingBooster)
 
   return (
     <Flex
@@ -37,10 +38,29 @@ const Component: FC<Props> = ({ waitingBooster, isEnable, ...props }) => {
             src={
               waitingBooster.booster.iconUrl ||
               '/assets/images/picture/picture_fallback.png'
-            } // TODO fallback image
+            }
             alt={waitingBooster.booster.name}
             fill={true}
           />
+          <Box
+            pos="absolute"
+            w="100%"
+            h="100%"
+            top={0}
+            left={0}
+            bg="rgba(0,0,0,0.4)"
+          >
+            <RingProgress
+              size={60}
+              thickness={6}
+              sections={[
+                {
+                  value: leftPersentage,
+                  color: colorScheme.scheme1.accent1.surface,
+                },
+              ]}
+            />
+          </Box>
         </Flex>
       </AspectRatio>
       <Box mt={8}>
@@ -48,9 +68,7 @@ const Component: FC<Props> = ({ waitingBooster, isEnable, ...props }) => {
           あと
         </Box>
         <Box mt={2} lh={1} fz={10} ta="center">
-          {/* {datetimeHumanizer} */}
           {Math.round(leftSeconds / 1000).toLocaleString()}秒
-          {/* {dateHumanizer.jaFullLength(leftSeconds)} */}
         </Box>
       </Box>
     </Flex>
