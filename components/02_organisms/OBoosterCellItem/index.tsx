@@ -4,6 +4,7 @@ import { FC } from 'react'
 import { WaitingBoostersService } from '../../../domains/services/waiting-boosters.service'
 import { WaitingBoosterEntity } from '../../../generated/graphql'
 import { colorScheme } from '../../../theme/colorScheme'
+import { dateConverter } from '../../../utils/dateConverter'
 
 type Props = BoxProps & {
   waitingBooster: WaitingBoosterEntity
@@ -13,7 +14,7 @@ type Props = BoxProps & {
 const Component: FC<Props> = ({ waitingBooster, isEnable, ...props }) => {
   const waitingBoostersService = new WaitingBoostersService()
 
-  const leftSeconds = waitingBoostersService.enableLeftDuration(waitingBooster)
+  const leftMs = waitingBoostersService.enableLeftDuration(waitingBooster)
   const leftPersentage =
     100 - waitingBoostersService.enableLeftDurationPersentage(waitingBooster)
 
@@ -68,7 +69,7 @@ const Component: FC<Props> = ({ waitingBooster, isEnable, ...props }) => {
           あと
         </Box>
         <Box mt={2} lh={1} fz={10} ta="center">
-          {Math.round(leftSeconds / 1000).toLocaleString()}秒
+          {dateConverter.msToMMDDSS(leftMs)}
         </Box>
       </Box>
     </Flex>

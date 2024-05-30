@@ -1,7 +1,7 @@
+import { Box, Flex } from '@mantine/core'
 import { FC } from 'react'
 import { BoosterEntity } from '../../../generated/graphql'
-import { Box, Flex } from '@mantine/core'
-import { msToMMDDSS } from '../../../utils/msToMMDDSS'
+import { dateConverter } from '../../../utils/dateConverter'
 
 type Props = {
   booster: BoosterEntity
@@ -12,7 +12,7 @@ const Component: FC<Props> = ({ booster }) => {
     <>
       <Flex align="center">
         <Box fz={10} lh={1} fw={700}>
-          {msToMMDDSS(booster.durationSeconds * 1000)}
+          {dateConverter.msToMMDDSS(booster.durationSeconds * 1000)}
         </Box>
         <Box ml={8} ff="outfit" fw={700}>
           +{booster.multiplier}pt{' '}

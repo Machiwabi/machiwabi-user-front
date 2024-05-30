@@ -1,19 +1,18 @@
-import { Box, BoxProps, Button, Flex, useToast } from '@chakra-ui/react'
+import { Box, BoxProps, Button, Flex } from '@chakra-ui/react'
+import Image from 'next/image'
 import { FC, useState } from 'react'
-import { useBoosters } from '../../../hooks/resources/useBoosters'
-import { useExchangeBooster } from '../../../hooks/resources/useExchangeBooster'
-import { LoadingTemplate } from '../../templates/LoadingTemplate'
-import { msToMMDDSS } from '../../../utils/msToMMDDSS'
-import { useWaiting } from '../../../hooks/resources/useWaiting'
+import { useAccount } from 'wagmi'
 import {
   BoosterEntity,
   BoosterType,
   WaitingEntity,
 } from '../../../generated/graphql'
-import Image from 'next/image'
+import { useBoosters } from '../../../hooks/resources/useBoosters'
 import { useProvisionBooster } from '../../../hooks/resources/useProvisionOffer'
+import { useWaiting } from '../../../hooks/resources/useWaiting'
 import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
-import { useAccount } from 'wagmi'
+import { dateConverter } from '../../../utils/dateConverter'
+import { LoadingTemplate } from '../../templates/LoadingTemplate'
 
 type Props = {
   waitingUniqueKey: string
@@ -161,7 +160,10 @@ const MissionList: FC<MissionListProps> = ({ waiting, booster }) => {
                   <Flex align="flex-end">
                     {booster.durationSeconds && (
                       <Box as="span" fontSize={12}>
-                        {msToMMDDSS(booster.durationSeconds * 1000)}の間
+                        {dateConverter.msToMMDDSS(
+                          booster.durationSeconds * 1000
+                        )}
+                        の間
                       </Box>
                     )}
                   </Flex>

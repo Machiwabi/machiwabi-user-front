@@ -2,12 +2,12 @@ import { Box, Flex } from '@chakra-ui/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
+import { WaitingService } from '../../../domains/services/waiting.service'
 import { WaitingEntity } from '../../../generated/graphql'
 import { useWaitingSiblings } from '../../../hooks/resources/useWaitingSiblings'
-import { msToMMDDSS } from '../../../utils/msToMMDDSS'
+import { dateConverter } from '../../../utils/dateConverter'
 import { truncator } from '../../../utils/truncator'
 import { LoadingTemplate } from '../../templates/LoadingTemplate'
-import { WaitingService } from '../../../domains/services/waiting.service'
 
 type Props = {
   eventUniqueKey: string
@@ -103,7 +103,7 @@ const WaitingsListItem: FC<WaitingsListItemProps> = ({ waiting, index }) => {
                 hourglass_bottom
               </Box>
               <Box ml={1} mr="2px" fontSize={11}>
-                {msToMMDDSS(waiting.waitingDuration)}
+                {dateConverter.msToMMDDSS(waiting.waitingDuration)}
               </Box>
             </Flex>
 
