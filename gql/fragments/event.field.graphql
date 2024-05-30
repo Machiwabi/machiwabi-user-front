@@ -12,4 +12,5 @@ fragment EventField on EventEntity {
   lng
   onlineUrl
   placeName
+  imageUrl
 }

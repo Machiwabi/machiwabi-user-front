@@ -21,7 +21,7 @@ const Component: FC = () => {
         h={56}
         bg={colorScheme.scheme1.surface1.surface}
         style={{
-          zIndex: 10,
+          zIndex: 100,
           borderBottom: `0.5px solid ${colorScheme.scheme1.border.mid}`,
         }}
       >

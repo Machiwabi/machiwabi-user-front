@@ -25,7 +25,7 @@ const Component: FC<Props> = ({ uniqueKey }) => {
 
   return (
     <>
-      <TEventShowTemplate mt={24} event={event} />
+      <TEventShowTemplate event={event} />
       <Flex
         pos="fixed"
         w="100%"
