@@ -1,10 +1,10 @@
 import { Box, BoxProps, Flex } from '@mantine/core'
-import { FC } from 'react'
 import Image from 'next/image'
-import { RewardEntity, WaitingEntity } from '../../../generated/graphql'
-import { colorScheme } from '../../../theme/colorScheme'
 import Link from 'next/link'
-import { rewardShowUrl, waitingRewardUrl } from '../../../helpers/url.helper'
+import { FC } from 'react'
+import { RewardEntity, WaitingEntity } from '../../../generated/graphql'
+import { waitingRewardUrl } from '../../../helpers/url.helper'
+import { colorScheme } from '../../../theme/colorScheme'
 import styles from './style.module.scss'
 
 type Props = BoxProps & {
@@ -20,16 +20,16 @@ const Component: FC<Props> = ({ waiting, reward, ...props }) => {
         className={styles['o-reward-cell-item']}
         style={{ textDecoration: 'none' }}
       >
-        <Box h={120} bg={colorScheme.scheme1.surface2.surface} {...props}>
+        <Flex justify="center" h={120} {...props}>
           <Image
             src={
-              reward.iconUrl || '/assets/images/_sample/picture_ranking_01.png'
-            } // TODO fallback image
+              reward.iconUrl || '/assets/images/picture/picture_fallback.png'
+            }
             alt={reward.name}
             width={120}
             height={120}
           />
-        </Box>
+        </Flex>
         <Box mt={12}>
           <Box
             lh={1}
