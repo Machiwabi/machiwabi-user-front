@@ -6,15 +6,13 @@ import {
   BoosterType,
   WaitingEntity,
 } from '../../../generated/graphql'
-import { colorScheme } from '../../../theme/colorScheme'
+import { dateConverter } from '../../../utils/dateConverter'
 import { EDefinitionTerm } from '../../01_elements/EDefinitionTerm'
 import { EHeading } from '../../01_elements/EHeading/base'
 import { EText } from '../../01_elements/EText/base'
 import { OBoosterMultiplier } from '../../02_organisms/OBoosterMultiplier'
-import { Pay } from './Pay'
 import { Mission } from './Mission'
-import { useBoosterUseableDuration } from '../../../hooks/resources/useBoosterUseableDuration'
-import { dateConverter } from '../../../utils/dateConverter'
+import { Pay } from './Pay'
 
 type Props = BoxProps & {
   booster: BoosterEntity

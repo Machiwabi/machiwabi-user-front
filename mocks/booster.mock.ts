@@ -16,6 +16,7 @@ export const boosterMock: BoosterEntity = {
 ❷ツイートしたURLを下記のフォームに投稿してください。確認が取れ次第ブースターを付与します。※即時には反映されません。
 `,
   iconUrl: '/assets/images/_sample/picture_ranking_10.png',
+  recoveryDurationSeconds: 60 * 60 * 24,
 }
 
 export const boosterMocks: BoosterEntity[] = [
