@@ -1,9 +1,7 @@
-import { FC, useCallback, useEffect, useState } from 'react'
-import { WaitingBoosterEntity } from '../../generated/graphql'
 import { Box, Flex, Progress } from '@chakra-ui/react'
-import { useMask } from '@react-three/drei'
-import { useCall } from 'wagmi'
-import { msToMMDDSS } from '../../utils/msToMMDDSS'
+import { FC, useEffect, useState } from 'react'
+import { WaitingBoosterEntity } from '../../generated/graphql'
+import { dateConverter } from '../../utils/dateConverter'
 
 type Props = {
   waitingBoosters: WaitingBoosterEntity[]
@@ -98,7 +96,7 @@ const WaitingBoosterListItem: FC<WaitingBoosterListItemProps> = ({
               + {(waitingBooster.booster.multiplier - 1).toLocaleString()}WABI /
               10sec
             </Box>
-            <Box fontSize={10}>有効時間{msToMMDDSS(diffMs)}</Box>
+            <Box fontSize={10}>有効時間{dateConverter.msToMMDDSS(diffMs)}</Box>
           </Flex>
         </Box>
       </Flex>

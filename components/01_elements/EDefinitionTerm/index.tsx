@@ -23,6 +23,7 @@ const Component: FC<Props> = ({ term, tooltip }) => {
               fz={10}
               className="material-icons-outlined"
               onClick={() => setOpened((o) => !o)}
+              style={{ cursor: 'pointer' }}
             >
               info
             </Box>

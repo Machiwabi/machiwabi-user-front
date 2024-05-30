@@ -7,6 +7,8 @@ import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
 import { colorScheme } from '../../../theme/colorScheme'
 import { EButton } from '../../01_elements/EButton'
 import { ELoader } from '../../01_elements/ELoader'
+import { useBoosterUseableDuration } from '../../../hooks/resources/useBoosterUseableDuration'
+import { dateConverter } from '../../../utils/dateConverter'
 
 type Props = BoxProps & {
   waiting: WaitingEntity
@@ -16,7 +18,17 @@ type Props = BoxProps & {
 const Component: FC<Props> = ({ waiting, booster, ...props }) => {
   const { isSiweWallet } = useSiweEoaAddress(waiting.user.eoaAddress)
   const { provisionBooster } = useProvisionBooster()
+
   const [processing, setProcessing] = useState(false)
+
+  const {
+    boosterUseableDuration,
+    boosterUseableDurationError,
+    boosterUseableDurationIsLoading,
+  } = useBoosterUseableDuration({
+    uniqueKey: booster.uniqueKey,
+    waitingUniqueKey: waiting.uniqueKey,
+  })
 
   const buyBooster = async (eventUniqueKey: string) => {
     if (!isSiweWallet) {
@@ -39,10 +51,24 @@ const Component: FC<Props> = ({ waiting, booster, ...props }) => {
     }
   }
 
-  return (
-    <>
-      <Box {...props}>
-        {isSiweWallet ? (
+  // 自分のではない
+  if (!isSiweWallet) {
+    return (
+      <>
+        <Box {...props}>
+          <EButton.Lg fillType="disabled" w="100%" disabled={true}>
+            他の人のマチワビのため購入できません
+          </EButton.Lg>
+        </Box>
+      </>
+    )
+  }
+
+  // ブースター購入可能かをチェック
+  if (!boosterUseableDuration || boosterUseableDurationIsLoading) {
+    return (
+      <>
+        <Box {...props}>
           <>
             <EButton.Lg
               fillType="filled"
@@ -50,28 +76,71 @@ const Component: FC<Props> = ({ waiting, booster, ...props }) => {
               w="100%"
               onClick={() => buyBooster(waiting.event.uniqueKey)}
             >
-              {processing ? (
-                <>
-                  <ELoader
-                    size="xs"
-                    color={colorScheme.scheme1.accent1.object.high}
-                  />
-                </>
-              ) : (
-                <>購入画面へ(クレジットカード)</>
-              )}
-            </EButton.Lg>
-            <EButton.Lg mt={16} fillType="disabled" w="100%" disabled={true}>
-              <>購入画面へ(暗号資産) - 準備中</>
+              <>
+                <ELoader
+                  size="xs"
+                  color={colorScheme.scheme1.accent1.object.high}
+                />
+              </>
             </EButton.Lg>
           </>
-        ) : (
-          <>
-            <EButton.Lg fillType="disabled" w="100%" disabled={true}>
-              他の人のマチワビのため購入できません
-            </EButton.Lg>
-          </>
-        )}
+        </Box>
+      </>
+    )
+  }
+
+  // ブースター購入可能かをチェックした結果エラーがある場合
+  if (boosterUseableDurationError) {
+    return (
+      <>
+        <Box {...props}>
+          <EButton.Lg fillType="disabled" w="100%" disabled={true}>
+            エラーのため購入できません
+          </EButton.Lg>
+        </Box>
+      </>
+    )
+  }
+
+  // ブースター購入可能かをチェックした結果、待ち時間がある場合
+  if (boosterUseableDuration.leftRecoveryDuration > 0) {
+    return (
+      <>
+        <Box {...props}>
+          <EButton.Lg fillType="disabled" w="100%" disabled={true}>
+            {`${dateConverter.msToMMDDSS(
+              boosterUseableDuration.leftRecoveryDuration
+            )}後に再チャレンジ可能`}
+          </EButton.Lg>
+        </Box>
+      </>
+    )
+  }
+
+  // ブースター購入可能な場合
+  return (
+    <>
+      <Box {...props}>
+        <EButton.Lg
+          fillType="filled"
+          surface="accent1"
+          w="100%"
+          onClick={() => buyBooster(waiting.event.uniqueKey)}
+        >
+          {processing ? (
+            <>
+              <ELoader
+                size="xs"
+                color={colorScheme.scheme1.accent1.object.high}
+              />
+            </>
+          ) : (
+            <>購入画面へ(クレジットカード)</>
+          )}
+        </EButton.Lg>
+        <EButton.Lg mt={16} fillType="disabled" w="100%" disabled={true}>
+          <>購入画面へ(暗号資産) - 準備中</>
+        </EButton.Lg>
       </Box>
     </>
   )

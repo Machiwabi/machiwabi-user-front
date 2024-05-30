@@ -1,0 +1,3 @@
+fragment BoosterUseableDurationField on BoosterUseableDurationEntity {
+  leftRecoveryDuration
+}

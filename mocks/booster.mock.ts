@@ -16,6 +16,7 @@ export const boosterMock: BoosterEntity = {
 ❷ツイートしたURLを下記のフォームに投稿してください。確認が取れ次第ブースターを付与します。※即時には反映されません。
 `,
   iconUrl: '/assets/images/_sample/picture_ranking_10.png',
+  recoveryDurationSeconds: 60 * 60 * 24,
 }
 
 export const boosterMocks: BoosterEntity[] = [
@@ -32,6 +33,7 @@ export const boosterMocks: BoosterEntity[] = [
     missionMdxContent:
       '既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。',
     iconUrl: '/assets/images/_sample/picture_ranking_01.png',
+    recoveryDurationSeconds: 60 * 60 * 24,
   },
   {
     boosterType: BoosterType.Mission,
@@ -46,6 +48,7 @@ export const boosterMocks: BoosterEntity[] = [
     missionMdxContent:
       '既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。',
     iconUrl: '/assets/images/_sample/picture_ranking_02.png',
+    recoveryDurationSeconds: 60 * 60 * 24,
   },
   {
     boosterType: BoosterType.Mission,
@@ -60,6 +63,7 @@ export const boosterMocks: BoosterEntity[] = [
     missionMdxContent:
       '既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。',
     iconUrl: '/assets/images/_sample/picture_ranking_03.png',
+    recoveryDurationSeconds: 60 * 60 * 24,
   },
   {
     boosterType: BoosterType.Mission,
@@ -74,6 +78,7 @@ export const boosterMocks: BoosterEntity[] = [
     missionMdxContent:
       '既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。',
     iconUrl: '/assets/images/_sample/picture_ranking_04.png',
+    recoveryDurationSeconds: 60 * 60 * 24,
   },
   {
     boosterType: BoosterType.Mission,
@@ -88,6 +93,7 @@ export const boosterMocks: BoosterEntity[] = [
     missionMdxContent:
       '既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。',
     iconUrl: '/assets/images/_sample/picture_ranking_05.png',
+    recoveryDurationSeconds: 60 * 60 * 24,
   },
   {
     boosterType: BoosterType.Mission,
@@ -102,6 +108,7 @@ export const boosterMocks: BoosterEntity[] = [
     missionMdxContent:
       '既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。',
     iconUrl: '/assets/images/_sample/picture_ranking_06.png',
+    recoveryDurationSeconds: 60 * 60 * 24,
   },
   {
     boosterType: BoosterType.Mission,
@@ -116,6 +123,7 @@ export const boosterMocks: BoosterEntity[] = [
     missionMdxContent:
       '既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。',
     iconUrl: '/assets/images/_sample/picture_ranking_07.png',
+    recoveryDurationSeconds: 60 * 60 * 24,
   },
   {
     boosterType: BoosterType.Mission,
@@ -130,6 +138,7 @@ export const boosterMocks: BoosterEntity[] = [
     missionMdxContent:
       '既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。',
     iconUrl: '/assets/images/_sample/picture_ranking_08.png',
+    recoveryDurationSeconds: 60 * 60 * 24,
   },
   {
     boosterType: BoosterType.Mission,
@@ -144,6 +153,7 @@ export const boosterMocks: BoosterEntity[] = [
     missionMdxContent:
       '既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。',
     iconUrl: '/assets/images/_sample/picture_ranking_09.png',
+    recoveryDurationSeconds: 60 * 60 * 24,
   },
   {
     boosterType: BoosterType.Mission,
@@ -158,6 +168,7 @@ export const boosterMocks: BoosterEntity[] = [
     missionMdxContent:
       '既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。',
     iconUrl: '/assets/images/_sample/picture_ranking_10.png',
+    recoveryDurationSeconds: 60 * 60 * 24,
   },
   {
     boosterType: BoosterType.Mission,
@@ -172,6 +183,7 @@ export const boosterMocks: BoosterEntity[] = [
     missionMdxContent:
       '既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。',
     iconUrl: '/assets/images/_sample/picture_ranking_11.png',
+    recoveryDurationSeconds: 60 * 60 * 24,
   },
   {
     boosterType: BoosterType.Mission,
@@ -186,5 +198,6 @@ export const boosterMocks: BoosterEntity[] = [
     missionMdxContent:
       '既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。既定のハッシュタグをつけてXで呟こう。',
     iconUrl: '/assets/images/_sample/picture_ranking_12.png',
+    recoveryDurationSeconds: 60 * 60 * 24,
   },
 ]

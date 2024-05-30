@@ -4,7 +4,6 @@ import { FC, useState } from 'react'
 import { WaitingService } from '../../../domains/services/waiting.service'
 import { WaitingEntity } from '../../../generated/graphql'
 import { dateConverter } from '../../../utils/dateConverter'
-import { msToMMDDSS } from '../../../utils/msToMMDDSS'
 
 type Props = {
   waiting: WaitingEntity
@@ -74,7 +73,7 @@ const CounterTime: FC<{
         anchorX="center"
         anchorY="middle"
       >
-        {msToMMDDSS(delta)}
+        {dateConverter.msToMMDDSS(delta)}
       </Text>
     </>
   )

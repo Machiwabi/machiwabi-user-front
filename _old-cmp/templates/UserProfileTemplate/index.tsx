@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from 'react'
 import { WaitingService } from '../../../domains/services/waiting.service'
 import { WaitingEntity } from '../../../generated/graphql'
 import { useEarnedTrigger } from '../../../hooks/useEarnedTrigger'
-import { msToMMDDSS } from '../../../utils/msToMMDDSS'
+import { dateConverter } from '../../../utils/dateConverter'
 import { HeartAnimation } from '../../organisms/HeartAnimation'
 import { UserIcon } from '../../organisms/UserIcon'
 
@@ -143,7 +143,7 @@ const Component: FC<Props> = ({ waiting }) => {
                 hourglass_bottom
               </Box>
               <Box ml={2} mr="2px" fontSize={14} fontWeight="bold">
-                {msToMMDDSS(waiting.waitingDuration)}
+                {dateConverter.msToMMDDSS(waiting.waitingDuration)}
               </Box>
             </Flex>
           </Box>
