@@ -4,7 +4,7 @@ import { EHeading } from '../../01_elements/EHeading/base'
 import { EText } from '../../01_elements/EText/base'
 import { EventEntity } from '../../../generated/graphql'
 import { EButton } from '../../01_elements/EButton'
-import { dateHumanizer } from '../../../utils/datetimeHumanizer'
+import { dateHumanizer } from '../../../utils/dateHumanizer'
 import Image from 'next/image'
 import { colorScheme } from '../../../theme/colorScheme'
 
