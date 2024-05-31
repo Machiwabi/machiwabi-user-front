@@ -36,8 +36,6 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
     (booster) => booster.uniqueKey === grantedWaitingBoosterUniqueKey
   )
 
-  console.log('grantedWaitingBooster', grantedWaitingBooster, showGrantedModal)
-
   return (
     <>
       {grantedWaitingBooster && showGrantedModal && (
