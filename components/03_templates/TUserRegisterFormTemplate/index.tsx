@@ -4,6 +4,8 @@ import { UseFormReturn } from 'react-hook-form'
 import { EButton } from '../../01_elements/EButton'
 import { EHeading } from '../../01_elements/EHeading/base'
 import { OUserIconUploader } from '../../02_organisms/OUserIconUploader'
+import { applicationUrls } from '../../../constants/applicationUrls'
+import { colorScheme } from '../../../theme/colorScheme'
 
 type Props = {
   secretJwt: string
@@ -26,19 +28,39 @@ const Component: FC<Props> = ({ secretJwt, methods, onSubmit }) => {
           />
         </Box>
         <Box my={24} px={16}>
-          <EHeading.Section>表示名</EHeading.Section>
+          <Flex justify="space-between" align="center">
+            <EHeading.Section>表示名</EHeading.Section>
+            <EHeading.Section fz={12} c={colorScheme.scheme1.notice.alert}>
+              必須
+            </EHeading.Section>
+          </Flex>
           <TextInput
             {...methods.register('displayName')}
             mt={8}
             placeholder="まちわびちゃん"
+            error={
+              methods.formState.errors['displayName']
+                ? methods.formState.errors['displayName'].message?.toString()
+                : ''
+            }
           />
         </Box>
         <Box my={24} px={16}>
-          <EHeading.Section>メールアドレス</EHeading.Section>
+          <Flex justify="space-between" align="center">
+            <EHeading.Section>メールアドレス</EHeading.Section>
+            <EHeading.Section fz={12} c={colorScheme.scheme1.notice.alert}>
+              必須
+            </EHeading.Section>
+          </Flex>
           <TextInput
             {...methods.register('email')}
             mt={8}
-            placeholder="mati-wabi.chan@mati-wabi.com"
+            placeholder="mati-wabi.chan@mati-wabi.xyz"
+            error={
+              methods.formState.errors['email']
+                ? methods.formState.errors['email'].message?.toString()
+                : ''
+            }
           />
         </Box>
 
@@ -47,7 +69,22 @@ const Component: FC<Props> = ({ secretJwt, methods, onSubmit }) => {
             {...methods.register('termsAgreement')}
             mt={8}
             onChange={() => {}}
-            label="利用規約に同意する"
+            label={
+              <>
+                <Box
+                  pr={8}
+                  component="a"
+                  target="_blank"
+                  rel="noreferrer"
+                  href={applicationUrls.terms}
+                  style={{ textDecoration: 'underline' }}
+                  c={colorScheme.scheme1.surface1.object.low}
+                >
+                  利用規約
+                </Box>
+                に同意する
+              </>
+            }
           />
         </Box>
 

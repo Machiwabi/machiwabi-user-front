@@ -19,7 +19,8 @@ const Component: FC<Props> = ({ waitings }) => {
                 w={32}
                 h={32}
                 iconImageUrl={
-                  waiting.user.iconImageUrl || '/images/default_icon.png'
+                  waiting.user.iconImageUrl ||
+                  '/assets/images/picture/picture_user-profile-fallback.png'
                 } // TODO fallback image
               />
             )

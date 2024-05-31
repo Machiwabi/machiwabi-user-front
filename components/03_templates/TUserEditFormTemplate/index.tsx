@@ -5,6 +5,7 @@ import { EButton } from '../../01_elements/EButton'
 import { EHeading } from '../../01_elements/EHeading/base'
 import { OUserIconUploader } from '../../02_organisms/OUserIconUploader'
 import { UserPrivateEntity } from '../../../generated/graphql'
+import { colorScheme } from '../../../theme/colorScheme'
 
 type Props = {
   secretJwt: string
@@ -34,19 +35,39 @@ const Component: FC<Props> = ({
           />
         </Box>
         <Box my={24} px={16}>
-          <EHeading.Section>表示名</EHeading.Section>
+          <Flex justify="space-between" align="center">
+            <EHeading.Section>表示名</EHeading.Section>
+            <EHeading.Section fz={12} c={colorScheme.scheme1.notice.alert}>
+              必須
+            </EHeading.Section>
+          </Flex>
           <TextInput
             {...methods.register('displayName')}
             mt={8}
             placeholder="まちわびちゃん"
+            error={
+              methods.formState.errors['displayName']
+                ? methods.formState.errors['displayName'].message?.toString()
+                : ''
+            }
           />
         </Box>
         <Box my={24} px={16}>
-          <EHeading.Section>メールアドレス</EHeading.Section>
+          <Flex justify="space-between" align="center">
+            <EHeading.Section>メールアドレス</EHeading.Section>
+            <EHeading.Section fz={12} c={colorScheme.scheme1.notice.alert}>
+              必須
+            </EHeading.Section>
+          </Flex>
           <TextInput
             {...methods.register('email')}
             mt={8}
-            placeholder="mati-wabi.chan@mati-wabi.com"
+            placeholder="mati-wabi.chan@mati-wabi.xyz"
+            error={
+              methods.formState.errors['email']
+                ? methods.formState.errors['email'].message?.toString()
+                : ''
+            }
           />
         </Box>
 

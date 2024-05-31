@@ -45,7 +45,10 @@ const Component: FC<Props> = ({ waiting, rank }) => {
         <OUserIconWithStatuses
           displayName={waiting.user.displayName || 'guest'}
           waitingDuration={waiting.waitingDuration}
-          iconImageUrl={waiting.user.iconImageUrl || ''}
+          iconImageUrl={
+            waiting.user.iconImageUrl ||
+            '/assets/images/picture/picture_user-profile-fallback.png'
+          }
         />
         <OUserWaitingStatuses
           totalPoints={waiting.totalPoint}
