@@ -5,18 +5,38 @@ import { WaitingBoostersService } from '../../../domains/services/waiting-booste
 import { WaitingBoosterEntity } from '../../../generated/graphql'
 import { colorScheme } from '../../../theme/colorScheme'
 import { dateConverter } from '../../../utils/dateConverter'
+import { motion } from 'framer-motion'
 
 type Props = BoxProps & {
   waitingBooster: WaitingBoosterEntity
-  isEnable?: boolean
+  isNowGranted?: boolean
 }
 
-const Component: FC<Props> = ({ waitingBooster, isEnable, ...props }) => {
+const Component: FC<Props> = ({ waitingBooster, isNowGranted, ...props }) => {
   const waitingBoostersService = new WaitingBoostersService()
 
   const leftMs = waitingBoostersService.enableLeftDuration(waitingBooster)
   const leftPersentage =
     100 - waitingBoostersService.enableLeftDurationPersentage(waitingBooster)
+
+  const animationShadowStyle = {
+    hide: {},
+    show: {
+      initial: {
+        rotate: 270,
+        scale: 4,
+      },
+      animate: {
+        rotate: 0,
+        scale: 1,
+      },
+      transition: {
+        type: 'spring',
+        stiffness: 260,
+        damping: 20,
+      },
+    },
+  }
 
   return (
     <Flex
@@ -25,45 +45,54 @@ const Component: FC<Props> = ({ waitingBooster, isEnable, ...props }) => {
       component="li"
       justify="center"
       align="center"
+      style={{ borderRadius: 8 }}
     >
       <AspectRatio ratio={1} w="100%" h="100%">
-        <Flex
-          pos="relative"
-          w="100%"
-          h="100%"
-          align="center"
-          justify="center"
-          bg={colorScheme.scheme1.surface2.surface}
+        <motion.div
+          {...(isNowGranted
+            ? animationShadowStyle.show
+            : animationShadowStyle.hide)}
         >
-          <Image
-            src={
-              waitingBooster.booster.iconUrl ||
-              '/assets/images/picture/picture_fallback.png'
-            }
-            alt={waitingBooster.booster.name}
-            fill={true}
-          />
-          <Box
-            pos="absolute"
+          <Flex
+            pos="relative"
             w="100%"
             h="100%"
-            top={0}
-            left={0}
-            bg="rgba(0,0,0,0.4)"
+            align="center"
+            justify="center"
+            bg={colorScheme.scheme1.surface2.surface}
           >
-            <RingProgress
-              size={60}
-              thickness={6}
-              sections={[
-                {
-                  value: leftPersentage,
-                  color: colorScheme.scheme1.accent1.surface,
-                },
-              ]}
+            <Image
+              src={
+                waitingBooster.booster.iconUrl ||
+                '/assets/images/picture/picture_fallback.png'
+              }
+              alt={waitingBooster.booster.name}
+              fill={true}
             />
-          </Box>
-        </Flex>
+
+            <Box
+              pos="absolute"
+              w="100%"
+              h="100%"
+              top={0}
+              left={0}
+              bg="rgba(0,0,0,0.4)"
+            >
+              <RingProgress
+                size={60}
+                thickness={6}
+                sections={[
+                  {
+                    value: leftPersentage,
+                    color: colorScheme.scheme1.accent1.surface,
+                  },
+                ]}
+              />
+            </Box>
+          </Flex>
+        </motion.div>
       </AspectRatio>
+
       <Box mt={8}>
         <Box lh={1} fz={10} ta="center">
           あと

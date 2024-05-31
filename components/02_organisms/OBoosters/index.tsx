@@ -1,20 +1,30 @@
 import { SimpleGrid, SimpleGridProps } from '@mantine/core'
 import { FC } from 'react'
-import { BoosterEntity, WaitingBoosterEntity } from '../../../generated/graphql'
+import { WaitingBoosterEntity } from '../../../generated/graphql'
 import { OBoosterCellItem } from '../OBoosterCellItem'
 
 type Props = SimpleGridProps & {
   waitingBoosters: WaitingBoosterEntity[]
+  grantedWaitingBoosterUniqueKey?: string
 }
 
-const Component: FC<Props> = ({ waitingBoosters, ...props }) => {
+const Component: FC<Props> = ({
+  waitingBoosters,
+  grantedWaitingBoosterUniqueKey,
+  ...props
+}) => {
   return (
     <>
       <SimpleGrid spacing={4} verticalSpacing={16} cols={6} {...props}>
         {waitingBoosters.map((waitingBooster) => {
+          const isNowGranted =
+            waitingBooster.uniqueKey === grantedWaitingBoosterUniqueKey
           return (
             <>
-              <OBoosterCellItem waitingBooster={waitingBooster} />
+              <OBoosterCellItem
+                waitingBooster={waitingBooster}
+                isNowGranted={isNowGranted}
+              />
             </>
           )
         })}
