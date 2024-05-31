@@ -1,4 +1,4 @@
-import { Box, BoxProps } from '@mantine/core'
+import { Box, BoxProps, Flex } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { FC, useState } from 'react'
 import { BoosterEntity, WaitingEntity } from '../../../generated/graphql'
@@ -9,6 +9,7 @@ import { EButton } from '../../01_elements/EButton'
 import { ELoader } from '../../01_elements/ELoader'
 import { useBoosterUseableDuration } from '../../../hooks/resources/useBoosterUseableDuration'
 import { dateConverter } from '../../../utils/dateConverter'
+import { EHeading } from '../../01_elements/EHeading/base'
 
 type Props = BoxProps & {
   waiting: WaitingEntity
@@ -121,6 +122,29 @@ const Component: FC<Props> = ({ waiting, booster, ...props }) => {
   return (
     <>
       <Box {...props}>
+        <Box>
+          <EHeading.SectionJa>金額</EHeading.SectionJa>
+          <Flex
+            mt={16}
+            mb={16}
+            py={16}
+            lh={1}
+            fz={24}
+            ff="outfit"
+            fw={700}
+            ta="center"
+            c={colorScheme.scheme1.surface1.object.high}
+            bg={colorScheme.scheme1.surface2.surface}
+            justify="center"
+            align="center"
+            style={{ borderRadius: 8 }}
+          >
+            <Box>￥{booster.price?.toLocaleString()}</Box>
+            <Box ml={6} fz={14}>
+              (税込)
+            </Box>
+          </Flex>
+        </Box>
         <EButton.Lg
           fillType="filled"
           surface="accent1"

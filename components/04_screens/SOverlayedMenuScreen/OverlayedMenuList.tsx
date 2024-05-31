@@ -11,7 +11,7 @@ const Component: FC<Props> = ({ ...props }) => {
     <>
       <Flex justify="center" direction="column" w="100%" {...props}>
         <OverlayedMenuListItem href={waitingsUrl()} title="ホーム画面" />
-        <OverlayedMenuListItem href="/" title="使い方" />
+        <OverlayedMenuListItem href={applicationUrls.howTo} title="使い方" />
         <OverlayedMenuListItem href={applicationUrls.form} title="お問い合せ" />
         <OverlayedMenuListItem
           href={applicationUrls.tokusho}
