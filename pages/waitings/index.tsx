@@ -3,7 +3,6 @@ import { SRecommendSignInScreen } from '../../components/04_screens/SRecommendSi
 import { SWaitingsScreen } from '../../components/04_screens/SWaitingsScreen'
 import { applicationProperties } from '../../constants/applicationProperties'
 import { waitingsUrl } from '../../helpers/url.helper'
-import { useSiweEoaAddress } from '../../hooks/resources/useSiweEoaAddress'
 import { useAuthenticatedStore } from '../../recoil/authenticatedStore/useAuthenticatedStore'
 import { NextPageWithLayout } from '../_app'
 
