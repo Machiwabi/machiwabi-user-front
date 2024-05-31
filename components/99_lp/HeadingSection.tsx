@@ -63,7 +63,7 @@ const Component: FC<Props> = ({ ...props }) => {
               mt={{ base: 16, lg: 30 }}
             />
             <NormalButton
-              href={''}
+              href={applicationUrls.campaign.icr240603Ticket}
               value={
                 <>
                   <span>チケットをまだ購入されていない方</span>

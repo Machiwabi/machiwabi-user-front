@@ -1,6 +1,6 @@
 import { Box, BoxProps, Flex } from '@mantine/core'
 import Image from 'next/image'
-import { FC } from 'react'
+import { FC, Fragment } from 'react'
 import {
   BoosterEntity,
   BoosterType,
@@ -45,7 +45,7 @@ const Component: FC<Props> = ({ waiting, booster, ...props }) => {
               </Box>
             )}
             <Box fz={14} fw={700} ml={8}>
-              ツイートの印
+              {booster.name}
             </Box>
           </Flex>
           <Box mt={16}>
@@ -77,7 +77,15 @@ const Component: FC<Props> = ({ waiting, booster, ...props }) => {
 
         <Box my={40}>
           <EHeading.SectionJa>ミッション内容</EHeading.SectionJa>
-          <EText.Desc1 mt={16}>{booster.missionMdxContent}</EText.Desc1>
+          <EText.Desc1 mt={16}>
+            {booster.missionMdxContent &&
+              booster.missionMdxContent.split('\n').map((line, index) => (
+                <Fragment key={index}>
+                  {line}
+                  <br />
+                </Fragment>
+              ))}
+          </EText.Desc1>
         </Box>
 
         {booster.boosterType === BoosterType.Mission && (

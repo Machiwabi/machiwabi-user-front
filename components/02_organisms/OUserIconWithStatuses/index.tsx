@@ -2,6 +2,7 @@ import { Box, Flex, Text } from '@mantine/core'
 import { FC } from 'react'
 import { colorScheme } from '../../../theme/colorScheme'
 import Image from 'next/image'
+import { dateConverter } from '../../../utils/dateConverter'
 
 type Props = {
   displayName: string
@@ -29,7 +30,7 @@ const Component: FC<Props> = ({
           {displayName}
         </Text>
         <Text fz={10} ff="outfit" fw={700}>
-          {waitingDuration}
+          待ち時間：{dateConverter.msToMMDDSS(waitingDuration)}
         </Text>
       </Box>
     </Flex>

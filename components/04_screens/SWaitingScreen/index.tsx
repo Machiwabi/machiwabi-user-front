@@ -34,11 +34,13 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
       <Box component="section" my={40} px={16}>
         <ESectionHeading
           heading="MESSAGE"
-          tooltip={<>hanzochangさんがイベントにかける思いです</>}
+          tooltip={
+            <>{waiting.user.displayName}さんがイベントにかける思いです</>
+          }
         />
         <Box mt={8}>
           <EText.Desc1>
-            ＊＊を推しています。＊＊を推しています。＊＊を推しています。＊＊を推しています。＊＊を推しています。＊＊を推しています。
+            （準備中：推しに対する応援メッセージを追加できる機能を予定しています）
           </EText.Desc1>
         </Box>
       </Box>

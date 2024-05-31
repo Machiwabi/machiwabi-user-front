@@ -29,7 +29,7 @@ const Component: FC<Props> = ({
               <Image
                 src={
                   wb.booster.iconUrl ||
-                  '/assets/images/_sample/picture_ranking_01.png'
+                  '/assets/images/picture/picture_fallback.png'
                 }
                 width={18}
                 height={18}
