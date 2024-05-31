@@ -21,7 +21,7 @@ const Component: FC<ERollTabProps> = ({ isCurrent = false, action, name }) => {
       >
         <Box h={24}>
           <Text fz={12} fw={500} lh={1}>
-            {name}
+            {name.toLocaleUpperCase()}
           </Text>
         </Box>
       </Flex>

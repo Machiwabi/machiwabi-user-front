@@ -13,7 +13,6 @@ type Props = BoxProps & {
 }
 
 const Component: FC<Props> = ({ event, ...props }) => {
-  console.log('||||||||||||', event)
   return (
     <Box {...props}>
       <Box pos="relative" w="100%" h={'240px'}>

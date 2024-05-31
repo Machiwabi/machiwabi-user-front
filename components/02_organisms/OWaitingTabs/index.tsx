@@ -1,14 +1,6 @@
 import { BoxProps, Tabs } from '@mantine/core'
+import { useRouter } from 'next/router'
 import { FC } from 'react'
-import {
-  waitingAquiredUrl,
-  waitingBoostersUrl,
-  waitingInformationUrl,
-  waitingMembersUrl,
-  waitingMissionsUrl,
-  waitingRewardsUrl,
-  waitingUrl,
-} from '../../../helpers/url.helper'
 import { ERollTabs } from '../../01_elements/ERollTabs'
 
 type Props = BoxProps & {
@@ -16,59 +8,93 @@ type Props = BoxProps & {
   current: string
 }
 
+const TABS = [
+  'home',
+  'members',
+  'missions',
+  'rewards',
+  'boosters',
+  'aquired',
+  'information',
+]
+
 const Component: FC<Props> = ({ waitingUniqueKey, current, ...props }) => {
+  const router = useRouter()
+
+  const handleTabChange = (tabName: string) => {
+    const selectedTab = TABS.find((tab) => tab === tabName)
+
+    if (!selectedTab) return
+
+    let query
+    if (selectedTab === 'home') {
+      query = { ...router.query }
+    } else {
+      query = { ...router.query, tab: selectedTab }
+    }
+
+    router.replace(
+      {
+        pathname: router.pathname,
+        query,
+      },
+      undefined,
+      { shallow: true }
+    )
+  }
+
   return (
     <>
       <Tabs.List {...props}>
         <ERollTabs
           tabs={[
             {
-              name: 'HOME',
-              isCurrent: current === 'HOME',
+              name: 'home',
+              isCurrent: current === 'home',
               action: () => {
-                history.pushState(null, '', waitingUrl(waitingUniqueKey))
+                handleTabChange('home')
               },
             },
             {
-              name: 'MEMBERS',
-              isCurrent: current === 'MEMBERS',
+              name: 'members',
+              isCurrent: current === 'members',
               action: () => {
-                history.pushState(null, '', waitingUrl(waitingUniqueKey))
+                handleTabChange('members')
               },
             },
             {
-              name: 'MISSIONS',
-              isCurrent: current === 'MISSIONS',
+              name: 'missions',
+              isCurrent: current === 'missions',
               action: () => {
-                history.pushState(null, '', waitingUrl(waitingUniqueKey))
+                handleTabChange('missions')
               },
             },
             {
-              name: 'REWARDS',
-              isCurrent: current === 'REWARDS',
+              name: 'rewards',
+              isCurrent: current === 'rewards',
               action: () => {
-                history.pushState(null, '', waitingUrl(waitingUniqueKey))
+                handleTabChange('rewards')
               },
             },
             {
-              name: 'BOOSTERS',
-              isCurrent: current === 'BOOSTERS',
+              name: 'boosters',
+              isCurrent: current === 'boosters',
               action: () => {
-                history.pushState(null, '', waitingUrl(waitingUniqueKey))
+                handleTabChange('boosters')
               },
             },
             {
-              name: 'AQUIRED',
-              isCurrent: current === 'AQUIRED',
+              name: 'aquired',
+              isCurrent: current === 'aquired',
               action: () => {
-                history.pushState(null, '', waitingUrl(waitingUniqueKey))
+                handleTabChange('aquired')
               },
             },
             {
-              name: 'INFORMATION',
-              isCurrent: current === 'INFORMATION',
+              name: 'information',
+              isCurrent: current === 'information',
               action: () => {
-                history.pushState(null, '', waitingUrl(waitingUniqueKey))
+                handleTabChange('information')
               },
             },
           ]}
