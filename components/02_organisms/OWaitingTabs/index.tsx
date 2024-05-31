@@ -27,11 +27,17 @@ const Component: FC<Props> = ({ waitingUniqueKey, current, ...props }) => {
     if (!selectedTab) return
 
     let query
+    const { grantedWaitingBoosterUniqueKey, ...extractQuery } = router.query
     if (selectedTab === 'home') {
-      query = { ...router.query }
+      query = { ...extractQuery }
     } else {
-      query = { ...router.query, tab: selectedTab }
+      query = {
+        ...extractQuery,
+        tab: selectedTab,
+      }
     }
+
+    console.log('query', query)
 
     router.replace(
       {
