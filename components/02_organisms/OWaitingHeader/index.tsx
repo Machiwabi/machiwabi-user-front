@@ -2,6 +2,7 @@ import { Box, Flex, FlexProps, Text } from '@mantine/core'
 import { FC } from 'react'
 import { WaitingEntity } from '../../../generated/graphql'
 import { colorScheme } from '../../../theme/colorScheme'
+import { dateConverter } from '../../../utils/dateConverter'
 
 type Props = FlexProps & { waiting: WaitingEntity }
 
@@ -30,7 +31,7 @@ const Component: FC<Props> = ({ waiting, ...props }) => {
         ta="right"
         c={colorScheme.scheme1.surface1.object.low}
       >
-        {waiting.event.startAt}
+        {dateConverter.yyyyMMddHHmmss(waiting.event.startAt)}
       </Text>
     </Flex>
   )

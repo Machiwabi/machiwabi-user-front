@@ -6,6 +6,7 @@ import { RewardEntity, WaitingEntity } from '../../../generated/graphql'
 import { waitingRewardUrl } from '../../../helpers/url.helper'
 import { colorScheme } from '../../../theme/colorScheme'
 import styles from './style.module.scss'
+import { dateConverter } from '../../../utils/dateConverter'
 
 type Props = BoxProps & {
   waiting: WaitingEntity
@@ -32,9 +33,9 @@ const Component: FC<Props> = ({ waiting, reward, ...props }) => {
         </Flex>
         <Box mt={12}>
           <Box
-            lh={1}
-            fz={12}
-            fw={700}
+            lh={1.45}
+            fz={14}
+            fw={600}
             ta="center"
             c={colorScheme.scheme1.surface1.object.high}
           >
@@ -43,13 +44,26 @@ const Component: FC<Props> = ({ waiting, reward, ...props }) => {
           <Box
             mt={6}
             lh={1}
-            fz={12}
+            fz={14}
             ff="outfit"
             fw={700}
             ta="center"
             c={colorScheme.scheme1.surface1.object.high}
           >
-            {reward.requiredTotalPoint?.toLocaleString()} pt
+            {reward.requiredTotalPoint?.toLocaleString()}
+            pt
+          </Box>
+          <Box
+            mt={9}
+            lh={1}
+            fz={10}
+            ff="outfit"
+            fw={400}
+            ta="center"
+            c={colorScheme.scheme1.surface1.object.low}
+          >
+            {new Date(reward.startAt) > new Date() &&
+              `${dateConverter.yyyyMMddHHmmss(reward.startAt)}から交換可能`}
           </Box>
         </Box>
       </Link>

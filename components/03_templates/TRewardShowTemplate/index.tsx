@@ -1,17 +1,21 @@
 import { AspectRatio, Box, BoxProps, Flex, Progress } from '@mantine/core'
 import Image from 'next/image'
 import { FC } from 'react'
-import { RewardEntity } from '../../../generated/graphql'
+import { RewardEntity, WaitingEntity } from '../../../generated/graphql'
 import { colorScheme } from '../../../theme/colorScheme'
 import { EButton } from '../../01_elements/EButton'
 import { EHeading } from '../../01_elements/EHeading/base'
 import { EText } from '../../01_elements/EText/base'
+import { WaitingService } from '../../../domains/services/waiting.service'
 
 type Props = BoxProps & {
+  waiting: WaitingEntity
   reward: RewardEntity
 }
 
-const Component: FC<Props> = ({ reward, ...props }) => {
+const Component: FC<Props> = ({ waiting, reward, ...props }) => {
+  const waitingService = new WaitingService(waiting)
+
   return (
     <>
       <Box px={16} {...props}>
@@ -26,8 +30,7 @@ const Component: FC<Props> = ({ reward, ...props }) => {
           >
             <Image
               src={
-                reward.iconUrl ||
-                '/assets/images/_sample/picture_ranking_01.png'
+                reward.iconUrl || '/assets/images/picture/picture_fallback.png'
               } // TODO fallback image
               alt={reward.name}
               fill={true}
@@ -49,7 +52,7 @@ const Component: FC<Props> = ({ reward, ...props }) => {
           />
           <Flex justify="space-between" mt={6}>
             <Box fz={12} ff="outfit" fw={700}>
-              186,123
+              {waiting.totalPoint.toLocaleString()} PT
             </Box>
             <Box ta="right">
               <Box fz={10}>現在のRateから32日後に達成見込みです</Box>
