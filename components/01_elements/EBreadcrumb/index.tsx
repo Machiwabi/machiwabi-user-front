@@ -1,7 +1,9 @@
-import { Anchor, Box, BoxProps, Breadcrumbs } from '@mantine/core'
+import { Box, BoxProps, Breadcrumbs } from '@mantine/core'
 
+import Link from 'next/link'
 import { FC } from 'react'
 import { colorScheme } from '../../../theme/colorScheme'
+import { EText } from '../EText/base'
 
 type Props = BoxProps & {
   breadcrumbs: { title: string; href?: string }[]
@@ -17,14 +19,11 @@ const Component: FC<Props> = ({ breadcrumbs, ...props }) => {
       )
     } else {
       return (
-        <Anchor
-          fz={10}
-          href={item.href}
-          key={index}
-          c={colorScheme.scheme1.surface1.object.low}
-        >
-          {item.title}
-        </Anchor>
+        <Link href={item.href || ''} key={index}>
+          <EText.Desc1 fz={10} c={colorScheme.scheme1.surface1.object.low}>
+            {item.title}
+          </EText.Desc1>
+        </Link>
       )
     }
   })
@@ -32,9 +31,6 @@ const Component: FC<Props> = ({ breadcrumbs, ...props }) => {
   return (
     <Box {...props}>
       <Breadcrumbs fz={10}>{items}</Breadcrumbs>
-      {/* <Breadcrumbs separator="→" separatorMargin="md" mt="xs">
-        {items}
-      </Breadcrumbs> */}
     </Box>
   )
 }

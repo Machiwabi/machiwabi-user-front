@@ -36,7 +36,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, rewardUniqueKey }) => {
             href: waitingUrl(waiting.uniqueKey),
           },
           {
-            title: 'Rewards',
+            title: 'REWARDS',
             href: waitingRewardsUrl(waiting.uniqueKey),
           },
           {
