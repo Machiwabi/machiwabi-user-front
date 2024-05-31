@@ -1,10 +1,4 @@
-import {
-  BoosterEntity,
-  RewardEntity,
-  WaitingBoosterEntity,
-  WaitingEntity,
-  WaitingRewardEntity,
-} from '../../generated/graphql'
+import { RewardEntity, WaitingEntity } from '../../generated/graphql'
 import { WaitingBoosterService } from './waiting-booster.service'
 import { WaitingBoostersService } from './waiting-boosters.service'
 import { WaitingRewardService } from './waiting-rewards.service'
@@ -16,6 +10,7 @@ export class WaitingService {
   private waitingBoostersService = new WaitingBoostersService()
   private waitingRewardService = new WaitingRewardService()
 
+  // 現在の待機ポイント
   public waitingPoint(
     baseDate: Date = new Date() // 指定がない場合は現在日時
   ) {
@@ -35,9 +30,8 @@ export class WaitingService {
     return Math.floor(seconds / this.waiting.secondsPerWaitingPoint)
   }
 
+  // 現在のトータルポイント
   public totalPoint(
-    // waitingBoosters: (WaitingBoosterEntity & { booster: BoosterEntity })[],
-    // waitingRewards: WaitingRewardEntity[],
     baseDate: Date = new Date() // 指定がない場合は現在日時
   ) {
     let boostedWaitingPoint = 0
@@ -62,6 +56,7 @@ export class WaitingService {
     return this.waitingPoint() + boostedWaitingPoint - usedTotalPoint
   }
 
+  // 現在の単位時間においての獲得可能なポイント
   public earnableTotalPoint(
     baseDate: Date = new Date() // 指定がない場合は現在日時
   ) {
@@ -74,6 +69,22 @@ export class WaitingService {
     return nextDateTotalPoint - baseDateTotalPoint === 0
       ? 1
       : nextDateTotalPoint - baseDateTotalPoint + 1
+  }
+
+  // 現時点での数字を元に、目標のポイントまでの秒数を返す
+  // WIP
+  public remainingSecondsToGoalTotalPoint(goalTotalPoint: number) {
+    // const currentTotalPoint = this.totalPoint()
+    // if (currentTotalPoint >= goalTotalPoint) return 0
+    // let leftEarnablePoint = 0
+    // for (const waitingBooster of this.waiting.waitingBoosters) {
+    //   leftEarnablePoint += this.waitingBoosterService.leftEarnablePoint(
+    //     waitingBooster,
+    //     this.waiting.secondsPerWaitingPoint
+    //   )
+    // }
+    // const leftPoint = goalTotalPoint - currentTotalPoint + leftEarnablePoint
+    // return remainingPoint * this.waiting.secondsPerWaitingPoint
   }
 
   // 待った時間
@@ -123,18 +134,21 @@ export class WaitingService {
     return this.waitedMs() - flooredWaitedMs
   }
 
+  // ブースターによって追加されているポイントを返す
   public addableSumPoint() {
     return this.waitingBoostersService.addableSumPoint(
       this.waiting.waitingBoosters
     )
   }
 
+  // 現在有効なブースターを返す
   public enableBoosters() {
     return this.waitingBoostersService.enableBoosters(
       this.waiting.waitingBoosters
     )
   }
 
+  // 現在ブーストしているかどうか
   public isBoosting() {
     const boosters = this.waitingBoostersService.enableBoosters(
       this.waiting.waitingBoosters

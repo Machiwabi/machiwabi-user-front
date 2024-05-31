@@ -1,6 +1,7 @@
 import { Box, Flex, Modal } from '@mantine/core'
 import { FC, useEffect, useState } from 'react'
 import { NormalButton } from './elements/NormalButton'
+import { applicationUrls } from '../../constants/applicationUrls'
 
 const Component: FC = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -95,7 +96,7 @@ const Component: FC = () => {
                 ff="RocknRoll One"
                 mx={16}
                 px={32}
-                href={'http://example.com/'}
+                href={applicationUrls.campaign.icr240603Ticket}
                 value={
                   <>
                     <span>はい</span>

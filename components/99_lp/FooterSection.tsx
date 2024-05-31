@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { FC } from 'react'
 import { colorScheme } from '../../theme/colorScheme'
 import style from './style.module.scss'
+import { applicationUrls } from '../../constants/applicationUrls'
 
 type Props = ContainerProps
 
@@ -44,7 +45,7 @@ const Component: FC<Props> = ({ ...props }) => {
         >
           <Box
             component="a"
-            href=""
+            href={applicationUrls.howTo}
             target="_blank"
             rel="noopener noreferrer"
             fz={14}
@@ -55,7 +56,7 @@ const Component: FC<Props> = ({ ...props }) => {
           </Box>
           <Box
             component="a"
-            href=""
+            href={applicationUrls.privacy}
             target="_blank"
             rel="noopener noreferrer"
             fz={14}
@@ -66,7 +67,7 @@ const Component: FC<Props> = ({ ...props }) => {
           </Box>
           <Box
             component="a"
-            href=""
+            href={applicationUrls.form}
             target="_blank"
             rel="noopener noreferrer"
             fz={14}
@@ -77,7 +78,7 @@ const Component: FC<Props> = ({ ...props }) => {
           </Box>
           <Box
             component="a"
-            href=""
+            href={applicationUrls.tokusho}
             target="_blank"
             rel="noopener noreferrer"
             fz={14}
@@ -88,7 +89,7 @@ const Component: FC<Props> = ({ ...props }) => {
           </Box>
           <Box
             component="a"
-            href=""
+            href={applicationUrls.terms}
             target="_blank"
             rel="noopener noreferrer"
             fz={14}

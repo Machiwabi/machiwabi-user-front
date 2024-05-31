@@ -6,4 +6,5 @@ export const waitingBoosterMock: WaitingBoosterEntity = {
   endAt: '2021-08-01T00:00:00Z',
   startAt: '2021-08-01T00:00:00Z',
   uniqueKey: 'uniqueKey',
+  multiplier: 1.5,
 }

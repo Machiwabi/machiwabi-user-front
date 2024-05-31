@@ -8,4 +8,8 @@ fragment RewardField on RewardEntity {
   stock
   stockPerWaiting
   iconUrl
+  exchangeable
+  startAt
+  endAt
+  order
 }

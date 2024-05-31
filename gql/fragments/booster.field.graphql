@@ -13,4 +13,5 @@ fragment BoosterField on BoosterEntity {
   missionMdxContent
   price
   recoveryDurationSeconds
+  order
 }
