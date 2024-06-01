@@ -4,6 +4,7 @@ import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
 import { AspectRatio, Box, Flex } from '@mantine/core'
 import { EText } from '../../01_elements/EText/base'
+import { OTutorialGuide } from '../../02_organisms/OTutorialGuide'
 
 type Props = {
   eventUniqueKey: string
@@ -24,32 +25,44 @@ const Component: FC<Props> = ({ eventUniqueKey }) => {
 
   return (
     <>
-      <AspectRatio ratio={1}>
-        <Flex
-          direction="column"
-          justify="center"
-          align="center"
-          style={{ border: 'solid 1px #000000', borderRadius: '50%' }}
-        >
-          <Box mb={16} fw={900}>
-            参加者の合計ポイント
-          </Box>
+      <OTutorialGuide
+        mt={-8}
+        mb={32}
+        px={16}
+        alertTitle={<>💁 ガイド｜TOTAL POINTSページ</>}
+        tutorialKey="waiting-totalpoints-guide"
+      >
+        参加者全員の現時点のTOTAL
+        POINTSです！このイベントにかける参加者の熱量の総量がこのポイントで表現されています！
+      </OTutorialGuide>
+      <Box px={24}>
+        <AspectRatio ratio={1}>
+          <Flex
+            direction="column"
+            justify="center"
+            align="center"
+            style={{ border: 'solid 1px #000000', borderRadius: '50%' }}
+          >
+            <Box mb={16} fw={900}>
+              参加者の合計ポイント
+            </Box>
 
-          <Flex justify="center" align="end">
-            <Box ff="outfit" fz={64} lh={1} fw="bold">
-              {totalPoints.toLocaleString()}
-            </Box>
-            <Box ff="outfit" fz={40} lh={1} fw="bold" ml={12} pb={6}>
-              pt
-            </Box>
+            <Flex justify="center" align="end">
+              <Box ff="outfit" fz={64} lh={1} fw="bold">
+                {totalPoints.toLocaleString()}
+              </Box>
+              <Box ff="outfit" fz={40} lh={1} fw="bold" ml={12} pb={6}>
+                pt
+              </Box>
+            </Flex>
           </Flex>
-        </Flex>
-      </AspectRatio>
-      <EText.Desc2 mt={16} ta="center">
-        参加者の合計ポイントです。
-        <br />
-        このイベントの参加者の熱量の総量です。
-      </EText.Desc2>
+        </AspectRatio>
+        <EText.Desc2 mt={16} ta="center">
+          参加者の合計ポイントです。
+          <br />
+          このイベントの参加者の熱量の総量です。
+        </EText.Desc2>
+      </Box>
     </>
   )
 }

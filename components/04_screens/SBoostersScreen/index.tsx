@@ -11,6 +11,7 @@ import { OBoosters } from '../../02_organisms/OBoosters'
 import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
 import { TModalGrantedWaitingBoosterTemplate } from '../../03_templates/TModalGrantedWaitingBoosterTemplate'
+import { OTutorialGuide } from '../../02_organisms/OTutorialGuide'
 
 type Props = {
   waitingUniqueKey: string
@@ -55,6 +56,16 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
           setIsOpen={() => setShowGrantedModal}
         />
       )}
+
+      <OTutorialGuide
+        mt={-8}
+        mb={32}
+        px={16}
+        alertTitle={<>💁 ガイド｜BOOSTERSページ</>}
+        tutorialKey="waiting-boosters-guide"
+      >
+        現在発動中のBOOSTER一覧！BOOSTER 発動中は速くポイントが貯まります！
+      </OTutorialGuide>
 
       <Box mb={40} px={16}>
         <EHeading.ParagraphJa>有効なブースター</EHeading.ParagraphJa>
