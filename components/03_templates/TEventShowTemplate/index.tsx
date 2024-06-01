@@ -7,7 +7,6 @@ import { dateHumanizer } from '../../../utils/dateHumanizer'
 import { EButton } from '../../01_elements/EButton'
 import { EHeading } from '../../01_elements/EHeading/base'
 import { EText } from '../../01_elements/EText/base'
-import { OTutorialGuide } from '../../02_organisms/OTutorialGuide'
 
 type Props = BoxProps & {
   event: EventEntity
@@ -16,16 +15,6 @@ type Props = BoxProps & {
 const Component: FC<Props> = ({ event, ...props }) => {
   return (
     <>
-      <OTutorialGuide
-        mt={-8}
-        mb={32}
-        px={16}
-        alertTitle={<>💁 ガイド｜INFORMATIONページ</>}
-        tutorialKey="waiting-information-guide"
-      >
-        このイベントの詳細情報や会場へのアクセス情報をご覧いただけます！
-      </OTutorialGuide>
-
       <Box {...props}>
         <Box pos="relative" w="100%" h={'240px'}>
           {event.imageUrl ? (
