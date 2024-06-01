@@ -30,9 +30,9 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
         alertTitle={<>💁 ガイド｜ようこそ！Mati-wabiへ！</>}
         tutorialKey="waiting-screen-guide"
       >
-        イベント当日までの残り時間と自分の獲得したポイントを確認しましょう！貯まったポイントは待ち侘びた時間の証です！
+        イベント当日までの残り時間と自分の獲得したポイントを確認しましょう！
         <br />
-        ポイントがたまれば、限定REWARDと交換可能です！
+        デフォルトは10秒で1ポイント増えますが、MISSIONSを達成すると、ポイント増加速度が増加します！ポイントがたまれば、限定REWARDSと交換可能！
       </OTutorialGuide>
       <OWaitingCounterWithUser waiting={waiting} px={16} />
 
