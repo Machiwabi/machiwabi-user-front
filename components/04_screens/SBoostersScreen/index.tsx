@@ -1,4 +1,4 @@
-import { Box } from '@mantine/core'
+import { Box, BoxProps, Flex } from '@mantine/core'
 import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 import { WaitingBoostersService } from '../../../domains/services/waiting-boosters.service'
@@ -8,6 +8,9 @@ import { OBoosters } from '../../02_organisms/OBoosters'
 import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
 import { TModalGrantedWaitingBoosterTemplate } from '../../03_templates/TModalGrantedWaitingBoosterTemplate'
+import { colorScheme } from '../../../theme/colorScheme'
+import { EButton } from '../../01_elements/EButton'
+import { useWaitingTabs } from '../../../hooks/useWaitingTabs'
 
 type Props = {
   waitingUniqueKey: string
@@ -36,6 +39,13 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
     (booster) => booster.uniqueKey === grantedWaitingBoosterUniqueKey
   )
 
+  const enableBoosters = waitingBoostersService.enableBoosters(
+    waiting.waitingBoosters
+  )
+  const finishedBoosters = waitingBoostersService.finishedBoosters(
+    waiting.waitingBoosters
+  )
+
   return (
     <>
       {grantedWaitingBooster && showGrantedModal && (
@@ -48,27 +58,63 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
 
       <Box mb={40} px={16}>
         <EHeading.ParagraphJa>有効なブースター</EHeading.ParagraphJa>
+        <Flex
+          direction="column"
+          justify="center"
+          align="center"
+          w="100%"
+          py={48}
+          px={16}
+          mt={16}
+          style={{
+            borderWidth: 1,
+            borderStyle: 'solid',
+            borderColor: colorScheme.scheme1.surface1.object.low,
+            borderRadius: 4,
+          }}
+        >
+          <Box c={colorScheme.scheme1.surface1.object.high} fz={14}>
+            有効なブースターがありません
+          </Box>
+          <Box
+            c={colorScheme.scheme1.surface1.object.high}
+            fz={12}
+            mt={4}
+            ta="center"
+          >
+            MISSONを達成すると
+            ポイントのスピードアップができるブースターを獲得できます！
+          </Box>
+          <GotoMissionButton mt={16} />
+        </Flex>
         <OBoosters
           mt={12}
-          waitingBoosters={waitingBoostersService.enableBoosters(
-            waiting.waitingBoosters
-          )}
+          waitingBoosters={enableBoosters}
           grantedWaitingBoosterUniqueKey={
             grantedWaitingBoosterUniqueKey as string
           }
         />
       </Box>
 
-      <Box my={40} px={16}>
-        <EHeading.ParagraphJa>効果が終了したブースター</EHeading.ParagraphJa>
-        <OBoosters
-          mt={12}
-          waitingBoosters={waitingBoostersService.finishedBoosters(
-            waiting.waitingBoosters
-          )}
-        />
-      </Box>
+      {finishedBoosters.length > 0 && (
+        <Box my={40} px={16}>
+          <EHeading.ParagraphJa>効果が終了したブースター</EHeading.ParagraphJa>
+          <OBoosters mt={12} waitingBoosters={finishedBoosters} />
+        </Box>
+      )}
     </>
   )
 }
 export { Component as SBoostersScreen }
+
+type GotoMissionButtonProps = BoxProps
+const GotoMissionButton: FC<GotoMissionButtonProps> = ({ ...props }) => {
+  const { handleTabChange } = useWaitingTabs()
+  return (
+    <Box {...props}>
+      <EButton.Sm onClick={() => handleTabChange('missions')}>
+        MISSION一覧へ
+      </EButton.Sm>
+    </Box>
+  )
+}
