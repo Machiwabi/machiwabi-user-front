@@ -7,6 +7,7 @@ import { EBreadcrumb } from '../../01_elements/EBreadcrumb'
 import { TAquiredRewardShowTemplate } from '../../03_templates/TAquiredRewardShowTemplate'
 import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
+import { Seo } from '../../99_seo/waitings/[uniqueKey]/aquired/Seo'
 
 type Props = {
   waitingUniqueKey: string
@@ -27,6 +28,10 @@ const Component: FC<Props> = ({ waitingUniqueKey, rewardUniqueKey }) => {
 
   return (
     <>
+      <Seo
+        rewardName={reward.name || ''}
+        rewardDescription={reward.description || ''}
+      />
       <EBreadcrumb
         mt={24}
         px={16}

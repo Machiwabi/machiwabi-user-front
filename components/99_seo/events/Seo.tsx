@@ -1,28 +1,32 @@
 import { NextSeo } from 'next-seo'
 import { FC } from 'react'
-import { applicationProperties } from '../../../../constants/applicationProperties'
+import { applicationProperties } from '../../../constants/applicationProperties'
+import { nextSeoConfig } from '../../../next-seo.config'
 
 type Props = {
-  title: string
-  description: string
+  eventTitle: string
+  eventDescription: string
+  eventImageUrl?: string
 }
 
-const Component: FC<Props> = ({ title, description }) => {
+const Component: FC<Props> = ({
+  eventTitle,
+  eventDescription,
+  eventImageUrl,
+}) => {
   return (
     <>
       <NextSeo
-        title={'Mati-wabi (マチワビ) | 待ち時間を価値するアプリ'}
-        description={
-          'イベントまでの“待ち侘びる時間”が推しの応援になったら？Mati-wabiはあなたの推し活時間をもっと価値のあるものにする「待ち活」専用アプリです！'
-        }
+        title={`${eventTitle} | Mati-wabi (マチワビ)`}
+        description={eventDescription}
         openGraph={{
-          url: applicationProperties.HOSTING_URL,
-          title: 'Mati-wabi (マチワビ) | 待ち時間を価値するアプリ',
-          description:
-            'イベントまでの“待ち侘びる時間”が推しの応援になったら？Mati-wabiはあなたの推し活時間をもっと価値のあるものにする「待ち活」専用アプリです！',
+          title: `${eventTitle} | Mati-wabi (マチワビ)`,
+          description: eventDescription,
           images: [
             {
-              url: `${applicationProperties.HOSTING_URL}/assets/ogp/ogp_image.jp`,
+              url:
+                eventImageUrl ||
+                `${applicationProperties.HOSTING_URL}/assets/ogp/ogp_twitterCard_default.png`,
               width: 2400,
               height: 1254,
               alt: 'ogp',
@@ -30,21 +34,9 @@ const Component: FC<Props> = ({ title, description }) => {
           ],
         }}
         twitter={{
-          handle: '@MeTown_jp',
-          site: '@site',
-          cardType: 'summary_large_image',
+          ...nextSeoConfig.twitter,
         }}
-        additionalMetaTags={[
-          {
-            name: 'keywords',
-            content:
-              'web3, NFT, blockchain, crypto, mati-wabi, マチワビ, 推し活, 待ち活',
-          },
-          {
-            name: 'theme-color',
-            content: '#000000',
-          },
-        ]}
+        additionalMetaTags={[...nextSeoConfig.additionalMetaTags]}
       />
     </>
   )

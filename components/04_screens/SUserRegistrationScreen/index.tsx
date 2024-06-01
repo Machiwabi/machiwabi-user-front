@@ -15,6 +15,7 @@ import { EHeading } from '../../01_elements/EHeading/base'
 import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
 import { TUserRegisterFormTemplate } from '../../03_templates/TUserRegisterFormTemplate'
+import { Seo } from '../../99_seo/users/Seo'
 
 const schema = z.object(registerUserSchema)
 
@@ -68,6 +69,7 @@ const Component: FC = () => {
 
   return (
     <>
+      <Seo />
       <EHeading.Page mt={24} px={16}>
         新規ユーザー登録
       </EHeading.Page>

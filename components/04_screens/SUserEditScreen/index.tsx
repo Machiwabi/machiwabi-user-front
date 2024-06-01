@@ -16,6 +16,7 @@ import { EHeading } from '../../01_elements/EHeading/base'
 import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
 import { TUserEditFormTemplate } from '../../03_templates/TUserEditFormTemplate'
+import { Seo } from '../../99_seo/users/Seo'
 
 const schema = z.object(editUserSchema)
 
@@ -28,11 +29,14 @@ const Component: FC = () => {
   if (userPrivateError) return <TErrorTemplate />
 
   return (
-    <MainBlock
-      secretJwt={secretJwt}
-      userPrivate={userPrivate}
-      upsertUser={upsertUser}
-    />
+    <>
+      <Seo />
+      <MainBlock
+        secretJwt={secretJwt}
+        userPrivate={userPrivate}
+        upsertUser={upsertUser}
+      />
+    </>
   )
 }
 

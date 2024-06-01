@@ -8,11 +8,13 @@ import { HeadingSection } from '../../components/101_lp/HeadingSection'
 import { HeroSection } from '../../components/101_lp/HeroSection'
 import { HowToSection } from '../../components/101_lp/HowToSection'
 import { StickyHeaderSection } from '../../components/101_lp/StickyHeaderSection'
+import { Seo } from '../../components/99_seo/campaigns/icr/Seo'
 import { NextPageWithLayout } from '../_app'
 
 const Page: NextPageWithLayout = () => {
   return (
     <>
+      <Seo />
       <StickyHeaderSection />
       <BgSection />
       <HeadingSection mt={120} mb={80} />

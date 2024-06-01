@@ -1,6 +1,7 @@
 import LGuestUserLayout from '../../components/00_layouts/LGuestUserLayout'
 import { SRecommendSignInScreen } from '../../components/04_screens/SRecommendSignInScreen'
 import { SWaitingsScreen } from '../../components/04_screens/SWaitingsScreen'
+import { Seo } from '../../components/99_seo/waitings/Seo'
 import { applicationProperties } from '../../constants/applicationProperties'
 import { waitingsUrl } from '../../helpers/url.helper'
 import { useAuthenticatedStore } from '../../recoil/authenticatedStore/useAuthenticatedStore'
@@ -11,12 +12,19 @@ const Page: NextPageWithLayout = () => {
 
   if (authenticated !== 'authenticated') {
     return (
-      <SRecommendSignInScreen
-        redirectUrl={`${applicationProperties.HOSTING_URL}${waitingsUrl()}`}
-      />
+      <>
+        <Seo />
+        <SRecommendSignInScreen
+          redirectUrl={`${applicationProperties.HOSTING_URL}${waitingsUrl()}`}
+        />
+      </>
     )
   }
-  return <SWaitingsScreen />
+  return (
+    <>
+      <SWaitingsScreen />
+    </>
+  )
 }
 
 Page.getLayout = LGuestUserLayout

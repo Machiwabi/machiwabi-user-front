@@ -1,8 +1,8 @@
 import { Box, Flex } from '@mantine/core'
-import Image from 'next/image'
+import LGuestUserLayout from '../../components/00_layouts/LGuestUserLayout'
 import { EButton } from '../../components/01_elements/EButton'
 import { EText } from '../../components/01_elements/EText/base'
-import LGuestUserLayout from '../../components/00_layouts/LGuestUserLayout'
+import { Seo } from '../../components/99_seo/auth/entrance/Seo'
 import { waitingsUrl } from '../../helpers/url.helper'
 import { useWeb3Auth } from '../../hooks/useWeb3Auth'
 import { NextPageWithLayout } from '../_app'
@@ -16,6 +16,7 @@ const Page: NextPageWithLayout = () => {
 
   return (
     <>
+      <Seo />
       <Flex
         direction="column"
         w={320}

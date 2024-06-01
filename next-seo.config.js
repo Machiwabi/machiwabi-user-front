@@ -3,13 +3,12 @@ const nextSeoConfig = {
   description:
     'イベントまでの“待ち侘びる時間”が推しの応援になったら？Mati-wabiはあなたの推し活時間をもっと価値のあるものにする「待ち活」専用アプリです！',
   openGraph: {
-    url: process.env.NEXT_PUBLIC_HOSTING_URL,
     title: 'Mati-wabi (マチワビ) | 待ち時間を価値するアプリ',
     description:
       'イベントまでの“待ち侘びる時間”が推しの応援になったら？Mati-wabiはあなたの推し活時間をもっと価値のあるものにする「待ち活」専用アプリです！',
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_HOSTING_URL}/assets/ogp/ogp_image.jpg`,
+        url: `${process.env.NEXT_PUBLIC_HOSTING_URL}/assets/ogp/ogp_twitterCard_default.png`,
         width: 1200,
         height: 630,
         alt: 'Mati-wabi',
