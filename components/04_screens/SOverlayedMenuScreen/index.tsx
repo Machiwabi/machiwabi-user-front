@@ -5,11 +5,17 @@ import { useMenuOpeningStatus } from '../../../recoil/openingStatus/useMenuOpeni
 import { colorScheme } from '../../../theme/colorScheme'
 import { OverlayedMenuList } from './OverlayedMenuList'
 import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
+import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
+import { truncator } from '../../../utils/truncator'
+import Link from 'next/link'
+import { waitingsUrl } from '../../../helpers/url.helper'
 
 const Component: React.FC = () => {
-  const { isMenuOpening, menuOpenGlobalMenuEnd, menuOpenGlobalMenuStart } =
-    useMenuOpeningStatus()
+  const { isMenuOpening, menuOpenGlobalMenuEnd } = useMenuOpeningStatus()
   const [display, setDisplay] = useState<boolean>(false)
+
+  const { isAuthenticated } = useAuthenticatedStore()
+  const { siweEoaAddress } = useSiweEoaAddress()
 
   useEffect(() => {
     if (!!isMenuOpening) {
@@ -40,19 +46,51 @@ const Component: React.FC = () => {
                   onClick={() => {
                     menuOpenGlobalMenuEnd()
                   }}
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: 'pointer', zIndex: 100 }}
                 >
                   close
                 </Box>
-                <Image
-                  src="/assets/images/logo/logo_machiwabi.svg"
-                  alt="logo"
-                  width={173}
-                  height={24}
-                />
-                <Box px={16} fz={12}>
-                  guest
-                </Box>
+                <Flex pos="absolute" w="100%" justify="center">
+                  <Link
+                    href={waitingsUrl()}
+                    style={{ display: 'block', width: 173, height: 24 }}
+                  >
+                    <Image
+                      src="/assets/images/logo/logo_machiwabi.svg"
+                      alt="logo"
+                      width={173}
+                      height={24}
+                    />
+                  </Link>
+                </Flex>
+                {isAuthenticated() && siweEoaAddress ? (
+                  <Box mr={16}>
+                    <Box
+                      px={8}
+                      fz={10}
+                      ff="outfit"
+                      fw="bold"
+                      bg={colorScheme.scheme1.surface2.surface}
+                      style={{ borderRadius: 16 }}
+                    >
+                      {truncator.truncateString(siweEoaAddress, 8, 'middle')}
+                    </Box>
+                  </Box>
+                ) : (
+                  <Box mr={16}>
+                    <Box
+                      px={8}
+                      fz={10}
+                      ff="outfit"
+                      fw="bold"
+                      bg={colorScheme.scheme1.surface2.surface}
+                      c={colorScheme.scheme1.surface2.object.low}
+                      style={{ borderRadius: 16 }}
+                    >
+                      GUEST
+                    </Box>
+                  </Box>
+                )}
               </Flex>
             </Box>
             <OverlayedMenuList mt={8} px={4} />

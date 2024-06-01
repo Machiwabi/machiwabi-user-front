@@ -4,6 +4,7 @@ import { TLoadingTemplate } from '../../components/03_templates/TLoadingTemplate
 import { useWeb3Auth } from '../../hooks/useWeb3Auth'
 import { NextPageWithLayout } from '../_app'
 import { waitingsUrl } from '../../helpers/url.helper'
+import { Seo } from '../../components/99_seo/auth/callback/Seo'
 
 const Page: NextPageWithLayout = () => {
   const { web3Auth, callbackedSignInWithEthereum } = useWeb3Auth()
@@ -14,7 +15,12 @@ const Page: NextPageWithLayout = () => {
     })()
   }, [web3Auth])
 
-  return <TLoadingTemplate />
+  return (
+    <>
+      <Seo />
+      <TLoadingTemplate />
+    </>
+  )
 }
 
 Page.getLayout = LGuestUserLayout

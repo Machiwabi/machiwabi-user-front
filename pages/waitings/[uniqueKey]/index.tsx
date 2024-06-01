@@ -8,7 +8,11 @@ type Props = {
 }
 
 const Page: NextPageWithLayout<Props> = ({ uniqueKey }) => {
-  return <SWaitingTabsScreen waitingUniqueKey={uniqueKey} />
+  return (
+    <>
+      <SWaitingTabsScreen waitingUniqueKey={uniqueKey} />
+    </>
+  )
 }
 
 Page.getLayout = LGuestUserLayout

@@ -5,6 +5,7 @@ import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
 import { TWaitingEventsTemplate } from '../../03_templates/TWaitingEventsTemplate'
 import { TNoWaitingsTemplate } from '../../03_templates/TNoWaitingsTemplate'
 import { OFooterNav } from '../../02_organisms/OFooterNav'
+import { Seo } from '../../99_seo/waitings/Seo'
 
 const Component: FC = () => {
   const { waitings, waitingsError, waitingsIsLoading } = useWaitings()
@@ -22,6 +23,7 @@ const Component: FC = () => {
 
   return (
     <>
+      <Seo />
       <TWaitingEventsTemplate
         mt={24}
         mb={40}

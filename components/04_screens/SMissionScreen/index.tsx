@@ -7,6 +7,7 @@ import { EBreadcrumb } from '../../01_elements/EBreadcrumb'
 import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
 import { TMissionTemplate } from '../../03_templates/TMissionTemplate'
+import { Seo } from '../../99_seo/waitings/[uniqueKey]/missions/Seo'
 
 type Props = {
   waitingUniqueKey: string
@@ -27,6 +28,10 @@ const Component: FC<Props> = ({ waitingUniqueKey, boosterUniqueKey }) => {
 
   return (
     <>
+      <Seo
+        missionName={booster.missionName || ''}
+        missionDescription={booster.missionDescription || ''}
+      />
       <EBreadcrumb
         mt={24}
         px={16}

@@ -7,6 +7,7 @@ import { OEventJoinButton } from '../../02_organisms/OEventJoinButton'
 import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TEventShowTemplate } from '../../03_templates/TEventShowTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
+import { Seo } from '../../99_seo/events/Seo'
 
 type Props = {
   uniqueKey: string
@@ -22,6 +23,11 @@ const Component: FC<Props> = ({ uniqueKey }) => {
 
   return (
     <>
+      <Seo
+        eventTitle={event.name || ''}
+        eventDescription={event.description || ''}
+        eventImageUrl={event.imageUrl || ''}
+      />
       <TEventShowTemplate event={event} />
       <Flex
         pos="fixed"
