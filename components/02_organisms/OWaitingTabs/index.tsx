@@ -30,6 +30,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, current, ...props }) => {
                 handleTabChange('members')
               },
             },
+
             {
               name: 'missions',
               isCurrent: current === 'missions',
@@ -56,6 +57,13 @@ const Component: FC<Props> = ({ waitingUniqueKey, current, ...props }) => {
               isCurrent: current === 'aquired',
               action: () => {
                 handleTabChange('aquired')
+              },
+            },
+            {
+              name: 'totalpoints',
+              isCurrent: current === 'totalpoints',
+              action: () => {
+                handleTabChange('totalpoints')
               },
             },
             {

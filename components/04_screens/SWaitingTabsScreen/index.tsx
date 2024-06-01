@@ -14,10 +14,11 @@ import { SMembersScreen } from '../SMembersScreen'
 import { SMissionsScreen } from '../SMissionsScreen'
 import { SRewardsScreen } from '../SRewardsScreen'
 import { SWaitingScreen } from '../SWaitingScreen'
+import { STotalWaitingScreen } from '../STotalWaitingScreen'
 
 type Props = { waitingUniqueKey: string }
 
-const TABS = [
+const WAITING_TABS = [
   'home',
   'members',
   'missions',
@@ -25,6 +26,7 @@ const TABS = [
   'boosters',
   'aquired',
   'information',
+  'totalpoints',
 ]
 
 const Component: FC<Props> = ({ waitingUniqueKey }) => {
@@ -34,7 +36,7 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
 
   const router = useRouter()
   const { tab } = router.query
-  const selectedTab = TABS.find((tabName) => tab === tabName) || 'home'
+  const selectedTab = WAITING_TABS.find((tabName) => tab === tabName) || 'home'
 
   if (waitingError) return <TErrorTemplate />
   if (waitingIsLoading || !waiting) return <TLoadingTemplate />
@@ -79,6 +81,10 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
             waitingUniqueKey={waiting.uniqueKey}
             eventUniqueKey={waiting.event.uniqueKey}
           />
+        </Tabs.Panel>
+
+        <Tabs.Panel value="totalpoints">
+          <STotalWaitingScreen eventUniqueKey={waiting.event.uniqueKey} />
         </Tabs.Panel>
 
         <Tabs.Panel value="information">
