@@ -27,8 +27,8 @@ const Component: FC<Props> = ({ waitingUniqueKey, eventUniqueKey }) => {
     return (
       <>
         <EBlankNotice
-          title="Rewardがありません。"
-          description="現在公開されているRewardはありません。"
+          title="REWARDがありません"
+          description="現在公開されているREWARDはありません。"
         />
       </>
     )
