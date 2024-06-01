@@ -1,16 +1,16 @@
-import { Box, BoxProps, Flex } from '@mantine/core'
+import { Box, BoxProps } from '@mantine/core'
 import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 import { WaitingBoostersService } from '../../../domains/services/waiting-boosters.service'
 import { useWaiting } from '../../../hooks/resources/useWaiting'
+import { useWaitingTabs } from '../../../hooks/useWaitingTabs'
+import { EBlankNotice } from '../../01_elements/EBlankNotice'
+import { EButton } from '../../01_elements/EButton'
 import { EHeading } from '../../01_elements/EHeading/base'
 import { OBoosters } from '../../02_organisms/OBoosters'
 import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
 import { TModalGrantedWaitingBoosterTemplate } from '../../03_templates/TModalGrantedWaitingBoosterTemplate'
-import { colorScheme } from '../../../theme/colorScheme'
-import { EButton } from '../../01_elements/EButton'
-import { useWaitingTabs } from '../../../hooks/useWaitingTabs'
 
 type Props = {
   waitingUniqueKey: string
@@ -58,35 +58,12 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
 
       <Box mb={40} px={16}>
         <EHeading.ParagraphJa>有効なブースター</EHeading.ParagraphJa>
-        <Flex
-          direction="column"
-          justify="center"
-          align="center"
-          w="100%"
-          py={48}
-          px={16}
+        <EBlankNotice
+          title="有効なブースターがありません"
+          description="MISSONを達成するとポイントのスピードアップができるブースターを獲得できます！"
+          additionalContent={<GotoMissionButton mt={16} />}
           mt={16}
-          style={{
-            borderWidth: 1,
-            borderStyle: 'solid',
-            borderColor: colorScheme.scheme1.surface1.object.low,
-            borderRadius: 4,
-          }}
-        >
-          <Box c={colorScheme.scheme1.surface1.object.high} fz={14}>
-            有効なブースターがありません
-          </Box>
-          <Box
-            c={colorScheme.scheme1.surface1.object.high}
-            fz={12}
-            mt={4}
-            ta="center"
-          >
-            MISSONを達成すると
-            ポイントのスピードアップができるブースターを獲得できます！
-          </Box>
-          <GotoMissionButton mt={16} />
-        </Flex>
+        />
         <OBoosters
           mt={12}
           waitingBoosters={enableBoosters}
