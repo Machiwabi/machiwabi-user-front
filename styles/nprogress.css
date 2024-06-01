@@ -4,7 +4,7 @@
 }
 
 #nprogress .bar {
-  background: rgba(0, 122, 255, 1);
+  background: rgba(0, 0, 0, 1);
 
   position: fixed;
   z-index: 20000;
@@ -28,34 +28,6 @@
   -webkit-transform: rotate(3deg) translate(0px, -4px);
   -ms-transform: rotate(3deg) translate(0px, -4px);
   transform: rotate(3deg) translate(0px, -4px);
-}
-
-/* Remove these to get rid of the spinner */
-#nprogress .spinner {
-  display: block;
-  position: fixed;
-  z-index: 1031;
-  bottom: 32px;
-  right: 24px;
-  padding: 16px;
-  border-radius: 8px;
-  background-color: white;
-  box-shadow: 0 0 10px rgb(0, 0, 0, 0.02), 0 0 2px rgb(0, 0, 0, 0.1);
-}
-
-#nprogress .spinner-icon {
-  width: 24px;
-  height: 24px;
-  box-sizing: border-box;
-  background-color: rgba(255, 255, 255, 0);
-
-  border: solid 2px transparent;
-  border-top-color: rgba(0, 122, 255, 1);
-  border-left-color: rgba(0, 122, 255, 1);
-  border-radius: 50%;
-
-  -webkit-animation: nprogress-spinner 400ms linear infinite;
-  animation: nprogress-spinner 400ms linear infinite;
 }
 
 .nprogress-custom-parent {
