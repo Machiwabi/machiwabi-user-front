@@ -4,6 +4,7 @@ import { OMissionList } from '../../02_organisms/OMissionList'
 import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
 import { useWaiting } from '../../../hooks/resources/useWaiting'
+import { EBlankNotice } from '../../01_elements/EBlankNotice'
 
 type Props = {
   waitingUniqueKey: string
@@ -22,6 +23,17 @@ const Component: FC<Props> = ({ waitingUniqueKey, eventUniqueKey }) => {
   if (waitingError || boostersError) return <TErrorTemplate />
   if (waitingIsLoading || boostersIsLoading || !boosters || !waiting)
     return <TLoadingTemplate />
+
+  if (boosters.length === 0) {
+    return (
+      <>
+        <EBlankNotice
+          title="MISSIONがありません"
+          description="現在公開されているMISSIONはありません。"
+        />
+      </>
+    )
+  }
 
   return (
     <>

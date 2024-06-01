@@ -1,6 +1,6 @@
 import { BoxProps, Tabs } from '@mantine/core'
-import { useRouter } from 'next/router'
 import { FC } from 'react'
+import { useWaitingTabs } from '../../../hooks/useWaitingTabs'
 import { ERollTabs } from '../../01_elements/ERollTabs'
 
 type Props = BoxProps & {
@@ -8,46 +8,8 @@ type Props = BoxProps & {
   current: string
 }
 
-const TABS = [
-  'home',
-  'members',
-  'missions',
-  'rewards',
-  'boosters',
-  'aquired',
-  'information',
-]
-
 const Component: FC<Props> = ({ waitingUniqueKey, current, ...props }) => {
-  const router = useRouter()
-
-  const handleTabChange = (tabName: string) => {
-    const selectedTab = TABS.find((tab) => tab === tabName)
-
-    if (!selectedTab) return
-
-    let query
-    const { grantedWaitingBoosterUniqueKey, ...extractQuery } = router.query
-    if (selectedTab === 'home') {
-      query = { ...extractQuery }
-    } else {
-      query = {
-        ...extractQuery,
-        tab: selectedTab,
-      }
-    }
-
-    console.log('query', query)
-
-    router.replace(
-      {
-        pathname: router.pathname,
-        query,
-      },
-      undefined,
-      { shallow: true }
-    )
-  }
+  const { handleTabChange } = useWaitingTabs()
 
   return (
     <>

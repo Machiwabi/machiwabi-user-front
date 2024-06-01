@@ -66,7 +66,7 @@ const Component: FC<Props> = ({
         mt={16}
         href={waitingMissionUrl(waiting.uniqueKey, booster.uniqueKey)}
       >
-        ミッション詳細
+        MISSION 詳細
       </EButton.Sm>
     </Box>
   )

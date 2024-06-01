@@ -1,8 +1,11 @@
-import { Box } from '@mantine/core'
+import { Box, BoxProps } from '@mantine/core'
 import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 import { WaitingBoostersService } from '../../../domains/services/waiting-boosters.service'
 import { useWaiting } from '../../../hooks/resources/useWaiting'
+import { useWaitingTabs } from '../../../hooks/useWaitingTabs'
+import { EBlankNotice } from '../../01_elements/EBlankNotice'
+import { EButton } from '../../01_elements/EButton'
 import { EHeading } from '../../01_elements/EHeading/base'
 import { OBoosters } from '../../02_organisms/OBoosters'
 import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
@@ -36,6 +39,13 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
     (booster) => booster.uniqueKey === grantedWaitingBoosterUniqueKey
   )
 
+  const enableBoosters = waitingBoostersService.enableBoosters(
+    waiting.waitingBoosters
+  )
+  const finishedBoosters = waitingBoostersService.finishedBoosters(
+    waiting.waitingBoosters
+  )
+
   return (
     <>
       {grantedWaitingBooster && showGrantedModal && (
@@ -48,27 +58,40 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
 
       <Box mb={40} px={16}>
         <EHeading.ParagraphJa>有効なブースター</EHeading.ParagraphJa>
+        <EBlankNotice
+          title="有効なブースターがありません"
+          description="MISSONを達成するとポイントのスピードアップができるブースターを獲得できます！"
+          additionalContent={<GotoMissionButton mt={16} />}
+          mt={16}
+        />
         <OBoosters
           mt={12}
-          waitingBoosters={waitingBoostersService.enableBoosters(
-            waiting.waitingBoosters
-          )}
+          waitingBoosters={enableBoosters}
           grantedWaitingBoosterUniqueKey={
             grantedWaitingBoosterUniqueKey as string
           }
         />
       </Box>
 
-      <Box my={40} px={16}>
-        <EHeading.ParagraphJa>効果が終了したブースター</EHeading.ParagraphJa>
-        <OBoosters
-          mt={12}
-          waitingBoosters={waitingBoostersService.finishedBoosters(
-            waiting.waitingBoosters
-          )}
-        />
-      </Box>
+      {finishedBoosters.length > 0 && (
+        <Box my={40} px={16}>
+          <EHeading.ParagraphJa>効果が終了したブースター</EHeading.ParagraphJa>
+          <OBoosters mt={12} waitingBoosters={finishedBoosters} />
+        </Box>
+      )}
     </>
   )
 }
 export { Component as SBoostersScreen }
+
+type GotoMissionButtonProps = BoxProps
+const GotoMissionButton: FC<GotoMissionButtonProps> = ({ ...props }) => {
+  const { handleTabChange } = useWaitingTabs()
+  return (
+    <Box {...props}>
+      <EButton.Sm onClick={() => handleTabChange('missions')}>
+        MISSION一覧へ
+      </EButton.Sm>
+    </Box>
+  )
+}
