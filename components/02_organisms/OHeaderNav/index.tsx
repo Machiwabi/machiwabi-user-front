@@ -7,11 +7,14 @@ import Link from 'next/link'
 import { useWeb3Auth } from '../../../hooks/useWeb3Auth'
 import { truncator } from '../../../utils/truncator'
 import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
+import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
+import { waitingsUrl } from '../../../helpers/url.helper'
 
 const Component: FC = () => {
   const { menuOpenGlobalMenuStart } = useMenuOpeningStatus()
-  const { eoaAddress } = useWeb3Auth()
-  const { authenticated, isAuthenticated } = useAuthenticatedStore()
+
+  const { isAuthenticated } = useAuthenticatedStore()
+  const { siweEoaAddress } = useSiweEoaAddress()
 
   return (
     <>
@@ -39,7 +42,7 @@ const Component: FC = () => {
           </Box>
           <Flex pos="absolute" w="100%" justify="center">
             <Link
-              href="/waitings"
+              href={waitingsUrl()}
               style={{ display: 'block', width: 173, height: 24 }}
             >
               <Image
@@ -50,7 +53,7 @@ const Component: FC = () => {
               />
             </Link>
           </Flex>
-          {isAuthenticated() && eoaAddress ? (
+          {isAuthenticated() && siweEoaAddress ? (
             <Box mr={16}>
               <Box
                 px={8}
@@ -60,7 +63,7 @@ const Component: FC = () => {
                 bg={colorScheme.scheme1.surface2.surface}
                 style={{ borderRadius: 16 }}
               >
-                {truncator.truncateString(eoaAddress, 8, 'middle')}
+                {truncator.truncateString(siweEoaAddress, 8, 'middle')}
               </Box>
             </Box>
           ) : (
