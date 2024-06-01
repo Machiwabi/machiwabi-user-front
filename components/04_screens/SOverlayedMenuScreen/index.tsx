@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useMenuOpeningStatus } from '../../../recoil/openingStatus/useMenuOpeningStatus'
 import { colorScheme } from '../../../theme/colorScheme'
 import { OverlayedMenuList } from './OverlayedMenuList'
+import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
 
 const Component: React.FC = () => {
   const { isMenuOpening, menuOpenGlobalMenuEnd, menuOpenGlobalMenuStart } =
@@ -39,6 +40,7 @@ const Component: React.FC = () => {
                   onClick={() => {
                     menuOpenGlobalMenuEnd()
                   }}
+                  style={{ cursor: 'pointer' }}
                 >
                   close
                 </Box>

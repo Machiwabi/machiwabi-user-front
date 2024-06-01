@@ -24,20 +24,16 @@ const Page: NextPageWithLayout = () => {
         align="center"
         justify="center"
       >
-        <Box>
-          <EText.Desc3 ta="center">
-            <Box fz={20} mb={16} fw={900}>
-              待ち侘びることが推し活になる！
-            </Box>
-            <Box>
-              イベントまでの待ち侘びる時間を
-              <br />
-              価値にできるアプリ
-              <br />
-              「Mati-wabi」にようこそ！
-            </Box>
-          </EText.Desc3>
+        <Box fz={20} mb={16} fw={900}>
+          待ち侘びることが推し活になる！
         </Box>
+        <EText.Desc3 ta="center">
+          イベントまでの待ち侘びる時間を
+          <br />
+          価値にできるアプリ
+          <br />
+          「Mati-wabi」にようこそ！
+        </EText.Desc3>
 
         {isWeb3AuthConnected ? (
           <EButton.Sm

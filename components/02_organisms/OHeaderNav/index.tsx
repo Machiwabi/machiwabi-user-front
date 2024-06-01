@@ -10,7 +10,7 @@ import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAut
 
 const Component: FC = () => {
   const { menuOpenGlobalMenuStart } = useMenuOpeningStatus()
-  const { isWeb3AuthConnected, eoaAddress } = useWeb3Auth()
+  const { eoaAddress } = useWeb3Auth()
   const { authenticated, isAuthenticated } = useAuthenticatedStore()
 
   return (
@@ -33,7 +33,7 @@ const Component: FC = () => {
             onClick={() => {
               menuOpenGlobalMenuStart()
             }}
-            style={{ zIndex: 100 }}
+            style={{ zIndex: 100, cursor: 'pointer' }}
           >
             menu
           </Box>

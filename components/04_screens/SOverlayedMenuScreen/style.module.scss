@@ -1,0 +1,9 @@
+.o-overlayed-menu-screen__menu-list-item {
+  transition: 0.2s;
+  text-decoration: none !important;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.2;
+  }
+}
