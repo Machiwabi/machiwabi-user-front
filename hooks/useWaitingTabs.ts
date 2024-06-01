@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 
-export const WAITING_TABS = [
+const WAITING_TABS = [
   'home',
   'members',
   'missions',
@@ -8,6 +8,7 @@ export const WAITING_TABS = [
   'boosters',
   'aquired',
   'information',
+  'totalpoints',
 ]
 
 export const useWaitingTabs = () => {
