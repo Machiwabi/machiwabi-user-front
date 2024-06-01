@@ -3,6 +3,7 @@ import { useWaiting } from '../../../hooks/resources/useWaiting'
 import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TEventShowTemplate } from '../../03_templates/TEventShowTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
+import { OTutorialGuide } from '../../02_organisms/OTutorialGuide'
 
 type Props = {
   waitingUniqueKey: string
@@ -18,6 +19,16 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
 
   return (
     <>
+      <OTutorialGuide
+        mt={-8}
+        mb={32}
+        px={16}
+        alertTitle={<>💁 ガイド｜INFORMATIONページ</>}
+        tutorialKey="waiting-information-guide"
+      >
+        このイベントの詳細情報や会場へのアクセス情報をご覧いただけます！
+      </OTutorialGuide>
+
       <TEventShowTemplate event={waiting.event} />
     </>
   )
