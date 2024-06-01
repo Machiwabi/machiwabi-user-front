@@ -36,6 +36,7 @@ export const Component: React.FC<Props> = ({
                 menuOpenGlobalMenuEnd()
               }, 100)
             }}
+            style={{ cursor: 'pointer' }}
             {...props}
           >
             {title}
@@ -51,6 +52,7 @@ export const Component: React.FC<Props> = ({
             fw="bold"
             ta="center"
             onClick={onClick}
+            style={{ cursor: 'pointer' }}
             {...props}
           >
             {title}

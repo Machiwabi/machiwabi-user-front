@@ -24,19 +24,19 @@ const Page: NextPageWithLayout = () => {
         align="center"
         justify="center"
       >
-        <Image
-          src="/assets/images/logo/logo_machiwabi.svg"
-          alt="logo"
-          width={173}
-          height={24}
-        />
-        <Box mt={24}>
-          <EText.Desc1>
-            待ち侘びることが推し活になる！
-            <br />
-            <br />
-            イベントまでの待ち侘びる時間を価値にできるアプリ「Mati-wabi」にようこそ！
-          </EText.Desc1>
+        <Box>
+          <EText.Desc3 ta="center">
+            <Box fz={20} mb={16} fw={900}>
+              待ち侘びることが推し活になる！
+            </Box>
+            <Box>
+              イベントまでの待ち侘びる時間を
+              <br />
+              価値にできるアプリ
+              <br />
+              「Mati-wabi」にようこそ！
+            </Box>
+          </EText.Desc3>
         </Box>
 
         {isWeb3AuthConnected ? (

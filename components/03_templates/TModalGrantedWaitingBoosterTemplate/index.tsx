@@ -54,7 +54,7 @@ const Component: FC<Props> = ({ booster, isOpen, setIsOpen }) => {
         </Flex>
         <EText.Desc2 mt={0} ta="center">
           <Box component="span" fw={700}>
-            {dateConverter.msToMMDDSS(booster.durationSeconds * 1000)}間
+            {dateConverter.msToMMDDSS(booster.durationSeconds * 1000)}の間
           </Box>
           、10秒ごとに
           <Box component="span" fw={700}>
