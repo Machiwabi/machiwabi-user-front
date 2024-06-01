@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { useWaitingSiblings } from '../../../hooks/resources/useWaitingSiblings'
+import { OTutorialGuide } from '../../02_organisms/OTutorialGuide'
 import { OWaitingUserList } from '../../02_organisms/OWaitingUserList'
 import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
@@ -25,6 +26,15 @@ const Component: FC<Props> = ({ eventUniqueKey }) => {
 
   return (
     <>
+      <OTutorialGuide
+        mt={-8}
+        mb={32}
+        px={16}
+        alertTitle={<>💁 ガイド｜MEMBERSページ</>}
+        tutorialKey="waiting-members-guide"
+      >
+        イベントを一緒に待ち侘びているMEMBERたちのランキングです！みんなで盛り上がってイベント当日を楽しみに待ち侘びましょう！
+      </OTutorialGuide>
       <OWaitingUserList waitings={waitings} />
     </>
   )

@@ -5,6 +5,7 @@ import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
 import { useRewards } from '../../../hooks/resources/useRewards'
 import { EBlankNotice } from '../../01_elements/EBlankNotice'
+import { OTutorialGuide } from '../../02_organisms/OTutorialGuide'
 
 type Props = {
   waitingUniqueKey: string
@@ -36,6 +37,15 @@ const Component: FC<Props> = ({ waitingUniqueKey, eventUniqueKey }) => {
 
   return (
     <>
+      <OTutorialGuide
+        mt={-8}
+        mb={32}
+        px={16}
+        alertTitle={<>💁 ガイド｜AQUIREDページ</>}
+        tutorialKey="waiting-aquired-guide"
+      >
+        獲得REWARD一覧です！REWARDページで引き換え可能なREWARDを確認しましょう！
+      </OTutorialGuide>
       <OAquiredRewardCells
         px={16}
         waiting={waiting}
