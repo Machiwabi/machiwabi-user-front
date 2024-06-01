@@ -58,12 +58,14 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
 
       <Box mb={40} px={16}>
         <EHeading.ParagraphJa>有効なブースター</EHeading.ParagraphJa>
-        <EBlankNotice
-          title="有効なブースターがありません"
-          description="MISSONを達成するとポイントのスピードアップができるブースターを獲得できます！"
-          additionalContent={<GotoMissionButton mt={16} />}
-          mt={16}
-        />
+        {enableBoosters.length === 0 && (
+          <EBlankNotice
+            title="有効なブースターがありません"
+            description="MISSONを達成するとポイントのスピードアップができるブースターを獲得できます！"
+            additionalContent={<GotoMissionButton mt={16} />}
+            mt={16}
+          />
+        )}
         <OBoosters
           mt={12}
           waitingBoosters={enableBoosters}
