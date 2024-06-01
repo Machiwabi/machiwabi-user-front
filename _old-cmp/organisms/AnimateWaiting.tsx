@@ -73,7 +73,7 @@ const Component: FC<Props> = ({ waiting }) => {
 
         <GeoText3d waiting={waiting} />
 
-        <OrbitControls />
+        {/* <OrbitControls /> */}
       </Canvas>
     </>
   )
