@@ -6,7 +6,8 @@ export const applicationUrls = {
   tokusho: 'https://www.mati-wabi.xyz/law',
   form: 'https://forms.gle/aggsyLwr3yh4Jiw47',
   privacy: 'https://www.mati-wabi.xyz/privacypolicy',
-  howTo: 'https://www.mati-wabi.xyz/howto',
+  howTo:
+    'https://metown-inc.notion.site/Mati-wabi-d905b3d4a4e041fdba501701a062d2b4',
   campaign: {
     icr240603: '/events/icr240603',
     icr240603Ticket: 'https://iceribbon.com/event_detail.php?id=3614',
