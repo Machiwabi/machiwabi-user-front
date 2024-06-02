@@ -355,6 +355,7 @@ export type WaitingFieldFragment = { __typename?: 'WaitingEntity', uniqueKey: st
 
 export type ExchangeBoosterMutationVariables = Exact<{
   uniqueKey: Scalars['String']['input'];
+  content?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -603,8 +604,8 @@ export const WaitingFieldFragmentDoc = gql`
 }
     `;
 export const ExchangeBoosterDocument = gql`
-    mutation exchangeBooster($uniqueKey: String!) {
-  exchangeBooster(input: {uniqueKey: $uniqueKey}) {
+    mutation exchangeBooster($uniqueKey: String!, $content: String) {
+  exchangeBooster(input: {uniqueKey: $uniqueKey, content: $content}) {
     ...WaitingBoosterField
     booster {
       ...BoosterField
