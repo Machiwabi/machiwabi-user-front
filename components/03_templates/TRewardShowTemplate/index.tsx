@@ -64,7 +64,7 @@ const Component: FC<Props> = ({ waiting, reward, ...props }) => {
 
       <Flex direction="column" my={0} px={16} justify="center" align="center">
         <EButton.Sm fillType="disabled">
-          {dateConverter.yyyyMMddHHmmss(reward.startAt)}から引き換え可能
+          {dateConverter.yyyyMMddHHmmss(reward.startAt)}から交換可能
         </EButton.Sm>
         <Box mt={8} fz={10} c={colorScheme.scheme1.surface1.object.mid}>
           {reward.stockPerWaiting && reward.stockPerWaiting > 0 && (
