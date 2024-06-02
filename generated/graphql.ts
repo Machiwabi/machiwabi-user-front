@@ -102,6 +102,7 @@ export type EventEntity = {
 };
 
 export type ExchangeBoosterInput = {
+  content?: InputMaybe<Scalars['String']['input']>;
   uniqueKey: Scalars['String']['input'];
 };
 
@@ -183,6 +184,7 @@ export type Query = {
   checkEventJoinable: Scalars['Boolean']['output'];
   event: EventEntity;
   events: Array<EventEntity>;
+  latestWaitingBooster: WaitingBoosterEntity;
   reward: RewardEntity;
   rewards: Array<RewardEntity>;
   userPrivate?: Maybe<UserPrivateEntity>;
@@ -216,6 +218,12 @@ export type QueryCheckEventJoinableArgs = {
 
 export type QueryEventArgs = {
   uniqueKey: Scalars['String']['input'];
+};
+
+
+export type QueryLatestWaitingBoosterArgs = {
+  boosterUniqueKey: Scalars['String']['input'];
+  waitingUniqueKey: Scalars['String']['input'];
 };
 
 
@@ -290,6 +298,7 @@ export type WaitingBoosterEntity = {
   __typename?: 'WaitingBoosterEntity';
   booster: BoosterEntity;
   content?: Maybe<Scalars['String']['output']>;
+  enabled: Scalars['Boolean']['output'];
   endAt: Scalars['ISO8601DateTime']['output'];
   multiplier: Scalars['Float']['output'];
   startAt: Scalars['ISO8601DateTime']['output'];
@@ -338,7 +347,7 @@ export type UserPrivateFieldFragment = { __typename?: 'UserPrivateEntity', uniqu
 
 export type UserPublicFieldFragment = { __typename?: 'UserPublicEntity', eoaAddress?: string | null, displayName?: string | null, iconImageUrl?: string | null };
 
-export type WaitingBoosterFieldFragment = { __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null };
+export type WaitingBoosterFieldFragment = { __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null, enabled: boolean };
 
 export type WaitingRewardFieldFragment = { __typename?: 'WaitingRewardEntity', uniqueKey: string, withdrawedTotalPoint: number };
 
@@ -349,7 +358,7 @@ export type ExchangeBoosterMutationVariables = Exact<{
 }>;
 
 
-export type ExchangeBoosterMutation = { __typename?: 'Mutation', exchangeBooster: { __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null, booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } } };
+export type ExchangeBoosterMutation = { __typename?: 'Mutation', exchangeBooster: { __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null, enabled: boolean, booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } } };
 
 export type ExchangeRewardMutationVariables = Exact<{
   uniqueKey: Scalars['String']['input'];
@@ -426,6 +435,14 @@ export type EventsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type EventsQuery = { __typename?: 'Query', events: Array<{ __typename?: 'EventEntity', uniqueKey: string, waitingStartAt: any, startAt: any, endAt: any, name?: string | null, description?: string | null, mdxContent?: string | null, detailMdxContent?: string | null, isJoinable: boolean, lat?: number | null, lng?: number | null, onlineUrl?: string | null, placeName?: string | null, imageUrl?: string | null }> };
 
+export type LatestWaitingBoosterQueryVariables = Exact<{
+  boosterUniqueKey: Scalars['String']['input'];
+  waitingUniqueKey: Scalars['String']['input'];
+}>;
+
+
+export type LatestWaitingBoosterQuery = { __typename?: 'Query', latestWaitingBooster: { __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null, enabled: boolean, booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } } };
+
 export type RewardQueryVariables = Exact<{
   uniqueKey: Scalars['String']['input'];
 }>;
@@ -450,19 +467,19 @@ export type WaitingSiblingsQueryVariables = Exact<{
 }>;
 
 
-export type WaitingSiblingsQuery = { __typename?: 'Query', waitingSiblings: Array<{ __typename?: 'WaitingEntity', uniqueKey: string, waitingPoint: number, totalPoint: number, waitingDuration: number, remainingEventStartDuration: number, secondsPerWaitingPoint: number, secondPerTotalPoint: number, totalPointMultiplier: number, waitingName?: string | null, waitingMessage?: string | null, joinAt: any, event: { __typename?: 'EventEntity', uniqueKey: string, waitingStartAt: any, startAt: any, endAt: any, name?: string | null, description?: string | null, mdxContent?: string | null, detailMdxContent?: string | null, isJoinable: boolean, lat?: number | null, lng?: number | null, onlineUrl?: string | null, placeName?: string | null, imageUrl?: string | null }, user: { __typename?: 'UserPublicEntity', eoaAddress?: string | null, displayName?: string | null, iconImageUrl?: string | null }, waitingBoosters: Array<{ __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null, booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } }>, waitingRewards: Array<{ __typename?: 'WaitingRewardEntity', uniqueKey: string, withdrawedTotalPoint: number, reward: { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null, exchangeable: boolean, startAt: any, endAt: any, order?: number | null } }> }> };
+export type WaitingSiblingsQuery = { __typename?: 'Query', waitingSiblings: Array<{ __typename?: 'WaitingEntity', uniqueKey: string, waitingPoint: number, totalPoint: number, waitingDuration: number, remainingEventStartDuration: number, secondsPerWaitingPoint: number, secondPerTotalPoint: number, totalPointMultiplier: number, waitingName?: string | null, waitingMessage?: string | null, joinAt: any, event: { __typename?: 'EventEntity', uniqueKey: string, waitingStartAt: any, startAt: any, endAt: any, name?: string | null, description?: string | null, mdxContent?: string | null, detailMdxContent?: string | null, isJoinable: boolean, lat?: number | null, lng?: number | null, onlineUrl?: string | null, placeName?: string | null, imageUrl?: string | null }, user: { __typename?: 'UserPublicEntity', eoaAddress?: string | null, displayName?: string | null, iconImageUrl?: string | null }, waitingBoosters: Array<{ __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null, enabled: boolean, booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } }>, waitingRewards: Array<{ __typename?: 'WaitingRewardEntity', uniqueKey: string, withdrawedTotalPoint: number, reward: { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null, exchangeable: boolean, startAt: any, endAt: any, order?: number | null } }> }> };
 
 export type WaitingQueryVariables = Exact<{
   uniqueKey: Scalars['String']['input'];
 }>;
 
 
-export type WaitingQuery = { __typename?: 'Query', waiting: { __typename?: 'WaitingEntity', uniqueKey: string, waitingPoint: number, totalPoint: number, waitingDuration: number, remainingEventStartDuration: number, secondsPerWaitingPoint: number, secondPerTotalPoint: number, totalPointMultiplier: number, waitingName?: string | null, waitingMessage?: string | null, joinAt: any, event: { __typename?: 'EventEntity', uniqueKey: string, waitingStartAt: any, startAt: any, endAt: any, name?: string | null, description?: string | null, mdxContent?: string | null, detailMdxContent?: string | null, isJoinable: boolean, lat?: number | null, lng?: number | null, onlineUrl?: string | null, placeName?: string | null, imageUrl?: string | null }, user: { __typename?: 'UserPublicEntity', eoaAddress?: string | null, displayName?: string | null, iconImageUrl?: string | null }, waitingBoosters: Array<{ __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null, booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } }>, waitingRewards: Array<{ __typename?: 'WaitingRewardEntity', uniqueKey: string, withdrawedTotalPoint: number, reward: { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null, exchangeable: boolean, startAt: any, endAt: any, order?: number | null } }> } };
+export type WaitingQuery = { __typename?: 'Query', waiting: { __typename?: 'WaitingEntity', uniqueKey: string, waitingPoint: number, totalPoint: number, waitingDuration: number, remainingEventStartDuration: number, secondsPerWaitingPoint: number, secondPerTotalPoint: number, totalPointMultiplier: number, waitingName?: string | null, waitingMessage?: string | null, joinAt: any, event: { __typename?: 'EventEntity', uniqueKey: string, waitingStartAt: any, startAt: any, endAt: any, name?: string | null, description?: string | null, mdxContent?: string | null, detailMdxContent?: string | null, isJoinable: boolean, lat?: number | null, lng?: number | null, onlineUrl?: string | null, placeName?: string | null, imageUrl?: string | null }, user: { __typename?: 'UserPublicEntity', eoaAddress?: string | null, displayName?: string | null, iconImageUrl?: string | null }, waitingBoosters: Array<{ __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null, enabled: boolean, booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } }>, waitingRewards: Array<{ __typename?: 'WaitingRewardEntity', uniqueKey: string, withdrawedTotalPoint: number, reward: { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null, exchangeable: boolean, startAt: any, endAt: any, order?: number | null } }> } };
 
 export type WaitingsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type WaitingsQuery = { __typename?: 'Query', waitings: Array<{ __typename?: 'WaitingEntity', uniqueKey: string, waitingPoint: number, totalPoint: number, waitingDuration: number, remainingEventStartDuration: number, secondsPerWaitingPoint: number, secondPerTotalPoint: number, totalPointMultiplier: number, waitingName?: string | null, waitingMessage?: string | null, joinAt: any, event: { __typename?: 'EventEntity', uniqueKey: string, waitingStartAt: any, startAt: any, endAt: any, name?: string | null, description?: string | null, mdxContent?: string | null, detailMdxContent?: string | null, isJoinable: boolean, lat?: number | null, lng?: number | null, onlineUrl?: string | null, placeName?: string | null, imageUrl?: string | null }, user: { __typename?: 'UserPublicEntity', eoaAddress?: string | null, displayName?: string | null, iconImageUrl?: string | null }, waitingBoosters: Array<{ __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null, booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } }>, waitingRewards: Array<{ __typename?: 'WaitingRewardEntity', uniqueKey: string, withdrawedTotalPoint: number, reward: { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null, exchangeable: boolean, startAt: any, endAt: any, order?: number | null } }> }> };
+export type WaitingsQuery = { __typename?: 'Query', waitings: Array<{ __typename?: 'WaitingEntity', uniqueKey: string, waitingPoint: number, totalPoint: number, waitingDuration: number, remainingEventStartDuration: number, secondsPerWaitingPoint: number, secondPerTotalPoint: number, totalPointMultiplier: number, waitingName?: string | null, waitingMessage?: string | null, joinAt: any, event: { __typename?: 'EventEntity', uniqueKey: string, waitingStartAt: any, startAt: any, endAt: any, name?: string | null, description?: string | null, mdxContent?: string | null, detailMdxContent?: string | null, isJoinable: boolean, lat?: number | null, lng?: number | null, onlineUrl?: string | null, placeName?: string | null, imageUrl?: string | null }, user: { __typename?: 'UserPublicEntity', eoaAddress?: string | null, displayName?: string | null, iconImageUrl?: string | null }, waitingBoosters: Array<{ __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null, enabled: boolean, booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } }>, waitingRewards: Array<{ __typename?: 'WaitingRewardEntity', uniqueKey: string, withdrawedTotalPoint: number, reward: { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null, exchangeable: boolean, startAt: any, endAt: any, order?: number | null } }> }> };
 
 export const BoosterUseableDurationFieldFragmentDoc = gql`
     fragment BoosterUseableDurationField on BoosterUseableDurationEntity {
@@ -561,6 +578,7 @@ export const WaitingBoosterFieldFragmentDoc = gql`
   endAt
   multiplier
   content
+  enabled
 }
     `;
 export const WaitingRewardFieldFragmentDoc = gql`
@@ -673,6 +691,20 @@ export const EventsDocument = gql`
   }
 }
     ${EventFieldFragmentDoc}`;
+export const LatestWaitingBoosterDocument = gql`
+    query latestWaitingBooster($boosterUniqueKey: String!, $waitingUniqueKey: String!) {
+  latestWaitingBooster(
+    boosterUniqueKey: $boosterUniqueKey
+    waitingUniqueKey: $waitingUniqueKey
+  ) {
+    ...WaitingBoosterField
+    booster {
+      ...BoosterField
+    }
+  }
+}
+    ${WaitingBoosterFieldFragmentDoc}
+${BoosterFieldFragmentDoc}`;
 export const RewardDocument = gql`
     query reward($uniqueKey: String!) {
   reward(uniqueKey: $uniqueKey) {
@@ -827,6 +859,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     events(variables?: EventsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<EventsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<EventsQuery>(EventsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'events', 'query');
+    },
+    latestWaitingBooster(variables: LatestWaitingBoosterQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<LatestWaitingBoosterQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<LatestWaitingBoosterQuery>(LatestWaitingBoosterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'latestWaitingBooster', 'query');
     },
     reward(variables: RewardQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<RewardQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<RewardQuery>(RewardDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'reward', 'query');

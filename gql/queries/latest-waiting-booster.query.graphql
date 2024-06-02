@@ -1,0 +1,14 @@
+query latestWaitingBooster(
+  $boosterUniqueKey: String!
+  $waitingUniqueKey: String!
+) {
+  latestWaitingBooster(
+    boosterUniqueKey: $boosterUniqueKey
+    waitingUniqueKey: $waitingUniqueKey
+  ) {
+    ...WaitingBoosterField
+    booster {
+      ...BoosterField
+    }
+  }
+}
