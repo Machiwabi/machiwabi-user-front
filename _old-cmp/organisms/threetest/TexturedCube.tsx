@@ -1,7 +1,7 @@
-import React, { useRef, useMemo } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { Mesh } from 'three'
+import { useFrame } from '@react-three/fiber'
+import React, { useMemo, useRef } from 'react'
 import * as THREE from 'three'
+import { Mesh } from 'three'
 
 const Component: React.FC = () => {
   const meshRef = useRef<Mesh>(null)
