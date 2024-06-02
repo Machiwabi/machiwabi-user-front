@@ -1,7 +1,7 @@
 import { Box } from '@mantine/core'
 import { FC, useState } from 'react'
 import { EventEntity } from '../../../generated/graphql'
-import { waitingUrl } from '../../../helpers/url.helper'
+import { waitingUrl, waitingsUrl } from '../../../helpers/url.helper'
 import { useEventJoinable } from '../../../hooks/resources/useEventJoinable'
 import { useJoinWaiting } from '../../../hooks/resources/useJoinWaiting'
 import { useWeb3Auth } from '../../../hooks/useWeb3Auth'
@@ -94,9 +94,22 @@ const AuthenticatedButton: FC<AuthenticatedButtonProps> = ({ event }) => {
   }
 
   if (isUserJoiableError) {
+    // 参加済みの場合
+    if (isUserJoinableErrorType === 'AlreadyWaitingError') {
+      return (
+        <>
+          <Box w="100%" maw={410} px={16}>
+            <EButton.Lg href={waitingsUrl()} w="100%">
+              イベント参加済｜一覧ページへ
+            </EButton.Lg>
+          </Box>
+        </>
+      )
+    }
+
+    // それ以外のエラー
     const errorMessage = isUserJoinableErrorType
       ? {
-          AlreadyWaitingError: 'すでに参加しています',
           NotFoundError: 'イベントが見つかりません',
           NotSuitableEventError: 'イベントが見つかりません',
           NotSuitableUserError: 'ユーザーが見つかりません',
