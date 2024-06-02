@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { showNotification } from '@mantine/notifications'
 import { useRouter } from 'next/router'
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { UpsertUserMutationVariables } from '../../../generated/graphql'
@@ -20,6 +20,7 @@ import { Seo } from '../../99_seo/users/Seo'
 const schema = z.object(registerUserSchema)
 
 const Component: FC = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const { userPrivate, userPrivateIsLoading, userPrivateError, upsertUser } =
     useUserPrivate()
   const { secretJwt } = useAuthenticatedStore()
@@ -33,6 +34,7 @@ const Component: FC = () => {
   })
 
   const sendOnSubmit = methods.handleSubmit(async (data) => {
+    setIsSubmitting(true)
     const dto: UpsertUserMutationVariables = {
       displayName: data.displayName,
       iconImageUrl: data.iconImageUrl,
@@ -58,6 +60,8 @@ const Component: FC = () => {
         message: 'プロフィールの登録に失敗しました',
         color: colorScheme.scheme1.notice.alert,
       })
+    } finally {
+      setIsSubmitting(false)
     }
   })
 
@@ -75,6 +79,7 @@ const Component: FC = () => {
         新規ユーザー登録
       </EHeading.Page>
       <TUserRegisterFormTemplate
+        isSubmitting={isSubmitting}
         secretJwt={secretJwt}
         methods={methods}
         onSubmit={sendOnSubmit}
