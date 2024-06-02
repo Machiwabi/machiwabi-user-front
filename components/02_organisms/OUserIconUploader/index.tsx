@@ -125,6 +125,7 @@ const Component: React.FC<Props> = ({
     <>
       <Flex align="center" {...props}>
         <Flex
+          pos="relative"
           w={72}
           h={72}
           bg={colorScheme.scheme1.surface2.surface}
@@ -135,8 +136,8 @@ const Component: React.FC<Props> = ({
               image ||
               '/assets/images/picture/picture_user-profile-fallback.png'
             }
-            width={72}
-            height={72}
+            layout="fill"
+            objectFit="cover"
             alt="user picture"
           />
         </Flex>
