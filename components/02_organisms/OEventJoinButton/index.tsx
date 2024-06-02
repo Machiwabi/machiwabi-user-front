@@ -1,13 +1,14 @@
 import { Box } from '@mantine/core'
 import { FC, useState } from 'react'
 import { EventEntity } from '../../../generated/graphql'
-import { waitingUrl } from '../../../helpers/url.helper'
+import { waitingUrl, waitingsUrl } from '../../../helpers/url.helper'
 import { useEventJoinable } from '../../../hooks/resources/useEventJoinable'
 import { useJoinWaiting } from '../../../hooks/resources/useJoinWaiting'
 import { useWeb3Auth } from '../../../hooks/useWeb3Auth'
 import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
 import { EButton } from '../../01_elements/EButton'
 import { ELoader } from '../../01_elements/ELoader'
+import { colorScheme } from '../../../theme/colorScheme'
 
 type Props = {
   event: EventEntity
@@ -37,8 +38,26 @@ const Component: FC<Props> = ({ event, redirectUrl }) => {
                     connectWeb3AuthAndSignInWithEthereum(redirectUrl)
                   }}
                 >
-                  ログインして参加する
+                  新規作成／ログインして参加する
                 </EButton.Lg>
+                <Box
+                  mt={8}
+                  p={8}
+                  bg={colorScheme.scheme1.surface1.surface}
+                  c={colorScheme.scheme1.surface1.object.high}
+                  style={{
+                    borderRadius: 8,
+                    border: `1px solid ${colorScheme.scheme1.surface1.object.high}`,
+                  }}
+                >
+                  <Box fz={10}>
+                    ・ safariやchromeなどのブラウザでご利用ください。
+                  </Box>
+                  <Box mt={2} fz={10}>
+                    ・
+                    ウォレットご利用の方：「接続」と「署名」の２回操作があります。
+                  </Box>
+                </Box>
               </Box>
             </>
           ) : (
@@ -63,8 +82,12 @@ type AuthenticatedButtonProps = {
 }
 
 const AuthenticatedButton: FC<AuthenticatedButtonProps> = ({ event }) => {
-  const { isUserJoinable, isUserJoinableEventIsLoading, isUserJoiableError } =
-    useEventJoinable({ uniqueKey: event.uniqueKey })
+  const {
+    isUserJoinable,
+    isUserJoinableEventIsLoading,
+    isUserJoiableError,
+    isUserJoinableErrorType,
+  } = useEventJoinable({ uniqueKey: event.uniqueKey })
 
   const { createJoinWaiting } = useJoinWaiting()
   const [joining, setJoining] = useState(false)
@@ -90,11 +113,32 @@ const AuthenticatedButton: FC<AuthenticatedButtonProps> = ({ event }) => {
   }
 
   if (isUserJoiableError) {
+    // 参加済みの場合
+    if (isUserJoinableErrorType === 'AlreadyWaitingError') {
+      return (
+        <>
+          <Box w="100%" maw={410} px={16}>
+            <EButton.Lg href={waitingsUrl()} w="100%">
+              イベント参加済｜一覧ページへ
+            </EButton.Lg>
+          </Box>
+        </>
+      )
+    }
+
+    // それ以外のエラー
+    const errorMessage = isUserJoinableErrorType
+      ? {
+          NotFoundError: 'イベントが見つかりません',
+          NotSuitableEventError: 'イベントが見つかりません',
+          NotSuitableUserError: 'ユーザーが見つかりません',
+        }[isUserJoinableErrorType]
+      : 'エラーのため参加できません'
     return (
       <>
         <Box w="100%" maw={410} px={16}>
           <EButton.Lg w="100%" fillType="disabled" disabled>
-            エラーのため参加できません
+            {errorMessage}
           </EButton.Lg>
         </Box>
       </>

@@ -1,5 +1,10 @@
 import { graphqlApiClient } from '../apis/GraphqlApiClient'
-import { NotFoundError } from '../exceptions/exceptions'
+import {
+  AlreadyWaitingError,
+  NotFoundError,
+  NotSuitableEventError,
+  NotSuitableUserError,
+} from '../exceptions/exceptions'
 import {
   CheckEventJoinableDocument,
   CheckEventJoinableQuery,
@@ -24,7 +29,6 @@ const findOne = async (variables: EventQueryVariables): Promise<EventQuery> => {
   } catch (e: any) {
     if (e.response.errors[0].extensions.code === 'NOT_FOUND_ERROR')
       throw new NotFoundError('Project not found')
-
     throw e
   }
 }
@@ -41,7 +45,13 @@ const isUserJoinable = async (
     return query.checkEventJoinable
   } catch (e: any) {
     if (e.response.errors[0].extensions.code === 'NOT_FOUND_ERROR')
-      throw new NotFoundError('Project not found')
+      throw new NotFoundError('Event not found')
+    if (e.response.errors[0].extensions.code === 'ALREADY_WAITING_ERROR')
+      throw new AlreadyWaitingError()
+    if (e.response.errors[0].extensions.code === 'NOT_SUITABLE_EVENT_ERROR')
+      throw new NotSuitableEventError()
+    if (e.response.errors[0].extensions.code === 'NOT_SUITABLE_USER_ERROR')
+      throw new NotSuitableUserError()
 
     throw e
   }
