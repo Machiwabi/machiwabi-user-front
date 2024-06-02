@@ -21,7 +21,7 @@ const Component: FC<Props> = ({ ...props }) => {
         <Center>
           <Box
             component="a"
-            href="https://twitter.com/MeTown_jp"
+            href="https://x.com/matiwabi"
             target="_blank"
             rel="noopener noreferrer"
             className={style['lp-footer__x']}

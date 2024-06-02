@@ -17,7 +17,7 @@ const nextSeoConfig = {
     siteName: 'Mati-wabi',
   },
   twitter: {
-    handle: '@MeTown_jp',
+    handle: '@matiwabi',
     site: '@site',
     cardType: 'summary_large_image',
   },

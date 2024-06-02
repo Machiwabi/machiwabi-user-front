@@ -1,4 +1,6 @@
-export const googleAnalyticsId = process.env.NEXT_PUBLIC_ANALYTICS_ID || ''
+import { applicationProperties } from '../constants/applicationProperties'
+
+export const googleAnalyticsId = applicationProperties.GOOGLE_ANALYTICS_ID
 
 export const ga4PushEvent = (action: string, params?: GA4Event) => {
   console.debug('ga4PushEvent', action, params)
