@@ -52,10 +52,7 @@ const Component: FC<Props> = ({ waiting, rank }) => {
         />
         <OUserWaitingStatuses
           totalPoints={waiting.totalPoint}
-          secondPerTotalPoints={
-            waitingService.addableSumPoint() +
-            waitingService.earnableTotalPoint()
-          }
+          secondPerTotalPoints={waitingService.earnableTotalPoint()}
           secondsPerWaitingPoint={waiting.secondsPerWaitingPoint}
           isBoosting={waitingService.isBoosting()}
         />
