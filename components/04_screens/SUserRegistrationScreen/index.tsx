@@ -16,6 +16,8 @@ import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
 import { TUserRegisterFormTemplate } from '../../03_templates/TUserRegisterFormTemplate'
 import { Seo } from '../../99_seo/users/Seo'
+import { ga4PushEvent } from '../../../utils/ga4'
+import { GA4_CUSTOM_EVENT } from '../../../constants/ga4CustomEvent'
 
 const schema = z.object(registerUserSchema)
 
@@ -47,6 +49,8 @@ const Component: FC = () => {
         message: 'プロフィールを登録しました',
         color: colorScheme.scheme1.accent1.surface,
       })
+
+      ga4PushEvent(GA4_CUSTOM_EVENT.COMPLETE_USER_REGISTRATION)
 
       setTimeout(async () => {
         const redirectUrl = await RedirectUrlRepository.get()
