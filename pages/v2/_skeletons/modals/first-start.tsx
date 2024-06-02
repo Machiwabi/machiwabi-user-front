@@ -7,13 +7,12 @@ import { OHeaderNav } from '../../../../components/02_organisms/OHeaderNav'
 import { TModalDailyMissionTemplate } from '../../../../components/03_templates/TModalDailyMissionTemplate'
 import { TModalGuidePwaTemplate } from '../../../../components/03_templates/TModalGuidePwaTemplate'
 import { TModalRewardConfirmConsumptionTemplate } from '../../../../components/03_templates/TModalRewardConfirmConsumptionTemplate'
-import { TModalWaitingFirstTemplate } from '../../../../components/03_templates/TModalWaitingFirstTemplate'
+import { TModalRewardConsumedTemplate } from '../../../../components/03_templates/TModalRewardConsumedTemplate'
 import { waitingMissionsUrl, waitingUrl } from '../../../../helpers/url.helper'
 import { boosterMock } from '../../../../mocks/booster.mock'
+import { rewardMock } from '../../../../mocks/reward.mock'
 import { waitingMock } from '../../../../mocks/waiting.mock'
 import { truncator } from '../../../../utils/truncator'
-import { rewardMock } from '../../../../mocks/reward.mock'
-import { TModalRewardConsumedTemplate } from '../../../../components/03_templates/TModalRewardConsumedTemplate'
 
 const Page = () => {
   return (
@@ -40,7 +39,7 @@ const Page = () => {
             },
           ]}
         />
-        <WaitingFirstScreen />
+
         <DailyMissionScreen />
         <GuidePwaScreen />
         <ModalRewardConsumptionScreen />
@@ -52,27 +51,6 @@ const Page = () => {
 }
 
 export default Page
-
-const WaitingFirstScreen = () => {
-  const [isOpen, setIsOpen] = useState(false)
-
-  return (
-    <>
-      <Box mt={24} px={16}>
-        <EButton.Lg
-          w="100%"
-          onClick={() => {
-            setIsOpen(true)
-          }}
-        >
-          WaitingHomeScreen_初回
-        </EButton.Lg>
-
-        <TModalWaitingFirstTemplate isOpen={isOpen} setIsOpen={setIsOpen} />
-      </Box>
-    </>
-  )
-}
 
 const DailyMissionScreen = () => {
   const [isOpen, setIsOpen] = useState(false)
