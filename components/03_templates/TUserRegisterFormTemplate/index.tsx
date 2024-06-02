@@ -22,7 +22,7 @@ const Component: FC<Props> = ({ secretJwt, methods, onSubmit }) => {
           <OUserIconUploader
             mt={22}
             methods={methods}
-            label="wa"
+            label="userIcon"
             schemaName="iconImageUrl"
             secretJwt={secretJwt}
           />

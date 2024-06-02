@@ -66,8 +66,10 @@ const Component: React.FC<Props> = ({
     }
 
     if (!secretJwt) {
-      return 'ログインできていないため、リロードしてください'
+      alert('ログインできていないため、リロードしてください')
+      return
     }
+
     const s3PresignedUrl = await AdminS3PresignedUrlRepository.getPresignedUrl(
       selectedFile.name,
       secretJwt

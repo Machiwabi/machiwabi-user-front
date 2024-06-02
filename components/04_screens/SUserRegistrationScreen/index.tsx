@@ -23,6 +23,7 @@ const Component: FC = () => {
   const { userPrivate, userPrivateIsLoading, userPrivateError, upsertUser } =
     useUserPrivate()
   const { secretJwt } = useAuthenticatedStore()
+
   const router = useRouter()
 
   const methods = useForm({
