@@ -21,7 +21,7 @@ const Component: FC<Props> = ({
       {href ? (
         <Button
           component="a"
-          href={''}
+          href={href}
           target="_blank"
           rel="noopener noreferrer"
           h={68}
