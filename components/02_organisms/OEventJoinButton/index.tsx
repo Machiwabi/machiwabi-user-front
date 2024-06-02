@@ -131,7 +131,7 @@ const AuthenticatedButton: FC<AuthenticatedButtonProps> = ({ event }) => {
       ? {
           NotFoundError: 'イベントが見つかりません',
           NotSuitableEventError: 'イベントが見つかりません',
-          NotSuitableUserError: 'ユーザーが見つかりません',
+          NotSuitableUserError: 'ログアウトし、もう一度お試しください',
         }[isUserJoinableErrorType]
       : 'エラーのため参加できません'
     return (
