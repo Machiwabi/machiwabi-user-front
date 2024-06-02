@@ -3,6 +3,7 @@ import { WaitingBoosterEntity } from '../../generated/graphql'
 export class WaitingBoostersService {
   public addableSumPoint(waitingBoosters: WaitingBoosterEntity[]) {
     const waitingBoosterMultipliers = waitingBoosters
+      .filter((waitingBooster) => waitingBooster.enabled) // TODO ドメイン分離
       .filter((waitingBooster) => {
         return new Date(waitingBooster.endAt).getTime() > new Date().getTime()
       })
