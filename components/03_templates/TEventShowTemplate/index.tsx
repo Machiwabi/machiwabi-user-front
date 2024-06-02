@@ -90,7 +90,7 @@ const Component: FC<Props> = ({ event, ...props }) => {
             />
             <EButton.Sm
               w="100%"
-              href={`https://www.google.com/maps/place/${event.placeName}/@${event.lat}@${event.lng},17z`}
+              href={`https://www.google.com/maps?q=${event.lat},${event.lng}&z=17`}
               hrefOutbound
             >
               大きな地図で見る
