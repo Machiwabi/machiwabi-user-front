@@ -8,6 +8,8 @@ import { OWaitingCounterWithUser } from '../../02_organisms/OWaitingCounterWithU
 import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
 import { WaitingMembersSubComponent } from './WaitingMembersSubComponent'
+import { WaitingFirstScreen } from './WaitingFirstScreen'
+import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
 
 type Props = {
   waitingUniqueKey: string
@@ -56,6 +58,7 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
           </EText.Desc1>
         </Box>
       </Box>
+      <WaitingFirstScreen waiting={waiting} />
     </>
   )
 }

@@ -2,26 +2,32 @@ import { FC } from 'react'
 import { EHeading } from '../../01_elements/EHeading/base'
 import { EModal } from '../../01_elements/EModal'
 import { EText } from '../../01_elements/EText/base'
+import { WaitingEntity } from '../../../generated/graphql'
 
 type Props = {
   isOpen: boolean
-  setIsOpen: (isOpen: boolean) => void
+  markAsUserTutorialRead: () => void
+  waiting: WaitingEntity
 }
 
-const Component: FC<Props> = ({ isOpen, setIsOpen }) => {
+const Component: FC<Props> = ({ waiting, isOpen, markAsUserTutorialRead }) => {
   return (
     <EModal
       isOpen={isOpen}
-      closedCallback={() => setIsOpen(false)}
+      closedCallback={markAsUserTutorialRead}
       showCloseButton={true}
     >
       <EHeading.Page ta="center">
-        aiueoの
+        {waiting.event.name}の
         <br />
-        待ち侘びルームに参加しました！
+        マチワビルームに参加しました！
       </EHeading.Page>
       <EText.Desc2 mt={8} ta="center">
-        イベント開催までにポイントが貯まっていきます。定期的にチェックしましょう！
+        マチワビルームでは
+        <br />
+        当日までの残り時間と、
+        <br />
+        待ち時間に応じたポイントをご覧いただけます！
       </EText.Desc2>
     </EModal>
   )
