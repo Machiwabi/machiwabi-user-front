@@ -7,7 +7,7 @@ export class WaitingBoostersService {
         return new Date(waitingBooster.endAt).getTime() > new Date().getTime()
       })
       .map((waitingBooster) => {
-        return waitingBooster.booster.multiplier - 1
+        return waitingBooster.multiplier - 1
       })
 
     if (waitingBoosterMultipliers.length > 0) {

@@ -16,11 +16,11 @@ const Component: FC<Props> = ({
 }) => {
   return (
     <Flex justify="space-between" align="center">
-      <Box fz={12} ff="outfit" fw="bold">
-        boosters
+      <Box fz={14} ff="outfit" fw="bold">
+        BOOSTERS
       </Box>
       <Flex align="center">
-        <Box mr={8} fz={10} ff="outfit" fw="bold">
+        <Box mr={8} fz={14} ff="outfit" fw="bold">
           +{secondPerTotalPoints}/{secondsPerWaitingPoint}sec
         </Box>
         <Flex>

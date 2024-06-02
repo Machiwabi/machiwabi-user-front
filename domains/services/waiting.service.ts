@@ -69,7 +69,7 @@ export class WaitingService {
 
     return nextDateTotalPoint - baseDateTotalPoint === 0
       ? 1
-      : nextDateTotalPoint - baseDateTotalPoint + 1 + 1 // TODO 1秒後に1ポイント獲得するため
+      : nextDateTotalPoint - baseDateTotalPoint + 1
   }
 
   // 現時点での数字を元に、目標のポイントまでの秒数を返す
