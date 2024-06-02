@@ -23,7 +23,7 @@ const Component: FC<Props> = ({
           {totalPoints.toLocaleString()}
         </Text>
         <Text fz={10} ff="outfit" fw={900} ml={4} pb={3} lh={1}>
-          PT
+          pt
         </Text>
       </Flex>
       <Box mb={4}>

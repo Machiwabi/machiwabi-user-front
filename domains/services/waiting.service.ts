@@ -42,6 +42,7 @@ export class WaitingService {
       baseDate.getTime() > ceiledStartAt.getTime() ? ceiledStartAt : baseDate
 
     for (const waitingBooster of this.waiting.waitingBoosters) {
+      if (!waitingBooster.enabled) continue
       boostedWaitingPoint += this.waitingBoosterService.boostedPoint(
         waitingBooster,
         this.waiting.secondsPerWaitingPoint,
@@ -68,7 +69,7 @@ export class WaitingService {
 
     return nextDateTotalPoint - baseDateTotalPoint === 0
       ? 1
-      : nextDateTotalPoint - baseDateTotalPoint + 1
+      : nextDateTotalPoint - baseDateTotalPoint + 1 + 1 // TODO 1秒後に1ポイント獲得するため
   }
 
   // 現時点での数字を元に、目標のポイントまでの秒数を返す
