@@ -3,6 +3,8 @@ import { FC, useState } from 'react'
 import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
 import { colorScheme } from '../../../theme/colorScheme'
 import { TModalGuidePwaTemplate } from '../../03_templates/TModalGuidePwaTemplate'
+import { GA4_CUSTOM_EVENT } from '../../../constants/ga4CustomEvent'
+import { ga4PushEvent } from '../../../utils/ga4'
 
 const Component: FC = () => {
   const { isAuthenticated } = useAuthenticatedStore()
@@ -34,6 +36,7 @@ const GuideFloatButton: FC = () => {
         w={68}
         h={68}
         onClick={() => {
+          ga4PushEvent(GA4_CUSTOM_EVENT.PRESS_HOME_SCEEEN)
           setIsOpen(true)
         }}
         style={{

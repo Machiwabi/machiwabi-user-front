@@ -9,6 +9,8 @@ import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAut
 import { EButton } from '../../01_elements/EButton'
 import { ELoader } from '../../01_elements/ELoader'
 import { colorScheme } from '../../../theme/colorScheme'
+import { ga4PushEvent } from '../../../utils/ga4'
+import { GA4_CUSTOM_EVENT } from '../../../constants/ga4CustomEvent'
 
 type Props = {
   event: EventEntity
@@ -97,6 +99,7 @@ const AuthenticatedButton: FC<AuthenticatedButtonProps> = ({ event }) => {
     const joinWaiting = await createJoinWaiting({
       eventUniqueKey: event.uniqueKey,
     })
+    ga4PushEvent(GA4_CUSTOM_EVENT.COMPLETE_JOIN_WAITING)
     window.location.href = waitingUrl(joinWaiting.joinEvent.uniqueKey)
   }
 

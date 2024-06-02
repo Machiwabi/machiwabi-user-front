@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import LLandingPageLayout from '../../components/00_layouts/LLandingPageLayout'
 import { BgSection } from '../../components/101_lp/BgSection'
 import { CheckFirstLandingSection } from '../../components/101_lp/CheckFirstLandingSection'
@@ -10,8 +11,14 @@ import { HowToSection } from '../../components/101_lp/HowToSection'
 import { StickyHeaderSection } from '../../components/101_lp/StickyHeaderSection'
 import { Seo } from '../../components/99_seo/campaigns/icr/Seo'
 import { NextPageWithLayout } from '../_app'
+import { ga4PushEvent } from '../../utils/ga4'
+import { GA4_CUSTOM_EVENT } from '../../constants/ga4CustomEvent'
 
 const Page: NextPageWithLayout = () => {
+  useEffect(() => {
+    ga4PushEvent(GA4_CUSTOM_EVENT.DISPLAY_PAGE_CAMPAIGN_ICR2406)
+  }, [])
+
   return (
     <>
       <Seo />
