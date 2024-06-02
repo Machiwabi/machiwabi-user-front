@@ -18,12 +18,13 @@ const Component: FC<Props> = ({
   return (
     <Flex align="center">
       <Box
+        pos="relative"
         w={56}
         h={56}
         style={{ borderRadius: 56 / 2, overflow: 'hidden' }}
         bg={colorScheme.scheme1.surface2.surface}
       >
-        <Image src={iconImageUrl} alt="icon" width={56} height={56} />
+        <Image src={iconImageUrl} alt="icon" layout="fill" objectFit="cover" />
       </Box>
       <Box ml={16}>
         <Text fz={16} ff="outfit" fw={700}>

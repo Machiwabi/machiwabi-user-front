@@ -19,6 +19,7 @@ const Component: FC<Props> = ({
 }) => {
   return (
     <Box
+      pos="relative"
       w={w}
       h={h}
       style={{ borderRadius: w, overflow: 'hidden' }}
@@ -28,8 +29,8 @@ const Component: FC<Props> = ({
       <Image
         src={iconImageUrl}
         alt={displayName || 'icon'}
-        width={w}
-        height={h}
+        layout="fill"
+        objectFit="cover"
       />
     </Box>
   )
