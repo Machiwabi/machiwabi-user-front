@@ -42,6 +42,7 @@ export class WaitingService {
       baseDate.getTime() > ceiledStartAt.getTime() ? ceiledStartAt : baseDate
 
     for (const waitingBooster of this.waiting.waitingBoosters) {
+      if (!waitingBooster.enabled) continue
       boostedWaitingPoint += this.waitingBoosterService.boostedPoint(
         waitingBooster,
         this.waiting.secondsPerWaitingPoint,

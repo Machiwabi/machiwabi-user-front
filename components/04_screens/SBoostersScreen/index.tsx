@@ -46,6 +46,9 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
   const finishedBoosters = waitingBoostersService.finishedBoosters(
     waiting.waitingBoosters
   )
+  const reviewingBoosters = waitingBoostersService.reviewingBoosters(
+    waiting.waitingBoosters
+  )
 
   return (
     <>
@@ -85,6 +88,20 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
           }
         />
       </Box>
+
+      {reviewingBoosters.length > 0 && (
+        <Box my={40} px={16}>
+          <EHeading.ParagraphJa>レビュー中のブースター</EHeading.ParagraphJa>
+          <OBoosters
+            mt={12}
+            waitingBoosters={reviewingBoosters}
+            opacity={0.2}
+            grantedWaitingBoosterUniqueKey={
+              grantedWaitingBoosterUniqueKey as string
+            }
+          />
+        </Box>
+      )}
 
       {finishedBoosters.length > 0 && (
         <Box my={40} px={16}>

@@ -1,25 +1,26 @@
-import { Box, BoxProps, Flex, TextInput } from '@mantine/core'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Box, BoxProps, TextInput } from '@mantine/core'
+import { showNotification } from '@mantine/notifications'
+import { useRouter } from 'next/router'
 import { FC, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 import {
   BoosterEntity,
   ExchangeBoosterMutationVariables,
-  LatestWaitingBoosterQueryVariables,
   WaitingEntity,
 } from '../../../generated/graphql'
+import { waitingBoostersUrl } from '../../../helpers/url.helper'
+import { useBoosterUseableDuration } from '../../../hooks/resources/useBoosterUseableDuration'
+import { useExchangeBooster } from '../../../hooks/resources/useExchangeBooster'
+import { useLatestWaitingBooster } from '../../../hooks/resources/useLatestWaitingBooster'
+import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
+import { colorScheme } from '../../../theme/colorScheme'
+import { dateConverter } from '../../../utils/dateConverter'
+import { missionUrlPostSchema } from '../../../validations/missionUrlPostSchema'
 import { EButton } from '../../01_elements/EButton'
 import { EHeading } from '../../01_elements/EHeading/base'
-import { missionUrlPostSchema } from '../../../validations/missionUrlPostSchema'
-import { late, z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useLatestWaitingBooster } from '../../../hooks/resources/useLatestWaitingBooster'
-import { useExchangeBooster } from '../../../hooks/resources/useExchangeBooster'
-import { showNotification } from '@mantine/notifications'
-import { colorScheme } from '../../../theme/colorScheme'
-import { useBoosterUseableDuration } from '../../../hooks/resources/useBoosterUseableDuration'
-import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
 import { ELoader } from '../../01_elements/ELoader'
-import { dateConverter } from '../../../utils/dateConverter'
 
 type Props = BoxProps & {
   waiting: WaitingEntity
@@ -29,6 +30,7 @@ type Props = BoxProps & {
 const schema = z.object(missionUrlPostSchema)
 
 const Component: FC<Props> = ({ waiting, booster, ...props }) => {
+  const router = useRouter()
   const { isSiweWallet } = useSiweEoaAddress(waiting.user.eoaAddress)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -73,6 +75,8 @@ const Component: FC<Props> = ({ waiting, booster, ...props }) => {
           'ミッション報告が完了しました、チェックの後ブースターが有効化されます',
         color: colorScheme.scheme1.accent1.surface,
       })
+
+      router.push(waitingBoostersUrl(waiting.uniqueKey))
     } catch (error) {
       console.error(error)
       showNotification({
