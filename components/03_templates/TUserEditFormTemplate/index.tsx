@@ -6,12 +6,14 @@ import { EHeading } from '../../01_elements/EHeading/base'
 import { OUserIconUploader } from '../../02_organisms/OUserIconUploader'
 import { UserPrivateEntity } from '../../../generated/graphql'
 import { colorScheme } from '../../../theme/colorScheme'
+import { ELoader } from '../../01_elements/ELoader'
 
 type Props = {
   secretJwt: string
   methods: UseFormReturn<any>
   onSubmit: (data: any) => void
   userPrivate?: UserPrivateEntity
+  isSubmitting: boolean
 }
 
 const Component: FC<Props> = ({
@@ -19,6 +21,7 @@ const Component: FC<Props> = ({
   methods,
   onSubmit,
   userPrivate,
+  isSubmitting,
 }) => {
   return (
     <>
@@ -81,8 +84,14 @@ const Component: FC<Props> = ({
           align="center"
         >
           <Box w="100%" maw={410} px={16}>
-            <EButton.Sm type="submit" w="100%">
-              登録
+            <EButton.Sm type="submit" w="100%" disabled={isSubmitting}>
+              {isSubmitting ? (
+                <>
+                  <ELoader size="xs" />
+                </>
+              ) : (
+                <>登録</>
+              )}
             </EButton.Sm>
           </Box>
         </Flex>

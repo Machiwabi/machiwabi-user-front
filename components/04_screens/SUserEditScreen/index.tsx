@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { showNotification } from '@mantine/notifications'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import {
@@ -55,6 +55,8 @@ const MainBlock: FC<MainBlockProps> = ({
   userPrivate,
   upsertUser,
 }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   const defaultValues = {
     displayName: userPrivate.displayName,
     iconImageUrl: userPrivate.iconImageUrl,
@@ -69,6 +71,8 @@ const MainBlock: FC<MainBlockProps> = ({
   })
 
   const sendOnSubmit = methods.handleSubmit(async (data) => {
+    setIsSubmitting(true)
+
     const dto: UpsertUserMutationVariables = {
       displayName: data.displayName,
       iconImageUrl: data.iconImageUrl,
@@ -87,6 +91,8 @@ const MainBlock: FC<MainBlockProps> = ({
         message: 'プロフィールの更新に失敗しました',
         color: colorScheme.scheme1.notice.alert,
       })
+    } finally {
+      setIsSubmitting(false)
     }
   })
 
@@ -96,6 +102,7 @@ const MainBlock: FC<MainBlockProps> = ({
         ユーザー情報更新
       </EHeading.Page>
       <TUserEditFormTemplate
+        isSubmitting={isSubmitting}
         secretJwt={secretJwt}
         methods={methods}
         onSubmit={sendOnSubmit}

@@ -6,14 +6,21 @@ import { EHeading } from '../../01_elements/EHeading/base'
 import { OUserIconUploader } from '../../02_organisms/OUserIconUploader'
 import { applicationUrls } from '../../../constants/applicationUrls'
 import { colorScheme } from '../../../theme/colorScheme'
+import { ELoader } from '../../01_elements/ELoader'
 
 type Props = {
   secretJwt: string
   methods: UseFormReturn<any>
+  isSubmitting: boolean
   onSubmit: (data: any) => void
 }
 
-const Component: FC<Props> = ({ secretJwt, methods, onSubmit }) => {
+const Component: FC<Props> = ({
+  secretJwt,
+  methods,
+  isSubmitting,
+  onSubmit,
+}) => {
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -22,7 +29,7 @@ const Component: FC<Props> = ({ secretJwt, methods, onSubmit }) => {
           <OUserIconUploader
             mt={22}
             methods={methods}
-            label="wa"
+            label="userIcon"
             schemaName="iconImageUrl"
             secretJwt={secretJwt}
           />
@@ -98,8 +105,14 @@ const Component: FC<Props> = ({ secretJwt, methods, onSubmit }) => {
           align="center"
         >
           <Box w="100%" maw={410} px={16}>
-            <EButton.Sm type="submit" w="100%">
-              登録
+            <EButton.Sm type="submit" w="100%" disabled={isSubmitting}>
+              {isSubmitting ? (
+                <>
+                  <ELoader size="xs" />
+                </>
+              ) : (
+                <>登録</>
+              )}
             </EButton.Sm>
           </Box>
         </Flex>

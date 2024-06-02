@@ -64,7 +64,7 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
           <AuthenticationProvider>
             {/* <ChakraProvider theme={theme.templateTheme}> */}
             <MantineProvider theme={mantineTheme} withGlobalClasses>
-              <Notifications />
+              <Notifications position="top-right" />
               <GoogleAnalyticsV4
                 googleAnalyticsId={googleAnalyticsId as GoogleAnalyticsId}
               />
