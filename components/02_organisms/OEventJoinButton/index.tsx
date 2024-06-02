@@ -63,8 +63,12 @@ type AuthenticatedButtonProps = {
 }
 
 const AuthenticatedButton: FC<AuthenticatedButtonProps> = ({ event }) => {
-  const { isUserJoinable, isUserJoinableEventIsLoading, isUserJoiableError } =
-    useEventJoinable({ uniqueKey: event.uniqueKey })
+  const {
+    isUserJoinable,
+    isUserJoinableEventIsLoading,
+    isUserJoiableError,
+    isUserJoinableErrorType,
+  } = useEventJoinable({ uniqueKey: event.uniqueKey })
 
   const { createJoinWaiting } = useJoinWaiting()
   const [joining, setJoining] = useState(false)
@@ -90,11 +94,19 @@ const AuthenticatedButton: FC<AuthenticatedButtonProps> = ({ event }) => {
   }
 
   if (isUserJoiableError) {
+    const errorMessage = isUserJoinableErrorType
+      ? {
+          AlreadyWaitingError: 'すでに参加しています',
+          NotFoundError: 'イベントが見つかりません',
+          NotSuitableEventError: 'イベントが見つかりません',
+          NotSuitableUserError: 'ユーザーが見つかりません',
+        }[isUserJoinableErrorType]
+      : 'エラーのため参加できません'
     return (
       <>
         <Box w="100%" maw={410} px={16}>
           <EButton.Lg w="100%" fillType="disabled" disabled>
-            エラーのため参加できません
+            {errorMessage}
           </EButton.Lg>
         </Box>
       </>
