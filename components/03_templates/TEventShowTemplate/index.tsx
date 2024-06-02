@@ -26,11 +26,6 @@ const Component: FC<Props> = ({ event, ...props }) => {
                   objectFit="cover"
                   alt={event.name || ''}
                 />
-                <Overlay
-                  gradient="linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%)"
-                  opacity={0.85}
-                  style={{ zIndex: 1 }}
-                />
               </>
             ) : (
               <>
