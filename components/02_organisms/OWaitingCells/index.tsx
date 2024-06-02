@@ -51,7 +51,7 @@ const Component: FC<Props> = ({ waitings, ...props }) => {
                       left={0}
                     >
                       <RingProgress
-                        size={180}
+                        size={140}
                         thickness={4}
                         sections={[
                           {
