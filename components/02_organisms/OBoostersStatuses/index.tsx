@@ -33,7 +33,7 @@ const Component: FC<Props> = ({
                 }
                 width={18}
                 height={18}
-                alt={'aaa'}
+                alt={'addable booster icon'}
               />
             </Box>
           ))}
