@@ -1,5 +1,5 @@
-mutation exchangeBooster($uniqueKey: String!) {
-  exchangeBooster(input: { uniqueKey: $uniqueKey }) {
+mutation exchangeBooster($uniqueKey: String!, $content: String) {
+  exchangeBooster(input: { uniqueKey: $uniqueKey, content: $content }) {
     ...WaitingBoosterField
     booster {
       ...BoosterField

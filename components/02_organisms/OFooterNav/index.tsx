@@ -9,6 +9,7 @@ const Component: FC = () => {
 
   if (!isAuthenticated()) return <></>
 
+  return <></>
   return (
     <>
       <GuideFloatButton />

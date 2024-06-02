@@ -75,7 +75,7 @@ const Component: FC<Props> = ({ waiting, booster, ...props }) => {
               fillType="filled"
               surface="accent1"
               w="100%"
-              onClick={() => buyBooster(waiting.event.uniqueKey)}
+              disabled={true}
             >
               <>
                 <ELoader

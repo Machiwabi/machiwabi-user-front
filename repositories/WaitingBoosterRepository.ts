@@ -3,6 +3,10 @@ import {
   ExchangeBoosterDocument,
   ExchangeBoosterMutation,
   ExchangeBoosterMutationVariables,
+  LatestWaitingBoosterDocument,
+  LatestWaitingBoosterQuery,
+  LatestWaitingBoosterQueryVariables,
+  WaitingBoosterEntity,
 } from '../generated/graphql'
 
 const exchange = async (
@@ -15,6 +19,18 @@ const exchange = async (
   )
 }
 
+const latestWaitingBooster = async (
+  variables: LatestWaitingBoosterQueryVariables
+): Promise<WaitingBoosterEntity> => {
+  const result = await graphqlApiClient().request<LatestWaitingBoosterQuery>(
+    LatestWaitingBoosterDocument,
+    variables
+  )
+
+  return result.latestWaitingBooster
+}
+
 export const WaitingBoosterRepository = {
   exchange,
+  latestWaitingBooster,
 }
