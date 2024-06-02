@@ -1,4 +1,4 @@
-import { Box, BoxProps, Flex, Overlay } from '@mantine/core'
+import { AspectRatio, Box, BoxProps, Flex, Overlay } from '@mantine/core'
 import Image from 'next/image'
 import { FC, Fragment } from 'react'
 import { EventEntity } from '../../../generated/graphql'
@@ -16,31 +16,33 @@ const Component: FC<Props> = ({ event, ...props }) => {
   return (
     <>
       <Box {...props}>
-        <Box pos="relative" w="100%" h={'240px'}>
-          {event.imageUrl ? (
-            <>
-              <Image
-                src={event.imageUrl}
-                layout="fill"
-                objectFit="cover"
-                alt={event.name || ''}
-              />
-              <Overlay
-                gradient="linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%)"
-                opacity={0.85}
-                style={{ zIndex: 1 }}
-              />
-            </>
-          ) : (
-            <>
-              <Box
-                bg={colorScheme.scheme1.surface2.surface}
-                w="100%"
-                h="100%"
-              />
-            </>
-          )}
-        </Box>
+        <AspectRatio mt={16} ratio={0.7}>
+          <Box pos="relative" w="100%">
+            {event.imageUrl ? (
+              <>
+                <Image
+                  src={event.imageUrl}
+                  layout="fill"
+                  objectFit="cover"
+                  alt={event.name || ''}
+                />
+                <Overlay
+                  gradient="linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%)"
+                  opacity={0.85}
+                  style={{ zIndex: 1 }}
+                />
+              </>
+            ) : (
+              <>
+                <Box
+                  bg={colorScheme.scheme1.surface2.surface}
+                  w="100%"
+                  h="100%"
+                />
+              </>
+            )}
+          </Box>
+        </AspectRatio>
 
         <Box mt={24} mb={16} px={16}>
           <EHeading.Page>{event.name}</EHeading.Page>

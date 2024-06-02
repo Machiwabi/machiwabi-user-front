@@ -29,7 +29,7 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
         このイベントの詳細情報や会場へのアクセス情報をご覧いただけます！
       </OTutorialGuide>
 
-      <TEventShowTemplate event={waiting.event} />
+      <TEventShowTemplate px={16} event={waiting.event} />
     </>
   )
 }
