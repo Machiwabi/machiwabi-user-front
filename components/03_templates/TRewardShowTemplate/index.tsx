@@ -1,12 +1,12 @@
-import { AspectRatio, Box, BoxProps, Flex, Progress } from '@mantine/core'
+import { AspectRatio, Box, BoxProps, Flex } from '@mantine/core'
 import Image from 'next/image'
 import { FC } from 'react'
 import { RewardEntity, WaitingEntity } from '../../../generated/graphql'
 import { colorScheme } from '../../../theme/colorScheme'
+import { dateConverter } from '../../../utils/dateConverter'
 import { EButton } from '../../01_elements/EButton'
 import { EHeading } from '../../01_elements/EHeading/base'
 import { EText } from '../../01_elements/EText/base'
-import { WaitingService } from '../../../domains/services/waiting.service'
 
 type Props = BoxProps & {
   waiting: WaitingEntity
@@ -14,8 +14,6 @@ type Props = BoxProps & {
 }
 
 const Component: FC<Props> = ({ waiting, reward, ...props }) => {
-  const waitingService = new WaitingService(waiting)
-
   return (
     <>
       <Box px={16} {...props}>
@@ -41,10 +39,10 @@ const Component: FC<Props> = ({ waiting, reward, ...props }) => {
       <Box my={24} px={16}>
         <EHeading.Page ta="center">{reward.name}</EHeading.Page>
         <Box mt={2} ta="center" ff="outfit" fw={700} fz={18}>
-          {reward.requiredTotalPoint?.toLocaleString()} PT
+          {reward.requiredTotalPoint?.toLocaleString()} pt
         </Box>
         <EText.Desc1 mt={8}>{reward.description}</EText.Desc1>
-        <Box mt={16}>
+        {/* <Box mt={16}>
           <Progress
             h={3}
             value={50}
@@ -61,13 +59,19 @@ const Component: FC<Props> = ({ waiting, reward, ...props }) => {
               </Box>
             </Box>
           </Flex>
-        </Box>
+        </Box> */}
       </Box>
 
       <Flex direction="column" my={0} px={16} justify="center" align="center">
-        <EButton.Sm fillType="disabled">Insufficient points</EButton.Sm>
+        <EButton.Sm fillType="disabled">
+          {dateConverter.yyyyMMddHHmmss(reward.startAt)}から交換可能
+        </EButton.Sm>
         <Box mt={8} fz={10} c={colorScheme.scheme1.surface1.object.mid}>
-          アカウントあたり1つまで引換可 ／ 残り32個
+          {reward.stockPerWaiting && reward.stockPerWaiting > 0 && (
+            <>アカウントあたり{reward.stockPerWaiting}つまで引換可</>
+          )}
+          {reward.stockPerWaiting && reward.stock && <> ／ </>}
+          {reward.stock && <>残り{reward.stock}個</>}
         </Box>
       </Flex>
     </>

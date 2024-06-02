@@ -60,16 +60,16 @@ const Component: FC<Props> = ({ ...props }) => {
           <Box pos="absolute" w="142px" h="5859px" left={0} top={0}>
             <Image
               src="/assets/images/lp/bg/bg_sm_milky-way-left.svg"
-              layout={`fill`}
-              objectFit={`cover`}
+              layout="fill"
+              objectFit="cover"
               alt="bg ergosphere"
             />
           </Box>
           <Box pos="absolute" w="142px" h="5859px" right={0} top={0}>
             <Image
               src="/assets/images/lp/bg/bg_sm_milky-way-right.svg"
-              layout={`fill`}
-              objectFit={`cover`}
+              layout="fill"
+              objectFit="cover"
               alt="bg ergosphere"
             />
           </Box>
