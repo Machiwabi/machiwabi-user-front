@@ -59,7 +59,7 @@ const MainBlock: FC<MainBlockProps> = ({
 
   const defaultValues = {
     displayName: userPrivate.displayName,
-    iconImageUrl: userPrivate.iconImageUrl,
+    iconImageUrl: userPrivate.iconImageUrl || undefined,
     email: userPrivate.email,
   }
 
