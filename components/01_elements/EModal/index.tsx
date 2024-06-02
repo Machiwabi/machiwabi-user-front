@@ -25,6 +25,7 @@ const Component: FC<Props> = ({
   }, [isOpen])
 
   useEffect(() => {
+    if (opened) return
     if (closedCallback) closedCallback(close)
   }, [opened])
 

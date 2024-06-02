@@ -1,6 +1,8 @@
 import { Box, Flex } from '@mantine/core'
 import { FC } from 'react'
 import { EText } from '../../01_elements/EText/base'
+import { EButton } from '../../01_elements/EButton'
+import { applicationUrls } from '../../../constants/applicationUrls'
 
 const Component: FC = () => {
   return (
@@ -18,6 +20,11 @@ const Component: FC = () => {
           <br />
           ありません
         </EText.Desc2>
+        <Box mt={16}>
+          <EButton.Sm href={applicationUrls.campaign.icr240603}>
+            「雨のち、リボン2024」に参加する
+          </EButton.Sm>
+        </Box>
       </Box>
     </Flex>
   )
