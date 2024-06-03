@@ -10,22 +10,30 @@ import {
   CheckEventJoinableQuery,
   CheckEventJoinableQueryVariables,
   EventDocument,
+  EventEntity,
   EventQuery,
   EventQueryVariables,
   EventsDocument,
   EventsQuery,
 } from '../generated/graphql'
 
-const findAll = async (): Promise<EventsQuery> => {
-  return await graphqlApiClient().request<EventsQuery>(EventsDocument)
+const findAll = async (): Promise<EventEntity[]> => {
+  const eventQuery = await graphqlApiClient().request<EventsQuery>(
+    EventsDocument
+  )
+  return eventQuery.events
 }
 
-const findOne = async (variables: EventQueryVariables): Promise<EventQuery> => {
+const findOne = async (
+  variables: EventQueryVariables
+): Promise<EventEntity> => {
   try {
-    return await graphqlApiClient().request<EventQuery>(
+    const eventQuery = await graphqlApiClient().request<EventQuery>(
       EventDocument,
       variables
     )
+
+    return eventQuery.event
   } catch (e: any) {
     if (e.response.errors[0].extensions.code === 'NOT_FOUND_ERROR')
       throw new NotFoundError('Project not found')
