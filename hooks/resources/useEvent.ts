@@ -1,9 +1,9 @@
 import useSWR from 'swr'
-import { EventQuery, EventQueryVariables } from '../../generated/graphql'
+import { EventEntity, EventQueryVariables } from '../../generated/graphql'
 import { EventRepository } from '../../repositories/EventRepository'
 
 export const useEvent = (variables: EventQueryVariables) => {
-  const { data, error, isLoading } = useSWR<EventQuery>(
+  const { data, error, isLoading } = useSWR<EventEntity>(
     ['EventDocument', variables],
     async () => {
       return EventRepository.findOne(variables)
@@ -11,7 +11,7 @@ export const useEvent = (variables: EventQueryVariables) => {
   )
 
   return {
-    event: data?.event,
+    event: data,
     eventError: error,
     eventIsLoading: isLoading,
   }

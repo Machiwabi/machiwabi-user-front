@@ -1,16 +1,25 @@
+import { SWRConfig, unstable_serialize } from 'swr'
 import LGuestUserLayout from '../../../components/00_layouts/LGuestUserLayout'
 import { SEventScreen } from '../../../components/04_screens/SEventScreen'
+import { EventEntity } from '../../../generated/graphql'
 import { EventRepository } from '../../../repositories/EventRepository'
 import { NextPageWithLayout } from '../../_app'
 
-type Props = {
-  uniqueKey: string
+type SWRFallbackValue = {
+  [key: string]: EventEntity
 }
 
-const Page: NextPageWithLayout<Props> = ({ uniqueKey }) => {
+type Props = {
+  uniqueKey: string
+  fallback: SWRFallbackValue
+}
+
+const Page: NextPageWithLayout<Props> = ({ uniqueKey, fallback }) => {
   return (
     <>
-      <SEventScreen uniqueKey={uniqueKey} />
+      <SWRConfig value={{ fallback }}>
+        <SEventScreen uniqueKey={uniqueKey} />
+      </SWRConfig>
     </>
   )
 }
@@ -25,12 +34,17 @@ type Params = {
   }
 }
 
-export const getServerSideProps = async ({ params }: Params) => {
-  const waiting = await EventRepository.findOne({
+export const getStaticProps = async ({ params }: Params) => {
+  const event = await EventRepository.findOne({
     uniqueKey: params.uniqueKey,
   })
 
-  if (!waiting) {
+  const serialized = unstable_serialize([
+    'EventDocument',
+    { uniqueKey: params.uniqueKey },
+  ])
+
+  if (!event) {
     return {
       notFound: true,
     }
@@ -39,10 +53,24 @@ export const getServerSideProps = async ({ params }: Params) => {
   try {
     return {
       props: {
+        fallback: {
+          [serialized]: event,
+        },
         uniqueKey: params.uniqueKey,
       } as Props,
     }
   } catch (e) {
     throw e
+  }
+}
+
+export const getStaticPaths = async () => {
+  const events = await EventRepository.findAll()
+
+  return {
+    paths: events.map((event) => ({
+      params: { uniqueKey: event.uniqueKey },
+    })),
+    fallback: 'blocking',
   }
 }
