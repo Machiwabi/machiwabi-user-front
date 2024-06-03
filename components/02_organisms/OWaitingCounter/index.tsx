@@ -1,6 +1,6 @@
 import { AspectRatio, Box } from '@mantine/core'
 import { FC } from 'react'
-import { AnimateWaiting } from '../../../_old-cmp/organisms/AnimateWaiting'
+import { AnimateWaiting } from '../../three/AnimateWaiting'
 import { WaitingEntity } from '../../../generated/graphql'
 
 type Props = {
