@@ -13,7 +13,7 @@ type Props = {
 }
 
 const Component: FC<Props> = ({
-  heading = 'エラー',
+  heading = '接続が切れました',
   description = '再読み込みをしてください',
   displayReloadButton = true,
   href,
