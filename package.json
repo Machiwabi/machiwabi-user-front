@@ -13,9 +13,6 @@
     "codegen-rest": "yarn openapi-generator-cli generate -g typescript-axios -i http://localhost:44004/api-json -o ./generated/rest-api -c ./openapiConfig.yml  --skip-validate-spec"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.8.2",
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
     "@faker-js/faker": "^8.0.1",
     "@hookform/resolvers": "^3.3.1",
     "@mantine/carousel": "^7.10.0",
