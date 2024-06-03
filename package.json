@@ -28,7 +28,6 @@
     "@mantine/notifications": "^7.9.1",
     "@mantine/nprogress": "^7.9.1",
     "@mantine/tiptap": "^7.9.1",
-    "@rainbow-me/rainbowkit": "2",
     "@react-spring/three": "^9.7.3",
     "@react-three/drei": "^9.105.1",
     "@react-three/fiber": "^8.16.1",
@@ -66,7 +65,6 @@
     "siwe": "2.1.4",
     "swr": "^2.1.5",
     "three": "^0.163.0",
-    "viem": "2.x",
     "wagmi": "2",
     "zod": "^3.22.2"
   },
