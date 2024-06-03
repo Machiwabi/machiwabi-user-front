@@ -40,7 +40,6 @@
     "@tiptap/starter-kit": "^2.3.2",
     "@web3auth/modal": "^7.3.1",
     "@web3auth/openlogin-adapter": "^7.3.1",
-    "alchemy-sdk": "^3.1.1",
     "axios": "^1.4.0",
     "dayjs": "^1.11.11",
     "embla-carousel-react": "^7.1.0",
