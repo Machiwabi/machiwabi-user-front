@@ -40,9 +40,9 @@ const Component: FC = () => {
               lh={{ base: 1.45 }}
               ta="center"
             >
-              雨のち、リボン
+              雨のち、リボン2024
               <Box component="br" />
-              のチケットをお持ちですか？
+              のチケットを予約・購入済みですか？
             </Box>
             <Flex
               direction={{ base: 'column', lg: 'row' }}
