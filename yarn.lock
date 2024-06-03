@@ -1948,13 +1948,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@faker-js/faker@npm:^8.0.1":
-  version: 8.0.1
-  resolution: "@faker-js/faker@npm:8.0.1"
-  checksum: 10c0/a1ac63f9cecd162bf4bee89075cdb5045f896df4e933400ac1442c0eb067df8dd151d332fa4e5a516a440b1caa3cd3f0301dae6d7af7677ebb2111da86512d4c
-  languageName: node
-  linkType: hard
-
 "@floating-ui/core@npm:^1.0.0":
   version: 1.6.1
   resolution: "@floating-ui/core@npm:1.6.1"
@@ -14199,7 +14192,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "nextjs-auth0-template@workspace:."
   dependencies:
-    "@faker-js/faker": "npm:^8.0.1"
     "@graphql-codegen/cli": "npm:^5.0.0"
     "@graphql-codegen/typescript": "npm:^4.0.1"
     "@graphql-codegen/typescript-graphql-request": "npm:^5.0.0"
