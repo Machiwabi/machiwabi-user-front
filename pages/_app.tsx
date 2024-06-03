@@ -7,7 +7,6 @@ import { Router } from 'next/router'
 import NProgress from 'nprogress'
 import { ReactElement, ReactNode } from 'react'
 import { RecoilRoot } from 'recoil'
-import { AuthenticationProvider } from '../providers/AuthenticationProvider'
 import '../styles/global.css'
 import '../styles/nprogress.css'
 import { mantineTheme } from '../theme/mantineTheme'
@@ -61,17 +60,13 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
     <Provider config={rollbarConfig}>
       <ErrorBoundary>
         <RecoilRoot>
-          <AuthenticationProvider>
-            {/* <ChakraProvider theme={theme.templateTheme}> */}
-            <MantineProvider theme={mantineTheme} withGlobalClasses>
-              <Notifications position="top-right" />
-              <GoogleAnalyticsV4
-                googleAnalyticsId={googleAnalyticsId as GoogleAnalyticsId}
-              />
-              {getLayout(<Component {...pageProps} key={router.asPath} />)}
-            </MantineProvider>
-            {/* </ChakraProvider> */}
-          </AuthenticationProvider>
+          <MantineProvider theme={mantineTheme} withGlobalClasses>
+            <Notifications position="top-right" />
+            <GoogleAnalyticsV4
+              googleAnalyticsId={googleAnalyticsId as GoogleAnalyticsId}
+            />
+            {getLayout(<Component {...pageProps} key={router.asPath} />)}
+          </MantineProvider>
         </RecoilRoot>
       </ErrorBoundary>
     </Provider>
