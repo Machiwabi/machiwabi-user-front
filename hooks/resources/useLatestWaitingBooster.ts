@@ -8,12 +8,11 @@ import { WaitingBoosterRepository } from '../../repositories/WaitingBoosterRepos
 export const useLatestWaitingBooster = (
   variables: LatestWaitingBoosterQueryVariables
 ) => {
-  const { data, error, isLoading } = useSWR<WaitingBoosterEntity>(
-    ['LatestWaitingBoosterDocument', variables],
-    async () => {
-      return await WaitingBoosterRepository.latestWaitingBooster(variables)
-    }
-  )
+  const { data, error, isLoading } = useSWR<
+    WaitingBoosterEntity | null | undefined
+  >(['LatestWaitingBoosterDocument', variables], async () => {
+    return await WaitingBoosterRepository.latestWaitingBooster(variables)
+  })
 
   return {
     latestWaitingBooster: data,

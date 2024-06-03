@@ -21,7 +21,7 @@ const exchange = async (
 
 const latestWaitingBooster = async (
   variables: LatestWaitingBoosterQueryVariables
-): Promise<WaitingBoosterEntity> => {
+): Promise<WaitingBoosterEntity | null | undefined> => {
   const result = await graphqlApiClient().request<LatestWaitingBoosterQuery>(
     LatestWaitingBoosterDocument,
     variables
