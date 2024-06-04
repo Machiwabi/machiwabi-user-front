@@ -14,7 +14,7 @@ export const waitingMissionsUrl = (uniqueKey: string) =>
 export const waitingMissionUrl = (
   uniqueKey: string,
   boosterUniqueKey: string
-) => `/waitings/${uniqueKey}/missions/${boosterUniqueKey}`
+) => `/missions/${boosterUniqueKey}?waitingUniqueKey=${uniqueKey}`
 
 export const waitingRewardsUrl = (uniqueKey: string) =>
   `/waitings/${uniqueKey}?tab=rewards`
