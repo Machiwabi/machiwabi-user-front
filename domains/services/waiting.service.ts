@@ -38,6 +38,9 @@ export class WaitingService {
 
     const ceiledStartAt = this._ceiledStartAt()
 
+    // この変数の意図
+    // baseDateが区切ったceiledStartAtとより後ろの場合は、ceiledStartAtを基準にする
+    // そうではなく、baseDateがceiledStartAtと同じ場合は、切り下げになってしまうのでそのまま出力する
     const adjustedBaseDate =
       baseDate.getTime() > ceiledStartAt.getTime() ? ceiledStartAt : baseDate
 
@@ -67,9 +70,7 @@ export class WaitingService {
       new Date(baseDate.getTime() + this.waiting.secondsPerWaitingPoint * 1000) // 10秒後
     )
 
-    return nextDateTotalPoint - baseDateTotalPoint === 0
-      ? 1
-      : nextDateTotalPoint - baseDateTotalPoint + 1
+    return nextDateTotalPoint - baseDateTotalPoint + 1
   }
 
   // 現時点での数字を元に、目標のポイントまでの秒数を返す
@@ -190,6 +191,7 @@ export class WaitingService {
     )
   }
 
+  // TODO これはEventServiceに移動するかも
   private _ceiledStartAt(): Date {
     return new Date(
       Math.ceil(
