@@ -181,12 +181,14 @@ export type Query = {
   booster: BoosterEntity;
   boosterUseableDuration: BoosterUseableDurationEntity;
   boosters: Array<BoosterEntity>;
+  boostersAll: Array<BoosterEntity>;
   checkEventJoinable: Scalars['Boolean']['output'];
   event: EventEntity;
   events: Array<EventEntity>;
-  latestWaitingBooster: WaitingBoosterEntity;
+  latestWaitingBooster?: Maybe<WaitingBoosterEntity>;
   reward: RewardEntity;
   rewards: Array<RewardEntity>;
+  rewardsAll: Array<RewardEntity>;
   userPrivate?: Maybe<UserPrivateEntity>;
   waiting: WaitingEntity;
   waitingSiblings: Array<WaitingEntity>;
@@ -410,6 +412,11 @@ export type BoosterQueryVariables = Exact<{
 
 export type BoosterQuery = { __typename?: 'Query', booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } };
 
+export type BoostersAllQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type BoostersAllQuery = { __typename?: 'Query', boostersAll: Array<{ __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null }> };
+
 export type BoostersQueryVariables = Exact<{
   eventUniqueKey: Scalars['String']['input'];
 }>;
@@ -442,7 +449,7 @@ export type LatestWaitingBoosterQueryVariables = Exact<{
 }>;
 
 
-export type LatestWaitingBoosterQuery = { __typename?: 'Query', latestWaitingBooster: { __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null, enabled: boolean, booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } } };
+export type LatestWaitingBoosterQuery = { __typename?: 'Query', latestWaitingBooster?: { __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null, enabled: boolean, booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } } | null };
 
 export type RewardQueryVariables = Exact<{
   uniqueKey: Scalars['String']['input'];
@@ -450,6 +457,11 @@ export type RewardQueryVariables = Exact<{
 
 
 export type RewardQuery = { __typename?: 'Query', reward: { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null, exchangeable: boolean, startAt: any, endAt: any, order?: number | null } };
+
+export type RewardsAllQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type RewardsAllQuery = { __typename?: 'Query', rewardsAll: Array<{ __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null, exchangeable: boolean, startAt: any, endAt: any, order?: number | null }> };
 
 export type RewardsQueryVariables = Exact<{
   eventUniqueKey: Scalars['String']['input'];
@@ -476,6 +488,11 @@ export type WaitingQueryVariables = Exact<{
 
 
 export type WaitingQuery = { __typename?: 'Query', waiting: { __typename?: 'WaitingEntity', uniqueKey: string, waitingPoint: number, totalPoint: number, waitingDuration: number, remainingEventStartDuration: number, secondsPerWaitingPoint: number, secondPerTotalPoint: number, totalPointMultiplier: number, waitingName?: string | null, waitingMessage?: string | null, joinAt: any, event: { __typename?: 'EventEntity', uniqueKey: string, waitingStartAt: any, startAt: any, endAt: any, name?: string | null, description?: string | null, mdxContent?: string | null, detailMdxContent?: string | null, isJoinable: boolean, lat?: number | null, lng?: number | null, onlineUrl?: string | null, placeName?: string | null, imageUrl?: string | null }, user: { __typename?: 'UserPublicEntity', eoaAddress?: string | null, displayName?: string | null, iconImageUrl?: string | null }, waitingBoosters: Array<{ __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null, enabled: boolean, booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } }>, waitingRewards: Array<{ __typename?: 'WaitingRewardEntity', uniqueKey: string, withdrawedTotalPoint: number, reward: { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null, exchangeable: boolean, startAt: any, endAt: any, order?: number | null } }> } };
+
+export type WaitingsAllQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type WaitingsAllQuery = { __typename?: 'Query', waitingsAll: Array<{ __typename?: 'WaitingEntity', uniqueKey: string, waitingPoint: number, totalPoint: number, waitingDuration: number, remainingEventStartDuration: number, secondsPerWaitingPoint: number, secondPerTotalPoint: number, totalPointMultiplier: number, waitingName?: string | null, waitingMessage?: string | null, joinAt: any, event: { __typename?: 'EventEntity', uniqueKey: string, waitingStartAt: any, startAt: any, endAt: any, name?: string | null, description?: string | null, mdxContent?: string | null, detailMdxContent?: string | null, isJoinable: boolean, lat?: number | null, lng?: number | null, onlineUrl?: string | null, placeName?: string | null, imageUrl?: string | null }, user: { __typename?: 'UserPublicEntity', eoaAddress?: string | null, displayName?: string | null, iconImageUrl?: string | null }, waitingBoosters: Array<{ __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null, enabled: boolean, booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } }>, waitingRewards: Array<{ __typename?: 'WaitingRewardEntity', uniqueKey: string, withdrawedTotalPoint: number, reward: { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null, exchangeable: boolean, startAt: any, endAt: any, order?: number | null } }> }> };
 
 export type WaitingsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -666,6 +683,13 @@ export const BoosterDocument = gql`
   }
 }
     ${BoosterFieldFragmentDoc}`;
+export const BoostersAllDocument = gql`
+    query boostersAll {
+  boostersAll {
+    ...BoosterField
+  }
+}
+    ${BoosterFieldFragmentDoc}`;
 export const BoostersDocument = gql`
     query boosters($eventUniqueKey: String!) {
   boosters(eventUniqueKey: $eventUniqueKey) {
@@ -709,6 +733,13 @@ ${BoosterFieldFragmentDoc}`;
 export const RewardDocument = gql`
     query reward($uniqueKey: String!) {
   reward(uniqueKey: $uniqueKey) {
+    ...RewardField
+  }
+}
+    ${RewardFieldFragmentDoc}`;
+export const RewardsAllDocument = gql`
+    query rewardsAll {
+  rewardsAll {
     ...RewardField
   }
 }
@@ -761,6 +792,37 @@ ${RewardFieldFragmentDoc}`;
 export const WaitingDocument = gql`
     query waiting($uniqueKey: String!) {
   waiting(uniqueKey: $uniqueKey) {
+    ...WaitingField
+    event {
+      ...EventField
+    }
+    user {
+      ...UserPublicField
+    }
+    waitingBoosters {
+      ...WaitingBoosterField
+      booster {
+        ...BoosterField
+      }
+    }
+    waitingRewards {
+      ...WaitingRewardField
+      reward {
+        ...RewardField
+      }
+    }
+  }
+}
+    ${WaitingFieldFragmentDoc}
+${EventFieldFragmentDoc}
+${UserPublicFieldFragmentDoc}
+${WaitingBoosterFieldFragmentDoc}
+${BoosterFieldFragmentDoc}
+${WaitingRewardFieldFragmentDoc}
+${RewardFieldFragmentDoc}`;
+export const WaitingsAllDocument = gql`
+    query waitingsAll {
+  waitingsAll {
     ...WaitingField
     event {
       ...EventField
@@ -849,6 +911,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     booster(variables: BoosterQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<BoosterQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<BoosterQuery>(BoosterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'booster', 'query');
     },
+    boostersAll(variables?: BoostersAllQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<BoostersAllQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<BoostersAllQuery>(BoostersAllDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'boostersAll', 'query');
+    },
     boosters(variables: BoostersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<BoostersQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<BoostersQuery>(BoostersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'boosters', 'query');
     },
@@ -867,6 +932,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     reward(variables: RewardQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<RewardQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<RewardQuery>(RewardDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'reward', 'query');
     },
+    rewardsAll(variables?: RewardsAllQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<RewardsAllQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RewardsAllQuery>(RewardsAllDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'rewardsAll', 'query');
+    },
     rewards(variables: RewardsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<RewardsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<RewardsQuery>(RewardsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'rewards', 'query');
     },
@@ -878,6 +946,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     waiting(variables: WaitingQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<WaitingQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<WaitingQuery>(WaitingDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'waiting', 'query');
+    },
+    waitingsAll(variables?: WaitingsAllQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<WaitingsAllQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<WaitingsAllQuery>(WaitingsAllDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'waitingsAll', 'query');
     },
     waitings(variables?: WaitingsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<WaitingsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<WaitingsQuery>(WaitingsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'waitings', 'query');

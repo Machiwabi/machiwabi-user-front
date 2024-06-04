@@ -4,6 +4,8 @@ import {
   BoosterEntity,
   BoosterQuery,
   BoosterQueryVariables,
+  BoostersAllDocument,
+  BoostersAllQuery,
   BoostersDocument,
   BoostersQuery,
   BoostersQueryVariables,
@@ -13,6 +15,13 @@ import {
   RedirectUriEntity,
 } from '../generated/graphql'
 
+const findAll = async (): Promise<BoosterEntity[]> => {
+  const boostersAllQuery = await graphqlApiClient().request<BoostersAllQuery>(
+    BoostersAllDocument
+  )
+  return boostersAllQuery.boostersAll
+}
+
 const findOne = async (
   variables: BoosterQueryVariables
 ): Promise<BoosterEntity> => {
@@ -20,6 +29,8 @@ const findOne = async (
     BoosterDocument,
     variables
   )
+
+  console.log('boosterQuery----------', boosterQuery)
 
   return boosterQuery.booster
 }
@@ -45,4 +56,4 @@ const provision = async (
   return mutation.provisionBooster
 }
 
-export const BoosterRepository = { findOne, findMany, provision }
+export const BoosterRepository = { findAll, findOne, findMany, provision }

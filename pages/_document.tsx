@@ -36,7 +36,7 @@ class MyDocument extends Document<Props> {
       <Html>
         <Head>
           {/* <Meta /> */}
-          <link rel="manifest" href="./manifest.json" />
+          <link rel="manifest" href="/manifest.json" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"

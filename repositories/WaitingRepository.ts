@@ -8,9 +8,19 @@ import {
   WaitingSiblingsDocument,
   WaitingSiblingsQuery,
   WaitingSiblingsQueryVariables,
+  WaitingsAllDocument,
+  WaitingsAllQuery,
   WaitingsDocument,
   WaitingsQuery,
 } from '../generated/graphql'
+
+const all = async (): Promise<WaitingEntity[]> => {
+  const waitingsAllQuery = await graphqlApiClient().request<WaitingsAllQuery>(
+    WaitingsAllDocument
+  )
+
+  return waitingsAllQuery.waitingsAll
+}
 
 const findMany = async (accessToken: string): Promise<WaitingEntity[]> => {
   const waitingsQuery = await graphqlApiClient(
@@ -47,4 +57,4 @@ const siblings = async (
   )
 }
 
-export const WaitingRepository = { findMany, findOne, siblings }
+export const WaitingRepository = { all, findMany, findOne, siblings }

@@ -1,6 +1,5 @@
 import useSWR from 'swr'
 import { WaitingEntity, WaitingQueryVariables } from '../../generated/graphql'
-import { SiweJwtRepository } from '../../repositories/SiweJwtRepository'
 import { WaitingRepository } from '../../repositories/WaitingRepository'
 
 export const useWaiting = (variables: WaitingQueryVariables) => {
@@ -9,9 +8,6 @@ export const useWaiting = (variables: WaitingQueryVariables) => {
     async () => {
       return WaitingRepository.findOne(variables)
     }
-    // {
-    //   refreshInterval: 6000,
-    // }
   )
 
   return {
