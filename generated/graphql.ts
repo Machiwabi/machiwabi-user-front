@@ -181,12 +181,14 @@ export type Query = {
   booster: BoosterEntity;
   boosterUseableDuration: BoosterUseableDurationEntity;
   boosters: Array<BoosterEntity>;
+  boostersAll: Array<BoosterEntity>;
   checkEventJoinable: Scalars['Boolean']['output'];
   event: EventEntity;
   events: Array<EventEntity>;
   latestWaitingBooster?: Maybe<WaitingBoosterEntity>;
   reward: RewardEntity;
   rewards: Array<RewardEntity>;
+  rewardsAll: Array<RewardEntity>;
   userPrivate?: Maybe<UserPrivateEntity>;
   waiting: WaitingEntity;
   waitingSiblings: Array<WaitingEntity>;
@@ -410,6 +412,11 @@ export type BoosterQueryVariables = Exact<{
 
 export type BoosterQuery = { __typename?: 'Query', booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } };
 
+export type BoostersAllQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type BoostersAllQuery = { __typename?: 'Query', boostersAll: Array<{ __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null }> };
+
 export type BoostersQueryVariables = Exact<{
   eventUniqueKey: Scalars['String']['input'];
 }>;
@@ -450,6 +457,11 @@ export type RewardQueryVariables = Exact<{
 
 
 export type RewardQuery = { __typename?: 'Query', reward: { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null, exchangeable: boolean, startAt: any, endAt: any, order?: number | null } };
+
+export type RewardsAllQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type RewardsAllQuery = { __typename?: 'Query', rewardsAll: Array<{ __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null, exchangeable: boolean, startAt: any, endAt: any, order?: number | null }> };
 
 export type RewardsQueryVariables = Exact<{
   eventUniqueKey: Scalars['String']['input'];
@@ -671,6 +683,13 @@ export const BoosterDocument = gql`
   }
 }
     ${BoosterFieldFragmentDoc}`;
+export const BoostersAllDocument = gql`
+    query boostersAll {
+  boostersAll {
+    ...BoosterField
+  }
+}
+    ${BoosterFieldFragmentDoc}`;
 export const BoostersDocument = gql`
     query boosters($eventUniqueKey: String!) {
   boosters(eventUniqueKey: $eventUniqueKey) {
@@ -714,6 +733,13 @@ ${BoosterFieldFragmentDoc}`;
 export const RewardDocument = gql`
     query reward($uniqueKey: String!) {
   reward(uniqueKey: $uniqueKey) {
+    ...RewardField
+  }
+}
+    ${RewardFieldFragmentDoc}`;
+export const RewardsAllDocument = gql`
+    query rewardsAll {
+  rewardsAll {
     ...RewardField
   }
 }
@@ -885,6 +911,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     booster(variables: BoosterQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<BoosterQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<BoosterQuery>(BoosterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'booster', 'query');
     },
+    boostersAll(variables?: BoostersAllQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<BoostersAllQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<BoostersAllQuery>(BoostersAllDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'boostersAll', 'query');
+    },
     boosters(variables: BoostersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<BoostersQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<BoostersQuery>(BoostersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'boosters', 'query');
     },
@@ -902,6 +931,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     reward(variables: RewardQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<RewardQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<RewardQuery>(RewardDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'reward', 'query');
+    },
+    rewardsAll(variables?: RewardsAllQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<RewardsAllQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RewardsAllQuery>(RewardsAllDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'rewardsAll', 'query');
     },
     rewards(variables: RewardsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<RewardsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<RewardsQuery>(RewardsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'rewards', 'query');
