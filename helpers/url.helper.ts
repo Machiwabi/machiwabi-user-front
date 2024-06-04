@@ -29,7 +29,7 @@ export const waitingAquiredUrl = (uniqueKey: string) =>
 export const waitingAquiredRewardUrl = (
   uniqueKey: string,
   rewardUniqueKey: string
-) => `/waitings/${uniqueKey}/aquired/${rewardUniqueKey}`
+) => `/aquired/${rewardUniqueKey}?waitingUniqueKey=${uniqueKey}`
 
 export const waitingInformationUrl = (uniqueKey: string) =>
   `/waitings/${uniqueKey}?tab=information`
