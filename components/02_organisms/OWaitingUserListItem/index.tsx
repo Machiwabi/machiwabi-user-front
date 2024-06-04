@@ -1,10 +1,9 @@
-import { Box, Flex } from '@mantine/core'
+import { Flex } from '@mantine/core'
 import { FC } from 'react'
 import { WaitingEntity } from '../../../generated/graphql'
+import { colorScheme } from '../../../theme/colorScheme'
 import { OUserIconWithStatuses } from '../OUserIconWithStatuses'
 import { OUserWaitingStatuses } from '../OUserWaitingStatuses'
-import { colorScheme } from '../../../theme/colorScheme'
-import { WaitingService } from '../../../domains/services/waiting.service'
 
 type Props = {
   waiting: WaitingEntity
@@ -12,8 +11,6 @@ type Props = {
 }
 
 const Component: FC<Props> = ({ waiting, rank }) => {
-  const waitingService = new WaitingService(waiting)
-
   return (
     <Flex align="center">
       {rank && (
@@ -42,20 +39,8 @@ const Component: FC<Props> = ({ waiting, rank }) => {
         </Flex>
       )}
       <Flex flex={1} justify="space-between" align="center">
-        <OUserIconWithStatuses
-          displayName={waiting.user.displayName || 'guest'}
-          waitingDuration={waiting.waitingDuration}
-          iconImageUrl={
-            waiting.user.iconImageUrl ||
-            '/assets/images/picture/picture_user-profile-fallback.png'
-          }
-        />
-        <OUserWaitingStatuses
-          totalPoints={waiting.totalPoint}
-          secondPerTotalPoints={waitingService.earnableTotalPoint()}
-          secondsPerWaitingPoint={waiting.secondsPerWaitingPoint}
-          isBoosting={waitingService.isBoosting()}
-        />
+        <OUserIconWithStatuses waiting={waiting} />
+        <OUserWaitingStatuses waiting={waiting} />
       </Flex>
     </Flex>
   )

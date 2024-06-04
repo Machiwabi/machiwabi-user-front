@@ -59,15 +59,13 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
   return (
     <Provider config={rollbarConfig}>
       <ErrorBoundary>
-        <RecoilRoot>
-          <MantineProvider theme={mantineTheme} withGlobalClasses>
-            <Notifications position="top-right" />
-            <GoogleAnalyticsV4
-              googleAnalyticsId={googleAnalyticsId as GoogleAnalyticsId}
-            />
-            {getLayout(<Component {...pageProps} key={router.asPath} />)}
-          </MantineProvider>
-        </RecoilRoot>
+        <MantineProvider theme={mantineTheme} withGlobalClasses>
+          <Notifications position="top-right" />
+          <GoogleAnalyticsV4
+            googleAnalyticsId={googleAnalyticsId as GoogleAnalyticsId}
+          />
+          {getLayout(<Component {...pageProps} key={router.asPath} />)}
+        </MantineProvider>
       </ErrorBoundary>
     </Provider>
   )
