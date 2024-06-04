@@ -69,6 +69,8 @@ export const getStaticProps = async ({ params }: Params) => {
           [serialized]: waiting,
         },
         uniqueKey: params.uniqueKey,
+        waitingEventTitle: waiting.event.name,
+        waitingUserDisplayName: waiting.user.displayName,
       } as Props,
     }
   } catch (e) {
