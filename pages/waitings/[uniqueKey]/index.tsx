@@ -4,6 +4,7 @@ import { SWaitingTabsScreen } from '../../../components/04_screens/SWaitingTabsS
 import { WaitingRepository } from '../../../repositories/WaitingRepository'
 import { NextPageWithLayout } from '../../_app'
 import { WaitingEntity } from '../../../generated/graphql'
+import { Seo } from '../../../components/99_seo/waitings/[uniqueKey]/Seo'
 
 type SWRFallbackValue = {
   [key: string]: WaitingEntity
@@ -11,13 +12,24 @@ type SWRFallbackValue = {
 
 type Props = {
   uniqueKey: string
+  waitingEventTitle: string
+  waitingUserDisplayName: string
   fallback: SWRFallbackValue
 }
 
-const Page: NextPageWithLayout<Props> = ({ uniqueKey, fallback }) => {
+const Page: NextPageWithLayout<Props> = ({
+  uniqueKey,
+  waitingEventTitle,
+  waitingUserDisplayName,
+  fallback,
+}) => {
   return (
     <>
       <SWRConfig value={{ fallback }}>
+        <Seo
+          waitingEventTitle={waitingEventTitle}
+          waitingUserDisplayName={waitingUserDisplayName}
+        />
         <SWaitingTabsScreen waitingUniqueKey={uniqueKey} />
       </SWRConfig>
     </>
@@ -57,6 +69,8 @@ export const getStaticProps = async ({ params }: Params) => {
           [serialized]: waiting,
         },
         uniqueKey: params.uniqueKey,
+        waitingEventTitle: waiting.event.name,
+        waitingUserDisplayName: waiting.user.displayName,
       } as Props,
     }
   } catch (e) {

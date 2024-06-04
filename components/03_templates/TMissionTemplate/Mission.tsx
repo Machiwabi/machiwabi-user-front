@@ -126,8 +126,6 @@ const Component: FC<Props> = ({ waiting, booster, ...props }) => {
     )
   }
 
-  console.log('-----------', latestWaitingBoosterError)
-
   if (boosterUseableDurationError || latestWaitingBoosterError) {
     return (
       <>

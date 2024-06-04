@@ -30,8 +30,6 @@ const findOne = async (
     variables
   )
 
-  console.log('boosterQuery----------', boosterQuery)
-
   return boosterQuery.booster
 }
 
