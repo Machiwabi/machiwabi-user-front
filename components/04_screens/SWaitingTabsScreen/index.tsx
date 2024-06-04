@@ -44,12 +44,6 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
 
   return (
     <>
-      <Seo
-        waitingEventTitle={waiting.event.name || ''}
-        waitingUserDisplayName={
-          waiting.user.displayName || waiting.user.eoaAddress || ''
-        }
-      />
       <Tabs variant="pills" defaultValue={selectedTab}>
         <OWaitingHeader waiting={waiting} mt={24} px={16} />
         <OWaitingTabs
