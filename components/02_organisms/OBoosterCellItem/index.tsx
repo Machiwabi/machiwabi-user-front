@@ -43,7 +43,7 @@ const Component: FC<Props> = ({ waitingBooster, isNowGranted, ...props }) => {
       pos="relative"
       direction="column"
       component="li"
-      justify="center"
+      justify="start"
       align="center"
       style={{ borderRadius: 8 }}
     >
@@ -70,16 +70,18 @@ const Component: FC<Props> = ({ waitingBooster, isNowGranted, ...props }) => {
               fill={true}
             />
 
-            <Box
+            <Flex
               pos="absolute"
               w="100%"
               h="100%"
+              align="center"
+              justify="center"
               top={0}
               left={0}
               bg="rgba(0,0,0,0.4)"
             >
               <RingProgress
-                size={60}
+                size={80}
                 thickness={6}
                 sections={[
                   {
@@ -88,17 +90,20 @@ const Component: FC<Props> = ({ waitingBooster, isNowGranted, ...props }) => {
                   },
                 ]}
               />
-            </Box>
+            </Flex>
           </Flex>
         </motion.div>
       </AspectRatio>
 
-      <Box mt={8}>
+      <Box mt={8} h="100%">
         <Box lh={1} fz={10} ta="center">
           あと
         </Box>
         <Box mt={2} lh={1} fz={10} ta="center">
           {dateConverter.msToMMDDSS(leftMs)}
+        </Box>
+        <Box fz={10} mt={8} fw={900} ta="justify">
+          {waitingBooster.booster.missionName}達成記念
         </Box>
       </Box>
     </Flex>
