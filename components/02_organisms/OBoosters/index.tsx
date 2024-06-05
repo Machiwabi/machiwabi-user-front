@@ -15,7 +15,7 @@ const Component: FC<Props> = ({
 }) => {
   return (
     <>
-      <SimpleGrid spacing={4} verticalSpacing={16} cols={6} {...props}>
+      <SimpleGrid spacing={8} verticalSpacing={16} cols={4} {...props}>
         {waitingBoosters.map((waitingBooster) => {
           const isNowGranted =
             waitingBooster.uniqueKey === grantedWaitingBoosterUniqueKey
