@@ -1,13 +1,9 @@
-import { Box, Flex, Text } from '@mantine/core'
-import Image from 'next/image'
+import { Box, Text } from '@mantine/core'
 import { FC } from 'react'
 import { WaitingBoosterEntity } from '../../../generated/graphql'
-import { colorScheme } from '../../../theme/colorScheme'
-import { dateConverter } from '../../../utils/dateConverter'
-import { OMissionCompleteListItem } from '../OMissionCompleteListItem'
-import { WaitingBoostersService } from '../../../domains/services/waiting-boosters.service'
-import { useOMissionCompleteList } from './useOMissionCompleteList'
 import { EBlankNotice } from '../../01_elements/EBlankNotice'
+import { OMissionCompleteListItem } from '../OMissionCompleteListItem'
+import { useOMissionCompleteList } from './useOMissionCompleteList'
 
 type Props = {
   waitingBoosters: WaitingBoosterEntity[]
