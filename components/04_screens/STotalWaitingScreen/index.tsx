@@ -5,6 +5,7 @@ import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
 import { AspectRatio, Box, Flex } from '@mantine/core'
 import { EText } from '../../01_elements/EText/base'
 import { OTutorialGuide } from '../../02_organisms/OTutorialGuide'
+import { OWaitingCounter } from '../../02_organisms/OWaitingCounter'
 
 type Props = {
   eventUniqueKey: string

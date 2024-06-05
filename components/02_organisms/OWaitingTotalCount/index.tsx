@@ -7,9 +7,11 @@ import { useAnimateTriggerStore } from '../../../recoil/animateTriggerStore/useA
 
 type Props = {
   waiting: WaitingEntity
+  fz?: number
+  rollSpeed?: number
 }
 
-const Component: FC<Props> = ({ waiting }) => {
+const Component: FC<Props> = ({ waiting, fz = 20, rollSpeed = 0 }) => {
   // 初期値生成
   const waitingService = new WaitingService(waiting)
   const totalPoint = waitingService.totalPoint()
@@ -46,12 +48,14 @@ const Component: FC<Props> = ({ waiting }) => {
               {digit}
             </Box>
           )
+        if (digit.match(/\d/) === null) return null
         return (
           <ECounterUnit
+            rollSpeed={rollSpeed}
             delay={index * 0.1}
             startNum={Math.random() * 10}
             goalNum={Number(digit)}
-            fz={20}
+            fz={fz}
             key={index}
           />
         )
