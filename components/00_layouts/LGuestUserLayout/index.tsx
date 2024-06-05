@@ -5,6 +5,7 @@ import { useAnimateTriggerStore } from '../../../recoil/animateTriggerStore/useA
 import { useAnimateTriggerTimer } from '../../../recoil/animateTriggerStore/useAnimateTriggerTimer'
 import { OHeaderNav } from '../../02_organisms/OHeaderNav'
 import { SOverlayedMenuScreen } from '../../04_screens/SOverlayedMenuScreen'
+import { applicationProperties } from '../../../constants/applicationProperties'
 
 export default function LGuestUserLayout(
   page: ReactElement<any, string | JSXElementConstructor<any>>
@@ -30,7 +31,12 @@ const MainBlock: FC<MainBlockProps> = ({ children }) => {
     <>
       <SOverlayedMenuScreen />
       <OHeaderNav />
-      <Container maw={410} pt={56} p={0} mb={160}>
+      <Container
+        maw={applicationProperties.CONTENT_MAX_WIDTH}
+        pt={56}
+        p={0}
+        mb={160}
+      >
         {children}
       </Container>
     </>

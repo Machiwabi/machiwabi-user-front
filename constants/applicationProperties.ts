@@ -20,4 +20,5 @@ export const applicationProperties = {
     PROJECT_ID: `${process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID}`,
   },
   GOOGLE_ANALYTICS_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || '',
+  CONTENT_MAX_WIDTH: 410,
 }
