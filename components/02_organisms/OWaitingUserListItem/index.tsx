@@ -6,7 +6,6 @@ import { colorScheme } from '../../../theme/colorScheme'
 import { EText } from '../../01_elements/EText/base'
 import { OUserIconWithStatuses } from '../OUserIconWithStatuses'
 import { OUserWaitingStatuses } from '../OUserWaitingStatuses'
-import styles from './style.module.scss'
 
 type Props = {
   waiting: WaitingEntity
@@ -19,11 +18,7 @@ const Component: FC<Props> = ({ waiting, rank, rollSpeed }) => {
     <Box pos="relative">
       <Popover>
         <Popover.Target>
-          <Flex
-            align="center"
-            style={{ cursor: 'pointer' }}
-            className={styles['o-waiting-user-list-item']}
-          >
+          <Flex align="center" style={{ cursor: 'pointer' }}>
             {rank && (
               <Flex
                 w={24}
