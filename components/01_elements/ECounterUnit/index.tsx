@@ -5,11 +5,18 @@ import { FC, useState } from 'react'
 type Props = {
   startNum: number
   goalNum: number
+  rollSpeed?: number
   fz?: number
   delay?: number
 }
 
-const Component: FC<Props> = ({ startNum, goalNum, fz = 18, delay = 0 }) => {
+const Component: FC<Props> = ({
+  startNum,
+  goalNum,
+  rollSpeed = 0,
+  fz = 18,
+  delay = 0,
+}) => {
   const [rolling, setRolling] = useState(true)
 
   return (
@@ -27,7 +34,7 @@ const Component: FC<Props> = ({ startNum, goalNum, fz = 18, delay = 0 }) => {
           variants={{
             hidden: { y: -fz * startNum, opacity: 1 },
             visible: {
-              y: -fz * goalNum + -fz * 20, //　動く量を多くするために
+              y: -fz * goalNum + -fz * 10 * rollSpeed, //　動く量を多くするために
               transition: {
                 duration: 2,
                 ease: 'easeOut',
@@ -39,8 +46,7 @@ const Component: FC<Props> = ({ startNum, goalNum, fz = 18, delay = 0 }) => {
           animate={rolling ? 'visible' : 'hidden'}
           onAnimationComplete={() => {}}
         >
-          {/* 回転のスピード感演出するため多めに数字を生成 */}
-          {[...new Array(30)].map((i, index) => {
+          {[...new Array(10 + 10 * rollSpeed)].map((i, index) => {
             return (
               <Box
                 w={'1rem'}

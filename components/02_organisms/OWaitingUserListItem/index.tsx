@@ -1,22 +1,20 @@
 import { Box, Flex, Popover, Text } from '@mantine/core'
-import Image from 'next/image'
 import { FC } from 'react'
 import { applicationProperties } from '../../../constants/applicationProperties'
 import { WaitingEntity } from '../../../generated/graphql'
 import { colorScheme } from '../../../theme/colorScheme'
-import { dateConverter } from '../../../utils/dateConverter'
+import { EText } from '../../01_elements/EText/base'
 import { OUserIconWithStatuses } from '../OUserIconWithStatuses'
 import { OUserWaitingStatuses } from '../OUserWaitingStatuses'
 import styles from './style.module.scss'
-import { OMissionCompleteList } from '../OMissionCompleteList'
-import { EText } from '../../01_elements/EText/base'
 
 type Props = {
   waiting: WaitingEntity
   rank?: number
+  rollSpeed?: number
 }
 
-const Component: FC<Props> = ({ waiting, rank }) => {
+const Component: FC<Props> = ({ waiting, rank, rollSpeed }) => {
   return (
     <Box pos="relative">
       <Popover>
@@ -53,7 +51,7 @@ const Component: FC<Props> = ({ waiting, rank }) => {
             )}
             <Flex flex={1} justify="space-between" align="center">
               <OUserIconWithStatuses waiting={waiting} />
-              <OUserWaitingStatuses waiting={waiting} />
+              <OUserWaitingStatuses waiting={waiting} rollSpeed={rollSpeed} />
             </Flex>
           </Flex>
         </Popover.Target>

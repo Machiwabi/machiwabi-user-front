@@ -26,6 +26,7 @@ const Component: FC<Props> = ({ addableTotalPoint, isBoosting }) => {
   }
 
   if (!addableTotalPoint) return null
+
   return (
     <>
       <motion.div
@@ -52,7 +53,7 @@ const Component: FC<Props> = ({ addableTotalPoint, isBoosting }) => {
               : colorScheme.scheme1.accent1.surface
           }
           ta="center"
-          fz={isBoosting ? 20 : 14}
+          fz={ballonFz(addableTotalPoint, isBoosting)}
           py={1}
           px={8}
           ff="outfit"
@@ -83,3 +84,13 @@ const generateSinWave = (points: number, amplitude: number, offset: number) => {
 }
 
 const { y, opacity } = generateSinWave(10, -20, -12)
+
+const ballonFz = (addableTotalPoint: number, isBoosting?: boolean) => {
+  if (!isBoosting) return 14
+
+  if (addableTotalPoint > 50) return 24
+  if (addableTotalPoint > 20) return 22
+  if (addableTotalPoint > 10) return 20
+  if (addableTotalPoint > 5) return 18
+  return 16
+}

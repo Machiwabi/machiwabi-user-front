@@ -24,7 +24,7 @@ const Component: FC<Props> = ({ waiting, ...props }) => {
             bg={colorScheme.scheme1.surface2.surface}
             className={styles['']}
           >
-            <OWaitingUserListItem waiting={waiting} />
+            <OWaitingUserListItem waiting={waiting} rollSpeed={5} />
             {waitingService.isBoosting() && (
               <>
                 <Divider my={16} />
