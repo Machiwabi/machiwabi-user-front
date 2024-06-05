@@ -71,7 +71,7 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
       </OTutorialGuide>
 
       <Box mb={40} px={16}>
-        <EHeading.ParagraphJa>有効なブースター</EHeading.ParagraphJa>
+        <EHeading.ParagraphJa>有効なBOOSTERS</EHeading.ParagraphJa>
         {enableBoosters.length === 0 && (
           <EBlankNotice
             title="有効なブースターがありません"
@@ -91,7 +91,7 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
 
       {reviewingBoosters.length > 0 && (
         <Box my={40} px={16}>
-          <EHeading.ParagraphJa>レビュー中のブースター</EHeading.ParagraphJa>
+          <EHeading.ParagraphJa>レビュー中のBOOSTERS</EHeading.ParagraphJa>
           <OBoosters
             mt={12}
             waitingBoosters={reviewingBoosters}
@@ -105,7 +105,7 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
 
       {finishedBoosters.length > 0 && (
         <Box my={40} px={16}>
-          <EHeading.ParagraphJa>効果が終了したブースター</EHeading.ParagraphJa>
+          <EHeading.ParagraphJa>効果が終了したBOOSTERS</EHeading.ParagraphJa>
           <OBoosters mt={12} waitingBoosters={finishedBoosters} />
         </Box>
       )}

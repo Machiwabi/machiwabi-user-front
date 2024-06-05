@@ -1,14 +1,14 @@
 import { Box, Flex, Popover, Text } from '@mantine/core'
+import Image from 'next/image'
 import { FC } from 'react'
+import { applicationProperties } from '../../../constants/applicationProperties'
 import { WaitingEntity } from '../../../generated/graphql'
 import { colorScheme } from '../../../theme/colorScheme'
+import { dateConverter } from '../../../utils/dateConverter'
 import { OUserIconWithStatuses } from '../OUserIconWithStatuses'
 import { OUserWaitingStatuses } from '../OUserWaitingStatuses'
-import { EText } from '../../01_elements/EText/base'
-import { applicationProperties } from '../../../constants/applicationProperties'
-import { EHeading } from '../../01_elements/EHeading/base'
-import { dateConverter } from '../../../utils/dateConverter'
-import Image from 'next/image'
+import styles from './style.module.scss'
+import { OMissionCompleteList } from '../OMissionCompleteList'
 
 type Props = {
   waiting: WaitingEntity
@@ -20,7 +20,11 @@ const Component: FC<Props> = ({ waiting, rank }) => {
     <Box pos="relative">
       <Popover>
         <Popover.Target>
-          <Flex align="center" style={{ cursor: 'pointer' }}>
+          <Flex
+            align="center"
+            style={{ cursor: 'pointer' }}
+            className={styles['o-waiting-user-list-item']}
+          >
             {rank && (
               <Flex
                 w={24}
@@ -54,54 +58,9 @@ const Component: FC<Props> = ({ waiting, rank }) => {
         </Popover.Target>
         <Popover.Dropdown
           w="100%"
-          maw={applicationProperties.CONTENT_MAX_WIDTH}
+          maw={applicationProperties.CONTENT_MAX_WIDTH - 32}
         >
-          <Text fz={14} fw={700}>
-            達成ミッション
-          </Text>
-          {waiting.waitingBoosters.length === 0 ? (
-            <></>
-          ) : (
-            <>
-              <Box mt={8}>
-                {waiting.waitingBoosters.map((waitingBooster) => {
-                  return (
-                    <Flex align="center" mb={6}>
-                      <Box
-                        pos="relative"
-                        w={32}
-                        h={32}
-                        style={{ borderRadius: 32, overflow: 'hidden' }}
-                      >
-                        <Image
-                          src={
-                            waitingBooster.booster.iconUrl ||
-                            '/assets/images/picture/picture_fallback.png'
-                          }
-                          alt={waitingBooster.booster.name}
-                          fill={true}
-                        />
-                      </Box>
-                      <Box ml={8} style={{ flexGrow: 1 }}>
-                        <Box fz={12}>{waitingBooster.booster.missionName}</Box>
-                        <Box
-                          fz={10}
-                          c={colorScheme.scheme1.surface1.object.low}
-                        >
-                          {dateConverter.yyyyMMddHHmmss(waitingBooster.startAt)}
-                        </Box>
-                      </Box>
-                      <Box>
-                        <Box ml={8} ff="outfit" fw={700} fz={14}>
-                          +{waitingBooster.multiplier - 1}pt{' '}
-                        </Box>
-                      </Box>
-                    </Flex>
-                  )
-                })}
-              </Box>
-            </>
-          )}
+          <OMissionCompleteList waitingBoosters={waiting.waitingBoosters} />
         </Popover.Dropdown>
       </Popover>
     </Box>

@@ -41,14 +41,14 @@ const Component: FC<Props> = ({ waiting }) => {
       <Box>
         {waitingService.isBoosting() ? (
           <ELabel
-            label="boosting"
+            label="Boosting"
             c={colorScheme.scheme1.surface1.surface}
             bg={colorScheme.scheme1.notice.alert}
           />
         ) : (
           <ELabel
             px={0}
-            label="non boost"
+            label="No boosts"
             c={colorScheme.scheme1.surface1.object.inactive}
           />
         )}
