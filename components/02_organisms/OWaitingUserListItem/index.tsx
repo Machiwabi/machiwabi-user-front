@@ -9,6 +9,7 @@ import { OUserIconWithStatuses } from '../OUserIconWithStatuses'
 import { OUserWaitingStatuses } from '../OUserWaitingStatuses'
 import styles from './style.module.scss'
 import { OMissionCompleteList } from '../OMissionCompleteList'
+import { EText } from '../../01_elements/EText/base'
 
 type Props = {
   waiting: WaitingEntity
@@ -60,7 +61,14 @@ const Component: FC<Props> = ({ waiting, rank }) => {
           w="100%"
           maw={applicationProperties.CONTENT_MAX_WIDTH - 32}
         >
-          <OMissionCompleteList waitingBoosters={waiting.waitingBoosters} />
+          <Text mb={4} fz={14} fw={700}>
+            {waiting.user.displayName}
+          </Text>
+          <EText.Desc2>
+            （準備中：推しに対する応援メッセージを追加できる機能を予定しています）
+          </EText.Desc2>
+          {/* 下記はちょっといやらしいという意見があり一旦排除 */}
+          {/* <OMissionCompleteList waitingBoosters={waiting.waitingBoosters} /> */}
         </Popover.Dropdown>
       </Popover>
     </Box>
