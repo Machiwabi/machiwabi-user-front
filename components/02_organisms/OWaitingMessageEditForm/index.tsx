@@ -100,7 +100,7 @@ const Component: FC<Props> = ({ waiting }) => {
               </EText.Desc2>
             ) : (
               <EText.Desc2 c={colorScheme.scheme1.surface1.object.low}>
-                ここをタップすると、推しに対する応援メッセージを設定できます。
+                ここをタップすると、イベントにかける想いのメッセージを設定できます。
               </EText.Desc2>
             )}
           </Box>

@@ -21,13 +21,9 @@ export const useWaitingTabs = () => {
 
     let query
     const { grantedWaitingBoosterUniqueKey, ...extractQuery } = router.query
-    if (selectedTab === 'home') {
-      query = { ...extractQuery }
-    } else {
-      query = {
-        ...extractQuery,
-        tab: selectedTab,
-      }
+    query = {
+      ...extractQuery,
+      tab: selectedTab,
     }
 
     router.replace(

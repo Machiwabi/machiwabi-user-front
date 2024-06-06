@@ -48,7 +48,7 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
         <ESectionHeading
           heading="MESSAGE"
           tooltip={
-            <>{waiting.user.displayName}さんがイベントにかける思いです</>
+            <>{waiting.user.displayName}さんのイベントにかける想いです</>
           }
         />
         <Box mt={8}>
