@@ -54,12 +54,12 @@ const Component: FC<Props> = ({ waiting, rank, rollSpeed }) => {
           w="100%"
           maw={applicationProperties.CONTENT_MAX_WIDTH - 32}
         >
-          <Text mb={4} fz={14} fw={700}>
+          <Text fz={14} fw={700}>
             {waiting.user.displayName}
           </Text>
-          <EText.Desc2>
-            （準備中：推しに対する応援メッセージを追加できる機能を予定しています）
-          </EText.Desc2>
+          {waiting.waitingMessage && (
+            <EText.Desc2 mt={4}>{waiting.waitingMessage}</EText.Desc2>
+          )}
           {/* 下記はちょっといやらしいという意見があり一旦排除 */}
           {/* <OMissionCompleteList waitingBoosters={waiting.waitingBoosters} /> */}
         </Popover.Dropdown>
