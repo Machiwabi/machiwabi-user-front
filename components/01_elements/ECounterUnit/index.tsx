@@ -1,6 +1,7 @@
 import { Box } from '@mantine/core'
 import { motion } from 'framer-motion'
 import { FC, useState } from 'react'
+import styles from './style.module.scss'
 
 type Props = {
   startNum: number
@@ -29,6 +30,7 @@ const Component: FC<Props> = ({
         fz={fz}
         ta="center"
         style={{ overflowY: 'hidden' }}
+        className={styles['e-counter-unit']}
       >
         <motion.div
           variants={{
