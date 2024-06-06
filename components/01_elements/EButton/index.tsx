@@ -2,6 +2,7 @@ import { ButtonProps } from '@mantine/core'
 import { Sm } from './Sm'
 import { colorScheme } from '../../../theme/colorScheme'
 import { Lg } from './Lg'
+import { Xs } from './Xs'
 
 type surface = 'surface1' | 'surface2' | 'surface3' | 'accent1' | 'accent2'
 
@@ -14,7 +15,7 @@ export type EButtonProps = ButtonProps & {
   type?: 'button' | 'submit' | 'reset'
 }
 
-export const EButton = { Sm, Lg }
+export const EButton = { Xs, Sm, Lg }
 
 export const generateButtonStyles = (
   fillType: 'filled' | 'outline' | 'disabled',

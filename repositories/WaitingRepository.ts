@@ -1,6 +1,9 @@
 import { graphqlApiClient } from '../apis/GraphqlApiClient'
 import { NotFoundError } from '../exceptions/exceptions'
 import {
+  UpdateWaitingMessageDocument,
+  UpdateWaitingMessageMutation,
+  UpdateWaitingMessageMutationVariables,
   WaitingDocument,
   WaitingEntity,
   WaitingQuery,
@@ -57,4 +60,24 @@ const siblings = async (
   )
 }
 
-export const WaitingRepository = { all, findMany, findOne, siblings }
+const updateWaitingMessage = async (
+  variables: UpdateWaitingMessageMutationVariables,
+  accessToken: string
+): Promise<WaitingEntity> => {
+  const mutation = await graphqlApiClient(
+    accessToken
+  ).request<UpdateWaitingMessageMutation>(
+    UpdateWaitingMessageDocument,
+    variables
+  )
+
+  return mutation.updateWaitingMessage
+}
+
+export const WaitingRepository = {
+  all,
+  findMany,
+  findOne,
+  siblings,
+  updateWaitingMessage,
+}

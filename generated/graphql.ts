@@ -132,6 +132,7 @@ export type Mutation = {
   exchangeReward: Scalars['Boolean']['output'];
   joinEvent: JoinedWaitingEntity;
   provisionBooster: RedirectUriEntity;
+  updateWaitingMessage: WaitingEntity;
   upsertUser: UserPrivateEntity;
   upsertUserDevice: Scalars['Boolean']['output'];
 };
@@ -164,6 +165,11 @@ export type MutationJoinEventArgs = {
 
 export type MutationProvisionBoosterArgs = {
   input: ProvisionBoosterInput;
+};
+
+
+export type MutationUpdateWaitingMessageArgs = {
+  input: UpdateWaitingInput;
 };
 
 
@@ -269,6 +275,11 @@ export type RewardEntity = {
   stock?: Maybe<Scalars['Float']['output']>;
   stockPerWaiting?: Maybe<Scalars['Float']['output']>;
   uniqueKey: Scalars['String']['output'];
+};
+
+export type UpdateWaitingInput = {
+  uniqueKey: Scalars['String']['input'];
+  waitingMessage?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UpsertUserInput = {
@@ -386,6 +397,14 @@ export type ProvisionBoosterMutationVariables = Exact<{
 
 
 export type ProvisionBoosterMutation = { __typename?: 'Mutation', provisionBooster: { __typename?: 'RedirectUriEntity', url: string } };
+
+export type UpdateWaitingMessageMutationVariables = Exact<{
+  uniqueKey: Scalars['String']['input'];
+  waitingMessage?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type UpdateWaitingMessageMutation = { __typename?: 'Mutation', updateWaitingMessage: { __typename?: 'WaitingEntity', uniqueKey: string, waitingPoint: number, totalPoint: number, waitingDuration: number, remainingEventStartDuration: number, secondsPerWaitingPoint: number, secondPerTotalPoint: number, totalPointMultiplier: number, waitingName?: string | null, waitingMessage?: string | null, joinAt: any, event: { __typename?: 'EventEntity', uniqueKey: string, waitingStartAt: any, startAt: any, endAt: any, name?: string | null, description?: string | null, mdxContent?: string | null, detailMdxContent?: string | null, isJoinable: boolean, lat?: number | null, lng?: number | null, onlineUrl?: string | null, placeName?: string | null, imageUrl?: string | null }, user: { __typename?: 'UserPublicEntity', eoaAddress?: string | null, displayName?: string | null, iconImageUrl?: string | null }, waitingBoosters: Array<{ __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null, enabled: boolean, booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } }>, waitingRewards: Array<{ __typename?: 'WaitingRewardEntity', uniqueKey: string, withdrawedTotalPoint: number, reward: { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null, exchangeable: boolean, startAt: any, endAt: any, order?: number | null } }> } };
 
 export type UpsertUserMutationVariables = Exact<{
   name?: InputMaybe<Scalars['String']['input']>;
@@ -657,6 +676,39 @@ export const ProvisionBoosterDocument = gql`
   }
 }
     ${RedirectUriFieldFragmentDoc}`;
+export const UpdateWaitingMessageDocument = gql`
+    mutation updateWaitingMessage($uniqueKey: String!, $waitingMessage: String) {
+  updateWaitingMessage(
+    input: {uniqueKey: $uniqueKey, waitingMessage: $waitingMessage}
+  ) {
+    ...WaitingField
+    event {
+      ...EventField
+    }
+    user {
+      ...UserPublicField
+    }
+    waitingBoosters {
+      ...WaitingBoosterField
+      booster {
+        ...BoosterField
+      }
+    }
+    waitingRewards {
+      ...WaitingRewardField
+      reward {
+        ...RewardField
+      }
+    }
+  }
+}
+    ${WaitingFieldFragmentDoc}
+${EventFieldFragmentDoc}
+${UserPublicFieldFragmentDoc}
+${WaitingBoosterFieldFragmentDoc}
+${BoosterFieldFragmentDoc}
+${WaitingRewardFieldFragmentDoc}
+${RewardFieldFragmentDoc}`;
 export const UpsertUserDocument = gql`
     mutation upsertUser($name: String, $displayName: String, $iconImageUrl: String, $email: String) {
   upsertUser(
@@ -901,6 +953,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     provisionBooster(variables: ProvisionBoosterMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ProvisionBoosterMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<ProvisionBoosterMutation>(ProvisionBoosterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'provisionBooster', 'mutation');
+    },
+    updateWaitingMessage(variables: UpdateWaitingMessageMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateWaitingMessageMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateWaitingMessageMutation>(UpdateWaitingMessageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateWaitingMessage', 'mutation');
     },
     upsertUser(variables?: UpsertUserMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpsertUserMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<UpsertUserMutation>(UpsertUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'upsertUser', 'mutation');

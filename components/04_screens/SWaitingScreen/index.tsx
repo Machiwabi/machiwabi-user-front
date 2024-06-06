@@ -2,14 +2,13 @@ import { Box } from '@mantine/core'
 import { FC } from 'react'
 import { useWaiting } from '../../../hooks/resources/useWaiting'
 import { ESectionHeading } from '../../01_elements/ESectionHeading'
-import { EText } from '../../01_elements/EText/base'
 import { OTutorialGuide } from '../../02_organisms/OTutorialGuide'
 import { OWaitingCounterWithUser } from '../../02_organisms/OWaitingCounterWithUser'
+import { OWaitingMessageEditForm } from '../../02_organisms/OWaitingMessageEditForm'
 import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
-import { WaitingMembersSubComponent } from './WaitingMembersSubComponent'
 import { WaitingFirstScreen } from './WaitingFirstScreen'
-import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
+import { WaitingMembersSubComponent } from './WaitingMembersSubComponent'
 
 type Props = {
   waitingUniqueKey: string
@@ -49,13 +48,11 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
         <ESectionHeading
           heading="MESSAGE"
           tooltip={
-            <>{waiting.user.displayName}さんがイベントにかける思いです</>
+            <>{waiting.user.displayName}さんのイベントにかける想いです</>
           }
         />
         <Box mt={8}>
-          <EText.Desc1>
-            （準備中：推しに対する応援メッセージを追加できる機能を予定しています）
-          </EText.Desc1>
+          <OWaitingMessageEditForm waiting={waiting} />
         </Box>
       </Box>
       <WaitingFirstScreen waiting={waiting} />
