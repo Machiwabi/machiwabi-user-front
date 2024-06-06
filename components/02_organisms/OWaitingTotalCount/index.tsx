@@ -59,9 +59,7 @@ const Component: FC<Props> = ({
           <ECounterUnit
             rollSpeed={rollSpeed}
             delay={index * 0.1}
-            startNum={
-              initialRollAnimation ? Math.random() * 10 : Number(digit) - 1
-            }
+            startNum={initialRollAnimation ? Math.random() * 10 : Number(digit)}
             goalNum={Number(digit)}
             fz={fz}
             key={index}
