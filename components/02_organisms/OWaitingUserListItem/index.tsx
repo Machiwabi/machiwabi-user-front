@@ -11,9 +11,15 @@ type Props = {
   waiting: WaitingEntity
   rank?: number
   rollSpeed?: number
+  initialRollAnimation?: boolean
 }
 
-const Component: FC<Props> = ({ waiting, rank, rollSpeed }) => {
+const Component: FC<Props> = ({
+  waiting,
+  rank,
+  rollSpeed,
+  initialRollAnimation = false,
+}) => {
   return (
     <Box pos="relative">
       <Popover>
@@ -46,7 +52,11 @@ const Component: FC<Props> = ({ waiting, rank, rollSpeed }) => {
             )}
             <Flex flex={1} justify="space-between" align="center">
               <OUserIconWithStatuses waiting={waiting} />
-              <OUserWaitingStatuses waiting={waiting} rollSpeed={rollSpeed} />
+              <OUserWaitingStatuses
+                waiting={waiting}
+                rollSpeed={rollSpeed}
+                initialRollAnimation={initialRollAnimation}
+              />
             </Flex>
           </Flex>
         </Popover.Target>

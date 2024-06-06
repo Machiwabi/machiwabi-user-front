@@ -10,9 +10,14 @@ import { OWaitingTotalCount } from '../OWaitingTotalCount'
 type Props = {
   waiting: WaitingEntity
   rollSpeed?: number
+  initialRollAnimation?: boolean
 }
 
-const Component: FC<Props> = ({ waiting, rollSpeed }) => {
+const Component: FC<Props> = ({
+  waiting,
+  rollSpeed,
+  initialRollAnimation = false,
+}) => {
   const waitingService = new WaitingService(waiting)
   const { trigger } = useAnimateTriggerStore()
   const [totalPoint, setTotalPoint] = useState<number>(waiting.totalPoint)
@@ -27,7 +32,11 @@ const Component: FC<Props> = ({ waiting, rollSpeed }) => {
   return (
     <Flex direction="column" align="end">
       <Flex align="end" mb={4}>
-        <OWaitingTotalCount waiting={waiting} rollSpeed={rollSpeed} />
+        <OWaitingTotalCount
+          waiting={waiting}
+          rollSpeed={rollSpeed}
+          initialRollAnimation={initialRollAnimation}
+        />
         <Text fz={10} ff="outfit" fw={900} ml={4} pb={3} lh={1}>
           pt
         </Text>
