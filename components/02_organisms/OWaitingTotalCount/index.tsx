@@ -9,9 +9,15 @@ type Props = {
   waiting: WaitingEntity
   fz?: number
   rollSpeed?: number
+  initialRollAnimation?: boolean
 }
 
-const Component: FC<Props> = ({ waiting, fz = 20, rollSpeed = 0 }) => {
+const Component: FC<Props> = ({
+  waiting,
+  fz = 20,
+  rollSpeed = 0,
+  initialRollAnimation = false,
+}) => {
   // 初期値生成
   const waitingService = new WaitingService(waiting)
   const totalPoint = waitingService.totalPoint()
@@ -53,7 +59,9 @@ const Component: FC<Props> = ({ waiting, fz = 20, rollSpeed = 0 }) => {
           <ECounterUnit
             rollSpeed={rollSpeed}
             delay={index * 0.1}
-            startNum={Math.random() * 10}
+            startNum={
+              initialRollAnimation ? Math.random() * 10 : Number(digit) - 1
+            }
             goalNum={Number(digit)}
             fz={fz}
             key={index}
