@@ -1,0 +1,25 @@
+mutation updateWaitingMessage($uniqueKey: String!, $waitingMessage: String) {
+  updateWaitingMessage(
+    input: { uniqueKey: $uniqueKey, waitingMessage: $waitingMessage }
+  ) {
+    ...WaitingField
+    event {
+      ...EventField
+    }
+    user {
+      ...UserPublicField
+    }
+    waitingBoosters {
+      ...WaitingBoosterField
+      booster {
+        ...BoosterField
+      }
+    }
+    waitingRewards {
+      ...WaitingRewardField
+      reward {
+        ...RewardField
+      }
+    }
+  }
+}
