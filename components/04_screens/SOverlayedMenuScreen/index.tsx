@@ -9,6 +9,7 @@ import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
 import { truncator } from '../../../utils/truncator'
 import Link from 'next/link'
 import { waitingsUrl } from '../../../helpers/url.helper'
+import { useClipboardCopy } from '../../../hooks/useClipboardCopy'
 
 const Component: React.FC = () => {
   const { isMenuOpening, menuOpenGlobalMenuEnd } = useMenuOpeningStatus()
@@ -16,6 +17,7 @@ const Component: React.FC = () => {
 
   const { isAuthenticated } = useAuthenticatedStore()
   const { siweEoaAddress } = useSiweEoaAddress()
+  const { handleCopyClick } = useClipboardCopy()
 
   useEffect(() => {
     if (!!isMenuOpening) {
@@ -28,7 +30,7 @@ const Component: React.FC = () => {
   return (
     <>
       {isMenuOpening === 'globalMenu' && (
-        <Flex pos="fixed" top={0} h="100%" w="100%" style={{ zIndex: 10000 }}>
+        <Flex pos="fixed" top={0} h="100%" w="100%" style={{ zIndex: 200 }}>
           <Flex
             pos="relative"
             align="center"
@@ -94,6 +96,30 @@ const Component: React.FC = () => {
               </Flex>
             </Box>
             <OverlayedMenuList mt={8} px={4} />
+            {siweEoaAddress && (
+              <Flex
+                align="center"
+                px={16}
+                py={2}
+                onClick={() => {
+                  handleCopyClick(siweEoaAddress)
+                }}
+                bg={colorScheme.scheme1.surface2.surface}
+                style={{ cursor: 'pointer', borderRadius: 16 }}
+              >
+                <Box fz={11} c={colorScheme.scheme1.surface1.object.mid}>
+                  {siweEoaAddress}
+                </Box>
+                <Box
+                  pos="relative"
+                  ml={4}
+                  className="material-icons-outlined"
+                  fz={12}
+                >
+                  copy
+                </Box>
+              </Flex>
+            )}
             <Box />
             {/* 調整用Div */}
           </Flex>
