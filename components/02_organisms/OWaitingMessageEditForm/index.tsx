@@ -63,7 +63,7 @@ const Component: FC<Props> = ({ waiting }) => {
           <Textarea
             {...methods.register('waitingMessage')}
             mt={8}
-            placeholder="推しに対する応援メッセージを設定できます。"
+            placeholder="イベントの応援メッセージを設定できます。"
             error={
               methods.formState.errors['waitingMessage']
                 ? methods.formState.errors['waitingMessage'].message?.toString()
