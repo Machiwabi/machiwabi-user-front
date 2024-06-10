@@ -1,4 +1,4 @@
-import { Box } from '@mantine/core'
+import { Box, Flex } from '@mantine/core'
 import { FC } from 'react'
 import { useWaiting } from '../../../hooks/resources/useWaiting'
 import { ESectionHeading } from '../../01_elements/ESectionHeading'
@@ -9,6 +9,11 @@ import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
 import { WaitingFirstScreen } from './WaitingFirstScreen'
 import { WaitingMembersSubComponent } from './WaitingMembersSubComponent'
+import { OEventJoinButton } from '../../02_organisms/OEventJoinButton'
+import { applicationProperties } from '../../../constants/applicationProperties'
+import { EButton } from '../../01_elements/EButton'
+import { OWaitingLoginButton } from '../../02_organisms/OWaitingLoginButton'
+import { waitingUrl } from '../../../helpers/url.helper'
 
 type Props = {
   waitingUniqueKey: string
@@ -56,6 +61,23 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
         </Box>
       </Box>
       <WaitingFirstScreen waiting={waiting} />
+
+      <Box pb={60} />
+      <Flex
+        pos="fixed"
+        w="100%"
+        left={0}
+        bottom={0}
+        mb={32}
+        justify="center"
+        align="center"
+      >
+        <OWaitingLoginButton
+          redirectUrl={`${applicationProperties.HOSTING_URL}${waitingUrl(
+            waitingUniqueKey
+          )}`}
+        />
+      </Flex>
     </>
   )
 }

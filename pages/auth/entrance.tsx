@@ -6,6 +6,7 @@ import { Seo } from '../../components/99_seo/auth/entrance/Seo'
 import { waitingsUrl } from '../../helpers/url.helper'
 import { useWeb3Auth } from '../../hooks/useWeb3Auth'
 import { NextPageWithLayout } from '../_app'
+import { useAuthenticatedStore } from '../../recoil/authenticatedStore/useAuthenticatedStore'
 
 const Page: NextPageWithLayout = () => {
   const {
@@ -13,6 +14,7 @@ const Page: NextPageWithLayout = () => {
     connectWeb3AuthAndSignInWithEthereum,
     web3AuthLogout,
   } = useWeb3Auth()
+  const { isAuthenticated } = useAuthenticatedStore()
 
   return (
     <>
@@ -36,7 +38,7 @@ const Page: NextPageWithLayout = () => {
           「Mati-wabi」にようこそ！
         </EText.Desc3>
 
-        {isWeb3AuthConnected ? (
+        {isAuthenticated() && isWeb3AuthConnected ? (
           <EButton.Sm
             mt={24}
             onClick={() => {
