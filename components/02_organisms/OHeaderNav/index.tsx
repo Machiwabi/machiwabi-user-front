@@ -4,11 +4,10 @@ import { FC } from 'react'
 import { colorScheme } from '../../../theme/colorScheme'
 import { useMenuOpeningStatus } from '../../../recoil/openingStatus/useMenuOpeningStatus'
 import Link from 'next/link'
-import { useWeb3Auth } from '../../../hooks/useWeb3Auth'
 import { truncator } from '../../../utils/truncator'
 import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
 import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
-import { waitingsUrl } from '../../../helpers/url.helper'
+import { waitingsUrl, web3AuthEntranceUrl } from '../../../helpers/url.helper'
 
 const Component: FC = () => {
   const { menuOpenGlobalMenuStart } = useMenuOpeningStatus()
@@ -67,19 +66,27 @@ const Component: FC = () => {
               </Box>
             </Box>
           ) : (
-            <Box mr={16}>
-              <Box
-                px={8}
-                fz={10}
-                ff="outfit"
-                fw="bold"
-                bg={colorScheme.scheme1.surface2.surface}
-                c={colorScheme.scheme1.surface2.object.low}
-                style={{ borderRadius: 16 }}
-              >
-                GUEST
+            <Link
+              href={web3AuthEntranceUrl()}
+              style={{ marginRight: 16, textDecoration: 'none', zIndex: 100 }}
+            >
+              <Box>
+                <Box
+                  px={8}
+                  fz={10}
+                  ff="outfit"
+                  fw="bold"
+                  c={colorScheme.scheme1.notice.alert}
+                  style={{
+                    borderRadius: 16,
+                    border: `1px solid ${colorScheme.scheme1.notice.alert}`,
+                    textDecoration: 'none',
+                  }}
+                >
+                  未ログイン
+                </Box>
               </Box>
-            </Box>
+            </Link>
           )}
         </Flex>
       </Box>
