@@ -61,23 +61,6 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
         </Box>
       </Box>
       <WaitingFirstScreen waiting={waiting} />
-
-      <Box pb={60} />
-      <Flex
-        pos="fixed"
-        w="100%"
-        left={0}
-        bottom={0}
-        mb={32}
-        justify="center"
-        align="center"
-      >
-        <OWaitingLoginButton
-          redirectUrl={`${applicationProperties.HOSTING_URL}${waitingUrl(
-            waitingUniqueKey
-          )}`}
-        />
-      </Flex>
     </>
   )
 }

@@ -1,4 +1,4 @@
-import { Tabs } from '@mantine/core'
+import { Box, Flex, Tabs } from '@mantine/core'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
 import { useWaiting } from '../../../hooks/resources/useWaiting'
@@ -15,7 +15,9 @@ import { SMissionsScreen } from '../SMissionsScreen'
 import { SRewardsScreen } from '../SRewardsScreen'
 import { SWaitingScreen } from '../SWaitingScreen'
 import { STotalWaitingScreen } from '../STotalWaitingScreen'
-import { Seo } from '../../99_seo/waitings/[uniqueKey]/Seo'
+import { OWaitingLoginButton } from '../../02_organisms/OWaitingLoginButton'
+import { applicationProperties } from '../../../constants/applicationProperties'
+import { waitingUrl } from '../../../helpers/url.helper'
 
 type Props = { waitingUniqueKey: string }
 
@@ -93,6 +95,22 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
         </Tabs.Panel>
       </Tabs>
       <OFooterNav />
+      <Box pb={60} />
+      <Flex
+        pos="fixed"
+        w="100%"
+        left={0}
+        bottom={0}
+        mb={32}
+        justify="center"
+        align="center"
+      >
+        <OWaitingLoginButton
+          redirectUrl={`${applicationProperties.HOSTING_URL}${waitingUrl(
+            waitingUniqueKey
+          )}`}
+        />
+      </Flex>
     </>
   )
 }
