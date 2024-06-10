@@ -29,7 +29,7 @@ const Component: FC<Props> = ({ redirectUrl }) => {
                   connectWeb3AuthAndSignInWithEthereum(redirectUrl)
                 }}
               >
-                新規作成／ログインして参加する
+                新規作成／ログイン
               </EButton.Lg>
               <Box
                 mt={8}
