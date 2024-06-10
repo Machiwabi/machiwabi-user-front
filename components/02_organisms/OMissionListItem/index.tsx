@@ -39,16 +39,16 @@ const Component: FC<Props> = ({
       </Text>
       <Flex justify="space-between" mt={12}>
         <Flex align="center">
-          <Box fz={10} fw={800}>
+          <Box fz={12} fw={800}>
             成功報酬
           </Box>
-          <Flex align="center" ml={16}>
+          <Flex align="center" ml={10}>
             {booster.iconUrl && (
               <Image
                 src={booster.iconUrl}
                 alt={booster.name}
-                width={16}
-                height={16}
+                width={28}
+                height={28}
               />
             )}
             <Box ml={8} fz={12} fw={700}>

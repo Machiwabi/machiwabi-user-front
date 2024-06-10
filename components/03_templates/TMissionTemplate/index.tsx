@@ -32,19 +32,19 @@ const Component: FC<Props> = ({ waiting, booster, ...props }) => {
           <Flex align="center" my={16}>
             {booster.iconUrl && (
               <Box
-                w={24}
-                h={24}
+                w={48}
+                h={48}
                 style={{ borderRadius: 4, overflow: 'hidden' }}
               >
                 <Image
                   src={booster.iconUrl}
                   alt={booster.name}
-                  width={24}
-                  height={24}
+                  width={48}
+                  height={48}
                 />
               </Box>
             )}
-            <Box fz={14} fw={700} ml={8}>
+            <Box fz={18} fw={700} ml={16} lh={1.45}>
               {booster.name}
             </Box>
           </Flex>
