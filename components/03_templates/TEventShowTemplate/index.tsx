@@ -91,35 +91,42 @@ const Component: FC<Props> = ({ event, ...props }) => {
           </EText.Desc2>
         </Box>
 
-        <Box my={40} px={16}>
-          <EHeading.Section>開催場所(リアル)</EHeading.Section>
-          <EText.Desc2 mt={8} mb={16}>
-            {event.placeName}
-          </EText.Desc2>
-          <Box mt={8}>
-            <iframe
-              src={`https://www.google.com/maps?q=${event.placeName}@${event.lat},${event.lng}&z=15&output=embed`}
-              width="100%"
-              height="410"
-              loading="lazy"
-              style={{ border: 0 }}
-            />
-            <EButton.Sm
-              w="100%"
-              href={`https://www.google.com/maps?q=${event.lat},${event.lng}&z=17`}
-              hrefOutbound
-            >
-              大きな地図で見る
-            </EButton.Sm>
+        {event.placeName && event.lat && event.lng && (
+          <Box my={40} px={16}>
+            <EHeading.Section>開催場所(リアル)</EHeading.Section>
+            <EText.Desc2 mt={8} mb={16}>
+              {event.placeName}
+            </EText.Desc2>
+            <Box mt={8}>
+              <iframe
+                src={`https://www.google.com/maps?q=${event.placeName}@${event.lat},${event.lng}&z=15&output=embed`}
+                width="100%"
+                height="410"
+                loading="lazy"
+                style={{ border: 0 }}
+              />
+              <EButton.Sm
+                w="100%"
+                href={`https://www.google.com/maps?q=${event.lat},${event.lng}&z=17`}
+                hrefOutbound
+              >
+                大きな地図で見る
+              </EButton.Sm>
+            </Box>
           </Box>
-        </Box>
+        )}
 
-        <Box my={40} px={16}>
-          <EHeading.Section>オンラインの開催場所</EHeading.Section>
-          <EText.Desc1 mt={8}>
-            {event.onlineUrl ? event.onlineUrl : 'なし'}
-          </EText.Desc1>
-        </Box>
+        {event.onlineUrl && (
+          <Box my={40} px={16}>
+            <EHeading.Section>オンラインの開催場所</EHeading.Section>
+
+            <Box component="a" href={event.onlineUrl}>
+              <EText.Desc1 mt={8}>
+                {event.onlineUrl ? event.onlineUrl : 'なし'}
+              </EText.Desc1>
+            </Box>
+          </Box>
+        )}
       </Box>
     </>
   )
