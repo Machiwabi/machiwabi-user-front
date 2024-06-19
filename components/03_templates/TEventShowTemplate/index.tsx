@@ -1,6 +1,6 @@
 import { AspectRatio, Box, BoxProps, Flex, Overlay } from '@mantine/core'
-import Image from 'next/image'
-import { FC, Fragment } from 'react'
+import NextImage from 'next/image' // Next.jsのImageコンポーネントはNextImageとしてインポート
+import { FC, Fragment, useEffect, useState } from 'react'
 import { EventEntity } from '../../../generated/graphql'
 import { colorScheme } from '../../../theme/colorScheme'
 import { dateHumanizer } from '../../../utils/dateHumanizer'
@@ -13,31 +13,47 @@ type Props = BoxProps & {
 }
 
 const Component: FC<Props> = ({ event, ...props }) => {
+  const [aspectRatio, setAspectRatio] = useState<number | null>(null)
+
+  useEffect(() => {
+    if (event.imageUrl) {
+      const img = new window.Image()
+      img.src = event.imageUrl
+      img.onload = () => {
+        console.log('img.width', img.width)
+        console.log('img.height', img.height)
+        setAspectRatio(img.width / img.height)
+      }
+    }
+  }, [event.imageUrl])
+
   return (
     <>
       <Box {...props}>
-        <AspectRatio mt={16} ratio={0.7}>
-          <Box pos="relative" w="100%">
-            {event.imageUrl ? (
-              <>
-                <Image
-                  src={event.imageUrl}
-                  layout="fill"
-                  objectFit="cover"
-                  alt={event.name || ''}
-                />
-              </>
-            ) : (
-              <>
-                <Box
-                  bg={colorScheme.scheme1.surface2.surface}
-                  w="100%"
-                  h="100%"
-                />
-              </>
-            )}
-          </Box>
-        </AspectRatio>
+        {aspectRatio !== null && (
+          <AspectRatio mt={16} ratio={aspectRatio}>
+            <Box pos="relative" w="100%">
+              {event.imageUrl ? (
+                <>
+                  <NextImage
+                    src={event.imageUrl}
+                    layout="fill"
+                    objectFit="cover"
+                    alt={event.name || ''}
+                  />
+                </>
+              ) : (
+                <>
+                  <Box
+                    bg={colorScheme.scheme1.surface2.surface}
+                    w="100%"
+                    h="100%"
+                  />
+                </>
+              )}
+            </Box>
+          </AspectRatio>
+        )}
 
         <Box mt={24} mb={16} px={16}>
           <EHeading.Page>{event.name}</EHeading.Page>
@@ -75,35 +91,42 @@ const Component: FC<Props> = ({ event, ...props }) => {
           </EText.Desc2>
         </Box>
 
-        <Box my={40} px={16}>
-          <EHeading.Section>開催場所(リアル)</EHeading.Section>
-          <EText.Desc2 mt={8} mb={16}>
-            {event.placeName}
-          </EText.Desc2>
-          <Box mt={8}>
-            <iframe
-              src={`https://www.google.com/maps?q=${event.placeName}@${event.lat},${event.lng}&z=15&output=embed`}
-              width="100%"
-              height="410"
-              loading="lazy"
-              style={{ border: 0 }}
-            />
-            <EButton.Sm
-              w="100%"
-              href={`https://www.google.com/maps?q=${event.lat},${event.lng}&z=17`}
-              hrefOutbound
-            >
-              大きな地図で見る
-            </EButton.Sm>
+        {event.placeName && event.lat && event.lng && (
+          <Box my={40} px={16}>
+            <EHeading.Section>開催場所(リアル)</EHeading.Section>
+            <EText.Desc2 mt={8} mb={16}>
+              {event.placeName}
+            </EText.Desc2>
+            <Box mt={8}>
+              <iframe
+                src={`https://www.google.com/maps?q=${event.placeName}@${event.lat},${event.lng}&z=15&output=embed`}
+                width="100%"
+                height="410"
+                loading="lazy"
+                style={{ border: 0 }}
+              />
+              <EButton.Sm
+                w="100%"
+                href={`https://www.google.com/maps?q=${event.lat},${event.lng}&z=17`}
+                hrefOutbound
+              >
+                大きな地図で見る
+              </EButton.Sm>
+            </Box>
           </Box>
-        </Box>
+        )}
 
-        <Box my={40} px={16}>
-          <EHeading.Section>オンラインの開催場所</EHeading.Section>
-          <EText.Desc1 mt={8}>
-            {event.onlineUrl ? event.onlineUrl : 'なし'}
-          </EText.Desc1>
-        </Box>
+        {event.onlineUrl && (
+          <Box my={40} px={16}>
+            <EHeading.Section>オンラインの開催場所</EHeading.Section>
+
+            <Box component="a" href={event.onlineUrl}>
+              <EText.Desc1 mt={8}>
+                {event.onlineUrl ? event.onlineUrl : 'なし'}
+              </EText.Desc1>
+            </Box>
+          </Box>
+        )}
       </Box>
     </>
   )
