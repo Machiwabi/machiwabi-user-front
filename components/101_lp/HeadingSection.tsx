@@ -47,38 +47,11 @@ const Component: FC<Props> = ({ ...props }) => {
             justify="center"
             align="center"
           >
-            <Box
-              fz={24}
-              ff="RocknRoll One"
-              lh={1}
-              c={colorScheme.schemeLp.accent1.surface}
-            >
-              チケットをお持ちの方
-            </Box>
-
             <CtaButton
               href={applicationUrls.campaign.icr240603}
               value={'マチワビる'}
               w={335}
               mt={{ base: 16, lg: 30 }}
-            />
-            <NormalButton
-              href={applicationUrls.campaign.icr240603Ticket}
-              value={
-                <>
-                  <span>チケットをまだ購入されていない方</span>
-                  <Box
-                    pt={3}
-                    ml={12}
-                    className="material-icons-outlined"
-                    component="i"
-                  >
-                    open_in_new
-                  </Box>
-                </>
-              }
-              w={{ base: '100%', sm: 600 }}
-              mt={{ base: 24, lg: 30 }}
             />
           </Flex>
         </Box>
