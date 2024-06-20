@@ -25,7 +25,7 @@ const Page: NextPageWithLayout = () => {
       <StickyHeaderSection />
       <BgSection />
       <HeadingSection mt={120} mb={80} />
-      <CheckFirstLandingSection />
+      {/* <CheckFirstLandingSection /> */}
       <HeroSection mt={120} mb={80} />
       <FeatureSection my={{ base: 62, lg: 300 }} />
       <CtaSection my={{ base: 62, lg: 300 }} />

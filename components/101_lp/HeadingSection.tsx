@@ -47,38 +47,63 @@ const Component: FC<Props> = ({ ...props }) => {
             justify="center"
             align="center"
           >
-            <Box
-              fz={24}
-              ff="RocknRoll One"
-              lh={1}
-              c={colorScheme.schemeLp.accent1.surface}
-            >
-              チケットをお持ちの方
-            </Box>
-
+            <Flex mb={{ base: 16, md: 16 }}>
+              <Flex direction="column" mr={{ base: 8, md: 16 }} align="center">
+                <Box
+                  fz={24}
+                  ff="RocknRoll One"
+                  lh={1}
+                  c={colorScheme.schemeLp.accent1.surface}
+                >
+                  ダウンロード
+                </Box>
+                <Box
+                  w={132}
+                  py={8}
+                  mt={16}
+                  fz={28}
+                  ff="RocknRoll One"
+                  c={colorScheme.schemeLp.surface1.surface}
+                  bg={colorScheme.schemeLp.accent1.surface}
+                  style={{ borderRadius: 24 }}
+                  ta="center"
+                >
+                  不要！
+                </Box>
+              </Flex>
+              <Flex direction="column" ml={{ base: 8, md: 16 }} align="center">
+                <Box
+                  fz={24}
+                  ff="RocknRoll One"
+                  lh={1}
+                  c={colorScheme.schemeLp.accent1.surface}
+                >
+                  所要時間
+                </Box>
+                <Box
+                  w={132}
+                  px={16}
+                  py={8}
+                  mt={16}
+                  fz={28}
+                  ff="RocknRoll One"
+                  c={colorScheme.schemeLp.surface1.surface}
+                  bg={colorScheme.schemeLp.accent1.surface}
+                  style={{ borderRadius: 24 }}
+                  ta="center"
+                >
+                  <Box component="span">1</Box>
+                  <Box component="span" fz={16}>
+                    分
+                  </Box>
+                </Box>
+              </Flex>
+            </Flex>
             <CtaButton
               href={applicationUrls.campaign.icr240603}
               value={'マチワビる'}
-              w={335}
+              w={{ base: '100%', md: 600 }}
               mt={{ base: 16, lg: 30 }}
-            />
-            <NormalButton
-              href={applicationUrls.campaign.icr240603Ticket}
-              value={
-                <>
-                  <span>チケットをまだ購入されていない方</span>
-                  <Box
-                    pt={3}
-                    ml={12}
-                    className="material-icons-outlined"
-                    component="i"
-                  >
-                    open_in_new
-                  </Box>
-                </>
-              }
-              w={{ base: '100%', sm: 600 }}
-              mt={{ base: 24, lg: 30 }}
             />
           </Flex>
         </Box>
