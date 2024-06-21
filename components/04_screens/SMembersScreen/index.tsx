@@ -33,7 +33,7 @@ const Component: FC<Props> = ({ eventUniqueKey }) => {
         alertTitle={<>💁 ガイド｜MEMBERSページ</>}
         tutorialKey="waiting-members-guide"
       >
-        イベントを一緒に待ち侘びているメンバーたちのランキングです！みんなで盛り上がってアイスリボンイベント当日を楽しみに待ち侘びましょう！上位のMEMBERSには嬉しい特典があります！
+        イベントを一緒に待ち侘びているメンバーたちのランキングです！みんなで盛り上がってアイスリボンイベント当日を楽しみに待ち侘びましょう！
       </OTutorialGuide>
       <OWaitingUserList waitings={waitings} />
     </>
