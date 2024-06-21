@@ -51,3 +51,39 @@ export class Web3AuthAlreadyConnectedError extends Error {
     super(`Web3AuthAlreadyConnectedError : ${message}`)
   }
 }
+
+export class NotEnoughTotalPointError extends Error {
+  constructor(message = '') {
+    super(`NotEnoughTotalPointError : ${message}`)
+  }
+}
+
+export class NotEnoughWaitingPointError extends Error {
+  constructor(message = '') {
+    super(`NotEnoughWaitingPointError : ${message}`)
+  }
+}
+
+export class RewardOutOfStockError extends Error {
+  constructor(message = '') {
+    super(`RewardOutOfStockError : ${message}`)
+  }
+}
+
+export class RewardOutOfStockPerWaitingError extends Error {
+  constructor(message = '') {
+    super(`RewardOutOfStockError : ${message}`)
+  }
+}
+
+export class RedeemNotStartedError extends Error {
+  constructor(message = '') {
+    super(`RedeemNotStartedError : ${message}`)
+  }
+}
+
+export class RedeemEndedError extends Error {
+  constructor(message = '') {
+    super(`RedeemEndedError : ${message}`)
+  }
+}
