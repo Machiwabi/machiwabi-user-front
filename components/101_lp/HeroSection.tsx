@@ -170,7 +170,7 @@ const Component: FC<Props> = ({ ...props }) => {
               </Box>
               <Box mx={16}>
                 <Image
-                  src="/assets/images/lp/picture/pictute_sm_hero-01.png"
+                  src="/assets/images/lp/picture/pictute_sm_hero-03.png"
                   alt="logo"
                   width={293}
                   height={406}
@@ -178,7 +178,7 @@ const Component: FC<Props> = ({ ...props }) => {
               </Box>
               <Box mx={16}>
                 <Image
-                  src="/assets/images/lp/picture/pictute_sm_hero-02.png"
+                  src="/assets/images/lp/picture/pictute_sm_hero-01.png"
                   alt="logo"
                   width={293}
                   height={406}
