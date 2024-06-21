@@ -7,6 +7,8 @@ import { dateConverter } from '../../../utils/dateConverter'
 import { EButton } from '../../01_elements/EButton'
 import { EHeading } from '../../01_elements/EHeading/base'
 import { EText } from '../../01_elements/EText/base'
+import { useRedeemReward } from '../../../hooks/resources/useRedeemReward'
+import { ORewardRedeemButton } from '../../02_organisms/ORewardRedeemButton'
 
 type Props = BoxProps & {
   waiting: WaitingEntity
@@ -61,6 +63,8 @@ const Component: FC<Props> = ({ waiting, reward, ...props }) => {
           </Flex>
         </Box> */}
       </Box>
+
+      <ORewardRedeemButton reward={reward} />
 
       <Flex direction="column" my={0} px={16} justify="center" align="center">
         <EButton.Sm fillType="disabled">

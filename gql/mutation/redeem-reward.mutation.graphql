@@ -1,0 +1,3 @@
+mutation redeemReward($uniqueKey: String!) {
+  redeemReward(input: { uniqueKey: $uniqueKey })
+}

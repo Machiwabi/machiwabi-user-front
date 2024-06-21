@@ -1,20 +1,33 @@
+import { is } from '@react-three/fiber/dist/declarations/src/core/utils'
 import { graphqlApiClient } from '../apis/GraphqlApiClient'
 import {
-  ExchangeRewardDocument,
-  ExchangeRewardMutation,
-  ExchangeRewardMutationVariables,
+  RedeemRewardDocument,
+  RedeemRewardMutation,
+  RedeemRewardMutationVariables,
+  RewardRedeemableDocument,
+  RewardRedeemableQuery,
+  RewardRedeemableQueryVariables,
 } from '../generated/graphql'
 
-const exchange = async (
-  variables: ExchangeRewardMutationVariables,
+const redeem = async (
+  variables: RedeemRewardMutationVariables,
   accessToken: string
-): Promise<ExchangeRewardMutation> => {
-  return await graphqlApiClient(accessToken).request<ExchangeRewardMutation>(
-    ExchangeRewardDocument,
+): Promise<RedeemRewardMutation> => {
+  return await graphqlApiClient(accessToken).request<RedeemRewardMutation>(
+    RedeemRewardDocument,
     variables
   )
 }
 
-export const WaitingRewardRepository = {
-  exchange,
+const isRedeemable = async (
+  variables: RewardRedeemableQueryVariables,
+  accessToken: string
+): Promise<boolean> => {
+  const rewardRedeemable = await graphqlApiClient(
+    accessToken
+  ).request<RewardRedeemableQuery>(RewardRedeemableDocument, variables)
+
+  return rewardRedeemable.rewardRedeemable
 }
+
+export const WaitingRewardRepository = { redeem, isRedeemable }
