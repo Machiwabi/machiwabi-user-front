@@ -6,16 +6,27 @@ import { SimpleGrid, SimpleGridProps } from '@mantine/core'
 type Props = SimpleGridProps & {
   waiting: WaitingEntity
   rewards: RewardEntity[]
+  grantedRewardUniqueKey?: string
 }
 
-const Component: FC<Props> = ({ waiting, rewards, ...props }) => {
+const Component: FC<Props> = ({
+  waiting,
+  rewards,
+  grantedRewardUniqueKey,
+  ...props
+}) => {
   return (
     <>
       <SimpleGrid verticalSpacing="xl" cols={2} {...props}>
         {rewards.map((reward) => {
+          const isNowGranted = reward.uniqueKey === grantedRewardUniqueKey
           return (
             <>
-              <ORewardCellItem waiting={waiting} reward={reward} />
+              <ORewardCellItem
+                waiting={waiting}
+                reward={reward}
+                isNowGranted={isNowGranted}
+              />
             </>
           )
         })}

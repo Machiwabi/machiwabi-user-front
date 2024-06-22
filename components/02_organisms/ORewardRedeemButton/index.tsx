@@ -75,9 +75,13 @@ const Button: FC<ButtonProps> = ({ waiting, reward }) => {
         color: colorScheme.scheme1.accent1.surface,
       })
 
-      router.push(
-        waitingAquiredUrl(waiting.uniqueKey, redeemedReward.uniqueKey)
+      window.location.href = waitingAquiredUrl(
+        waiting.uniqueKey,
+        redeemedReward.reward.uniqueKey
       )
+      // router.push(
+      //   waitingAquiredUrl(waiting.uniqueKey, redeemedReward.reward.uniqueKey)
+      // )
     } catch (e: any) {
       console.error(e)
       notifications.show({
