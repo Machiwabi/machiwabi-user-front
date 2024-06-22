@@ -7,13 +7,26 @@ import { OWaitingCounter } from '../OWaitingCounter'
 import { OWaitingUserListItem } from '../OWaitingUserListItem'
 import styles from './style.module.scss'
 import { WaitingService } from '../../../domains/services/waiting.service'
+import { useEvent } from '../../../hooks/resources/useEvent'
+import { ELoader } from '../../01_elements/ELoader'
+import { EventService } from '../../../domains/services/event.service'
 
 type Props = BoxProps & {
   waiting: WaitingEntity
+  eventUniqueKey: string
 }
 
-const Component: FC<Props> = ({ waiting, ...props }) => {
+const Component: FC<Props> = ({ waiting, eventUniqueKey, ...props }) => {
+  const { event, eventError, eventIsLoading } = useEvent({
+    uniqueKey: eventUniqueKey,
+  })
+
+  if (eventError) return <div>読み込みエラー</div>
+  if (eventIsLoading || !event) return <ELoader />
+
   const waitingService = new WaitingService(waiting)
+  const eventService = new EventService(event)
+
   return (
     <>
       <Box {...props}>
@@ -28,6 +41,7 @@ const Component: FC<Props> = ({ waiting, ...props }) => {
               waiting={waiting}
               rollSpeed={3}
               initialRollAnimation={true}
+              animationEnabled={!eventService.eventStarted()}
             />
             {waitingService.isBoosting() && (
               <>

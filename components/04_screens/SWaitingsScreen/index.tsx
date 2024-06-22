@@ -15,10 +15,10 @@ const Component: FC = () => {
   if (waitings.length === 0) return <TNoWaitingsTemplate />
 
   const currentWaitings = waitings.filter(
-    (waiting) => new Date(waiting.event?.startAt) > new Date()
+    (waiting) => new Date(waiting.event?.endAt) > new Date()
   )
   const pastWaitings = waitings.filter(
-    (waiting) => new Date(waiting.event?.startAt) <= new Date()
+    (waiting) => new Date(waiting.event?.endAt) <= new Date()
   )
 
   return (
