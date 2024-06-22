@@ -72,7 +72,7 @@ export class RewardOutOfStockError extends Error {
 
 export class RewardOutOfStockPerWaitingError extends Error {
   constructor(message = '') {
-    super(`RewardOutOfStockError : ${message}`)
+    super(`RewardOutOfStockPerWaitingError : ${message}`)
   }
 }
 

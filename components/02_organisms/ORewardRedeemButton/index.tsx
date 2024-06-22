@@ -1,53 +1,25 @@
 import { Box, BoxProps, Flex } from '@mantine/core'
-import { FC } from 'react'
-import { RewardEntity } from '../../../generated/graphql'
+import { FC, useState } from 'react'
+import { RewardEntity, WaitingEntity } from '../../../generated/graphql'
 import { useRedeemReward } from '../../../hooks/resources/useRedeemReward'
 import { EButton } from '../../01_elements/EButton'
 import { dateConverter } from '../../../utils/dateConverter'
 import { colorScheme } from '../../../theme/colorScheme'
-import { RedeemNotStartedError } from '../../../exceptions/exceptions'
+import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
+import { notifications, showNotification } from '@mantine/notifications'
+import { ELoader } from '../../01_elements/ELoader'
+import { waitingAquiredUrl } from '../../../helpers/url.helper'
+import { useRouter } from 'next/router'
 
 type Props = BoxProps & {
+  waiting: WaitingEntity
   reward: RewardEntity
 }
 
-const Component: FC<Props> = ({ reward }) => {
-  // if (isUserJoiableError) {
-  //   // 参加済みの場合
-  //   if (isUserJoinableErrorType === 'AlreadyWaitingError') {
-  //     return (
-  //       <>
-  //         <Box w="100%" maw={410} px={16}>
-  //           <EButton.Lg href={waitingsUrl()} w="100%">
-  //             イベント参加済｜一覧ページへ
-  //           </EButton.Lg>
-  //         </Box>
-  //       </>
-  //     )
-  //   }
-
-  //   // それ以外のエラー
-  //   const errorMessage = isUserJoinableErrorType
-  //     ? {
-  //         NotFoundError: 'イベントが見つかりません',
-  //         NotSuitableEventError: 'イベントが見つかりません',
-  //         NotSuitableUserError: 'ログアウトし、もう一度お試しください',
-  //       }[isUserJoinableErrorType]
-  //     : 'エラーのため参加できません'
-  //   return (
-  //     <>
-  //       <Box w="100%" maw={410} px={16}>
-  //         <EButton.Lg w="100%" fillType="disabled" disabled>
-  //           {errorMessage}
-  //         </EButton.Lg>
-  //       </Box>
-  //     </>
-  //   )
-  // }
-
+const Component: FC<Props> = ({ waiting, reward }) => {
   return (
     <Flex direction="column" my={0} px={16} justify="center" align="center">
-      <Button reward={reward} />
+      <Button waiting={waiting} reward={reward} />
       <Box mt={8} fz={10} c={colorScheme.scheme1.surface1.object.mid}>
         {reward.stockPerWaiting && reward.stockPerWaiting > 0 && (
           <>アカウントあたり{reward.stockPerWaiting}つまで引換可</>
@@ -68,10 +40,13 @@ const Component: FC<Props> = ({ reward }) => {
 export { Component as ORewardRedeemButton }
 
 type ButtonProps = {
+  waiting: WaitingEntity
   reward: RewardEntity
 }
 
-const Button: FC<ButtonProps> = ({ reward }) => {
+const Button: FC<ButtonProps> = ({ waiting, reward }) => {
+  const router = useRouter()
+
   const {
     isRewardRedeemable,
     isRewardRedeemableError,
@@ -80,7 +55,38 @@ const Button: FC<ButtonProps> = ({ reward }) => {
     redeemReward,
   } = useRedeemReward({ uniqueKey: reward.uniqueKey })
 
-  console.log('isRewardRedeemable', isRewardRedeemableError)
+  const { isSiweWallet } = useSiweEoaAddress(waiting.user.eoaAddress)
+  const [processing, setProcessing] = useState(false)
+
+  const onSubmit = async () => {
+    if (!isSiweWallet) {
+      notifications.show({
+        message: '他の人のリワードページのため交換できません',
+        color: colorScheme.scheme1.notice.alert,
+      })
+    }
+
+    try {
+      setProcessing(true)
+      const redeemedReward = await redeemReward({ uniqueKey: reward.uniqueKey })
+
+      showNotification({
+        message: 'リワードを獲得しました。',
+        color: colorScheme.scheme1.accent1.surface,
+      })
+
+      router.push(
+        waitingAquiredUrl(waiting.uniqueKey, redeemedReward.uniqueKey)
+      )
+    } catch (e: any) {
+      console.error(e)
+      notifications.show({
+        title: 'エラー',
+        message: e.message,
+        color: colorScheme.scheme1.notice.alert,
+      })
+    }
+  }
 
   if (isRewardRedeemableError) {
     const errorMessage = redeemRewardErrorType
@@ -127,8 +133,19 @@ const Button: FC<ButtonProps> = ({ reward }) => {
     )
 
   return (
-    <EButton.Sm fillType="filled" surface="surface3" w="100%">
-      {reward.requiredTotalPoint}ptで交換(利用)する
+    <EButton.Sm
+      fillType="filled"
+      surface="surface3"
+      w="100%"
+      onClick={onSubmit}
+    >
+      {processing ? (
+        <>
+          <ELoader size="xs" color={colorScheme.scheme1.accent1.object.high} />
+        </>
+      ) : (
+        <> {reward.requiredTotalPoint}ptで交換する</>
+      )}
     </EButton.Sm>
   )
 }

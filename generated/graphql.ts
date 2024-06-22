@@ -131,7 +131,7 @@ export type Mutation = {
   exchangeBooster: WaitingBoosterEntity;
   joinEvent: JoinedWaitingEntity;
   provisionBooster: RedirectUriEntity;
-  redeemReward: Scalars['Boolean']['output'];
+  redeemReward: WaitingRewardEntity;
   updateWaitingMessage: WaitingEntity;
   upsertUser: UserPrivateEntity;
   upsertUserDevice: Scalars['Boolean']['output'];
@@ -402,7 +402,7 @@ export type RedeemRewardMutationVariables = Exact<{
 }>;
 
 
-export type RedeemRewardMutation = { __typename?: 'Mutation', redeemReward: boolean };
+export type RedeemRewardMutation = { __typename?: 'Mutation', redeemReward: { __typename?: 'WaitingRewardEntity', uniqueKey: string, withdrawedTotalPoint: number, reward: { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null, exchangeable: boolean, startAt: any, endAt: any, order?: number | null } } };
 
 export type UpdateWaitingMessageMutationVariables = Exact<{
   uniqueKey: Scalars['String']['input'];
@@ -686,9 +686,15 @@ export const ProvisionBoosterDocument = gql`
     ${RedirectUriFieldFragmentDoc}`;
 export const RedeemRewardDocument = gql`
     mutation redeemReward($uniqueKey: String!) {
-  redeemReward(input: {uniqueKey: $uniqueKey})
+  redeemReward(input: {uniqueKey: $uniqueKey}) {
+    ...WaitingRewardField
+    reward {
+      ...RewardField
+    }
+  }
 }
-    `;
+    ${WaitingRewardFieldFragmentDoc}
+${RewardFieldFragmentDoc}`;
 export const UpdateWaitingMessageDocument = gql`
     mutation updateWaitingMessage($uniqueKey: String!, $waitingMessage: String) {
   updateWaitingMessage(

@@ -12,20 +12,23 @@ import {
   RedeemRewardDocument,
   RedeemRewardMutation,
   RedeemRewardMutationVariables,
+  RewardEntity,
   RewardRedeemableDocument,
   RewardRedeemableQuery,
   RewardRedeemableQueryVariables,
+  WaitingRewardEntity,
 } from '../generated/graphql'
 
 const redeem = async (
   variables: RedeemRewardMutationVariables,
   accessToken: string
-): Promise<RedeemRewardMutation> => {
+): Promise<WaitingRewardEntity> => {
   try {
-    return await graphqlApiClient(accessToken).request<RedeemRewardMutation>(
-      RedeemRewardDocument,
-      variables
-    )
+    const redeemRewardMutation = await graphqlApiClient(
+      accessToken
+    ).request<RedeemRewardMutation>(RedeemRewardDocument, variables)
+
+    return redeemRewardMutation.redeemReward
   } catch (e: any) {
     if (e.response.errors[0].extensions.code === 'NOT_FOUND_ERROR')
       throw new NotFoundError('リワードまたはイベントが見つかりません')

@@ -3,6 +3,7 @@ import {
   RedeemRewardMutation,
   RedeemRewardMutationVariables,
   RewardRedeemableQueryVariables,
+  WaitingRewardEntity,
 } from '../../generated/graphql'
 import { SiweJwtRepository } from '../../repositories/SiweJwtRepository'
 import { WaitingRewardRepository } from '../../repositories/WaitingRewardRepository'
@@ -23,7 +24,7 @@ export const useRedeemReward = (variables: RewardRedeemableQueryVariables) => {
   )
   const redeemReward = async (
     variables: RedeemRewardMutationVariables
-  ): Promise<RedeemRewardMutation> => {
+  ): Promise<WaitingRewardEntity> => {
     const secretJwt = await SiweJwtRepository.getSiweJwtFromBrowser()
 
     return await WaitingRewardRepository.redeem(

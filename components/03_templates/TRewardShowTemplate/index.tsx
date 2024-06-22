@@ -61,7 +61,7 @@ const Component: FC<Props> = ({ waiting, reward, ...props }) => {
         </Box> */}
       </Box>
 
-      <ORewardRedeemButton reward={reward} />
+      <ORewardRedeemButton waiting={waiting} reward={reward} />
     </>
   )
 }

@@ -23,8 +23,11 @@ export const waitingRewardUrl = (uniqueKey: string, rewardUniqueKey: string) =>
 
 export const waitingBoostersUrl = (uniqueKey: string) =>
   `/waitings/${uniqueKey}?tab=boosters`
-export const waitingAquiredUrl = (uniqueKey: string) =>
-  `/waitings/${uniqueKey}?tab=aquired`
+export const waitingAquiredUrl = (
+  uniqueKey: string,
+  grantedWaitingRewardUniqueKey: string
+) =>
+  `/waitings/${uniqueKey}?tab=aquired&grantedWaitingRewardUniqueKey=${grantedWaitingRewardUniqueKey}`
 
 export const waitingAquiredRewardUrl = (
   uniqueKey: string,
