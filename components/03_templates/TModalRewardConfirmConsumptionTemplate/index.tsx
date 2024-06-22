@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Flex, SimpleGrid } from '@mantine/core'
+import { AspectRatio, Box, Flex } from '@mantine/core'
 import { notifications, showNotification } from '@mantine/notifications'
 import Image from 'next/image'
 import { FC, useState } from 'react'
@@ -8,6 +8,7 @@ import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
 import { colorScheme } from '../../../theme/colorScheme'
 import { EButton } from '../../01_elements/EButton'
 import { EHeading } from '../../01_elements/EHeading/base'
+import { ELoader } from '../../01_elements/ELoader'
 import { EModal } from '../../01_elements/EModal'
 import { EText } from '../../01_elements/EText/base'
 
@@ -28,11 +29,11 @@ const Component: FC<Props> = ({
     isRewardConsumeable,
     isRewardConsumeableError,
     isRewardConsumeableIsLoading,
-    consumeRewardErrorType,
     consumeReward,
   } = useConsumeReward({ uniqueKey: waitingReward.uniqueKey })
 
   const { isSiweWallet } = useSiweEoaAddress(waiting.user.eoaAddress)
+  const [used, setUsed] = useState(false)
   const [processing, setProcessing] = useState(false)
 
   const onSubmit = async () => {
@@ -45,25 +46,16 @@ const Component: FC<Props> = ({
 
     try {
       setProcessing(true)
-      // const consumeWaitingReward = await consumeReward({
-      //   uniqueKey: waitingReward.uniqueKey,
-      // })
+      await consumeReward({
+        uniqueKey: waitingReward.uniqueKey,
+      })
 
-      // showNotification({
-      //   message: 'リワードを使用しました。',
-      //   color: colorScheme.scheme1.accent1.surface,
-      // })
-
-      setIsOpen(false)
-
-      // window.location.href = waitingAquiredUrl(
-      //   waiting.uniqueKey,
-      //   redeemedReward.reward.uniqueKey
-      // )
-      // router.push(
-      //   waitingAquiredUrl(waiting.uniqueKey, redeemedReward.reward.uniqueKey)
-      // )
+      setUsed(true)
+      setTimeout(() => {
+        setProcessing(false)
+      }, 2000)
     } catch (e: any) {
+      setProcessing(false)
       console.error(e)
       notifications.show({
         title: 'エラー',
@@ -73,11 +65,72 @@ const Component: FC<Props> = ({
     }
   }
 
+  if (isRewardConsumeableError) {
+    return (
+      <EModal
+        isOpen={isOpen}
+        closedCallback={() => setIsOpen(false)}
+        showCloseButton={false}
+      >
+        <Flex w="100%" h="300px" align="center" justify="center">
+          Consumeableエラー
+        </Flex>
+      </EModal>
+    )
+  }
+
+  if (isRewardConsumeableIsLoading || !isRewardConsumeable)
+    return (
+      <Flex direction="column" my={0} px={16} justify="center" align="center">
+        <EButton.Sm fillType="disabled">Loading...</EButton.Sm>
+      </Flex>
+    )
+
+  if (processing) {
+    return (
+      <EModal
+        isOpen={isOpen}
+        closedCallback={() => setIsOpen(false)}
+        showCloseButton={false}
+      >
+        <Flex w="100%" h="300px" align="center" justify="center">
+          <ELoader />
+        </Flex>
+      </EModal>
+    )
+  }
+
+  if (used) {
+    return (
+      <EModal
+        isOpen={isOpen}
+        closedCallback={() => setIsOpen(false)}
+        // showCloseButton={true}
+      >
+        <EHeading.Page ta="center">利用開始</EHeading.Page>
+
+        <EText.Desc2 mt={8} ta="center">
+          お楽しみください！
+        </EText.Desc2>
+
+        <EButton.Sm
+          w="100%"
+          mt={16}
+          surface="surface2"
+          fillType="filled"
+          onClick={() => window.location.reload()}
+        >
+          閉じる
+        </EButton.Sm>
+      </EModal>
+    )
+  }
+
   return (
     <EModal
+      showCloseButton={true}
       isOpen={isOpen}
       closedCallback={() => setIsOpen(false)}
-      showCloseButton={false}
     >
       <Box
         mt={-32}
@@ -121,19 +174,16 @@ const Component: FC<Props> = ({
       <EText.Desc2 mt={8} ta="center" c={colorScheme.scheme1.notice.alert}>
         「利用する」押下後の取り消しはできません
       </EText.Desc2>
-      <SimpleGrid mt={16} cols={2} spacing={4}>
-        <EButton.Sm w="100%" surface="surface2" fillType="filled">
-          キャンセル
-        </EButton.Sm>
-        <EButton.Sm
-          w="100%"
-          surface="accent2"
-          fillType="filled"
-          onClick={onSubmit}
-        >
-          利用する
-        </EButton.Sm>
-      </SimpleGrid>
+
+      <EButton.Sm
+        w="100%"
+        mt={16}
+        surface="accent2"
+        fillType="filled"
+        onClick={onSubmit}
+      >
+        利用する
+      </EButton.Sm>
     </EModal>
   )
 }

@@ -23,15 +23,18 @@ export const useConsumeReward = (
       )
     }
   )
+
   const consumeReward = async (
     variables: ConsumeWaitingRewardMutationVariables
   ): Promise<WaitingRewardEntity> => {
     const secretJwt = await SiweJwtRepository.getSiweJwtFromBrowser()
 
-    return await WaitingRewardRepository.consume(
+    const waitingReward = await WaitingRewardRepository.consume(
       variables,
       `${secretJwt?.accessToken}`
     )
+
+    return waitingReward
   }
 
   useEffect(() => {

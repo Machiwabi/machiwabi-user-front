@@ -5,19 +5,11 @@ import {
   WaitingEntity,
   WaitingRewardEntity,
 } from '../../../generated/graphql'
-import { useRedeemReward } from '../../../hooks/resources/useRedeemReward'
-import { EButton } from '../../01_elements/EButton'
-import { dateConverter } from '../../../utils/dateConverter'
-import { colorScheme } from '../../../theme/colorScheme'
-import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
-import { notifications, showNotification } from '@mantine/notifications'
-import { ELoader } from '../../01_elements/ELoader'
-import { waitingAquiredUrl } from '../../../helpers/url.helper'
-import { useRouter } from 'next/router'
 import { useConsumeReward } from '../../../hooks/resources/useConsumeWaitingReward'
 import { useWaitingRewards } from '../../../hooks/resources/useWaitingRewards'
+import { EButton } from '../../01_elements/EButton'
+import { ELoader } from '../../01_elements/ELoader'
 import { EText } from '../../01_elements/EText/base'
-import { TModalRewardConsumedTemplate } from '../../03_templates/TModalRewardConsumedTemplate'
 import { TModalRewardConfirmConsumptionTemplate } from '../../03_templates/TModalRewardConfirmConsumptionTemplate'
 
 type Props = BoxProps & {
