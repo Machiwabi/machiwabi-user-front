@@ -94,6 +94,26 @@ const AuthenticatedButton: FC<AuthenticatedButtonProps> = ({ event }) => {
     window.location.href = waitingUrl(joinWaiting.joinEvent.uniqueKey)
   }
 
+  if (eventService.eventEnded()) {
+    return (
+      <Box w="100%" maw={410} px={16}>
+        <EButton.Lg w="100%" fillType="disabled" disabled>
+          このイベントは終了しました
+        </EButton.Lg>
+      </Box>
+    )
+  }
+
+  if (!eventService.eventStarted()) {
+    return (
+      <Box w="100%" maw={410} px={16}>
+        <EButton.Lg w="100%" fillType="disabled" disabled>
+          このイベントはまだ開始していません
+        </EButton.Lg>
+      </Box>
+    )
+  }
+
   if (isUserJoinableEventIsLoading || joining) {
     return (
       <>
@@ -136,26 +156,6 @@ const AuthenticatedButton: FC<AuthenticatedButtonProps> = ({ event }) => {
           </EButton.Lg>
         </Box>
       </>
-    )
-  }
-
-  if (eventService.eventEnded()) {
-    return (
-      <Box w="100%" maw={410} px={16}>
-        <EButton.Lg w="100%" fillType="disabled" disabled>
-          このイベントは終了しました
-        </EButton.Lg>
-      </Box>
-    )
-  }
-
-  if (!eventService.eventStarted()) {
-    return (
-      <Box w="100%" maw={410} px={16}>
-        <EButton.Lg w="100%" fillType="disabled" disabled>
-          このイベントはまだ開始していません
-        </EButton.Lg>
-      </Box>
     )
   }
 
