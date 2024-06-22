@@ -11,6 +11,7 @@ import { ELoader } from '../../01_elements/ELoader'
 import { colorScheme } from '../../../theme/colorScheme'
 import { ga4PushEvent } from '../../../utils/ga4'
 import { GA4_CUSTOM_EVENT } from '../../../constants/ga4CustomEvent'
+import { EventService } from '../../../domains/services/event.service'
 
 type Props = {
   event: EventEntity
@@ -29,48 +30,36 @@ const Component: FC<Props> = ({ event, redirectUrl }) => {
         </>
       ) : (
         <>
-          {event.isJoinable ? (
-            <>
-              <Box w="100%" maw={410} px={16}>
-                <EButton.Lg
-                  w="100%"
-                  fillType="filled"
-                  surface="surface3"
-                  onClick={() => {
-                    connectWeb3AuthAndSignInWithEthereum(redirectUrl)
-                  }}
-                >
-                  新規作成／ログインして参加する
-                </EButton.Lg>
-                <Box
-                  mt={8}
-                  p={8}
-                  bg={colorScheme.scheme1.surface1.surface}
-                  c={colorScheme.scheme1.surface1.object.high}
-                  style={{
-                    borderRadius: 8,
-                    border: `1px solid ${colorScheme.scheme1.surface1.object.high}`,
-                  }}
-                >
-                  <Box fz={10}>
-                    ・ safariやchromeなどのブラウザでご利用ください。
-                  </Box>
-                  <Box mt={2} fz={10}>
-                    ・
-                    ウォレットご利用の方：「接続」と「署名」の２回操作があります。
-                  </Box>
-                </Box>
+          <Box w="100%" maw={410} px={16}>
+            <EButton.Lg
+              w="100%"
+              fillType="filled"
+              surface="surface3"
+              onClick={() => {
+                connectWeb3AuthAndSignInWithEthereum(redirectUrl)
+              }}
+            >
+              新規作成／ログインして参加する
+            </EButton.Lg>
+            <Box
+              mt={8}
+              p={8}
+              bg={colorScheme.scheme1.surface1.surface}
+              c={colorScheme.scheme1.surface1.object.high}
+              style={{
+                borderRadius: 8,
+                border: `1px solid ${colorScheme.scheme1.surface1.object.high}`,
+              }}
+            >
+              <Box fz={10}>
+                ・ safariやchromeなどのブラウザでご利用ください。
               </Box>
-            </>
-          ) : (
-            <>
-              <Box w="100%" maw={410} px={16}>
-                <EButton.Lg w="100%" fillType="disabled" disabled>
-                  終了しました
-                </EButton.Lg>
+              <Box mt={2} fz={10}>
+                ・
+                ウォレットご利用の方：「接続」と「署名」の２回操作があります。
               </Box>
-            </>
-          )}
+            </Box>
+          </Box>
         </>
       )}
     </>
@@ -90,6 +79,8 @@ const AuthenticatedButton: FC<AuthenticatedButtonProps> = ({ event }) => {
     isUserJoiableError,
     isUserJoinableErrorType,
   } = useEventJoinable({ uniqueKey: event.uniqueKey })
+
+  const eventService = new EventService(event)
 
   const { createJoinWaiting } = useJoinWaiting()
   const [joining, setJoining] = useState(false)
@@ -148,6 +139,26 @@ const AuthenticatedButton: FC<AuthenticatedButtonProps> = ({ event }) => {
     )
   }
 
+  if (eventService.eventEnded()) {
+    return (
+      <Box w="100%" maw={410} px={16}>
+        <EButton.Lg w="100%" fillType="disabled" disabled>
+          このイベントは終了しました
+        </EButton.Lg>
+      </Box>
+    )
+  }
+
+  if (!eventService.eventStarted()) {
+    return (
+      <Box w="100%" maw={410} px={16}>
+        <EButton.Lg w="100%" fillType="disabled" disabled>
+          このイベントはまだ開始していません
+        </EButton.Lg>
+      </Box>
+    )
+  }
+
   return (
     <>
       {event.isJoinable ? (
@@ -179,7 +190,7 @@ const AuthenticatedButton: FC<AuthenticatedButtonProps> = ({ event }) => {
         <>
           <Box w="100%" maw={410} px={16}>
             <EButton.Lg w="100%" fillType="disabled" disabled>
-              終了しました
+              開始していないもしくは終了しました
             </EButton.Lg>
           </Box>
         </>
