@@ -8,4 +8,6 @@ export class WaitingRewardService {
       })
       .reduce((acc, cur) => acc + cur, 0)
   }
+
+  public redeemable(waitingReward: WaitingRewardEntity) {}
 }

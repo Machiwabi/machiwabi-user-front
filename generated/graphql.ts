@@ -129,9 +129,9 @@ export type Mutation = {
   createBooster: BoosterEntity;
   createReward: RewardEntity;
   exchangeBooster: WaitingBoosterEntity;
-  exchangeReward: Scalars['Boolean']['output'];
   joinEvent: JoinedWaitingEntity;
   provisionBooster: RedirectUriEntity;
+  redeemReward: WaitingRewardEntity;
   updateWaitingMessage: WaitingEntity;
   upsertUser: UserPrivateEntity;
   upsertUserDevice: Scalars['Boolean']['output'];
@@ -153,11 +153,6 @@ export type MutationExchangeBoosterArgs = {
 };
 
 
-export type MutationExchangeRewardArgs = {
-  input: ExchangeRewardInput;
-};
-
-
 export type MutationJoinEventArgs = {
   input: JoinEventInput;
 };
@@ -165,6 +160,11 @@ export type MutationJoinEventArgs = {
 
 export type MutationProvisionBoosterArgs = {
   input: ProvisionBoosterInput;
+};
+
+
+export type MutationRedeemRewardArgs = {
+  input: ExchangeRewardInput;
 };
 
 
@@ -193,6 +193,7 @@ export type Query = {
   events: Array<EventEntity>;
   latestWaitingBooster?: Maybe<WaitingBoosterEntity>;
   reward: RewardEntity;
+  rewardRedeemable: Scalars['Boolean']['output'];
   rewards: Array<RewardEntity>;
   rewardsAll: Array<RewardEntity>;
   userPrivate?: Maybe<UserPrivateEntity>;
@@ -237,6 +238,11 @@ export type QueryLatestWaitingBoosterArgs = {
 
 export type QueryRewardArgs = {
   uniqueKey: Scalars['String']['input'];
+};
+
+
+export type QueryRewardRedeemableArgs = {
+  input: ExchangeRewardInput;
 };
 
 
@@ -374,13 +380,6 @@ export type ExchangeBoosterMutationVariables = Exact<{
 
 export type ExchangeBoosterMutation = { __typename?: 'Mutation', exchangeBooster: { __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null, enabled: boolean, booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } } };
 
-export type ExchangeRewardMutationVariables = Exact<{
-  uniqueKey: Scalars['String']['input'];
-}>;
-
-
-export type ExchangeRewardMutation = { __typename?: 'Mutation', exchangeReward: boolean };
-
 export type JoinEventMutationVariables = Exact<{
   eventUniqueKey: Scalars['String']['input'];
   waitingName?: InputMaybe<Scalars['String']['input']>;
@@ -397,6 +396,13 @@ export type ProvisionBoosterMutationVariables = Exact<{
 
 
 export type ProvisionBoosterMutation = { __typename?: 'Mutation', provisionBooster: { __typename?: 'RedirectUriEntity', url: string } };
+
+export type RedeemRewardMutationVariables = Exact<{
+  uniqueKey: Scalars['String']['input'];
+}>;
+
+
+export type RedeemRewardMutation = { __typename?: 'Mutation', redeemReward: { __typename?: 'WaitingRewardEntity', uniqueKey: string, withdrawedTotalPoint: number, reward: { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null, exchangeable: boolean, startAt: any, endAt: any, order?: number | null } } };
 
 export type UpdateWaitingMessageMutationVariables = Exact<{
   uniqueKey: Scalars['String']['input'];
@@ -469,6 +475,13 @@ export type LatestWaitingBoosterQueryVariables = Exact<{
 
 
 export type LatestWaitingBoosterQuery = { __typename?: 'Query', latestWaitingBooster?: { __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null, enabled: boolean, booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } } | null };
+
+export type RewardRedeemableQueryVariables = Exact<{
+  uniqueKey: Scalars['String']['input'];
+}>;
+
+
+export type RewardRedeemableQuery = { __typename?: 'Query', rewardRedeemable: boolean };
 
 export type RewardQueryVariables = Exact<{
   uniqueKey: Scalars['String']['input'];
@@ -650,11 +663,6 @@ export const ExchangeBoosterDocument = gql`
 }
     ${WaitingBoosterFieldFragmentDoc}
 ${BoosterFieldFragmentDoc}`;
-export const ExchangeRewardDocument = gql`
-    mutation exchangeReward($uniqueKey: String!) {
-  exchangeReward(input: {uniqueKey: $uniqueKey})
-}
-    `;
 export const JoinEventDocument = gql`
     mutation joinEvent($eventUniqueKey: String!, $waitingName: String, $waitingMessage: String) {
   joinEvent(
@@ -676,6 +684,17 @@ export const ProvisionBoosterDocument = gql`
   }
 }
     ${RedirectUriFieldFragmentDoc}`;
+export const RedeemRewardDocument = gql`
+    mutation redeemReward($uniqueKey: String!) {
+  redeemReward(input: {uniqueKey: $uniqueKey}) {
+    ...WaitingRewardField
+    reward {
+      ...RewardField
+    }
+  }
+}
+    ${WaitingRewardFieldFragmentDoc}
+${RewardFieldFragmentDoc}`;
 export const UpdateWaitingMessageDocument = gql`
     mutation updateWaitingMessage($uniqueKey: String!, $waitingMessage: String) {
   updateWaitingMessage(
@@ -782,6 +801,11 @@ export const LatestWaitingBoosterDocument = gql`
 }
     ${WaitingBoosterFieldFragmentDoc}
 ${BoosterFieldFragmentDoc}`;
+export const RewardRedeemableDocument = gql`
+    query rewardRedeemable($uniqueKey: String!) {
+  rewardRedeemable(input: {uniqueKey: $uniqueKey})
+}
+    `;
 export const RewardDocument = gql`
     query reward($uniqueKey: String!) {
   reward(uniqueKey: $uniqueKey) {
@@ -945,14 +969,14 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     exchangeBooster(variables: ExchangeBoosterMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ExchangeBoosterMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<ExchangeBoosterMutation>(ExchangeBoosterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'exchangeBooster', 'mutation');
     },
-    exchangeReward(variables: ExchangeRewardMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ExchangeRewardMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<ExchangeRewardMutation>(ExchangeRewardDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'exchangeReward', 'mutation');
-    },
     joinEvent(variables: JoinEventMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<JoinEventMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<JoinEventMutation>(JoinEventDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'joinEvent', 'mutation');
     },
     provisionBooster(variables: ProvisionBoosterMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ProvisionBoosterMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<ProvisionBoosterMutation>(ProvisionBoosterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'provisionBooster', 'mutation');
+    },
+    redeemReward(variables: RedeemRewardMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<RedeemRewardMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RedeemRewardMutation>(RedeemRewardDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'redeemReward', 'mutation');
     },
     updateWaitingMessage(variables: UpdateWaitingMessageMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateWaitingMessageMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<UpdateWaitingMessageMutation>(UpdateWaitingMessageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateWaitingMessage', 'mutation');
@@ -983,6 +1007,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     latestWaitingBooster(variables: LatestWaitingBoosterQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<LatestWaitingBoosterQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<LatestWaitingBoosterQuery>(LatestWaitingBoosterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'latestWaitingBooster', 'query');
+    },
+    rewardRedeemable(variables: RewardRedeemableQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<RewardRedeemableQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RewardRedeemableQuery>(RewardRedeemableDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'rewardRedeemable', 'query');
     },
     reward(variables: RewardQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<RewardQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<RewardQuery>(RewardDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'reward', 'query');

@@ -11,9 +11,10 @@ import { dateConverter } from '../../../utils/dateConverter'
 type Props = BoxProps & {
   waiting: WaitingEntity
   reward: RewardEntity
+  isNowGranted?: boolean
 }
 
-const Component: FC<Props> = ({ waiting, reward, ...props }) => {
+const Component: FC<Props> = ({ waiting, reward, isNowGranted, ...props }) => {
   return (
     <Flex direction="column" component="li" justify="center" align="center">
       <Link
