@@ -100,18 +100,10 @@ const Component: FC<Props> = ({ ...props }) => {
               </Flex>
             </Flex>
             <CtaButton
-              href={applicationUrls.campaign.icr240824}
-              value={'マチワビる-08月24日大会-'}
-              w={{ base: '100%', md: 600 }}
-              mt={{ base: 16, lg: 30 }}
-            />
-            <CtaButton
               href={applicationUrls.campaign.icr240603}
-              value={'06月23日大会のマチワビはこちら'}
+              value={'マチワビる'}
               w={{ base: '100%', md: 600 }}
               mt={{ base: 16, lg: 30 }}
-              h={40}
-              fz={16}
             />
           </Flex>
         </Box>
