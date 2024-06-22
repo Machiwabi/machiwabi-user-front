@@ -44,10 +44,10 @@ export const useConsumeReward = (
   }, [error])
 
   return {
-    isRewardRedeemable: data,
-    isRewardRedeemableError: error,
-    isRewardRedeemableIsLoading: isLoading,
-    redeemRewardErrorType: errorType,
+    isRewardConsumeable: data,
+    isRewardConsumeableError: error,
+    isRewardConsumeableIsLoading: isLoading,
+    consumeRewardErrorType: errorType,
     consumeReward,
   }
 }
