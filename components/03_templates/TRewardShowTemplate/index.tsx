@@ -6,6 +6,7 @@ import { colorScheme } from '../../../theme/colorScheme'
 import { EHeading } from '../../01_elements/EHeading/base'
 import { EText } from '../../01_elements/EText/base'
 import { ORewardRedeemButton } from '../../02_organisms/ORewardRedeemButton'
+import { useWaitingRewards } from '../../../hooks/resources/useWaitingRewards'
 
 type Props = BoxProps & {
   waiting: WaitingEntity

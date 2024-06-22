@@ -1,0 +1,8 @@
+query waitingRewardsByReward($rewardUniqueKey: String!) {
+  waitingRewardsByReward(rewardUniqueKey: $rewardUniqueKey) {
+    ...WaitingRewardField
+    reward {
+      ...RewardField
+    }
+  }
+}

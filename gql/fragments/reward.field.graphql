@@ -9,6 +9,7 @@ fragment RewardField on RewardEntity {
   stockPerWaiting
   iconUrl
   exchangeable
+  consumeable
   startAt
   endAt
   order

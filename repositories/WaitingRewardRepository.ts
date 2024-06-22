@@ -9,15 +9,37 @@ import {
   RewardOutOfStockPerWaitingError,
 } from '../exceptions/exceptions'
 import {
+  ConsumeWaitingRewardDocument,
+  ConsumeWaitingRewardMutation,
+  ConsumeWaitingRewardMutationVariables,
   RedeemRewardDocument,
   RedeemRewardMutation,
   RedeemRewardMutationVariables,
-  RewardEntity,
   RewardRedeemableDocument,
   RewardRedeemableQuery,
   RewardRedeemableQueryVariables,
+  ValidateConsumeableWaitingRewardDocument,
+  ValidateConsumeableWaitingRewardQuery,
+  ValidateConsumeableWaitingRewardQueryVariables,
   WaitingRewardEntity,
+  WaitingRewardsByRewardDocument,
+  WaitingRewardsByRewardQuery,
+  WaitingRewardsByRewardQueryVariables,
 } from '../generated/graphql'
+
+const findManyBy = async (
+  variables: WaitingRewardsByRewardQueryVariables,
+  accessToken: string
+): Promise<WaitingRewardEntity[]> => {
+  const waitingRewards = await graphqlApiClient(
+    accessToken
+  ).request<WaitingRewardsByRewardQuery>(
+    WaitingRewardsByRewardDocument,
+    variables
+  )
+
+  return waitingRewards.waitingRewardsByReward
+}
 
 const redeem = async (
   variables: RedeemRewardMutationVariables,
@@ -89,4 +111,54 @@ const isRedeemable = async (
   }
 }
 
-export const WaitingRewardRepository = { redeem, isRedeemable }
+const isConsumeable = async (
+  variables: ValidateConsumeableWaitingRewardQueryVariables,
+  accessToken: string
+): Promise<boolean> => {
+  try {
+    const isConsumeable = await graphqlApiClient(
+      accessToken
+    ).request<ValidateConsumeableWaitingRewardQuery>(
+      ValidateConsumeableWaitingRewardDocument,
+      variables
+    )
+
+    return isConsumeable.validateConsumeableWaitingReward
+  } catch (e: any) {
+    if (e.response.errors[0].extensions.code === 'NOT_FOUND_ERROR')
+      throw new NotFoundError('リワードが見つかりません')
+    // TODO Error handling
+
+    throw e
+  }
+}
+
+const consume = async (
+  variables: ConsumeWaitingRewardMutationVariables,
+  accessToken: string
+): Promise<WaitingRewardEntity> => {
+  try {
+    const consumeRewardMutation = await graphqlApiClient(
+      accessToken
+    ).request<ConsumeWaitingRewardMutation>(
+      ConsumeWaitingRewardDocument,
+      variables
+    )
+
+    return consumeRewardMutation.consumeWaitingReward
+  } catch (e: any) {
+    if (e.response.errors[0].extensions.code === 'NOT_FOUND_ERROR')
+      throw new NotFoundError('リワードが見つかりません')
+    // TODO Error handling
+
+    throw e
+  }
+}
+
+export const WaitingRewardRepository = {
+  redeem,
+  isRedeemable,
+  consume,
+  isConsumeable,
+  findManyBy,
+}

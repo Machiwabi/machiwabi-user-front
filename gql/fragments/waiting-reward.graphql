@@ -1,4 +1,6 @@
 fragment WaitingRewardField on WaitingRewardEntity {
   uniqueKey
   withdrawedTotalPoint
+  consumeable
+  consumedAt
 }

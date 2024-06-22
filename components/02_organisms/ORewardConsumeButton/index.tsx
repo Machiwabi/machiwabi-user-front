@@ -17,27 +17,19 @@ type Props = BoxProps & {
 }
 
 const Component: FC<Props> = ({ waiting, reward }) => {
-  return (
-    <Flex direction="column" my={0} px={16} justify="center" align="center">
-      <Button waiting={waiting} reward={reward} />
-      <Box mt={8} fz={10} c={colorScheme.scheme1.surface1.object.mid}>
-        {reward.stockPerWaiting && reward.stockPerWaiting > 0 && (
-          <>アカウントあたり{reward.stockPerWaiting}つまで引換可</>
-        )}
-        {reward.stockPerWaiting && reward.stock && <> ／ </>}
-        {reward.stock && <>残り{reward.stock}個</>}
-      </Box>
-      <Flex mb={8} direction="column" align="center">
-        <Box component="span" fz={10}>
-          交換期間: {dateConverter.yyyyMMddHHmmss(reward.startAt)}〜
-          {dateConverter.yyyyMMddHHmmss(reward.endAt)}
-        </Box>
+  if (!reward.consumeable) {
+    return (
+      <Flex direction="column" my={0} px={16} justify="center" align="center">
+        <EButton.Sm fillType="filled">
+          NFTの配布はしばらくお待ちください
+        </EButton.Sm>
       </Flex>
-    </Flex>
-  )
+    )
+  }
+  return <></>
 }
 
-export { Component as ORewardRedeemButton }
+export { Component as ORewardConsumeButton }
 
 type ButtonProps = {
   waiting: WaitingEntity
@@ -45,6 +37,8 @@ type ButtonProps = {
 }
 
 const Button: FC<ButtonProps> = ({ waiting, reward }) => {
+  const router = useRouter()
+
   const {
     isRewardRedeemable,
     isRewardRedeemableError,
