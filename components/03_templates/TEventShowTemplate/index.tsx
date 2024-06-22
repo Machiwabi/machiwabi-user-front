@@ -20,8 +20,6 @@ const Component: FC<Props> = ({ event, ...props }) => {
       const img = new window.Image()
       img.src = event.imageUrl
       img.onload = () => {
-        console.log('img.width', img.width)
-        console.log('img.height', img.height)
         setAspectRatio(img.width / img.height)
       }
     }

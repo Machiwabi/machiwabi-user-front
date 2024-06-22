@@ -20,7 +20,11 @@ export const useWaitingTabs = () => {
     if (!selectedTab) return
 
     let query
-    const { grantedWaitingBoosterUniqueKey, ...extractQuery } = router.query
+    const {
+      grantedWaitingBoosterUniqueKey,
+      grantedRewardUniqueKey,
+      ...extractQuery
+    } = router.query
     query = {
       ...extractQuery,
       tab: selectedTab,

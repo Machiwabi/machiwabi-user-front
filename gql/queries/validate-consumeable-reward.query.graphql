@@ -1,0 +1,3 @@
+query validateConsumeableWaitingReward($uniqueKey: String!) {
+  validateConsumeableWaitingReward(uniqueKey: $uniqueKey)
+}

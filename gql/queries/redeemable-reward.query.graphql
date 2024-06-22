@@ -1,0 +1,3 @@
+query rewardRedeemable($uniqueKey: String!) {
+  rewardRedeemable(input: { uniqueKey: $uniqueKey })
+}

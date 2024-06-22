@@ -49,7 +49,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, rewardUniqueKey }) => {
           },
         ]}
       />
-      <TAquiredRewardShowTemplate mt={24} reward={reward} />
+      <TAquiredRewardShowTemplate mt={24} waiting={waiting} reward={reward} />
     </>
   )
 }

@@ -3,10 +3,10 @@ import Image from 'next/image'
 import { FC } from 'react'
 import { RewardEntity, WaitingEntity } from '../../../generated/graphql'
 import { colorScheme } from '../../../theme/colorScheme'
-import { dateConverter } from '../../../utils/dateConverter'
-import { EButton } from '../../01_elements/EButton'
 import { EHeading } from '../../01_elements/EHeading/base'
 import { EText } from '../../01_elements/EText/base'
+import { ORewardRedeemButton } from '../../02_organisms/ORewardRedeemButton'
+import { useWaitingRewards } from '../../../hooks/resources/useWaitingRewards'
 
 type Props = BoxProps & {
   waiting: WaitingEntity
@@ -62,18 +62,7 @@ const Component: FC<Props> = ({ waiting, reward, ...props }) => {
         </Box> */}
       </Box>
 
-      <Flex direction="column" my={0} px={16} justify="center" align="center">
-        <EButton.Sm fillType="disabled">
-          {dateConverter.yyyyMMddHHmmss(reward.startAt)}から交換可能
-        </EButton.Sm>
-        <Box mt={8} fz={10} c={colorScheme.scheme1.surface1.object.mid}>
-          {reward.stockPerWaiting && reward.stockPerWaiting > 0 && (
-            <>アカウントあたり{reward.stockPerWaiting}つまで引換可</>
-          )}
-          {reward.stockPerWaiting && reward.stock && <> ／ </>}
-          {reward.stock && <>残り{reward.stock}個</>}
-        </Box>
-      </Flex>
+      <ORewardRedeemButton waiting={waiting} reward={reward} />
     </>
   )
 }
