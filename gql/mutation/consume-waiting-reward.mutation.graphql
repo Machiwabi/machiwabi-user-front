@@ -1,0 +1,8 @@
+mutation consumeWaitingReward($uniqueKey: String!) {
+  consumeWaitingReward(uniqueKey: $uniqueKey) {
+    ...WaitingRewardField
+    reward {
+      ...RewardField
+    }
+  }
+}

@@ -126,6 +126,7 @@ export type JoinedWaitingEntity = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  consumeWaitingReward: WaitingRewardEntity;
   createBooster: BoosterEntity;
   createReward: RewardEntity;
   exchangeBooster: WaitingBoosterEntity;
@@ -135,6 +136,11 @@ export type Mutation = {
   updateWaitingMessage: WaitingEntity;
   upsertUser: UserPrivateEntity;
   upsertUserDevice: Scalars['Boolean']['output'];
+};
+
+
+export type MutationConsumeWaitingRewardArgs = {
+  uniqueKey: Scalars['String']['input'];
 };
 
 
@@ -197,6 +203,7 @@ export type Query = {
   rewards: Array<RewardEntity>;
   rewardsAll: Array<RewardEntity>;
   userPrivate?: Maybe<UserPrivateEntity>;
+  validateConsumeableWaitingReward: Scalars['Boolean']['output'];
   waiting: WaitingEntity;
   waitingSiblings: Array<WaitingEntity>;
   waitings: Array<WaitingEntity>;
@@ -248,6 +255,11 @@ export type QueryRewardRedeemableArgs = {
 
 export type QueryRewardsArgs = {
   eventUniqueKey: Scalars['String']['input'];
+};
+
+
+export type QueryValidateConsumeableWaitingRewardArgs = {
+  uniqueKey: Scalars['String']['input'];
 };
 
 
@@ -371,6 +383,13 @@ export type WaitingBoosterFieldFragment = { __typename?: 'WaitingBoosterEntity',
 export type WaitingRewardFieldFragment = { __typename?: 'WaitingRewardEntity', uniqueKey: string, withdrawedTotalPoint: number };
 
 export type WaitingFieldFragment = { __typename?: 'WaitingEntity', uniqueKey: string, waitingPoint: number, totalPoint: number, waitingDuration: number, remainingEventStartDuration: number, secondsPerWaitingPoint: number, secondPerTotalPoint: number, totalPointMultiplier: number, waitingName?: string | null, waitingMessage?: string | null, joinAt: any };
+
+export type ConsumeWaitingRewardMutationVariables = Exact<{
+  uniqueKey: Scalars['String']['input'];
+}>;
+
+
+export type ConsumeWaitingRewardMutation = { __typename?: 'Mutation', consumeWaitingReward: { __typename?: 'WaitingRewardEntity', uniqueKey: string, withdrawedTotalPoint: number, reward: { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null, exchangeable: boolean, startAt: any, endAt: any, order?: number | null } } };
 
 export type ExchangeBoosterMutationVariables = Exact<{
   uniqueKey: Scalars['String']['input'];
@@ -506,6 +525,13 @@ export type UserPrivateQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type UserPrivateQuery = { __typename?: 'Query', userPrivate?: { __typename?: 'UserPrivateEntity', uniqueKey: string, eoaAddress?: string | null, isActive?: boolean | null, name?: string | null, displayName?: string | null, iconImageUrl?: string | null, email?: string | null } | null };
+
+export type ValidateConsumeableWaitingRewardQueryVariables = Exact<{
+  uniqueKey: Scalars['String']['input'];
+}>;
+
+
+export type ValidateConsumeableWaitingRewardQuery = { __typename?: 'Query', validateConsumeableWaitingReward: boolean };
 
 export type WaitingSiblingsQueryVariables = Exact<{
   eventUniqueKey: Scalars['String']['input'];
@@ -652,6 +678,17 @@ export const WaitingFieldFragmentDoc = gql`
   joinAt
 }
     `;
+export const ConsumeWaitingRewardDocument = gql`
+    mutation consumeWaitingReward($uniqueKey: String!) {
+  consumeWaitingReward(uniqueKey: $uniqueKey) {
+    ...WaitingRewardField
+    reward {
+      ...RewardField
+    }
+  }
+}
+    ${WaitingRewardFieldFragmentDoc}
+${RewardFieldFragmentDoc}`;
 export const ExchangeBoosterDocument = gql`
     mutation exchangeBooster($uniqueKey: String!, $content: String) {
   exchangeBooster(input: {uniqueKey: $uniqueKey, content: $content}) {
@@ -834,6 +871,11 @@ export const UserPrivateDocument = gql`
   }
 }
     ${UserPrivateFieldFragmentDoc}`;
+export const ValidateConsumeableWaitingRewardDocument = gql`
+    query validateConsumeableWaitingReward($uniqueKey: String!) {
+  validateConsumeableWaitingReward(uniqueKey: $uniqueKey)
+}
+    `;
 export const WaitingSiblingsDocument = gql`
     query waitingSiblings($eventUniqueKey: String!) {
   waitingSiblings(eventUniqueKey: $eventUniqueKey) {
@@ -966,6 +1008,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    consumeWaitingReward(variables: ConsumeWaitingRewardMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ConsumeWaitingRewardMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ConsumeWaitingRewardMutation>(ConsumeWaitingRewardDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'consumeWaitingReward', 'mutation');
+    },
     exchangeBooster(variables: ExchangeBoosterMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ExchangeBoosterMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<ExchangeBoosterMutation>(ExchangeBoosterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'exchangeBooster', 'mutation');
     },
@@ -1022,6 +1067,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     userPrivate(variables?: UserPrivateQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UserPrivateQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<UserPrivateQuery>(UserPrivateDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'userPrivate', 'query');
+    },
+    validateConsumeableWaitingReward(variables: ValidateConsumeableWaitingRewardQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ValidateConsumeableWaitingRewardQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ValidateConsumeableWaitingRewardQuery>(ValidateConsumeableWaitingRewardDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'validateConsumeableWaitingReward', 'query');
     },
     waitingSiblings(variables: WaitingSiblingsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<WaitingSiblingsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<WaitingSiblingsQuery>(WaitingSiblingsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'waitingSiblings', 'query');
