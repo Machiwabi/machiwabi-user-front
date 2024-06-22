@@ -9,9 +9,10 @@ import { WaitingService } from '../../../domains/services/waiting.service'
 
 type Props = {
   waiting: WaitingEntity
+  animationEnabled?: boolean
 }
 
-const Component: FC<Props> = ({ waiting }) => {
+const Component: FC<Props> = ({ waiting, animationEnabled = true }) => {
   const waitingService = new WaitingService(waiting)
   return (
     <Flex align="center">
@@ -27,6 +28,7 @@ const Component: FC<Props> = ({ waiting }) => {
           <OCountBaloonAnimation
             addableTotalPoint={waitingService.earnableTotalPoint()}
             isBoosting={waitingService.isBoosting()}
+            animationEnabled={animationEnabled}
           />
         </Flex>
         <Box

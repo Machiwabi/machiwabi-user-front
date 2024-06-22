@@ -12,6 +12,7 @@ type Props = {
   rank?: number
   rollSpeed?: number
   initialRollAnimation?: boolean
+  animationEnabled?: boolean
 }
 
 const Component: FC<Props> = ({
@@ -19,6 +20,7 @@ const Component: FC<Props> = ({
   rank,
   rollSpeed,
   initialRollAnimation = false,
+  animationEnabled = true,
 }) => {
   return (
     <Box pos="relative">
@@ -51,7 +53,10 @@ const Component: FC<Props> = ({
               </Flex>
             )}
             <Flex flex={1} justify="space-between" align="center">
-              <OUserIconWithStatuses waiting={waiting} />
+              <OUserIconWithStatuses
+                waiting={waiting}
+                animationEnabled={animationEnabled}
+              />
               <OUserWaitingStatuses
                 waiting={waiting}
                 rollSpeed={rollSpeed}

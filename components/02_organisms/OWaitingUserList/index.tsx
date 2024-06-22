@@ -5,9 +5,10 @@ import { OWaitingUserListItem } from '../OWaitingUserListItem'
 
 type Props = {
   waitings: WaitingEntity[]
+  animationEnabled?: boolean
 }
 
-const Component: FC<Props> = ({ waitings }) => {
+const Component: FC<Props> = ({ waitings, animationEnabled = true }) => {
   return (
     <>
       <SimpleGrid px={16} spacing={16}>
@@ -17,6 +18,7 @@ const Component: FC<Props> = ({ waitings }) => {
               key={waiting.uniqueKey}
               waiting={waiting}
               rank={index + 1}
+              animationEnabled={animationEnabled}
             />
           )
         })}

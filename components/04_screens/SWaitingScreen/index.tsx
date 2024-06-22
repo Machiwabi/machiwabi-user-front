@@ -40,7 +40,11 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
         <br />
         デフォルトは10秒で1ポイント増えますが、MISSIONSを達成すると、ポイント増加速度が増加します！ポイントがたまれば、限定REWARDSと交換可能！
       </OTutorialGuide>
-      <OWaitingCounterWithUser waiting={waiting} px={16} />
+      <OWaitingCounterWithUser
+        waiting={waiting}
+        eventUniqueKey={waiting.event.uniqueKey}
+        px={16}
+      />
 
       <WaitingMembersSubComponent
         eventUniqueKey={waiting.event.uniqueKey}

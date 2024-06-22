@@ -7,19 +7,25 @@ import { colorScheme } from '../../../theme/colorScheme'
 type Props = {
   addableTotalPoint?: number
   isBoosting?: boolean
+  animationEnabled?: boolean
 }
 
 const animateDurationSecond = 3
 
-const Component: FC<Props> = ({ addableTotalPoint, isBoosting }) => {
+const Component: FC<Props> = ({
+  addableTotalPoint,
+  isBoosting,
+  animationEnabled = true,
+}) => {
   const { trigger } = useAnimateTriggerStore()
-  const [localTrigger, setLocalTrigger] = useState(true)
+  const [localTrigger, setLocalTrigger] = useState(animationEnabled)
 
   useEffect(() => {
     if (trigger) {
+      if (!animationEnabled) return
       setLocalTrigger(true)
     }
-  }, [trigger])
+  }, [trigger, animationEnabled])
 
   const resetTrigger = () => {
     setLocalTrigger(false)

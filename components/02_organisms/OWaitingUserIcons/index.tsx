@@ -7,14 +7,15 @@ import { WaitingService } from '../../../domains/services/waiting.service'
 
 type Props = {
   waitings: WaitingEntity[]
+  animationEnabled?: boolean
 }
 
-const Component: FC<Props> = ({ waitings }) => {
+const Component: FC<Props> = ({ waitings, animationEnabled = true }) => {
   return (
     <>
       <ScrollArea mt={-30} scrollbarSize={0} style={{ overflowY: 'visible' }}>
         <Flex gap={4} pt={30}>
-          {waitings.map((waiting, index) => {
+          {waitings.map((waiting) => {
             const waitingService = new WaitingService(waiting)
             return (
               <Box pos="relative" key={waiting.uniqueKey}>
@@ -22,6 +23,7 @@ const Component: FC<Props> = ({ waitings }) => {
                   <OCountBaloonAnimation
                     addableTotalPoint={waitingService.earnableTotalPoint()}
                     isBoosting={waitingService.isBoosting()}
+                    animationEnabled={animationEnabled}
                   />
                 </Box>
                 <OUserIcon
