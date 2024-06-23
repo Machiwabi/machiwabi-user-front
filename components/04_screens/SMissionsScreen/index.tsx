@@ -6,6 +6,8 @@ import { OMissionList } from '../../02_organisms/OMissionList'
 import { OTutorialGuide } from '../../02_organisms/OTutorialGuide'
 import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
+import { useEvent } from '../../../hooks/resources/useEvent'
+import { EventService } from '../../../domains/services/event.service'
 
 type Props = {
   waitingUniqueKey: string
@@ -21,10 +23,33 @@ const Component: FC<Props> = ({ waitingUniqueKey, eventUniqueKey }) => {
     eventUniqueKey,
   })
 
-  if (waitingError || boostersError) return <TErrorTemplate />
-  if (waitingIsLoading || boostersIsLoading || !boosters || !waiting)
+  const { event, eventError, eventIsLoading } = useEvent({
+    uniqueKey: eventUniqueKey,
+  })
+
+  if (waitingError || boostersError || eventError) return <TErrorTemplate />
+  if (
+    waitingIsLoading ||
+    boostersIsLoading ||
+    eventIsLoading ||
+    !boosters ||
+    !waiting ||
+    !event
+  )
     return <TLoadingTemplate />
 
+  const eventService = new EventService(event)
+
+  if (eventService.eventStarted()) {
+    return (
+      <>
+        <EBlankNotice
+          title="イベントが開始されました"
+          description="イベントが開始されたため、MISSIONはクローズしました。"
+        />
+      </>
+    )
+  }
   if (boosters.length === 0) {
     return (
       <>
