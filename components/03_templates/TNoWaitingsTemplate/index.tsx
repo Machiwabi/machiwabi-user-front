@@ -21,8 +21,8 @@ const Component: FC = () => {
           ありません
         </EText.Desc2>
         <Box mt={16}>
-          <EButton.Sm href={applicationUrls.campaign.icr240603}>
-            「雨のち、リボン2024」に参加する
+          <EButton.Sm href={applicationUrls.campaign.icr240824}>
+            「不思議の国のアイス2024」(08月24日大会)をマチワビる
           </EButton.Sm>
         </Box>
       </Box>

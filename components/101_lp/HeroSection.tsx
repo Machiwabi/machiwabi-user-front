@@ -72,7 +72,7 @@ const Component: FC<Props> = ({ ...props }) => {
             {/* cta */}
             <Box pos="absolute" bottom={160}>
               <CtaButton
-                href={applicationUrls.campaign.icr240603}
+                href={applicationUrls.campaign.icr240824}
                 value={'マチワビる'}
               />
             </Box>
@@ -202,7 +202,7 @@ const Component: FC<Props> = ({ ...props }) => {
           >
             <Center>
               <CtaButton
-                href={applicationUrls.campaign.icr240603}
+                href={applicationUrls.campaign.icr240824}
                 value={'マチワビる'}
                 w={330}
               />
