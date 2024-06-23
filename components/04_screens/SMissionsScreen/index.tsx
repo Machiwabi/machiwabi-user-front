@@ -45,7 +45,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, eventUniqueKey }) => {
       <>
         <EBlankNotice
           title="イベントが開始されました"
-          description="イベントが開始されたため、MISSIONは終了しました。"
+          description="イベントが開始されたため、MISSIONはクローズしました。"
         />
       </>
     )
