@@ -76,7 +76,10 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
         </Tabs.Panel>
 
         <Tabs.Panel value="boosters">
-          <SBoostersScreen waitingUniqueKey={waiting.uniqueKey} />
+          <SBoostersScreen
+            waitingUniqueKey={waiting.uniqueKey}
+            eventUniqueKey={waiting.event.uniqueKey}
+          />
         </Tabs.Panel>
 
         <Tabs.Panel value="aquired">

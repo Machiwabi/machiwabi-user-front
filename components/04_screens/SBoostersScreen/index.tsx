@@ -12,14 +12,22 @@ import { TErrorTemplate } from '../../03_templates/TErrorTemplate'
 import { TLoadingTemplate } from '../../03_templates/TLoadingTemplate'
 import { TModalGrantedWaitingBoosterTemplate } from '../../03_templates/TModalGrantedWaitingBoosterTemplate'
 import { OTutorialGuide } from '../../02_organisms/OTutorialGuide'
+import { useEvent } from '../../../hooks/resources/useEvent'
+import { EventService } from '../../../domains/services/event.service'
+import { WaitingBoosterEntity } from '../../../generated/graphql'
 
 type Props = {
   waitingUniqueKey: string
+  eventUniqueKey: string
 }
 
-const Component: FC<Props> = ({ waitingUniqueKey }) => {
+const Component: FC<Props> = ({ waitingUniqueKey, eventUniqueKey }) => {
   const { waiting, waitingError, waitingIsLoading } = useWaiting({
     uniqueKey: waitingUniqueKey,
+  })
+
+  const { event, eventError, eventIsLoading } = useEvent({
+    uniqueKey: eventUniqueKey,
   })
 
   const router = useRouter()
@@ -32,23 +40,36 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
     }, 1000)
   }, [waiting])
 
-  if (waitingError) return <TErrorTemplate />
-  if (waitingIsLoading || !waiting) return <TLoadingTemplate />
+  if (waitingError || eventError) return <TErrorTemplate />
+  if (waitingIsLoading || !waiting || eventIsLoading || !event)
+    return <TLoadingTemplate />
 
   const waitingBoostersService = new WaitingBoostersService()
+  const eventService = new EventService(event)
+
   const grantedWaitingBooster = waiting.waitingBoosters.find(
     (booster) => booster.uniqueKey === grantedWaitingBoosterUniqueKey
   )
 
-  const enableBoosters = waitingBoostersService.enableBoosters(
-    waiting.waitingBoosters
-  )
-  const finishedBoosters = waitingBoostersService.finishedBoosters(
-    waiting.waitingBoosters
-  )
-  const reviewingBoosters = waitingBoostersService.reviewingBoosters(
-    waiting.waitingBoosters
-  )
+  let enableBoosters: WaitingBoosterEntity[] = []
+  let finishedBoosters: WaitingBoosterEntity[] = []
+  let reviewingBoosters: WaitingBoosterEntity[] = []
+
+  if (eventService.eventStarted()) {
+    enableBoosters = []
+    finishedBoosters = waiting.waitingBoosters
+    reviewingBoosters = []
+  } else {
+    enableBoosters = waitingBoostersService.enableBoosters(
+      waiting.waitingBoosters
+    )
+    finishedBoosters = waitingBoostersService.finishedBoosters(
+      waiting.waitingBoosters
+    )
+    reviewingBoosters = waitingBoostersService.reviewingBoosters(
+      waiting.waitingBoosters
+    )
+  }
 
   return (
     <>
