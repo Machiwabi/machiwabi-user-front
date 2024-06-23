@@ -27,7 +27,7 @@ const Component: FC<Props> = ({ waiting, reward }) => {
     return (
       <Flex direction="column" my={0} px={16} justify="center" align="center">
         <EButton.Sm disabled={true} fillType="disabled">
-          OpenseaでNFTを見る(準備中)
+          後日NFTを送付いたします！
         </EButton.Sm>
       </Flex>
     )
