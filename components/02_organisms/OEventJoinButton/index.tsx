@@ -104,7 +104,7 @@ const AuthenticatedButton: FC<AuthenticatedButtonProps> = ({ event }) => {
     )
   }
 
-  if (!eventService.eventStarted()) {
+  if (!eventService.eventWaitingStarted()) {
     return (
       <Box w="100%" maw={410} px={16}>
         <EButton.Lg w="100%" fillType="disabled" disabled>
