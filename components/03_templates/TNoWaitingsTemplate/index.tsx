@@ -21,7 +21,7 @@ const Component: FC = () => {
           ありません
         </EText.Desc2>
         <Box mt={16}>
-          <EButton.Sm href={applicationUrls.campaign.icr240603}>
+          <EButton.Sm href={applicationUrls.campaign.icr240824}>
             「雨のち、リボン2024」に参加する
           </EButton.Sm>
         </Box>
