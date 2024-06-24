@@ -3,6 +3,7 @@ import {
   ExchangeBoosterDocument,
   ExchangeBoosterMutation,
   ExchangeBoosterMutationVariables,
+  ExchangeBoosterWithMissionCouponDocument,
   ExchangeBoosterWithMissionCouponMutation,
   ExchangeBoosterWithMissionCouponMutationVariables,
   LatestWaitingBoosterDocument,
@@ -28,7 +29,7 @@ const exchangeWithMissionCoupon = async (
   const waitingBooster = await graphqlApiClient(
     accessToken
   ).request<ExchangeBoosterWithMissionCouponMutation>(
-    ExchangeBoosterDocument,
+    ExchangeBoosterWithMissionCouponDocument,
     variables
   )
 
