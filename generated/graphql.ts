@@ -389,6 +389,14 @@ export type ConsumeWaitingRewardMutationVariables = Exact<{
 
 export type ConsumeWaitingRewardMutation = { __typename?: 'Mutation', consumeWaitingReward: { __typename?: 'WaitingRewardEntity', uniqueKey: string, withdrawedTotalPoint: number, consumeable: boolean, consumedAt?: any | null, reward: { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null, exchangeable: boolean, consumeable: boolean, startAt: any, endAt: any, order?: number | null } } };
 
+export type ExchangeBoosterWithMissionCouponMutationVariables = Exact<{
+  uniqueKey: Scalars['String']['input'];
+  couponCode: Scalars['String']['input'];
+}>;
+
+
+export type ExchangeBoosterWithMissionCouponMutation = { __typename?: 'Mutation', exchangeBoosterWithMissionCoupon: { __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null, enabled: boolean, booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } } };
+
 export type ExchangeBoosterMutationVariables = Exact<{
   uniqueKey: Scalars['String']['input'];
   content?: InputMaybe<Scalars['String']['input']>;
@@ -697,6 +705,19 @@ export const ConsumeWaitingRewardDocument = gql`
 }
     ${WaitingRewardFieldFragmentDoc}
 ${RewardFieldFragmentDoc}`;
+export const ExchangeBoosterWithMissionCouponDocument = gql`
+    mutation exchangeBoosterWithMissionCoupon($uniqueKey: String!, $couponCode: String!) {
+  exchangeBoosterWithMissionCoupon(
+    input: {uniqueKey: $uniqueKey, couponCode: $couponCode}
+  ) {
+    ...WaitingBoosterField
+    booster {
+      ...BoosterField
+    }
+  }
+}
+    ${WaitingBoosterFieldFragmentDoc}
+${BoosterFieldFragmentDoc}`;
 export const ExchangeBoosterDocument = gql`
     mutation exchangeBooster($uniqueKey: String!, $content: String) {
   exchangeBooster(input: {uniqueKey: $uniqueKey, content: $content}) {
@@ -1029,6 +1050,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     consumeWaitingReward(variables: ConsumeWaitingRewardMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ConsumeWaitingRewardMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<ConsumeWaitingRewardMutation>(ConsumeWaitingRewardDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'consumeWaitingReward', 'mutation');
+    },
+    exchangeBoosterWithMissionCoupon(variables: ExchangeBoosterWithMissionCouponMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ExchangeBoosterWithMissionCouponMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ExchangeBoosterWithMissionCouponMutation>(ExchangeBoosterWithMissionCouponDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'exchangeBoosterWithMissionCoupon', 'mutation');
     },
     exchangeBooster(variables: ExchangeBoosterMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ExchangeBoosterMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<ExchangeBoosterMutation>(ExchangeBoosterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'exchangeBooster', 'mutation');
