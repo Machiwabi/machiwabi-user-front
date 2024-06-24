@@ -41,6 +41,7 @@ export type BoosterEntity = {
 };
 
 export enum BoosterType {
+  Coupon = 'COUPON',
   Free = 'FREE',
   Mission = 'MISSION',
   Pay = 'PAY'
@@ -49,23 +50,6 @@ export enum BoosterType {
 export type BoosterUseableDurationEntity = {
   __typename?: 'BoosterUseableDurationEntity';
   leftRecoveryDuration: Scalars['Float']['output'];
-};
-
-export type CreateBoosterInput = {
-  boosterType: BoosterType;
-  content?: InputMaybe<Scalars['String']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
-  durationSeconds: Scalars['Float']['input'];
-  emoji: Scalars['String']['input'];
-  eventUniqueKey: Scalars['String']['input'];
-  iconUrl?: InputMaybe<Scalars['String']['input']>;
-  missionDescription?: InputMaybe<Scalars['String']['input']>;
-  missionMdxContent?: InputMaybe<Scalars['String']['input']>;
-  missionName?: InputMaybe<Scalars['String']['input']>;
-  multiplier: Scalars['Float']['input'];
-  name: Scalars['String']['input'];
-  price?: InputMaybe<Scalars['Float']['input']>;
-  recoveryDurationSeconds?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type CreateRewardInput = {
@@ -106,6 +90,11 @@ export type ExchangeBoosterInput = {
   uniqueKey: Scalars['String']['input'];
 };
 
+export type ExchangeBoosterWithCouponInput = {
+  couponCode: Scalars['String']['input'];
+  uniqueKey: Scalars['String']['input'];
+};
+
 export type ExchangeRewardInput = {
   uniqueKey: Scalars['String']['input'];
 };
@@ -127,9 +116,9 @@ export type JoinedWaitingEntity = {
 export type Mutation = {
   __typename?: 'Mutation';
   consumeWaitingReward: WaitingRewardEntity;
-  createBooster: BoosterEntity;
   createReward: RewardEntity;
   exchangeBooster: WaitingBoosterEntity;
+  exchangeBoosterWithMissionCoupon: WaitingBoosterEntity;
   joinEvent: JoinedWaitingEntity;
   provisionBooster: RedirectUriEntity;
   redeemReward: WaitingRewardEntity;
@@ -144,11 +133,6 @@ export type MutationConsumeWaitingRewardArgs = {
 };
 
 
-export type MutationCreateBoosterArgs = {
-  input: CreateBoosterInput;
-};
-
-
 export type MutationCreateRewardArgs = {
   input: CreateRewardInput;
 };
@@ -156,6 +140,11 @@ export type MutationCreateRewardArgs = {
 
 export type MutationExchangeBoosterArgs = {
   input: ExchangeBoosterInput;
+};
+
+
+export type MutationExchangeBoosterWithMissionCouponArgs = {
+  input: ExchangeBoosterWithCouponInput;
 };
 
 
