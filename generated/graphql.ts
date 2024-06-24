@@ -41,6 +41,7 @@ export type BoosterEntity = {
 };
 
 export enum BoosterType {
+  Coupon = 'COUPON',
   Free = 'FREE',
   Mission = 'MISSION',
   Pay = 'PAY'
@@ -49,23 +50,6 @@ export enum BoosterType {
 export type BoosterUseableDurationEntity = {
   __typename?: 'BoosterUseableDurationEntity';
   leftRecoveryDuration: Scalars['Float']['output'];
-};
-
-export type CreateBoosterInput = {
-  boosterType: BoosterType;
-  content?: InputMaybe<Scalars['String']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
-  durationSeconds: Scalars['Float']['input'];
-  emoji: Scalars['String']['input'];
-  eventUniqueKey: Scalars['String']['input'];
-  iconUrl?: InputMaybe<Scalars['String']['input']>;
-  missionDescription?: InputMaybe<Scalars['String']['input']>;
-  missionMdxContent?: InputMaybe<Scalars['String']['input']>;
-  missionName?: InputMaybe<Scalars['String']['input']>;
-  multiplier: Scalars['Float']['input'];
-  name: Scalars['String']['input'];
-  price?: InputMaybe<Scalars['Float']['input']>;
-  recoveryDurationSeconds?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type CreateRewardInput = {
@@ -106,6 +90,11 @@ export type ExchangeBoosterInput = {
   uniqueKey: Scalars['String']['input'];
 };
 
+export type ExchangeBoosterWithCouponInput = {
+  couponCode: Scalars['String']['input'];
+  uniqueKey: Scalars['String']['input'];
+};
+
 export type ExchangeRewardInput = {
   uniqueKey: Scalars['String']['input'];
 };
@@ -127,9 +116,9 @@ export type JoinedWaitingEntity = {
 export type Mutation = {
   __typename?: 'Mutation';
   consumeWaitingReward: WaitingRewardEntity;
-  createBooster: BoosterEntity;
   createReward: RewardEntity;
   exchangeBooster: WaitingBoosterEntity;
+  exchangeBoosterWithMissionCoupon: WaitingBoosterEntity;
   joinEvent: JoinedWaitingEntity;
   provisionBooster: RedirectUriEntity;
   redeemReward: WaitingRewardEntity;
@@ -144,11 +133,6 @@ export type MutationConsumeWaitingRewardArgs = {
 };
 
 
-export type MutationCreateBoosterArgs = {
-  input: CreateBoosterInput;
-};
-
-
 export type MutationCreateRewardArgs = {
   input: CreateRewardInput;
 };
@@ -156,6 +140,11 @@ export type MutationCreateRewardArgs = {
 
 export type MutationExchangeBoosterArgs = {
   input: ExchangeBoosterInput;
+};
+
+
+export type MutationExchangeBoosterWithMissionCouponArgs = {
+  input: ExchangeBoosterWithCouponInput;
 };
 
 
@@ -399,6 +388,14 @@ export type ConsumeWaitingRewardMutationVariables = Exact<{
 
 
 export type ConsumeWaitingRewardMutation = { __typename?: 'Mutation', consumeWaitingReward: { __typename?: 'WaitingRewardEntity', uniqueKey: string, withdrawedTotalPoint: number, consumeable: boolean, consumedAt?: any | null, reward: { __typename?: 'RewardEntity', uniqueKey: string, name: string, description?: string | null, content?: string | null, requiredWaitingPoint?: number | null, requiredTotalPoint?: number | null, stock?: number | null, stockPerWaiting?: number | null, iconUrl?: string | null, exchangeable: boolean, consumeable: boolean, startAt: any, endAt: any, order?: number | null } } };
+
+export type ExchangeBoosterWithMissionCouponMutationVariables = Exact<{
+  uniqueKey: Scalars['String']['input'];
+  couponCode: Scalars['String']['input'];
+}>;
+
+
+export type ExchangeBoosterWithMissionCouponMutation = { __typename?: 'Mutation', exchangeBoosterWithMissionCoupon: { __typename?: 'WaitingBoosterEntity', uniqueKey: string, startAt: any, endAt: any, multiplier: number, content?: string | null, enabled: boolean, booster: { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null } } };
 
 export type ExchangeBoosterMutationVariables = Exact<{
   uniqueKey: Scalars['String']['input'];
@@ -708,6 +705,19 @@ export const ConsumeWaitingRewardDocument = gql`
 }
     ${WaitingRewardFieldFragmentDoc}
 ${RewardFieldFragmentDoc}`;
+export const ExchangeBoosterWithMissionCouponDocument = gql`
+    mutation exchangeBoosterWithMissionCoupon($uniqueKey: String!, $couponCode: String!) {
+  exchangeBoosterWithMissionCoupon(
+    input: {uniqueKey: $uniqueKey, couponCode: $couponCode}
+  ) {
+    ...WaitingBoosterField
+    booster {
+      ...BoosterField
+    }
+  }
+}
+    ${WaitingBoosterFieldFragmentDoc}
+${BoosterFieldFragmentDoc}`;
 export const ExchangeBoosterDocument = gql`
     mutation exchangeBooster($uniqueKey: String!, $content: String) {
   exchangeBooster(input: {uniqueKey: $uniqueKey, content: $content}) {
@@ -1040,6 +1050,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     consumeWaitingReward(variables: ConsumeWaitingRewardMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ConsumeWaitingRewardMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<ConsumeWaitingRewardMutation>(ConsumeWaitingRewardDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'consumeWaitingReward', 'mutation');
+    },
+    exchangeBoosterWithMissionCoupon(variables: ExchangeBoosterWithMissionCouponMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ExchangeBoosterWithMissionCouponMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ExchangeBoosterWithMissionCouponMutation>(ExchangeBoosterWithMissionCouponDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'exchangeBoosterWithMissionCoupon', 'mutation');
     },
     exchangeBooster(variables: ExchangeBoosterMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ExchangeBoosterMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<ExchangeBoosterMutation>(ExchangeBoosterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'exchangeBooster', 'mutation');

@@ -1,6 +1,8 @@
 import {
   ExchangeBoosterMutation,
   ExchangeBoosterMutationVariables,
+  ExchangeBoosterWithMissionCouponMutationVariables,
+  WaitingBoosterEntity,
 } from '../../generated/graphql'
 import { SiweJwtRepository } from '../../repositories/SiweJwtRepository'
 import { WaitingBoosterRepository } from '../../repositories/WaitingBoosterRepository'
@@ -17,7 +19,19 @@ export const useExchangeBooster = () => {
     )
   }
 
+  const exchangeBoosterWithMissionCoupon = async (
+    variables: ExchangeBoosterWithMissionCouponMutationVariables
+  ): Promise<WaitingBoosterEntity> => {
+    const secretJwt = await SiweJwtRepository.getSiweJwtFromBrowser()
+
+    return await WaitingBoosterRepository.exchangeWithMissionCoupon(
+      variables,
+      `${secretJwt?.accessToken}`
+    )
+  }
+
   return {
     exchangeBooster,
+    exchangeBoosterWithMissionCoupon,
   }
 }

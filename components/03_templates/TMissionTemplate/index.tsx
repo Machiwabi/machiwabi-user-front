@@ -13,6 +13,7 @@ import { EText } from '../../01_elements/EText/base'
 import { OBoosterMultiplier } from '../../02_organisms/OBoosterMultiplier'
 import { Mission } from './Mission'
 import { Pay } from './Pay'
+import { Coupon } from './Coupon'
 
 type Props = BoxProps & {
   booster: BoosterEntity
@@ -87,6 +88,10 @@ const Component: FC<Props> = ({ waiting, booster, ...props }) => {
               ))}
           </EText.Desc1>
         </Box>
+
+        {booster.boosterType === BoosterType.Coupon && (
+          <Coupon waiting={waiting} booster={booster} mt={40} />
+        )}
 
         {booster.boosterType === BoosterType.Mission && (
           <Mission waiting={waiting} booster={booster} mt={40} />

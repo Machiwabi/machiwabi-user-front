@@ -1,0 +1,13 @@
+mutation exchangeBoosterWithMissionCoupon(
+  $uniqueKey: String!
+  $couponCode: String!
+) {
+  exchangeBoosterWithMissionCoupon(
+    input: { uniqueKey: $uniqueKey, couponCode: $couponCode }
+  ) {
+    ...WaitingBoosterField
+    booster {
+      ...BoosterField
+    }
+  }
+}
