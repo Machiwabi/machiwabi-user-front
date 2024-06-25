@@ -1,6 +1,6 @@
 import { Box, BoxProps, Container, Flex } from '@mantine/core'
 import { FC } from 'react'
-import { colorScheme } from '../../theme/colorScheme'
+import { colorScheme } from '../../../theme/colorScheme'
 
 type Props = BoxProps
 

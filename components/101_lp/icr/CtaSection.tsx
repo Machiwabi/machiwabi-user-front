@@ -1,8 +1,8 @@
 import { Box, BoxProps, Center, Container, Flex } from '@mantine/core'
 import { FC } from 'react'
-import { colorScheme } from '../../theme/colorScheme'
-import { CtaButton } from './elements/CtaButton'
-import { applicationUrls } from '../../constants/applicationUrls'
+import { colorScheme } from '../../../theme/colorScheme'
+import { CtaButton } from '../elements/CtaButton'
+import { applicationUrls } from '../../../constants/applicationUrls'
 
 type Props = BoxProps
 
