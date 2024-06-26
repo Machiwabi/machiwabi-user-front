@@ -1,6 +1,5 @@
-import { OrbitControls } from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import * as THREE from 'three'
 import { WaitingService } from '../../domains/services/waiting.service'
 import { WaitingEntity } from '../../generated/graphql'
@@ -17,12 +16,29 @@ const Component: FC<Props> = ({ waiting }) => {
   const waitableSeconds = waitingService.waitableMs() / 1000
   const waitedSeconds = waitingService.waitedMs() / 1000 - 2
 
+  const [windowSize, setWindowSize] = useState({
+    width: calcaulateCanvasSize().width,
+    height: calcaulateCanvasSize().height,
+  })
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: calcaulateCanvasSize().width,
+        height: calcaulateCanvasSize().height,
+      })
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   return (
     <>
       <Canvas
         style={{
-          width: '378px',
-          height: '378px',
+          width: windowSize.width,
+          height: windowSize.width,
         }}
         camera={{ position: [0, 0, 3] }}
       >
@@ -101,4 +117,16 @@ const CameraAnimator = () => {
   })
 
   return null // このコンポーネントは視覚的な出力を持たない
+}
+
+const calcaulateCanvasSize = () => {
+  if (window.innerWidth > 378 + 16 * 2) {
+    const width = 378
+    const height = 378
+    return { width, height }
+  } else {
+    const width = window.innerWidth - 32
+    const height = width
+    return { width, height }
+  }
 }
