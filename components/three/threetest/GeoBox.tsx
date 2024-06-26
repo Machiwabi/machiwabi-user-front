@@ -26,7 +26,6 @@ const Component: FC<Props> = ({ waiting }) => {
       <CounterTime waiting={waiting} />
 
       {/* <CounterText fontSize={0.8} position={[0, 0, 0]} color="black" /> */}
-      {/* <TotalPoint waiting={waiting} /> */}
 
       <Text
         color="white"
@@ -37,7 +36,7 @@ const Component: FC<Props> = ({ waiting }) => {
       >
         {dateConverter.yyyyMMddHHmmss(waiting.event.startAt)}
       </Text>
-      <Text
+      {/* <Text
         color="white"
         fontSize={0.35}
         position={[0, -1.6, 1]} // 位置を調整
@@ -45,7 +44,7 @@ const Component: FC<Props> = ({ waiting }) => {
         anchorY="middle"
       >
         {waiting.event.placeName}
-      </Text>
+      </Text> */}
     </>
   )
 }

@@ -57,22 +57,27 @@ const Component: FC<Props> = ({ waiting }) => {
           color={new THREE.Color(0.88, 0.88, 0.88)}
         />
         {/* ポイント */}
-        <BgCircle position={[0, 0, 0.49]} radius={3.9} borderWidth={0.01} />
+        <BgCircle
+          position={[0, 0, 0.49]}
+          radius={3.9}
+          borderWidth={0.005}
+          color={new THREE.Color(0.25, 0.25, 0.25)}
+        />
         <Timer
           maxSeconds={waitableSeconds}
           initialTime={waitedSeconds}
           position={[0, 0, 0.49]}
           radius={3.9}
           denominatorSeconds={10}
-          borderWidth={0.01}
-          color="white"
+          borderWidth={0.005}
+          color={new THREE.Color(0.88, 0.88, 0.88)}
         />
 
         {/* 待ち時間 */}
         <BgCircle
           position={[0, 0, 0.99]}
           radius={5}
-          borderWidth={0.025}
+          borderWidth={0.005}
           color={new THREE.Color(0.25, 0.25, 0.25)}
         />
 
@@ -82,9 +87,16 @@ const Component: FC<Props> = ({ waiting }) => {
           radius={5}
           initialTime={waitedSeconds}
           denominatorSeconds={waitableSeconds}
-          borderWidth={0.02}
-          color="white"
+          borderWidth={0.005}
+          color={new THREE.Color(46 / 255, 124 / 255, 246 / 255)}
           isRepeat={false}
+        />
+
+        <BgCircle
+          position={[0, 0, 0.99]}
+          radius={6.4}
+          borderWidth={0.003}
+          color={new THREE.Color(0.25, 0.25, 0.25)}
         />
 
         <GeoText3d waiting={waiting} />
@@ -110,8 +122,7 @@ const CameraAnimator = () => {
     camera.position.x = radius * Math.sin(time * -0.4) * 0.2
 
     camera.position.y = radius * Math.sin(time * -0.4) * 0.1
-    // camera.position.z = radius * Math.sin(time * -0.4) * 0.1 + 9.6
-    camera.position.z = 8
+    camera.position.z = 8.5
 
     camera.lookAt(0, 0, 0) // 常に原点を向く
   })
