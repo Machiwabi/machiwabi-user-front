@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { WaitingEntity } from '../../../generated/graphql'
 import { Box } from '@mantine/core'
 import { ECounterUnit } from '../../01_elements/ECounterUnit'
@@ -56,11 +56,11 @@ const Component: FC<Props> = ({
           )
         if (digit.match(/\d/) === null) return null
         return (
-          <ECounterUnit
+          <CounterUnitWrapper
+            digit={digit}
+            index={index}
             rollSpeed={rollSpeed}
-            delay={index * 0.1}
-            startNum={initialRollAnimation ? Math.random() * 10 : Number(digit)}
-            goalNum={Number(digit)}
+            initialRollAnimation={initialRollAnimation}
             fz={fz}
             key={index}
           />
@@ -71,3 +71,33 @@ const Component: FC<Props> = ({
 }
 
 export { Component as OWaitingTotalCount }
+
+type CounterUnitWrapperProps = {
+  digit: string
+  rollSpeed: number
+  fz: number
+  index: number
+  initialRollAnimation: boolean
+}
+
+const CounterUnitWrapper: FC<CounterUnitWrapperProps> = ({
+  digit,
+  rollSpeed,
+  fz,
+  index,
+  initialRollAnimation,
+}) => {
+  const startNum = useRef(
+    initialRollAnimation ? Math.random() * 10 : Number(digit)
+  )
+  return (
+    <ECounterUnit
+      rollSpeed={rollSpeed}
+      delay={index * 0.1}
+      startNum={startNum.current}
+      goalNum={Number(digit)}
+      fz={fz}
+      key={index}
+    />
+  )
+}
