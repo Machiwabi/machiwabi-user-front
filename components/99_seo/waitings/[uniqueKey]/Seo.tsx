@@ -24,7 +24,7 @@ const Component: FC<Props> = ({
           description: `${waitingUserDisplayName}さんが${waitingEventTitle}をただいまマチワビ中！当日まで、一緒に待ち侘びませんか？`,
           images: [
             {
-              url: `${applicationProperties.HOSTING_URL}/assets/ogp/ogp_twitterCard_campaign_icr.png`, // TODO イベントごとに設定、読み込む
+              url: `${applicationProperties.HOSTING_URL}/assets/ogp/ogp_twitterCard_default.png`, // TODO イベントごとに設定、読み込む
               width: 2400,
               height: 1254,
               alt: 'ogp',
