@@ -21,8 +21,12 @@ const Component: FC = () => {
           ありません
         </EText.Desc2>
         <Box mt={16}>
-          <EButton.Sm href={applicationUrls.campaign.icr240824}>
+          {/* <EButton.Sm href={applicationUrls.campaign.icr240824}>
+            enXross 2nd を待ち侘びる
             「不思議の国のアイス2024」(08月24日大会)をマチワビる
+          </EButton.Sm> */}
+          <EButton.Sm href={applicationUrls.campaign.enxross0704}>
+            enXross 2nd をマチワビる
           </EButton.Sm>
         </Box>
       </Box>
