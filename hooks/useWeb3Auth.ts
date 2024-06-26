@@ -27,15 +27,31 @@ import { SiweEoaAddressRepository } from '../repositories/SiweEoaAddressReposito
 type Props = {
   redirectUrl?: string
   forceInitialize?: boolean
+  authCallbackParams?: { key: string; value: string }[]
 }
 
-export const useWeb3Auth = ({ forceInitialize = false }: Props = {}) => {
+export const useWeb3Auth = ({
+  forceInitialize = false,
+  authCallbackParams,
+}: Props = {}) => {
   const [web3Auth, setWeb3Auth] = useState<Web3Auth | null>()
   const [eoaAddress, setEoaAddress] = useState<string | null>(null)
   // TODO persistしたisCheckConnectedAyncに置き換える
   const [isWeb3AuthConnected, setWeb3AuthIsConnected] = useState<boolean>(false)
 
   const initializing = useRef(false) // useRefを使って初期化の状態を追跡
+
+  const stringifiedAuthCallbackParams = authCallbackParams?.map((param) => {
+    return `${param.key}=${param.value}`
+  })
+
+  const callbackUrl = stringifiedAuthCallbackParams
+    ? `${
+        applicationProperties.HOSTING_URL
+      }${web3AuthCallbackUrl()}?${stringifiedAuthCallbackParams?.join('&')}`
+    : `${applicationProperties.HOSTING_URL}${web3AuthCallbackUrl()}`
+
+  console.log('callbackUrl', callbackUrl)
 
   const { upsertUser } = useUserPrivate()
 
@@ -76,9 +92,7 @@ export const useWeb3Auth = ({ forceInitialize = false }: Props = {}) => {
     },
     adapterSettings: {
       uxMode: 'redirect', // safariは　popup が使えないため明示的に redirect を指定する
-      redirectUrl: `${
-        applicationProperties.HOSTING_URL
-      }/${web3AuthCallbackUrl()}`,
+      redirectUrl: callbackUrl,
     },
   })
 
@@ -265,7 +279,11 @@ export const useWeb3Auth = ({ forceInitialize = false }: Props = {}) => {
 
         window.location.href = redirectUrl || waitingsUrl()
       } else {
-        window.location.href = userNewUrl()
+        const url = stringifiedAuthCallbackParams
+          ? `${userNewUrl()}?${stringifiedAuthCallbackParams?.join('&')}`
+          : `${userNewUrl()}`
+        // authCallbackParamsがある場合は、それを使ってリダイレクトする
+        window.location.href = url
       }
     } catch (e) {
       console.error(e)

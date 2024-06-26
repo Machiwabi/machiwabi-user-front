@@ -16,11 +16,20 @@ import { EventService } from '../../../domains/services/event.service'
 type Props = {
   event: EventEntity
   redirectUrl: string
+  authCallbackParams?: { key: string; value: string }[]
 }
 
-const Component: FC<Props> = ({ event, redirectUrl }) => {
+const Component: FC<Props> = ({ event, redirectUrl, authCallbackParams }) => {
   const { isAuthenticated } = useAuthenticatedStore()
-  const { connectWeb3AuthAndSignInWithEthereum } = useWeb3Auth()
+  const { connectWeb3AuthAndSignInWithEthereum } = useWeb3Auth({
+    authCallbackParams,
+  })
+  const stringifiedAuthCallbackParams = authCallbackParams?.map((param) => {
+    return `${param.key}=${param.value}`
+  })
+  const callbackUrl = stringifiedAuthCallbackParams
+    ? `${redirectUrl}?${stringifiedAuthCallbackParams.join('&')}`
+    : redirectUrl
 
   return (
     <>
@@ -36,7 +45,7 @@ const Component: FC<Props> = ({ event, redirectUrl }) => {
               fillType="filled"
               surface="surface3"
               onClick={() => {
-                connectWeb3AuthAndSignInWithEthereum(redirectUrl)
+                connectWeb3AuthAndSignInWithEthereum(callbackUrl)
               }}
             >
               新規作成／ログインして参加する

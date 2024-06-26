@@ -4,7 +4,16 @@ export const missionShowUrl = (uniqueKey: string) => `/missions/${uniqueKey}`
 export const userNewUrl = () => '/users/new'
 export const userEditUrl = () => '/users/edit'
 
-export const waitingsUrl = () => '/waitings'
+export const waitingsUrl = (params?: { key: string; value: string }[]) => {
+  if (params && params.length > 0) {
+    const stringParams = params
+      .map((param) => `${param.key}=${param.value}`)
+      .join('&')
+    return `/waitings?${stringParams}`
+  } else {
+    return `/waitings`
+  }
+}
 export const waitingUrl = (uniqueKey: string) => `/waitings/${uniqueKey}`
 export const waitingMembersUrl = (uniqueKey: string) =>
   `/waitings/${uniqueKey}?tab=members`
@@ -55,4 +64,16 @@ export const web3AuthCallbackUrl = () => '/auth/callback'
 export const web3AuthEntranceUrl = () => '/auth/entrance'
 export const web3AuthSignOutUrl = () => '/signout'
 
-export const eventUrl = (uniqueKey: string) => `/events/${uniqueKey}`
+export const eventUrl = (
+  uniqueKey: string,
+  params?: { key: string; value: string }[]
+) => {
+  if (params && params.length > 0) {
+    const stringParams = params
+      .map((param) => `${param.key}=${param.value}`)
+      .join('&')
+    return `/events/${uniqueKey}?${stringParams}`
+  } else {
+    return `/events/${uniqueKey}`
+  }
+}
