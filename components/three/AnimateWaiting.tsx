@@ -88,7 +88,8 @@ const Component: FC<Props> = ({ waiting }) => {
           initialTime={waitedSeconds}
           denominatorSeconds={waitableSeconds}
           borderWidth={0.005}
-          color={new THREE.Color(46 / 255, 124 / 255, 246 / 255)}
+          // color={new THREE.Color(255 / 255, 116 / 255, 199 / 255)}
+          color={new THREE.Color(5 / 255, 255 / 255, 135 / 255)}
           isRepeat={false}
         />
 
@@ -122,7 +123,7 @@ const CameraAnimator = () => {
     camera.position.x = radius * Math.sin(time * -0.4) * 0.2
 
     camera.position.y = radius * Math.sin(time * -0.4) * 0.1
-    camera.position.z = 8.5
+    camera.position.z = 8.3
 
     camera.lookAt(0, 0, 0) // 常に原点を向く
   })
