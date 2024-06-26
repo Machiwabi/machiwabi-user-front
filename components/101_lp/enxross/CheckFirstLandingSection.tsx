@@ -1,7 +1,7 @@
 import { Box, Flex, Modal } from '@mantine/core'
 import { FC, useEffect, useState } from 'react'
-import { NormalButton } from './elements/NormalButton'
-import { applicationUrls } from '../../constants/applicationUrls'
+import { NormalButton } from '../elements/NormalButton'
+import { applicationUrls } from '../../../constants/applicationUrls'
 
 const Component: FC = () => {
   const [isOpen, setIsOpen] = useState(false)

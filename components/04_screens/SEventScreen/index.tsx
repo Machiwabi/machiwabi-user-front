@@ -38,12 +38,26 @@ const Component: FC<Props> = ({ uniqueKey }) => {
         justify="center"
         align="center"
       >
-        <OEventJoinButton
-          event={event}
-          redirectUrl={`${applicationProperties.HOSTING_URL}${eventUrl(
-            uniqueKey
-          )}`}
-        />
+        {event.uniqueKey === 'enxross0704' ? (
+          <>
+            <OEventJoinButton
+              event={event}
+              redirectUrl={`${applicationProperties.HOSTING_URL}${eventUrl(
+                uniqueKey
+              )}`}
+              authCallbackParams={[{ key: 'notRegisterEmail', value: 'false' }]}
+            />
+          </>
+        ) : (
+          <>
+            <OEventJoinButton
+              event={event}
+              redirectUrl={`${applicationProperties.HOSTING_URL}${eventUrl(
+                uniqueKey
+              )}`}
+            />
+          </>
+        )}
       </Flex>
     </>
   )

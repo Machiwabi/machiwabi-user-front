@@ -11,6 +11,8 @@ export const applicationUrls = {
   campaign: {
     icr240824: '/events/icr240824',
     icr240603: '/events/icr240603',
+    enxross0704: '/events/enxross0704',
     icr240603Ticket: 'https://iceribbon.com/event_detail.php?id=3614',
+    enxross0704Ticket: 'https://enxross2nd-event-tokyodome.peatix.com/',
   },
 }

@@ -2,9 +2,9 @@ import { Carousel } from '@mantine/carousel'
 import { Box, BoxProps, Center, Container, Flex } from '@mantine/core'
 import Image from 'next/image'
 import { FC } from 'react'
-import { CtaButton } from './elements/CtaButton'
-import { colorScheme } from '../../theme/colorScheme'
-import { applicationUrls } from '../../constants/applicationUrls'
+import { CtaButton } from '../elements/CtaButton'
+import { colorScheme } from '../../../theme/colorScheme'
+import { applicationUrls } from '../../../constants/applicationUrls'
 
 type Props = BoxProps
 

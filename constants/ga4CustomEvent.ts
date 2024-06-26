@@ -1,4 +1,6 @@
 export const GA4_CUSTOM_EVENT = {
+  // Visit LP enXross0704
+  DISPLAY_PAGE_CAMPAIGN_ENXROSS0704: 'display_page_campaign_enxross0704',
   // Visit LP
   DISPLAY_PAGE_CAMPAIGN_ICR2406: 'display_page_campaign_icr2406',
   //　　Press Matiwabiru Button

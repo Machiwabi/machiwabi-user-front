@@ -21,8 +21,7 @@ const Component: FC<Props> = ({ rewardName, rewardDescription }) => {
           description: rewardDescription,
           images: [
             {
-              url: `${applicationProperties.HOSTING_URL}/assets/ogp/ogp_twitterCard_campaign_icr.png`, // TODO イベントごとに設定、読み込む
-              width: 2400,
+              url: `${applicationProperties.HOSTING_URL}/assets/ogp/ogp_twitterCard_default.png`, // TODO イベントごとに設定、読み込む
               height: 1254,
               alt: 'ogp',
             },

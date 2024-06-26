@@ -1,9 +1,9 @@
 import { Box, BoxProps, Container, Flex } from '@mantine/core'
 import { FC } from 'react'
-import { colorScheme } from '../../theme/colorScheme'
-import { CtaButton } from './elements/CtaButton'
-import { NormalButton } from './elements/NormalButton'
-import { applicationUrls } from '../../constants/applicationUrls'
+import { colorScheme } from '../../../theme/colorScheme'
+import { CtaButton } from '../elements/CtaButton'
+import { NormalButton } from '../elements/NormalButton'
+import { applicationUrls } from '../../../constants/applicationUrls'
 
 type Props = BoxProps
 
@@ -20,24 +20,13 @@ const Component: FC<Props> = ({ ...props }) => {
             <Box
               fz={{ base: 36, lg: 64 }}
               ff="RocknRoll One"
-              lh={{ base: 1.45, lg: 1 }}
-              ta="center"
-            >
-              待ち侘びることが
-              <Box component="br" hiddenFrom="lg" />
-              推し活になる
-            </Box>
-            <Box
-              mt={{ base: 34, lg: 32 }}
-              fz={{ base: 24, lg: 32 }}
-              ff="RocknRoll One"
-              lh={{ base: 1.45, lg: 1 }}
+              lh={{ base: 1.45, lg: 1.45 }}
               ta="center"
             >
               イベントまでの
-              <Box component="br" hiddenFrom="sm" />
+              <Box component="br" />
               待ち侘びる時間を
-              <Box component="br" hiddenFrom="lg" />
+              <Box component="br" />
               価値にできるアプリ
             </Box>
           </Flex>
@@ -71,7 +60,7 @@ const Component: FC<Props> = ({ ...props }) => {
                   不要！
                 </Box>
               </Flex>
-              <Flex direction="column" ml={{ base: 8, md: 16 }} align="center">
+              <Flex direction="column" ml={{ base: 8, md: 8 }} align="center">
                 <Box
                   fz={24}
                   ff="RocknRoll One"
@@ -100,18 +89,29 @@ const Component: FC<Props> = ({ ...props }) => {
               </Flex>
             </Flex>
             <CtaButton
-              href={applicationUrls.campaign.icr240824}
-              value={'マチワビる-08月24日大会-'}
-              w={{ base: '100%', md: 600 }}
+              href={applicationUrls.campaign.enxross0704}
+              value={'マチワビる'}
+              w={335}
               mt={{ base: 16, lg: 30 }}
             />
-            <CtaButton
-              href={applicationUrls.campaign.icr240603}
-              value={'06月23日大会のマチワビはこちら'}
-              w={{ base: '100%', md: 600 }}
-              mt={{ base: 16, lg: 30 }}
-              h={40}
-              fz={16}
+
+            <NormalButton
+              href={applicationUrls.campaign.enxross0704Ticket}
+              value={
+                <>
+                  <span>enXross 2ndのチケットはこちら</span>
+                  <Box
+                    pt={3}
+                    ml={12}
+                    className="material-icons-outlined"
+                    component="i"
+                  >
+                    open_in_new
+                  </Box>
+                </>
+              }
+              w={{ base: '100%', sm: 600 }}
+              mt={{ base: 24, lg: 30 }}
             />
           </Flex>
         </Box>

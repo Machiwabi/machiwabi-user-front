@@ -1,9 +1,9 @@
 import { Box, Center, Container, ContainerProps, Flex } from '@mantine/core'
 import Image from 'next/image'
 import { FC } from 'react'
-import { colorScheme } from '../../theme/colorScheme'
-import style from './style.module.scss'
-import { applicationUrls } from '../../constants/applicationUrls'
+import { colorScheme } from '../../../theme/colorScheme'
+import style from '../style.module.scss'
+import { applicationUrls } from '../../../constants/applicationUrls'
 
 type Props = ContainerProps
 
