@@ -1,5 +1,5 @@
 import { Box, Flex, Text } from '@mantine/core'
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useLayoutEffect, useState } from 'react'
 import { WaitingService } from '../../../domains/services/waiting.service'
 import { WaitingEntity } from '../../../generated/graphql'
 import { useAnimateTriggerStore } from '../../../recoil/animateTriggerStore/useAnimateTriggerStore'
@@ -22,7 +22,7 @@ const Component: FC<Props> = ({
   const { trigger } = useAnimateTriggerStore()
   const [totalPoint, setTotalPoint] = useState<number>(waiting.totalPoint)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (trigger) {
       const totalPoint = waitingService.totalPoint()
       setTotalPoint(totalPoint)
@@ -31,19 +31,11 @@ const Component: FC<Props> = ({
 
   return (
     <Flex direction="column" align="end">
-      <Flex align="end" mb={4}>
-        {/* <OWaitingTotalCount
-          waiting={waiting}
-          rollSpeed={rollSpeed}
-          initialRollAnimation={initialRollAnimation}
-        /> */}
-        <Box ff="outfit" fw={800} fz={20} lh={1}>
-          {waiting.totalPoint.toLocaleString().split('')}
-        </Box>
-        <Text fz={10} ff="outfit" fw={900} ml={4} pb={3} lh={1}>
-          pt
-        </Text>
-      </Flex>
+      <DelayedRenderingCounter
+        waiting={waiting}
+        rollSpeed={rollSpeed}
+        initialRollAnimation={initialRollAnimation}
+      />
       <Box mb={4}>
         <Text fz={10} ff="outfit" fw={700} lh={1}>
           {waitingService.earnableTotalPoint().toLocaleString()} pt /{' '}
@@ -70,3 +62,48 @@ const Component: FC<Props> = ({
 }
 
 export { Component as OUserWaitingStatuses }
+
+// react-virtualを使った描画を行う際に、カウンターを含む本コンポーネントはレンダリングが遅れるため、
+// スクロールの際にちらつきが発生してしまう。それを防ぐために最初のレンダーの時は静的なカウンターを表示し、
+// 1秒後にアニメーションを開始するようにし、段階的なレンダリングを行うためのコンポーネントを作成した。
+type DelayedRenderingCounterProps = {
+  waiting: WaitingEntity
+  rollSpeed?: number
+  initialRollAnimation?: boolean
+}
+
+const DelayedRenderingCounter: FC<DelayedRenderingCounterProps> = ({
+  waiting,
+  rollSpeed,
+  initialRollAnimation,
+}) => {
+  const [displayingCounter, setDisplayingCounter] = useState<boolean>(false)
+  const waitingService = new WaitingService(waiting)
+
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      setDisplayingCounter(true)
+    }, 1000)
+  }, [])
+
+  return (
+    <>
+      <Flex align="end" mb={4}>
+        {displayingCounter ? (
+          <OWaitingTotalCount
+            waiting={waiting}
+            rollSpeed={rollSpeed}
+            initialRollAnimation={initialRollAnimation}
+          />
+        ) : (
+          <Box ff="outfit" fw={800} fz={20} lh={1} lts={0.92}>
+            {waitingService.totalPoint().toLocaleString()}
+          </Box>
+        )}
+        <Text fz={10} ff="outfit" fw={900} ml={4} pb={3} lh={1}>
+          pt
+        </Text>
+      </Flex>
+    </>
+  )
+}
