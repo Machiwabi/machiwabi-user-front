@@ -85,10 +85,11 @@ const Component: FC<Props> = ({ waitingUniqueKey, eventUniqueKey }) => {
         mt={-8}
         mb={32}
         px={16}
-        alertTitle={<>💁 ガイド｜BOOSTERSページ</>}
+        alertTitle={<>💁 ガイド｜ブースターページ</>}
         tutorialKey="waiting-boosters-guide"
       >
-        現在発動中のBOOSTER一覧！BOOSTER 発動中は速くポイントが貯まります！
+        現在発動中のブースター一覧！ブースター
+        発動中は速くポイントが貯まります！
       </OTutorialGuide>
 
       <Box mb={40} px={16}>
@@ -96,7 +97,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, eventUniqueKey }) => {
         {enableBoosters.length === 0 && (
           <EBlankNotice
             title="有効なブースターがありません"
-            description="MISSONを達成するとポイントのスピードアップができるブースターを獲得できます！"
+            description="ミッションを達成するとポイントのスピードアップができるブースターを獲得できます！"
             additionalContent={<GotoMissionButton mt={16} />}
             mt={16}
           />
@@ -112,7 +113,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, eventUniqueKey }) => {
 
       {reviewingBoosters.length > 0 && (
         <Box my={40} px={16}>
-          <EHeading.ParagraphJa>レビュー中のBOOSTERS</EHeading.ParagraphJa>
+          <EHeading.ParagraphJa>レビュー中のブースター</EHeading.ParagraphJa>
           <OBoosters
             mt={12}
             waitingBoosters={reviewingBoosters}
@@ -126,7 +127,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, eventUniqueKey }) => {
 
       {finishedBoosters.length > 0 && (
         <Box my={40} px={16}>
-          <EHeading.ParagraphJa>効果が終了したBOOSTERS</EHeading.ParagraphJa>
+          <EHeading.ParagraphJa>効果が終了したブースター</EHeading.ParagraphJa>
           <OBoosters mt={12} waitingBoosters={finishedBoosters} />
         </Box>
       )}
@@ -141,7 +142,7 @@ const GotoMissionButton: FC<GotoMissionButtonProps> = ({ ...props }) => {
   return (
     <Box {...props}>
       <EButton.Sm onClick={() => handleTabChange('missions')}>
-        MISSION一覧へ
+        ミッション一覧へ
       </EButton.Sm>
     </Box>
   )

@@ -44,8 +44,8 @@ const Component: FC<Props> = ({ waitingUniqueKey, eventUniqueKey }) => {
     return (
       <>
         <EBlankNotice
-          title="REWARDがありません"
-          description="現在公開されているREWARDはありません。"
+          title="リワードがありません"
+          description="現在公開されているリワードはありません。"
         />
       </>
     )
@@ -64,10 +64,10 @@ const Component: FC<Props> = ({ waitingUniqueKey, eventUniqueKey }) => {
         mt={-8}
         mb={32}
         px={16}
-        alertTitle={<>💁 ガイド｜REWARDSページ</>}
+        alertTitle={<>💁 ガイド｜リワードページ</>}
         tutorialKey="waiting-rewards-guide"
       >
-        ポイントと引き換え可能なREWARD一覧です！
+        ポイントと引き換え可能なリワード一覧です！
       </OTutorialGuide>
       <ORewardCells
         px={16}

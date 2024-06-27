@@ -30,11 +30,10 @@ const Component: FC<Props> = ({ eventUniqueKey }) => {
         mt={-8}
         mb={32}
         px={16}
-        alertTitle={<>💁 ガイド｜TOTAL POINTSページ</>}
+        alertTitle={<>💁 ガイド｜総合ポイントページ</>}
         tutorialKey="waiting-totalpoints-guide"
       >
-        参加者全員の現時点のTOTAL
-        POINTSです！このイベントにかける参加者の熱量の総量がこのポイントで表現されています！
+        参加者全員の現時点の総合ポイントです！このイベントにかける参加者の熱量の総量がこのポイントで表現されています！
       </OTutorialGuide>
       <Box px={24}>
         <AspectRatio ratio={1}>

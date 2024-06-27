@@ -5,10 +5,16 @@ import styles from './style.module.scss'
 export type ERollTabProps = {
   name: string
   isCurrent?: boolean
+  displayName: string
   action: () => void
 }
 
-const Component: FC<ERollTabProps> = ({ isCurrent = false, action, name }) => {
+const Component: FC<ERollTabProps> = ({
+  isCurrent = false,
+  action,
+  name,
+  displayName,
+}) => {
   return (
     <Tabs.Tab h={24 + 16 + 16} value={name} className={styles['e-roll-tab']}>
       <Flex
@@ -21,7 +27,7 @@ const Component: FC<ERollTabProps> = ({ isCurrent = false, action, name }) => {
       >
         <Box h={24}>
           <Text fz={12} fw={500} lh={1}>
-            {name.toLocaleUpperCase()}
+            {displayName}
           </Text>
         </Box>
       </Flex>

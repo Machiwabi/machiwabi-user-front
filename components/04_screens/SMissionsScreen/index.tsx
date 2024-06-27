@@ -70,7 +70,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, eventUniqueKey }) => {
         alertTitle={<>💁 ガイド｜MISSIONSページ</>}
         tutorialKey="waiting-missions-guide"
       >
-        MISSIONをクリアして、ポイントを効率的に増やせるBOOSTERを獲得しましょう！
+        ミッションをクリアして、ポイントを効率的に増やせるブースターを獲得しましょう！
       </OTutorialGuide>
       <OMissionList px={16} waiting={waiting} boosters={boosters} />
     </>
