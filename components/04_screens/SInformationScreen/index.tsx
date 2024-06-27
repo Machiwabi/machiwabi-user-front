@@ -23,7 +23,7 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
         mt={-8}
         mb={32}
         px={16}
-        alertTitle={<>💁 ガイド｜INFORMATIONページ</>}
+        alertTitle={<>💁 ガイド｜イベント情報ページ</>}
         tutorialKey="waiting-information-guide"
       >
         このイベントの詳細情報や会場へのアクセス情報をご覧いただけます！

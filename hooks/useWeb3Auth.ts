@@ -51,8 +51,6 @@ export const useWeb3Auth = ({
       }${web3AuthCallbackUrl()}?${stringifiedAuthCallbackParams?.join('&')}`
     : `${applicationProperties.HOSTING_URL}${web3AuthCallbackUrl()}`
 
-  console.log('callbackUrl', callbackUrl)
-
   const { upsertUser } = useUserPrivate()
 
   // 初期化処理

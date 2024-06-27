@@ -18,6 +18,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, current, ...props }) => {
           tabs={[
             {
               name: 'home',
+              displayName: 'ホーム',
               isCurrent: current === 'home',
               action: () => {
                 handleTabChange('home')
@@ -25,6 +26,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, current, ...props }) => {
             },
             {
               name: 'members',
+              displayName: 'ワチワビスト',
               isCurrent: current === 'members',
               action: () => {
                 handleTabChange('members')
@@ -33,6 +35,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, current, ...props }) => {
 
             {
               name: 'missions',
+              displayName: 'ミッション',
               isCurrent: current === 'missions',
               action: () => {
                 handleTabChange('missions')
@@ -40,6 +43,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, current, ...props }) => {
             },
             {
               name: 'rewards',
+              displayName: 'リワード',
               isCurrent: current === 'rewards',
               action: () => {
                 handleTabChange('rewards')
@@ -47,6 +51,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, current, ...props }) => {
             },
             {
               name: 'boosters',
+              displayName: 'ブースター',
               isCurrent: current === 'boosters',
               action: () => {
                 handleTabChange('boosters')
@@ -54,6 +59,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, current, ...props }) => {
             },
             {
               name: 'aquired',
+              displayName: '獲得済リワード',
               isCurrent: current === 'aquired',
               action: () => {
                 handleTabChange('aquired')
@@ -61,6 +67,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, current, ...props }) => {
             },
             {
               name: 'totalpoints',
+              displayName: '総合ポイント',
               isCurrent: current === 'totalpoints',
               action: () => {
                 handleTabChange('totalpoints')
@@ -68,6 +75,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, current, ...props }) => {
             },
             {
               name: 'information',
+              displayName: 'イベント情報',
               isCurrent: current === 'information',
               action: () => {
                 handleTabChange('information')

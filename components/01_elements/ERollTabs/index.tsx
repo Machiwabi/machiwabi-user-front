@@ -16,6 +16,7 @@ const Component: FC<Props> = ({ tabs }) => {
               <ERollTab
                 isCurrent={tab.isCurrent}
                 action={tab.action}
+                displayName={tab.displayName}
                 name={tab.name}
               />
             </>

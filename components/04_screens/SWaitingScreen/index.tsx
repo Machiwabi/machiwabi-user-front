@@ -33,7 +33,7 @@ const Component: FC<Props> = ({ waitingUniqueKey }) => {
       >
         イベント当日までの残り時間と自分の獲得したポイントを確認しましょう！
         <br />
-        デフォルトは10秒で1ポイント増えますが、MISSIONSを達成すると、ポイント増加速度が増加します！ポイントがたまれば、限定REWARDSと交換可能！
+        デフォルトは10秒で1ポイント増えますが、ミッションを達成すると、ポイント増加速度が増加します！ポイントがたまれば、限定リワードと交換可能！
       </OTutorialGuide>
       <OWaitingCounterWithUser
         waiting={waiting}
