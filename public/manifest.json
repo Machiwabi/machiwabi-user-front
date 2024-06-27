@@ -1,0 +1,21 @@
+{
+  "name": "My PWA App",
+  "short_name": "PWA App",
+  "start_url": "/waitings",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "description": "My awesome PWA app",
+  "icons": [
+    {
+      "src": "/assets/favicon/favicon_196x196.png",
+      "sizes": "196x196",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicon/favicon_512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
