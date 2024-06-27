@@ -1,11 +1,10 @@
-import { Box, Flex, Text } from '@mantine/core'
+import { Box, Flex, Image, Text } from '@mantine/core'
 import { FC } from 'react'
-import { colorScheme } from '../../../theme/colorScheme'
-import Image from 'next/image'
-import { dateConverter } from '../../../utils/dateConverter'
-import { WaitingEntity } from '../../../generated/graphql'
-import { OCountBaloonAnimation } from '../OCountBaloonAnimation'
 import { WaitingService } from '../../../domains/services/waiting.service'
+import { WaitingEntity } from '../../../generated/graphql'
+import { colorScheme } from '../../../theme/colorScheme'
+import { dateConverter } from '../../../utils/dateConverter'
+import { OCountBaloonAnimation } from '../OCountBaloonAnimation'
 
 type Props = {
   waiting: WaitingEntity
@@ -53,10 +52,19 @@ const Component: FC<Props> = ({ waiting, animationEnabled = true }) => {
               waiting.user.iconImageUrl ||
               '/assets/images/picture/picture_user-profile-fallback.png'
             }
-            alt="icon"
-            layout="fill"
-            objectFit="cover"
           />
+          {/* NextImageとreact-virtualの組み合わせでの相性が悪いのでNextImageを一旦回避 */}
+          {/* <NextImage
+            src={
+              waiting.user.iconImageUrl ||
+              '/assets/images/picture/picture_user-profile-fallback.png'
+            }
+            alt="icon"
+            width={56}
+            height={56}
+            key={waiting.user.iconImageUrl || 'fallback'}
+            priority
+          /> */}
         </Box>
       </Box>
 
