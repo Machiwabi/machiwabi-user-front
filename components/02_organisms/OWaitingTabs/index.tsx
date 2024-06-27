@@ -26,7 +26,7 @@ const Component: FC<Props> = ({ waitingUniqueKey, current, ...props }) => {
             },
             {
               name: 'members',
-              displayName: 'ワチワビスト',
+              displayName: 'メンバー',
               isCurrent: current === 'members',
               action: () => {
                 handleTabChange('members')
