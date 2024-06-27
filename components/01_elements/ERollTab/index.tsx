@@ -16,7 +16,12 @@ const Component: FC<ERollTabProps> = ({
   displayName,
 }) => {
   return (
-    <Tabs.Tab h={24 + 16 + 16} value={name} className={styles['e-roll-tab']}>
+    <Tabs.Tab
+      h={24 + 16 + 16}
+      px={16}
+      value={name}
+      className={styles['e-roll-tab']}
+    >
       <Flex
         direction="column"
         align="center"

@@ -32,11 +32,14 @@ const Component: FC<Props> = ({
   return (
     <Flex direction="column" align="end">
       <Flex align="end" mb={4}>
-        <OWaitingTotalCount
+        {/* <OWaitingTotalCount
           waiting={waiting}
           rollSpeed={rollSpeed}
           initialRollAnimation={initialRollAnimation}
-        />
+        /> */}
+        <Box ff="outfit" fw={800} fz={20} lh={1}>
+          {waiting.totalPoint.toLocaleString().split('')}
+        </Box>
         <Text fz={10} ff="outfit" fw={900} ml={4} pb={3} lh={1}>
           pt
         </Text>
