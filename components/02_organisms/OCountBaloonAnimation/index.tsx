@@ -1,6 +1,6 @@
 import { Box } from '@mantine/core'
 import { motion } from 'framer-motion'
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useLayoutEffect, useState } from 'react'
 import { useAnimateTriggerStore } from '../../../recoil/animateTriggerStore/useAnimateTriggerStore'
 import { colorScheme } from '../../../theme/colorScheme'
 
@@ -18,9 +18,9 @@ const Component: FC<Props> = ({
   animationEnabled = true,
 }) => {
   const { trigger } = useAnimateTriggerStore()
-  const [localTrigger, setLocalTrigger] = useState(animationEnabled)
+  const [localTrigger, setLocalTrigger] = useState(animationEnabled && trigger)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (trigger) {
       if (!animationEnabled) return
       setLocalTrigger(true)

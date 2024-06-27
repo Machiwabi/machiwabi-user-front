@@ -28,6 +28,7 @@
     "@react-three/fiber": "^8.16.1",
     "@rollbar/react": "^0.11.1",
     "@tabler/icons-react": "^3.3.0",
+    "@tanstack/react-virtual": "^3.7.0",
     "@web3auth/modal": "^7.3.1",
     "@web3auth/openlogin-adapter": "^7.3.1",
     "axios": "^1.4.0",
