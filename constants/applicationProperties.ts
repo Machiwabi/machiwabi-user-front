@@ -21,4 +21,6 @@ export const applicationProperties = {
   },
   GOOGLE_ANALYTICS_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || '',
   CONTENT_MAX_WIDTH: 410,
+  VAPID_PUBLIC_KEY: process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY || '',
+  NOTIFICATION_SUBSCRIBE_URL: `${process.env.NEXT_PUBLIC_API_URL}/v1/notifications/subscribe`,
 }
