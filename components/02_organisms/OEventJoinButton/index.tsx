@@ -104,13 +104,23 @@ const AuthenticatedButton: FC<AuthenticatedButtonProps> = ({ event }) => {
   }
 
   if (eventService.eventEnded()) {
-    return (
-      <Box w="100%" maw={410} px={16}>
-        <EButton.Lg w="100%" fillType="disabled" disabled>
-          このイベントは終了しました
-        </EButton.Lg>
-      </Box>
-    )
+    if (event.uniqueKey === 'enxross0704') {
+      return (
+        <Box w="100%" maw={410} px={16}>
+          <EButton.Lg href={waitingUrl('GLxRU4rQfxI_C9H7FkV7Ng')} w="100%">
+            参加期間は終了ました(サンプルページに移動)
+          </EButton.Lg>
+        </Box>
+      )
+    } else {
+      return (
+        <Box w="100%" maw={410} px={16}>
+          <EButton.Lg w="100%" fillType="disabled" disabled>
+            参加期間は終了しました(中身だけ見る)
+          </EButton.Lg>
+        </Box>
+      )
+    }
   }
 
   if (!eventService.eventWaitingStarted()) {
