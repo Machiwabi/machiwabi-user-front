@@ -3,11 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 import { RewardEntity, WaitingEntity } from '../../../generated/graphql'
-import {
-  rewardShowUrl,
-  waitingAquiredRewardUrl,
-  waitingAquiredUrl,
-} from '../../../helpers/url.helper'
+import { waitingAquiredRewardUrl } from '../../../helpers/url.helper'
 import { colorScheme } from '../../../theme/colorScheme'
 import styles from './style.module.scss'
 
@@ -67,6 +63,7 @@ const Component: FC<Props> = ({
             >
               <Image
                 src={
+                  reward.aquiredImageUrl ||
                   reward.iconUrl ||
                   '/assets/images/_sample/picture_ranking_01.png'
                 } // TODO fallback image
