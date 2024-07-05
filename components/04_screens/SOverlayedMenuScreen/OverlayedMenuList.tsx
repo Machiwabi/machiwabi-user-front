@@ -2,6 +2,7 @@ import { Box, BoxProps, Flex } from '@mantine/core'
 import { FC } from 'react'
 import { OverlayedMenuListItem } from './OverlayedMenuListItem'
 import {
+  nftWalletUrl,
   userEditUrl,
   waitingsUrl,
   web3AuthSignOutUrl,
@@ -9,9 +10,11 @@ import {
 import { applicationUrls } from '../../../constants/applicationUrls'
 import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
 
-type Props = BoxProps
+type Props = BoxProps & {
+  siweEoaAddress?: string | null
+}
 
-const Component: FC<Props> = ({ ...props }) => {
+const Component: FC<Props> = ({ siweEoaAddress, ...props }) => {
   const { isAuthenticated } = useAuthenticatedStore()
 
   return (
@@ -50,6 +53,13 @@ const Component: FC<Props> = ({ ...props }) => {
           title="プライバシーポリシー"
           hrefOutbound
         />
+        {siweEoaAddress && (
+          <OverlayedMenuListItem
+            href={nftWalletUrl(siweEoaAddress)}
+            title="NFTウォレット(外部サイト)"
+            hrefOutbound
+          />
+        )}
         <OverlayedMenuListItem href={web3AuthSignOutUrl()} title="ログアウト" />
       </Flex>
     </>

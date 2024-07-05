@@ -95,7 +95,7 @@ const Component: React.FC = () => {
                 )}
               </Flex>
             </Box>
-            <OverlayedMenuList mt={8} px={4} />
+            <OverlayedMenuList mt={8} px={4} siweEoaAddress={siweEoaAddress} />
             {siweEoaAddress && (
               <Flex
                 align="center"
