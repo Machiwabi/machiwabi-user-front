@@ -33,6 +33,42 @@ export const V1UserDevicesApiAxiosParamCreator = function (configuration?: Confi
     return {
         /**
          * 
+         * @summary Push通知を購読する
+         * @param {CreateUserDeviceInput} createUserDeviceInput 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create: async (createUserDeviceInput: CreateUserDeviceInput, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createUserDeviceInput' is not null or undefined
+            assertParamExists('create', 'createUserDeviceInput', createUserDeviceInput)
+            const localVarPath = `/v1/user-devices/create`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createUserDeviceInput, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -62,14 +98,10 @@ export const V1UserDevicesApiAxiosParamCreator = function (configuration?: Confi
         },
         /**
          * 
-         * @summary Push通知を購読する
-         * @param {CreateUserDeviceInput} createUserDeviceInput 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        subscribe2: async (createUserDeviceInput: CreateUserDeviceInput, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'createUserDeviceInput' is not null or undefined
-            assertParamExists('subscribe2', 'createUserDeviceInput', createUserDeviceInput)
+        subscribe: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v1/user-devices/subscribe`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -84,12 +116,9 @@ export const V1UserDevicesApiAxiosParamCreator = function (configuration?: Confi
 
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createUserDeviceInput, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -108,6 +137,17 @@ export const V1UserDevicesApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary Push通知を購読する
+         * @param {CreateUserDeviceInput} createUserDeviceInput 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async create(createUserDeviceInput: CreateUserDeviceInput, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserDeviceEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create(createUserDeviceInput, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -117,13 +157,11 @@ export const V1UserDevicesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Push通知を購読する
-         * @param {CreateUserDeviceInput} createUserDeviceInput 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async subscribe2(createUserDeviceInput: CreateUserDeviceInput, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserDeviceEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.subscribe2(createUserDeviceInput, options);
+        async subscribe(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.subscribe(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -138,6 +176,16 @@ export const V1UserDevicesApiFactory = function (configuration?: Configuration, 
     return {
         /**
          * 
+         * @summary Push通知を購読する
+         * @param {CreateUserDeviceInput} createUserDeviceInput 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create(createUserDeviceInput: CreateUserDeviceInput, options?: any): AxiosPromise<UserDeviceEntity> {
+            return localVarFp.create(createUserDeviceInput, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -146,13 +194,11 @@ export const V1UserDevicesApiFactory = function (configuration?: Configuration, 
         },
         /**
          * 
-         * @summary Push通知を購読する
-         * @param {CreateUserDeviceInput} createUserDeviceInput 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        subscribe2(createUserDeviceInput: CreateUserDeviceInput, options?: any): AxiosPromise<UserDeviceEntity> {
-            return localVarFp.subscribe2(createUserDeviceInput, options).then((request) => request(axios, basePath));
+        subscribe(options?: any): AxiosPromise<void> {
+            return localVarFp.subscribe(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -165,6 +211,16 @@ export const V1UserDevicesApiFactory = function (configuration?: Configuration, 
 export interface V1UserDevicesApiInterface {
     /**
      * 
+     * @summary Push通知を購読する
+     * @param {CreateUserDeviceInput} createUserDeviceInput 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof V1UserDevicesApiInterface
+     */
+    create(createUserDeviceInput: CreateUserDeviceInput, options?: AxiosRequestConfig): AxiosPromise<UserDeviceEntity>;
+
+    /**
+     * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof V1UserDevicesApiInterface
@@ -173,13 +229,11 @@ export interface V1UserDevicesApiInterface {
 
     /**
      * 
-     * @summary Push通知を購読する
-     * @param {CreateUserDeviceInput} createUserDeviceInput 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof V1UserDevicesApiInterface
      */
-    subscribe2(createUserDeviceInput: CreateUserDeviceInput, options?: AxiosRequestConfig): AxiosPromise<UserDeviceEntity>;
+    subscribe(options?: AxiosRequestConfig): AxiosPromise<void>;
 
 }
 
@@ -192,6 +246,18 @@ export interface V1UserDevicesApiInterface {
 export class V1UserDevicesApi extends BaseAPI implements V1UserDevicesApiInterface {
     /**
      * 
+     * @summary Push通知を購読する
+     * @param {CreateUserDeviceInput} createUserDeviceInput 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof V1UserDevicesApi
+     */
+    public create(createUserDeviceInput: CreateUserDeviceInput, options?: AxiosRequestConfig) {
+        return V1UserDevicesApiFp(this.configuration).create(createUserDeviceInput, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof V1UserDevicesApi
@@ -202,13 +268,11 @@ export class V1UserDevicesApi extends BaseAPI implements V1UserDevicesApiInterfa
 
     /**
      * 
-     * @summary Push通知を購読する
-     * @param {CreateUserDeviceInput} createUserDeviceInput 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof V1UserDevicesApi
      */
-    public subscribe2(createUserDeviceInput: CreateUserDeviceInput, options?: AxiosRequestConfig) {
-        return V1UserDevicesApiFp(this.configuration).subscribe2(createUserDeviceInput, options).then((request) => request(this.axios, this.basePath));
+    public subscribe(options?: AxiosRequestConfig) {
+        return V1UserDevicesApiFp(this.configuration).subscribe(options).then((request) => request(this.axios, this.basePath));
     }
 }
