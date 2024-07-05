@@ -11,6 +11,7 @@ import { EButton } from '../../01_elements/EButton'
 import { ELoader } from '../../01_elements/ELoader'
 import { EText } from '../../01_elements/EText/base'
 import { TModalRewardConfirmConsumptionTemplate } from '../../03_templates/TModalRewardConfirmConsumptionTemplate'
+import { ORewardNftWalletUrlButton } from '../ORewardNftWalletUrlButton'
 
 type Props = BoxProps & {
   waiting: WaitingEntity
@@ -24,13 +25,14 @@ const Component: FC<Props> = ({ waiting, reward }) => {
     })
 
   if (!reward.consumeable) {
-    return (
-      <Flex direction="column" my={0} px={16} justify="center" align="center">
-        <EButton.Sm disabled={true} fillType="disabled">
-          後日NFTを送付いたします！
-        </EButton.Sm>
-      </Flex>
-    )
+    if (reward.aquiredImageUrl) {
+    } else {
+      return (
+        <Flex direction="column" my={0} px={16} justify="center" align="center">
+          <ORewardNftWalletUrlButton />
+        </Flex>
+      )
+    }
   } else {
     if (waitingRewardsError) {
       return (

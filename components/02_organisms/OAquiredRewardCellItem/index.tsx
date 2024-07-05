@@ -67,7 +67,7 @@ const Component: FC<Props> = ({
                   reward.aquiredImageUrl ||
                   reward.iconUrl ||
                   '/assets/images/_sample/picture_ranking_01.png'
-                } // TODO fallback image
+                }
                 alt={reward.name}
                 fill={true}
                 style={{
