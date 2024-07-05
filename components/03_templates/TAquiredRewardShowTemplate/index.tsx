@@ -51,10 +51,6 @@ const Component: FC<Props> = ({ waiting, reward, ...props }) => {
       </Box>
 
       <ORewardConsumeButton reward={reward} waiting={waiting} />
-
-      <Box mt={24}>
-        <ORewardNftWalletUrlButton />
-      </Box>
     </>
   )
 }
