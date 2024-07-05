@@ -28,10 +28,10 @@ export interface CreateUserDeviceInput {
     'webPushEndPoint': string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof CreateUserDeviceInput
      */
-    'webPushExpirationTime': string | null;
+    'webPushExpirationTime': number | null;
     /**
      * 
      * @type {string}
