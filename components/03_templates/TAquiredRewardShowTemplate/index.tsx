@@ -31,9 +31,13 @@ const Component: FC<Props> = ({ waiting, reward, ...props }) => {
                 reward.aquiredImageUrl ||
                 reward.iconUrl ||
                 '/assets/images/_sample/picture_ranking_01.png'
-              } // TODO fallback image
+              }
               alt={reward.name}
               fill={true}
+              style={{
+                objectFit: 'contain',
+                objectPosition: 'center',
+              }}
             />
           </Flex>
         </AspectRatio>
@@ -47,10 +51,6 @@ const Component: FC<Props> = ({ waiting, reward, ...props }) => {
       </Box>
 
       <ORewardConsumeButton reward={reward} waiting={waiting} />
-
-      <Box mt={24}>
-        <ORewardNftWalletUrlButton />
-      </Box>
     </>
   )
 }

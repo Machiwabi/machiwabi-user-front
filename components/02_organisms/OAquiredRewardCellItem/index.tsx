@@ -57,6 +57,7 @@ const Component: FC<Props> = ({
           >
             <Box
               pos="relative"
+              w={104}
               h={104}
               bg={colorScheme.scheme1.surface2.surface}
               {...props}
@@ -66,10 +67,13 @@ const Component: FC<Props> = ({
                   reward.aquiredImageUrl ||
                   reward.iconUrl ||
                   '/assets/images/_sample/picture_ranking_01.png'
-                } // TODO fallback image
+                }
                 alt={reward.name}
-                width={104}
-                height={104}
+                fill={true}
+                style={{
+                  objectFit: 'contain',
+                  objectPosition: 'center',
+                }}
               />
               {count && count > 1 && (
                 <Flex
