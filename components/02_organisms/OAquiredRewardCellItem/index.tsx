@@ -63,6 +63,7 @@ const Component: FC<Props> = ({
             >
               <Image
                 src={
+                  reward.aquiredImageUrl ||
                   reward.iconUrl ||
                   '/assets/images/_sample/picture_ranking_01.png'
                 } // TODO fallback image
