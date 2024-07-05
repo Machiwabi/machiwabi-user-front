@@ -1,13 +1,12 @@
-import { AspectRatio, Box, BoxProps, Flex, Progress } from '@mantine/core'
+import { AspectRatio, Box, BoxProps, Flex } from '@mantine/core'
 import Image from 'next/image'
 import { FC } from 'react'
 import { RewardEntity, WaitingEntity } from '../../../generated/graphql'
 import { colorScheme } from '../../../theme/colorScheme'
-import { EButton } from '../../01_elements/EButton'
 import { EHeading } from '../../01_elements/EHeading/base'
 import { EText } from '../../01_elements/EText/base'
-import { useWaitingRewards } from '../../../hooks/resources/useWaitingRewards'
 import { ORewardConsumeButton } from '../../02_organisms/ORewardConsumeButton'
+import { ORewardNftWalletUrlButton } from '../../02_organisms/ORewardNftWalletUrlButton'
 
 type Props = BoxProps & {
   waiting: WaitingEntity
@@ -48,6 +47,10 @@ const Component: FC<Props> = ({ waiting, reward, ...props }) => {
       </Box>
 
       <ORewardConsumeButton reward={reward} waiting={waiting} />
+
+      <Box mt={24}>
+        <ORewardNftWalletUrlButton />
+      </Box>
     </>
   )
 }
