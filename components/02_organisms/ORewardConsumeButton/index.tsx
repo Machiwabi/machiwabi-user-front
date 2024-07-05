@@ -26,10 +26,17 @@ const Component: FC<Props> = ({ waiting, reward }) => {
 
   if (!reward.consumeable) {
     if (reward.aquiredImageUrl) {
-    } else {
       return (
         <Flex direction="column" my={0} px={16} justify="center" align="center">
           <ORewardNftWalletUrlButton />
+        </Flex>
+      )
+    } else {
+      return (
+        <Flex direction="column" my={0} px={16} justify="center" align="center">
+          <EButton.Sm disabled={true} fillType="disabled">
+            後日NFTを送付いたします！
+          </EButton.Sm>
         </Flex>
       )
     }
