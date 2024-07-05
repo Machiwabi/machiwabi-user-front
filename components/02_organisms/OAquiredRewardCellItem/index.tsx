@@ -3,11 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 import { RewardEntity, WaitingEntity } from '../../../generated/graphql'
-import {
-  rewardShowUrl,
-  waitingAquiredRewardUrl,
-  waitingAquiredUrl,
-} from '../../../helpers/url.helper'
+import { waitingAquiredRewardUrl } from '../../../helpers/url.helper'
 import { colorScheme } from '../../../theme/colorScheme'
 import styles from './style.module.scss'
 

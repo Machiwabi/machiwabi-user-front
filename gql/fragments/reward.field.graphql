@@ -8,7 +8,7 @@ fragment RewardField on RewardEntity {
   stock
   stockPerWaiting
   iconUrl
-  aquiredUrl
+  aquiredImageUrl
   exchangeable
   consumeable
   startAt
