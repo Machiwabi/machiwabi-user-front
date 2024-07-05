@@ -12,7 +12,7 @@ const Component: FC = () => {
   return (
     <Flex direction="column" my={0} px={16} justify="center" align="center">
       <EButton.Sm href={nftWalletUrl(siweEoaAddress)}>
-        NFTウォレット(外部サイト)で見る
+        NFTウォレットで見る
       </EButton.Sm>
     </Flex>
   )
