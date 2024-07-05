@@ -15,4 +15,5 @@ export const applicationUrls = {
     icr240603Ticket: 'https://iceribbon.com/event_detail.php?id=3614',
     enxross0704Ticket: 'https://enxross2nd-event-tokyodome.peatix.com/',
   },
+  nftWalletUrl: 'https://rarible.com/user',
 }

@@ -1,3 +1,5 @@
+import { applicationUrls } from '../constants/applicationUrls'
+
 export const rewardShowUrl = (uniqueKey: string) => `/rewards/${uniqueKey}`
 export const missionShowUrl = (uniqueKey: string) => `/missions/${uniqueKey}`
 
@@ -76,4 +78,8 @@ export const eventUrl = (
   } else {
     return `/events/${uniqueKey}`
   }
+}
+
+export const nftWalletUrl = (siweEoaAddress: string) => {
+  return `${applicationUrls.nftWalletUrl}/${siweEoaAddress}`
 }
