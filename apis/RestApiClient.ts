@@ -1,8 +1,9 @@
 import { applicationProperties } from '../constants/applicationProperties'
 import {
-  V1AuthenticationApi,
   Configuration,
+  V1AuthenticationApi,
   V1S3ImagesApi,
+  V1UserDevicesApi,
 } from '../generated/rest-api'
 
 export class RestApiClient {
@@ -12,4 +13,5 @@ export class RestApiClient {
 
   public authentication = new V1AuthenticationApi(this.config)
   public v1s3Image = new V1S3ImagesApi(this.config)
+  public userDevice = new V1UserDevicesApi(this.config)
 }

@@ -35,8 +35,8 @@ class MyDocument extends Document<Props> {
     return (
       <Html>
         <Head>
-          {/* <Meta /> */}
           <link rel="manifest" href="/manifest.json" />
+          <link rel="icon" href="/assets/favicon/favicon_196x196.png" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"
