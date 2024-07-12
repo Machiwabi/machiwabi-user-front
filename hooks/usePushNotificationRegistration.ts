@@ -16,6 +16,8 @@ export const usePushNotificationRegistration = () => {
       await swRegistration.pushManager.getSubscription()
 
     if (pushManagerSubscription) {
+      console.log('pms exists--', pushManagerSubscription)
+    } else {
       console.log('pms not exists--', pushManagerSubscription)
       pushManagerSubscription = await swRegistration.pushManager.subscribe({
         userVisibleOnly: true,
@@ -23,8 +25,6 @@ export const usePushNotificationRegistration = () => {
           applicationProperties.VAPID_PUBLIC_KEY
         ),
       })
-    } else {
-      console.log('pms exists--', pushManagerSubscription)
     }
 
     console.log('save subscription')
