@@ -9,6 +9,16 @@ export const usePushNotificationRegistration = () => {
     const siwe = await SiweJwtRepository.getSiweJwtFromBrowser()
     if (!siwe) return
 
+    if ('Notification' in window) {
+      Notification.requestPermission().then(function (permission) {
+        if (permission === 'granted') {
+          console.log('Notification permission granted.')
+        } else {
+          console.log('Notification permission denied.')
+        }
+      })
+    }
+
     console.log('check sw')
     const swRegistration = await navigator.serviceWorker.register('/sw.js')
     console.log('check pushManagerSubscription')
