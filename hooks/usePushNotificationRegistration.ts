@@ -9,20 +9,31 @@ export const usePushNotificationRegistration = () => {
     const siwe = await SiweJwtRepository.getSiweJwtFromBrowser()
     if (!siwe) return
 
-    if ('Notification' in window) {
-      console.log('Notification?')
-      const permission = await Notification.requestPermission()
-      console.log('permission?', permission)
-      if (permission === 'granted') {
-        console.log('Notification permission granted.')
-      } else {
-        console.log('Notification permission denied.')
-        return
-      }
-    }
+    // if ('Notification' in window) {
+    //   console.log('Notification?')
+    //   const permission = await Notification.requestPermission()
+    //   console.log('permission?', permission)
+    //   if (permission === 'granted') {
+    //     console.log('Notification permission granted.')
+    //   } else {
+    //     console.log('Notification permission denied.')
+    //     return
+    //   }
+    // }
 
     console.log('check sw')
+    console.log(navigator.serviceWorker)
     const swRegistration = await navigator.serviceWorker.register('/sw.js')
+
+    // test
+    let pushManager = swRegistration.pushManager
+    console.log('pushManager', pushManager)
+    let permissionState = await pushManager.permissionState({
+      userVisibleOnly: true,
+    })
+    console.log('permissionState', permissionState)
+    // test
+
     console.log('check pushManagerSubscription')
     let pushManagerSubscription =
       await swRegistration.pushManager.getSubscription()
