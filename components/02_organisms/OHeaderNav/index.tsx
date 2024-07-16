@@ -1,13 +1,15 @@
 import { Box, Flex } from '@mantine/core'
 import Image from 'next/image'
-import { FC } from 'react'
-import { colorScheme } from '../../../theme/colorScheme'
-import { useMenuOpeningStatus } from '../../../recoil/openingStatus/useMenuOpeningStatus'
+
 import Link from 'next/link'
-import { truncator } from '../../../utils/truncator'
-import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
-import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
+import { FC } from 'react'
 import { waitingsUrl, web3AuthEntranceUrl } from '../../../helpers/url.helper'
+import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
+import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
+import { useMenuOpeningStatus } from '../../../recoil/openingStatus/useMenuOpeningStatus'
+import { colorScheme } from '../../../theme/colorScheme'
+import { truncator } from '../../../utils/truncator'
+import { OPwaInstallBanner } from '../OPwaInstallBanner'
 
 const Component: FC = () => {
   const { menuOpenGlobalMenuStart } = useMenuOpeningStatus()
@@ -20,14 +22,14 @@ const Component: FC = () => {
       <Box
         pos="fixed"
         w="100%"
-        h={56}
         bg={colorScheme.scheme1.surface1.surface}
         style={{
           zIndex: 100,
           borderBottom: `0.5px solid ${colorScheme.scheme1.border.mid}`,
         }}
       >
-        <Flex pos="relative" justify="space-between" align="center" h={'100%'}>
+        <OPwaInstallBanner />
+        <Flex pos="relative" justify="space-between" align="center" h={56}>
           <Box
             pos="relative"
             px={16}

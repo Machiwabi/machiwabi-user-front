@@ -33,7 +33,7 @@ const MainBlock: FC<MainBlockProps> = ({ children }) => {
       <OHeaderNav />
       <Container
         maw={applicationProperties.CONTENT_MAX_WIDTH}
-        pt={56}
+        pt={56 + 66}
         p={0}
         mb={160}
       >

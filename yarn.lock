@@ -6753,6 +6753,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/ua-parser-js@npm:^0.7.39":
+  version: 0.7.39
+  resolution: "@types/ua-parser-js@npm:0.7.39"
+  checksum: 10c0/fea522f42dfc2854d9c93144a13c3db3bbe1c791458451db06d46bec7e1dbbe945d1542e02bb38378e39a04bdb7810b43e2ead26f9e6c250832e187312522708
+  languageName: node
+  linkType: hard
+
 "@types/unist@npm:*, @types/unist@npm:^2.0.0":
   version: 2.0.6
   resolution: "@types/unist@npm:2.0.6"
@@ -14948,6 +14955,7 @@ __metadata:
     "@types/react-dom": "npm:18.0.6"
     "@types/testing-library__user-event": "npm:^4.2.0"
     "@types/three": "npm:^0.163.0"
+    "@types/ua-parser-js": "npm:^0.7.39"
     "@typescript-eslint/eslint-plugin": "npm:^7.4.0"
     "@typescript-eslint/parser": "npm:^7.4.0"
     "@vitejs/plugin-react": "npm:^4.0.0"
@@ -14988,6 +14996,7 @@ __metadata:
     swr: "npm:^2.1.5"
     three: "npm:^0.163.0"
     typescript: "npm:^5.4.3"
+    ua-parser-js: "npm:^1.0.38"
     vitest: "npm:^0.31.0"
     wagmi: "npm:2"
     workbox-window: "npm:^7.1.0"
@@ -20158,6 +20167,13 @@ openapitools@openapitools/openapi-generator-cli:
   version: 1.0.36
   resolution: "ua-parser-js@npm:1.0.36"
   checksum: 10c0/c9a9554f368c5757545cc0b62fa6402df56a8001fd8fd21dd69fbab77d46c9603c07ea4537e039cf63afd32be5548d5cbe3636e94255d77e7fa4e3eb3a47c7a2
+  languageName: node
+  linkType: hard
+
+"ua-parser-js@npm:^1.0.38":
+  version: 1.0.38
+  resolution: "ua-parser-js@npm:1.0.38"
+  checksum: 10c0/b1dd11b87e1784c79f7129e9aec679753fccf8a9b22f5202b79b19492635b5b46b779607a3cfae0270999a0d48da223bf94015642d2abee69d83c9069ab37bd0
   languageName: node
   linkType: hard
 
