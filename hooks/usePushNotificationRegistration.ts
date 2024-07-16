@@ -9,18 +9,6 @@ export const usePushNotificationRegistration = () => {
     const siwe = await SiweJwtRepository.getSiweJwtFromBrowser()
     if (!siwe) return
 
-    // if ('Notification' in window) {
-    //   console.log('Notification?')
-    //   const permission = await Notification.requestPermission()
-    //   console.log('permission?', permission)
-    //   if (permission === 'granted') {
-    //     console.log('Notification permission granted.')
-    //   } else {
-    //     console.log('Notification permission denied.')
-    //     return
-    //   }
-    // }
-
     console.log('check sw')
     console.log(navigator.serviceWorker)
     const swRegistration = await navigator.serviceWorker.register('/sw.js')
@@ -48,6 +36,8 @@ export const usePushNotificationRegistration = () => {
           applicationProperties.VAPID_PUBLIC_KEY
         ),
       })
+
+      console.log('pms created--', pushManagerSubscription)
     }
 
     console.log('save subscription')

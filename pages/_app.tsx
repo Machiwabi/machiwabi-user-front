@@ -5,7 +5,7 @@ import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import { Router } from 'next/router'
 import NProgress from 'nprogress'
-import { ReactElement, ReactNode, useEffect } from 'react'
+import { ReactElement, ReactNode } from 'react'
 import '../styles/global.css'
 import '../styles/nprogress.css'
 import { mantineTheme } from '../theme/mantineTheme'
@@ -17,7 +17,6 @@ import '@mantine/carousel/styles.css'
 import '@mantine/core/styles.css'
 import { Notifications } from '@mantine/notifications'
 import '@mantine/notifications/styles.css'
-import { usePushNotificationRegistration } from '../hooks/usePushNotificationRegistration'
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start()
@@ -55,11 +54,6 @@ type AppPropsWithLayout = AppProps & {
 
 function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
-  const { register } = usePushNotificationRegistration()
-
-  useEffect(() => {
-    register()
-  }, [])
 
   return (
     <Provider config={rollbarConfig}>
