@@ -1,4 +1,4 @@
-import { Box, Container, Flex } from '@mantine/core'
+import { Box, Container, Flex, Modal } from '@mantine/core'
 import { FC, useEffect, useState } from 'react'
 import { colorScheme } from '../../../theme/colorScheme'
 import { applicationProperties } from '../../../constants/applicationProperties'
@@ -18,51 +18,106 @@ const Component: FC = () => {
   if (displayable) {
     // モバイル端末でPWAではない場合はバナーを表示
     return (
-      <Box bg={colorScheme.scheme1.surface2.surface}>
-        <Container py={12} maw={applicationProperties.CONTENT_MAX_WIDTH}>
-          <Flex justify="space-between" align="center">
+      <>
+        <Box bg={colorScheme.scheme1.surface2.surface}>
+          <Container py={12} maw={applicationProperties.CONTENT_MAX_WIDTH}>
+            <Flex justify="space-between" align="center">
+              <Flex>
+                <Box
+                  w={42}
+                  h={42}
+                  pos="relative"
+                  style={{ borderRadius: 4, overflow: 'hidden' }}
+                >
+                  <Image
+                    src={'/assets/favicon/favicon_192x192.png'}
+                    layout="fill"
+                    objectFit="cover"
+                    alt={''}
+                  />
+                </Box>
+                <Flex ml={12} direction="column" justify="center">
+                  <Box
+                    fz={16}
+                    c={colorScheme.scheme1.surface2.object.high}
+                    fw="bold"
+                    lh={1}
+                  >
+                    Mati-wabi
+                  </Box>
+                  <Box mt={6} fz={12} lh={1}>
+                    待ち時間を価値するアプリ
+                  </Box>
+                </Flex>
+              </Flex>
+              <Box>
+                <EButton.Xs
+                  fillType="filled"
+                  h={28}
+                  c={colorScheme.scheme1.accent1.object.high}
+                  bg={colorScheme.scheme1.accent1.surface}
+                  fz={12}
+                >
+                  インストール
+                </EButton.Xs>
+              </Box>
+            </Flex>
+          </Container>
+        </Box>
+        <Modal
+          opened={true}
+          onClose={close}
+          withCloseButton={false}
+          centered
+          xOffset={16}
+          overlayProps={{
+            backgroundOpacity: 0.55,
+            blur: 3,
+          }}
+          radius={12}
+        >
+          <Box py={16} px={8}>
             <Flex>
               <Box
-                w={42}
-                h={42}
-                pos="relative"
-                style={{ borderRadius: 4, overflow: 'hidden' }}
+                pt={3}
+                ml={12}
+                className="material-icons-outlined"
+                component="i"
               >
-                <Image
-                  src={'/assets/favicon/favicon_192x192.png'}
-                  layout="fill"
-                  objectFit="cover"
-                  alt={''}
-                />
+                open_in_new
               </Box>
-              <Flex ml={12} direction="column" justify="center">
-                <Box
-                  fz={16}
-                  c={colorScheme.scheme1.surface2.object.high}
-                  fw="bold"
-                  lh={1}
-                >
-                  Mati-wabi
-                </Box>
-                <Box mt={6} fz={12} lh={1}>
-                  待ち時間を価値するアプリ
-                </Box>
-              </Flex>
+              <Box ml={8}>ホーム画面に追加をタップします。</Box>
             </Flex>
-            <Box>
-              <EButton.Xs
-                fillType="filled"
-                h={28}
-                c={colorScheme.scheme1.accent1.object.high}
-                bg={colorScheme.scheme1.accent1.surface}
-                fz={12}
+            <Flex>
+              <Box
+                pt={3}
+                ml={12}
+                className="material-icons-outlined"
+                component="i"
               >
-                インストール
-              </EButton.Xs>
-            </Box>
-          </Flex>
-        </Container>
-      </Box>
+                open_in_new
+              </Box>
+              <Box>NavigationBarをタップします。</Box>
+            </Flex>
+            <Flex>
+              <Box
+                pt={3}
+                ml={12}
+                className="material-icons-outlined"
+                component="i"
+              >
+                open_in_new
+              </Box>
+              <Box>ホーム画面に追加をタップします。</Box>
+            </Flex>
+            <Flex justify="center">
+              <EButton.Sm mt={16} onClick={close}>
+                閉じる
+              </EButton.Sm>
+            </Flex>
+          </Box>
+        </Modal>
+      </>
     )
   } else {
     // モバイルではないまたはPWAの場合はバナーを表示しない
