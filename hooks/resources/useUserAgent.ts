@@ -13,5 +13,13 @@ export const useUserAgent = () => {
     return window.matchMedia('(display-mode: standalone)').matches
   }, [])
 
-  return { isMobile, isPwa }
+  const isIos = useCallback(() => {
+    return ua.model === 'iPhone' || ua.model === 'iPad'
+  }, [])
+
+  const isAndroid = useCallback(() => {
+    return ua.model === 'Android'
+  }, [])
+
+  return { isMobile, isPwa, isIos, isAndroid }
 }

@@ -64,59 +64,7 @@ const Component: FC = () => {
             </Flex>
           </Container>
         </Box>
-        <Modal
-          opened={true}
-          onClose={close}
-          withCloseButton={false}
-          centered
-          xOffset={16}
-          overlayProps={{
-            backgroundOpacity: 0.55,
-            blur: 3,
-          }}
-          radius={12}
-        >
-          <Box py={16} px={8}>
-            <Flex>
-              <Box
-                pt={3}
-                ml={12}
-                className="material-icons-outlined"
-                component="i"
-              >
-                open_in_new
-              </Box>
-              <Box ml={8}>ホーム画面に追加をタップします。</Box>
-            </Flex>
-            <Flex>
-              <Box
-                pt={3}
-                ml={12}
-                className="material-icons-outlined"
-                component="i"
-              >
-                open_in_new
-              </Box>
-              <Box>NavigationBarをタップします。</Box>
-            </Flex>
-            <Flex>
-              <Box
-                pt={3}
-                ml={12}
-                className="material-icons-outlined"
-                component="i"
-              >
-                open_in_new
-              </Box>
-              <Box>ホーム画面に追加をタップします。</Box>
-            </Flex>
-            <Flex justify="center">
-              <EButton.Sm mt={16} onClick={close}>
-                閉じる
-              </EButton.Sm>
-            </Flex>
-          </Box>
-        </Modal>
+        <ModalGuide />
       </>
     )
   } else {
@@ -126,3 +74,105 @@ const Component: FC = () => {
 }
 
 export { Component as OPwaInstallBanner }
+
+const ModalGuide: FC = () => {
+  const { isIos } = useUserAgent()
+
+  return (
+    <>
+      <Modal
+        opened={true}
+        onClose={close}
+        withCloseButton={false}
+        centered
+        xOffset={16}
+        overlayProps={{
+          backgroundOpacity: 0.55,
+          blur: 3,
+        }}
+        radius={12}
+      >
+        <Box py={16} px={8}>
+          {isIos() ? (
+            <>
+              <Flex mb={24} justify="center" fz={18} fw={600}>
+                Webアプリインストール方法(iOS)
+              </Flex>
+              <Box>
+                <Flex align="center">
+                  <Image
+                    src="/assets/images/icon/icon_ios_safari.svg"
+                    width={24}
+                    height={24}
+                    alt=""
+                  />
+                  <Box ml={16} fw={500}>
+                    1.SafariでMati-wabiを開きます。
+                  </Box>
+                </Flex>
+                <Flex align="center" mt={16}>
+                  <Image
+                    src="/assets/images/icon/icon_ios_share.svg"
+                    width={24}
+                    height={24}
+                    alt=""
+                  />
+                  <Box ml={16} fw={500}>
+                    2.シェアボタンをタップします。
+                  </Box>
+                </Flex>
+                <Flex align="center" mt={16}>
+                  <Image
+                    src="/assets/images/icon/icon_ios_add.svg"
+                    width={24}
+                    height={24}
+                    alt=""
+                  />
+                  <Box ml={16} fw={500}>
+                    3.ホーム画面に追加をタップします。
+                  </Box>
+                </Flex>
+              </Box>
+            </>
+          ) : (
+            <>
+              <Flex mb={24} justify="center" fz={18} fw={600}>
+                Webアプリインストール方法(Android)
+              </Flex>
+              <Box>
+                <Flex align="center">
+                  <Image
+                    src="/assets/images/icon/icon_android_more-vert.svg"
+                    width={24}
+                    height={24}
+                    alt=""
+                  />
+                  <Box ml={16} fw={500}>
+                    1.ブラウザの「メニュー」をタップします。
+                  </Box>
+                </Flex>
+                <Flex align="center" mt={16}>
+                  <Image
+                    src="/assets/images/icon/icon_android_app-promo.svg"
+                    width={24}
+                    height={24}
+                    alt=""
+                  />
+                  <Box ml={16} fw={500}>
+                    2.アプリのインストールをタップします。
+                  </Box>
+                </Flex>
+              </Box>
+            </>
+          )}
+
+          <Flex mt={16} justify="center">
+            <EButton.Sm mt={16} onClick={close}>
+              閉じる
+            </EButton.Sm>
+          </Flex>
+        </Box>
+      </Modal>
+    </>
+  )
+}
