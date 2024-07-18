@@ -11,7 +11,6 @@ import { NextPageWithLayout } from '../_app'
 
 const Page: NextPageWithLayout = () => {
   const { authenticated } = useAuthenticatedStore()
-
   const { register } = usePushNotificationRegistration()
 
   if (authenticated !== 'authenticated') {
@@ -21,26 +20,12 @@ const Page: NextPageWithLayout = () => {
         <SRecommendSignInScreen
           redirectUrl={`${applicationProperties.HOSTING_URL}${waitingsUrl()}`}
         />
-        <Button
-          onClick={() => {
-            register()
-          }}
-        >
-          Push登録
-        </Button>
       </>
     )
   }
   return (
     <>
       <SWaitingsScreen />
-      <Button
-        onClick={() => {
-          register()
-        }}
-      >
-        Push登録
-      </Button>
     </>
   )
 }

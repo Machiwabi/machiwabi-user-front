@@ -11,6 +11,7 @@ import { colorScheme } from '../../../theme/colorScheme'
 import { truncator } from '../../../utils/truncator'
 import { OPwaInstallBanner } from '../OPwaInstallBanner'
 import { useUserAgent } from '../../../hooks/resources/useUserAgent'
+import { OPushNotificationInstallBanner } from '../OPushNotificationInstallBanner'
 
 const Component: FC = () => {
   const { menuOpenGlobalMenuStart } = useMenuOpeningStatus()
@@ -19,11 +20,12 @@ const Component: FC = () => {
   const { siweEoaAddress } = useSiweEoaAddress()
 
   // Pwa Install Paramaters
-  const [displayable, setDisplayable] = useState(false)
+  const [installBannerDisplayable, setInstallBannerDisplayable] =
+    useState(false)
   const { isMobile, isPwa, isPwaInstallable } = useUserAgent()
   useEffect(() => {
     if (isPwaInstallable()) {
-      setDisplayable(true)
+      setInstallBannerDisplayable(true)
     }
   }, [isMobile, isPwa])
 
@@ -38,7 +40,8 @@ const Component: FC = () => {
           borderBottom: `0.5px solid ${colorScheme.scheme1.border.mid}`,
         }}
       >
-        {displayable && <OPwaInstallBanner />}
+        {installBannerDisplayable && <OPwaInstallBanner />}
+        <OPushNotificationInstallBanner />
         <Flex pos="relative" justify="space-between" align="center" h={56}>
           <Box
             pos="relative"
