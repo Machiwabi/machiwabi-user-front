@@ -13,7 +13,11 @@ import { OPwaInstallBanner } from '../OPwaInstallBanner'
 import { useUserAgent } from '../../../hooks/resources/useUserAgent'
 import { OPushNotificationInstallBanner } from '../OPushNotificationInstallBanner'
 
-const Component: FC = () => {
+type Props = {
+  bannerDisplayable?: boolean
+}
+
+const Component: FC<Props> = ({ bannerDisplayable = true }) => {
   const { menuOpenGlobalMenuStart } = useMenuOpeningStatus()
 
   const { isAuthenticated } = useAuthenticatedStore()
@@ -40,8 +44,12 @@ const Component: FC = () => {
           borderBottom: `0.5px solid ${colorScheme.scheme1.border.mid}`,
         }}
       >
-        {installBannerDisplayable && <OPwaInstallBanner />}
-        <OPushNotificationInstallBanner />
+        {bannerDisplayable && (
+          <>
+            {installBannerDisplayable && <OPwaInstallBanner />}
+            <OPushNotificationInstallBanner />
+          </>
+        )}
         <Flex pos="relative" justify="space-between" align="center" h={56}>
           <Box
             pos="relative"
