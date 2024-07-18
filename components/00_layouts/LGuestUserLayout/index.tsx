@@ -14,6 +14,7 @@ import { OHeaderNav } from '../../02_organisms/OHeaderNav'
 import { SOverlayedMenuScreen } from '../../04_screens/SOverlayedMenuScreen'
 import { applicationProperties } from '../../../constants/applicationProperties'
 import { useUserAgent } from '../../../hooks/resources/useUserAgent'
+import { usePushNotificationRegistration } from '../../../hooks/usePushNotificationRegistration'
 
 export default function LGuestUserLayout(
   page: ReactElement<any, string | JSXElementConstructor<any>>
@@ -35,10 +36,14 @@ const MainBlock: FC<MainBlockProps> = ({ children }) => {
   useAnimateTriggerTimer(10)
   const { trigger } = useAnimateTriggerStore()
   const { isPwaInstallable } = useUserAgent()
+  const { osNotificationPermissionGrantable } =
+    usePushNotificationRegistration()
 
   // バナー表示がある場合は６6px分のスペースを確保
   //　　TODO コンポーネントの中身を知りすぎているので、場所は適正でない上手い場所におきたい
-  const pt = isPwaInstallable() ? 56 + 66 : 56
+  let pt = 56
+  pt = isPwaInstallable() ? pt + 66 : pt
+  pt = osNotificationPermissionGrantable() ? pt + 66 : pt
 
   return (
     <>

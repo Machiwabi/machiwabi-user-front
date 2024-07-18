@@ -1,12 +1,12 @@
 import { Box, Container, Flex, Modal } from '@mantine/core'
-import { FC, useEffect, useState } from 'react'
-import { colorScheme } from '../../../theme/colorScheme'
-import { applicationProperties } from '../../../constants/applicationProperties'
 import Image from 'next/image'
+import { FC } from 'react'
+import { applicationProperties } from '../../../constants/applicationProperties'
+import { colorScheme } from '../../../theme/colorScheme'
 import { EButton } from '../../01_elements/EButton'
 
-import { useUserAgent } from '../../../hooks/resources/useUserAgent'
 import { useDisclosure } from '@mantine/hooks'
+import { useUserAgent } from '../../../hooks/resources/useUserAgent'
 
 const Component: FC = () => {
   const [opened, { open, close }] = useDisclosure(false)
