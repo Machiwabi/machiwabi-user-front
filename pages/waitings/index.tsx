@@ -1,4 +1,4 @@
-import LGuestUserLayout from '../../components/00_layouts/LGuestUserLayout'
+import LApplicationLayout from '../../components/00_layouts/LApplicationLayout'
 import { SRecommendSignInScreen } from '../../components/04_screens/SRecommendSignInScreen'
 import { SWaitingsScreen } from '../../components/04_screens/SWaitingsScreen'
 import { Seo } from '../../components/99_seo/waitings/Seo'
@@ -27,6 +27,6 @@ const Page: NextPageWithLayout = () => {
   )
 }
 
-Page.getLayout = LGuestUserLayout
+Page.getLayout = LApplicationLayout
 
 export default Page

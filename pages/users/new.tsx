@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import LGuestUserLayout from '../../components/00_layouts/LGuestUserLayout'
+import LApplicationLayout from '../../components/00_layouts/LApplicationLayout'
 import { SUserRegistrationScreen } from '../../components/04_screens/SUserRegistrationScreen'
 import { NextPageWithLayout } from '../_app'
 import { SUserRegistrationNoEmailScreen } from '../../components/04_screens/SUserRegistrationScreen/no-email'
@@ -12,6 +12,6 @@ const Page: NextPageWithLayout = () => {
   return <SUserRegistrationScreen />
 }
 
-Page.getLayout = LGuestUserLayout
+Page.getLayout = LApplicationLayout
 
 export default Page

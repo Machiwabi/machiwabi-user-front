@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import LGuestUserLayout from '../../../components/00_layouts/LGuestUserLayout'
+import LApplicationLayout from '../../../components/00_layouts/LApplicationLayout'
 import { SRewardScreen } from '../../../components/04_screens/SRewardScreen'
 import { RewardEntity } from '../../../generated/graphql'
 import { RewardRepository } from '../../../repositories/RewardRepository'
@@ -42,7 +42,7 @@ const Page: NextPageWithLayout<Props> = ({ uniqueKey, fallback }) => {
   )
 }
 
-Page.getLayout = LGuestUserLayout
+Page.getLayout = LApplicationLayout
 
 export default Page
 
