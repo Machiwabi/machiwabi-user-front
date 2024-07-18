@@ -2,7 +2,7 @@ import { Box, Flex } from '@mantine/core'
 import Image from 'next/image'
 
 import Link from 'next/link'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { waitingsUrl, web3AuthEntranceUrl } from '../../../helpers/url.helper'
 import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
 import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
@@ -10,12 +10,28 @@ import { useMenuOpeningStatus } from '../../../recoil/openingStatus/useMenuOpeni
 import { colorScheme } from '../../../theme/colorScheme'
 import { truncator } from '../../../utils/truncator'
 import { OPwaInstallBanner } from '../OPwaInstallBanner'
+import { useUserAgent } from '../../../hooks/resources/useUserAgent'
+import { OPushNotificationInstallBanner } from '../OPushNotificationInstallBanner'
 
-const Component: FC = () => {
+type Props = {
+  bannerDisplayable?: boolean
+}
+
+const Component: FC<Props> = ({ bannerDisplayable = true }) => {
   const { menuOpenGlobalMenuStart } = useMenuOpeningStatus()
 
   const { isAuthenticated } = useAuthenticatedStore()
   const { siweEoaAddress } = useSiweEoaAddress()
+
+  // Pwa Install Paramaters
+  const [installBannerDisplayable, setInstallBannerDisplayable] =
+    useState(false)
+  const { isMobile, isPwa, isPwaInstallable } = useUserAgent()
+  useEffect(() => {
+    if (isPwaInstallable()) {
+      setInstallBannerDisplayable(true)
+    }
+  }, [isMobile, isPwa])
 
   return (
     <>
@@ -28,7 +44,12 @@ const Component: FC = () => {
           borderBottom: `0.5px solid ${colorScheme.scheme1.border.mid}`,
         }}
       >
-        <OPwaInstallBanner />
+        {bannerDisplayable && (
+          <>
+            {installBannerDisplayable && <OPwaInstallBanner />}
+            <OPushNotificationInstallBanner />
+          </>
+        )}
         <Flex pos="relative" justify="space-between" align="center" h={56}>
           <Box
             pos="relative"

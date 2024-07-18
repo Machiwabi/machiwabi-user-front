@@ -1,5 +1,5 @@
 import { SWRConfig, unstable_serialize } from 'swr'
-import LGuestUserLayout from '../../../components/00_layouts/LGuestUserLayout'
+import LApplicationLayout from '../../../components/00_layouts/LApplicationLayout'
 import { SEventScreen } from '../../../components/04_screens/SEventScreen'
 import { EventEntity } from '../../../generated/graphql'
 import { EventRepository } from '../../../repositories/EventRepository'
@@ -24,7 +24,7 @@ const Page: NextPageWithLayout<Props> = ({ uniqueKey, fallback }) => {
   )
 }
 
-Page.getLayout = LGuestUserLayout
+Page.getLayout = LApplicationLayout
 
 export default Page
 
