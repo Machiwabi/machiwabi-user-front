@@ -21,5 +21,9 @@ export const useUserAgent = () => {
     return ua.model === 'Android'
   }, [])
 
-  return { isMobile, isPwa, isIos, isAndroid }
+  const isPwaInstallable = () => {
+    return isMobile() && !isPwa()
+  }
+
+  return { isMobile, isPwa, isIos, isAndroid, isPwaInstallable }
 }
