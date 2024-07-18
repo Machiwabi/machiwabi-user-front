@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { applicationProperties } from '../constants/applicationProperties'
 import { SiweJwtRepository } from '../repositories/SiweJwtRepository'
 import { urlBase64ToUint8Array } from '../utils/urlBase64ToUnit8Array'
@@ -61,5 +62,17 @@ export const usePushNotificationRegistration = () => {
     console.log('subscription:', pushManagerSubscription)
   }
 
-  return { register }
+  // osの通知許可が取得可能かどうかを返す
+  const osNotificationPermissionGrantable = useCallback(() => {
+    if (typeof window !== 'undefined' && 'Notification' in window) {
+      if (Notification.permission === 'granted') return false
+      if (Notification.permission === 'denied') return false
+      if (Notification.permission === 'default') return true
+      return false
+    } else {
+      return false
+    }
+  }, [])
+
+  return { register, osNotificationPermissionGrantable }
 }

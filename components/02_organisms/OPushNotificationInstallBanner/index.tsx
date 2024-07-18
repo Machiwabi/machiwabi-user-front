@@ -1,12 +1,22 @@
 import { Box, Container, Flex } from '@mantine/core'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { applicationProperties } from '../../../constants/applicationProperties'
 import { colorScheme } from '../../../theme/colorScheme'
 import { EButton } from '../../01_elements/EButton'
 import { usePushNotificationRegistration } from '../../../hooks/usePushNotificationRegistration'
 
 const Component: FC = () => {
-  const { register } = usePushNotificationRegistration()
+  const { register, osNotificationPermissionGrantable } =
+    usePushNotificationRegistration()
+  const [displayable, setDisplayable] = useState(false)
+
+  useEffect(() => {
+    if (osNotificationPermissionGrantable()) {
+      setDisplayable(true)
+    }
+  }, [])
+
+  if (!displayable) return <></>
 
   return (
     <>
@@ -30,7 +40,10 @@ const Component: FC = () => {
                 c={colorScheme.scheme1.accent1.object.high}
                 bg={colorScheme.scheme1.accent1.surface}
                 fz={12}
-                onClick={register}
+                onClick={async () => {
+                  await register()
+                  setDisplayable(false)
+                }}
               >
                 通知を受け取る
               </EButton.Xs>
