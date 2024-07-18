@@ -4,11 +4,16 @@ import { applicationProperties } from '../../../constants/applicationProperties'
 import { colorScheme } from '../../../theme/colorScheme'
 import { EButton } from '../../01_elements/EButton'
 import { usePushNotificationRegistration } from '../../../hooks/usePushNotificationRegistration'
+import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
+import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
 
 const Component: FC = () => {
   const { register, osNotificationPermissionGrantable } =
     usePushNotificationRegistration()
   const [displayable, setDisplayable] = useState(false)
+
+  const { isAuthenticated } = useAuthenticatedStore()
+  const { siweEoaAddress } = useSiweEoaAddress()
 
   useEffect(() => {
     if (osNotificationPermissionGrantable()) {
@@ -17,6 +22,7 @@ const Component: FC = () => {
   }, [])
 
   if (!displayable) return <></>
+  if (!isAuthenticated() || !siweEoaAddress) return <></>
 
   return (
     <>
