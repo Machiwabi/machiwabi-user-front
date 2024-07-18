@@ -3,15 +3,18 @@ import { FC } from 'react'
 import { applicationProperties } from '../../../constants/applicationProperties'
 import { colorScheme } from '../../../theme/colorScheme'
 import { EButton } from '../../01_elements/EButton'
+import { usePushNotificationRegistration } from '../../../hooks/usePushNotificationRegistration'
 
 const Component: FC = () => {
+  const { register } = usePushNotificationRegistration()
+
   return (
     <>
       <Box bg={colorScheme.scheme1.surface2.surface}>
         <Container py={12} maw={applicationProperties.CONTENT_MAX_WIDTH}>
           <Flex justify="space-between" align="center">
             <Flex>
-              <Flex ml={12} direction="column" justify="center">
+              <Flex direction="column" justify="center">
                 <Box fz={12} lh={1}>
                   プッシュ通知をオンにして
                 </Box>
@@ -27,6 +30,7 @@ const Component: FC = () => {
                 c={colorScheme.scheme1.accent1.object.high}
                 bg={colorScheme.scheme1.accent1.surface}
                 fz={12}
+                onClick={register}
               >
                 通知を受け取る
               </EButton.Xs>
