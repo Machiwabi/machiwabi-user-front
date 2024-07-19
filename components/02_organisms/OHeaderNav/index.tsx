@@ -1,33 +1,56 @@
 import { Box, Flex } from '@mantine/core'
 import Image from 'next/image'
-import { FC } from 'react'
-import { colorScheme } from '../../../theme/colorScheme'
-import { useMenuOpeningStatus } from '../../../recoil/openingStatus/useMenuOpeningStatus'
-import Link from 'next/link'
-import { truncator } from '../../../utils/truncator'
-import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
-import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
-import { waitingsUrl, web3AuthEntranceUrl } from '../../../helpers/url.helper'
 
-const Component: FC = () => {
+import Link from 'next/link'
+import { FC, useEffect, useState } from 'react'
+import { waitingsUrl, web3AuthEntranceUrl } from '../../../helpers/url.helper'
+import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
+import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
+import { useMenuOpeningStatus } from '../../../recoil/openingStatus/useMenuOpeningStatus'
+import { colorScheme } from '../../../theme/colorScheme'
+import { truncator } from '../../../utils/truncator'
+import { OPwaInstallBanner } from '../OPwaInstallBanner'
+import { useUserAgent } from '../../../hooks/resources/useUserAgent'
+import { OPushNotificationInstallBanner } from '../OPushNotificationInstallBanner'
+
+type Props = {
+  bannerDisplayable?: boolean
+}
+
+const Component: FC<Props> = ({ bannerDisplayable = true }) => {
   const { menuOpenGlobalMenuStart } = useMenuOpeningStatus()
 
   const { isAuthenticated } = useAuthenticatedStore()
   const { siweEoaAddress } = useSiweEoaAddress()
+
+  // Pwa Install Paramaters
+  const [installBannerDisplayable, setInstallBannerDisplayable] =
+    useState(false)
+  const { isMobile, isPwa, isPwaInstallable } = useUserAgent()
+  useEffect(() => {
+    if (isPwaInstallable()) {
+      setInstallBannerDisplayable(true)
+    }
+  }, [isMobile, isPwa])
 
   return (
     <>
       <Box
         pos="fixed"
         w="100%"
-        h={56}
         bg={colorScheme.scheme1.surface1.surface}
         style={{
           zIndex: 100,
           borderBottom: `0.5px solid ${colorScheme.scheme1.border.mid}`,
         }}
       >
-        <Flex pos="relative" justify="space-between" align="center" h={'100%'}>
+        {bannerDisplayable && (
+          <>
+            {installBannerDisplayable && <OPwaInstallBanner />}
+            <OPushNotificationInstallBanner />
+          </>
+        )}
+        <Flex pos="relative" justify="space-between" align="center" h={56}>
           <Box
             pos="relative"
             px={16}

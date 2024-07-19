@@ -1,0 +1,21 @@
+{
+  "name": "Mati-wabi",
+  "short_name": "Mati-wabi",
+  "start_url": "/waitings",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "description": "Mati-wabi",
+  "icons": [
+    {
+      "src": "/assets/favicon/favicon_192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicon/favicon_512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

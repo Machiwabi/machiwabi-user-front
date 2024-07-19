@@ -3,12 +3,16 @@
 api.ts
 api/booster-payments-api.ts
 api/v1-authentication-api.ts
+api/v1-boosters-api.ts
 api/v1-s3-images-api.ts
+api/v1-user-devices-api.ts
 base.ts
 common.ts
 configuration.ts
 git_push.sh
 index.ts
 types/aws-s3-presigned-url-entity.ts
+types/create-user-device-input.ts
 types/index.ts
 types/siwe-jwt-entity.ts
+types/user-device-entity.ts

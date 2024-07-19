@@ -1,5 +1,5 @@
 import { Box, Flex } from '@mantine/core'
-import LGuestUserLayout from '../../components/00_layouts/LGuestUserLayout'
+import LApplicationLayout from '../../components/00_layouts/LApplicationLayout'
 import { EButton } from '../../components/01_elements/EButton'
 import { EText } from '../../components/01_elements/EText/base'
 import { Seo } from '../../components/99_seo/auth/entrance/Seo'
@@ -62,6 +62,6 @@ const Page: NextPageWithLayout = () => {
   )
 }
 
-Page.getLayout = LGuestUserLayout
+Page.getLayout = LApplicationLayout
 
 export default Page

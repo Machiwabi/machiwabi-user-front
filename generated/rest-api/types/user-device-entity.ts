@@ -14,9 +14,17 @@
 
 
 
-export * from './api/booster-payments-api';
-export * from './api/v1-authentication-api';
-export * from './api/v1-boosters-api';
-export * from './api/v1-s3-images-api';
-export * from './api/v1-user-devices-api';
+/**
+ * 
+ * @export
+ * @interface UserDeviceEntity
+ */
+export interface UserDeviceEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof UserDeviceEntity
+     */
+    'uniqueKey': string;
+}
 

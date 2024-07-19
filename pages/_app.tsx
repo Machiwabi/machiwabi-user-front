@@ -6,7 +6,6 @@ import type { AppProps } from 'next/app'
 import { Router } from 'next/router'
 import NProgress from 'nprogress'
 import { ReactElement, ReactNode } from 'react'
-import { RecoilRoot } from 'recoil'
 import '../styles/global.css'
 import '../styles/nprogress.css'
 import { mantineTheme } from '../theme/mantineTheme'
@@ -14,10 +13,10 @@ import { googleAnalyticsId } from '../utils/ga4'
 import GoogleAnalyticsV4, { GoogleAnalyticsId } from './GoogleAnalyticsV4'
 
 // mantine
-import '@mantine/core/styles.css'
-import '@mantine/notifications/styles.css'
 import '@mantine/carousel/styles.css'
+import '@mantine/core/styles.css'
 import { Notifications } from '@mantine/notifications'
+import '@mantine/notifications/styles.css'
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start()
