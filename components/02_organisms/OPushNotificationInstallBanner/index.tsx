@@ -6,6 +6,8 @@ import { EButton } from '../../01_elements/EButton'
 import { usePushNotificationRegistration } from '../../../hooks/usePushNotificationRegistration'
 import { useAuthenticatedStore } from '../../../recoil/authenticatedStore/useAuthenticatedStore'
 import { useSiweEoaAddress } from '../../../hooks/resources/useSiweEoaAddress'
+import { ga4PushEvent } from '../../../utils/ga4'
+import { GA4_CUSTOM_EVENT } from '../../../constants/ga4CustomEvent'
 
 const Component: FC = () => {
   const { register, osNotificationPermissionGrantable } =
@@ -48,6 +50,7 @@ const Component: FC = () => {
                 fz={12}
                 onClick={async () => {
                   await register()
+                  ga4PushEvent(GA4_CUSTOM_EVENT.PRESS_PUSH_NOTIFICATION_BANNER)
                   setDisplayable(false)
                 }}
               >

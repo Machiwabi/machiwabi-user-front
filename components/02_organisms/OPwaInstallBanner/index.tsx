@@ -7,6 +7,8 @@ import { EButton } from '../../01_elements/EButton'
 
 import { useDisclosure } from '@mantine/hooks'
 import { useUserAgent } from '../../../hooks/resources/useUserAgent'
+import { ga4PushEvent } from '../../../utils/ga4'
+import { GA4_CUSTOM_EVENT } from '../../../constants/ga4CustomEvent'
 
 const Component: FC = () => {
   const [opened, { open, close }] = useDisclosure(false)
@@ -46,7 +48,10 @@ const Component: FC = () => {
                 c={colorScheme.scheme1.accent1.object.high}
                 bg={colorScheme.scheme1.accent1.surface}
                 fz={12}
-                onClick={open}
+                onClick={() => {
+                  ga4PushEvent(GA4_CUSTOM_EVENT.PRESS_PWA_INSTALL_BANNER)
+                  open()
+                }}
               >
                 詳しく
               </EButton.Xs>
