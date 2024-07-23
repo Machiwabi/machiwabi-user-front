@@ -12,5 +12,7 @@ export const GA4_CUSTOM_EVENT = {
   //　Begin Waiting
   COMPLETE_JOIN_WAITING: 'complete_join_waiting',
   //　Add to Home Screen
-  PRESS_HOME_SCEEEN: 'press_home_screen',
+  PRESS_PWA_INSTALL_BANNER: 'press_pwa_install_banner',
+  //　Add to Push Notification
+  PRESS_PUSH_NOTIFICATION_BANNER: 'press_push_notification_banner',
 }

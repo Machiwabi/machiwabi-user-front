@@ -1,5 +1,12 @@
 import { Container } from '@mantine/core'
-import { FC, JSXElementConstructor, ReactElement, ReactNode } from 'react'
+import {
+  FC,
+  JSXElementConstructor,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useState,
+} from 'react'
 import { RecoilRoot } from 'recoil'
 import { applicationProperties } from '../../../constants/applicationProperties'
 import { useUserAgent } from '../../../hooks/resources/useUserAgent'
@@ -32,11 +39,16 @@ const MainBlock: FC<MainBlockProps> = ({ children }) => {
   const { osNotificationPermissionGrantable } =
     usePushNotificationRegistration()
 
+  const [pt, setPt] = useState(56)
+
   // バナー表示がある場合は６6px分のスペースを確保
   //　　TODO コンポーネントの中身を知りすぎているので、場所は適正でない上手い場所におきたい
-  let pt = 56
-  pt = isPwaInstallable() ? pt + 66 : pt
-  pt = osNotificationPermissionGrantable() ? pt + 66 : pt
+  useEffect(() => {
+    let lpt = 56
+    lpt = isPwaInstallable() ? lpt + 66 : lpt
+    lpt = osNotificationPermissionGrantable() ? lpt + 66 : lpt
+    setPt(lpt)
+  }, [])
 
   return (
     <>

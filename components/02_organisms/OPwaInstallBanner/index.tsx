@@ -7,6 +7,8 @@ import { EButton } from '../../01_elements/EButton'
 
 import { useDisclosure } from '@mantine/hooks'
 import { useUserAgent } from '../../../hooks/resources/useUserAgent'
+import { ga4PushEvent } from '../../../utils/ga4'
+import { GA4_CUSTOM_EVENT } from '../../../constants/ga4CustomEvent'
 
 const Component: FC = () => {
   const [opened, { open, close }] = useDisclosure(false)
@@ -31,16 +33,11 @@ const Component: FC = () => {
                 />
               </Box>
               <Flex ml={12} direction="column" justify="center">
-                <Box
-                  fz={16}
-                  c={colorScheme.scheme1.surface2.object.high}
-                  fw="bold"
-                  lh={1}
-                >
-                  Mati-wabi
+                <Box fz={12} lh={1} fw={900}>
+                  WEBアプリ提供開始！
                 </Box>
                 <Box mt={6} fz={12} lh={1}>
-                  待ち時間を価値するアプリ
+                  通知やアップデートを受け取れる！
                 </Box>
               </Flex>
             </Flex>
@@ -51,9 +48,12 @@ const Component: FC = () => {
                 c={colorScheme.scheme1.accent1.object.high}
                 bg={colorScheme.scheme1.accent1.surface}
                 fz={12}
-                onClick={open}
+                onClick={() => {
+                  ga4PushEvent(GA4_CUSTOM_EVENT.PRESS_PWA_INSTALL_BANNER)
+                  open()
+                }}
               >
-                インストール
+                詳しく
               </EButton.Xs>
             </Box>
           </Flex>
@@ -91,8 +91,29 @@ const ModalGuide: FC<ModalGuideProps> = ({ opened, close }) => {
         <Box py={16} px={8}>
           {isIos() ? (
             <>
-              <Flex mb={24} justify="center" fz={18} fw={600}>
-                Webアプリインストール方法(iOS)
+              <Box>
+                <Flex mb={24} justify="center" fz={22} fw={900}>
+                  Mati-wabiのWebアプリ
+                </Flex>
+                <Flex justify="center">
+                  <Image
+                    src="/assets/images/picture/picture_install-guide-ios.png"
+                    width={304}
+                    height={160}
+                    alt=""
+                  />
+                </Flex>
+                <Box
+                  mt={16}
+                  fz={14}
+                  c={colorScheme.scheme1.surface1.object.mid}
+                >
+                  Webアプリをインストールすると マチワビをすぐに確認できます。
+                  またキャンペーンや新機能の通知が届きます！
+                </Box>
+              </Box>
+              <Flex mt={32} mb={24} justify="center" fz={16} fw={600}>
+                iOS版インストール方法
               </Flex>
               <Box>
                 <Flex align="center">
@@ -132,8 +153,29 @@ const ModalGuide: FC<ModalGuideProps> = ({ opened, close }) => {
             </>
           ) : (
             <>
-              <Flex mb={24} justify="center" fz={18} fw={600}>
-                Webアプリインストール方法(Android)
+              <Box>
+                <Flex mb={24} justify="center" fz={22} fw={900}>
+                  Mati-wabiのWebアプリ
+                </Flex>
+                <Flex justify="center">
+                  <Image
+                    src="/assets/images/picture/picture_install-guide-android.png"
+                    width={304}
+                    height={160}
+                    alt=""
+                  />
+                </Flex>
+                <Box
+                  mt={16}
+                  fz={14}
+                  c={colorScheme.scheme1.surface1.object.mid}
+                >
+                  Webアプリをインストールすると マチワビをすぐに確認できます。
+                  またキャンペーンや新機能の通知が届きます！
+                </Box>
+              </Box>
+              <Flex mt={32} mb={24} justify="center" fz={16} fw={600}>
+                Android版インストール方法
               </Flex>
               <Box>
                 <Flex align="center">
@@ -155,7 +197,12 @@ const ModalGuide: FC<ModalGuideProps> = ({ opened, close }) => {
                     alt=""
                   />
                   <Box ml={16} fw={500}>
-                    2.アプリのインストールをタップします。
+                    2.ホーム画面に追加をタップします。
+                  </Box>
+                </Flex>
+                <Flex align="center" mt={16}>
+                  <Box ml={16 + 24} fw={500}>
+                    3.インストールを選択します。
                   </Box>
                 </Flex>
               </Box>
