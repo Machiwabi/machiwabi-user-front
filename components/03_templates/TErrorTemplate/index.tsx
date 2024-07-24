@@ -39,8 +39,8 @@ const Component: FC<Props> = ({
           <EButton.Sm mt={12} onClick={handleReload}>
             再読み込み
           </EButton.Sm>
-          <EButton.Sm mt={16} href="/auth/signout">
-            ログアウト
+          <EButton.Sm mt={16} href="/signout">
+            ログアウトして接続し直す
           </EButton.Sm>
         </>
       )}
