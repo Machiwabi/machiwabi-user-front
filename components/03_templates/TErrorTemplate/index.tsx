@@ -35,9 +35,14 @@ const Component: FC<Props> = ({
       <EHeading.Section>{heading}</EHeading.Section>
       <EText.Desc1 mt={6}>{description}</EText.Desc1>
       {displayReloadButton && (
-        <EButton.Sm mt={12} onClick={handleReload}>
-          再読み込み
-        </EButton.Sm>
+        <>
+          <EButton.Sm mt={12} onClick={handleReload}>
+            再読み込み
+          </EButton.Sm>
+          <EButton.Sm mt={16} href="/signout">
+            ログアウトして接続し直す
+          </EButton.Sm>
+        </>
       )}
       {href && (
         <EButton.Sm mt={12} href={href}>
