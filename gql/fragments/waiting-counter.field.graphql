@@ -1,0 +1,5 @@
+fragment WaitingCounterField on WaitingCounterEntity {
+  uniqueKey
+  bgImageUrl
+  bgExpiredAt
+}
