@@ -73,6 +73,40 @@ export class WaitingService {
     return nextDateTotalPoint - baseDateTotalPoint + 1
   }
 
+  public waitingCounterBgImageUrl() {
+    return this.waiting.waitingCounter?.bgImageUrl
+  }
+
+  public isWaitingCounterBgDisplayable() {
+    // return true
+    if (!this.waiting.waitingCounter || !this.waiting.waitingCounter.bgImageUrl)
+      return false
+
+    return new Date(this.waiting.waitingCounter.bgExpiresAt) > new Date()
+  }
+
+  public waitingCounterWaitableMs() {
+    console.log('waoo1o', this.waiting.waitingCounter)
+    if (
+      !this.waiting.waitingCounter ||
+      !this.waiting.waitingCounter.bgExpiresAt
+    )
+      return 0
+    return (
+      new Date(this.waiting.waitingCounter.bgExpiresAt).getTime() -
+      new Date(this.waiting.waitingCounter.updatedAt).getTime()
+    )
+  }
+
+  public waitingCounterWaitedMs() {
+    console.log('waooo2', this.waiting.waitingCounter)
+    if (!this.waiting.waitingCounter) return 0
+    return (
+      new Date().getTime() -
+      new Date(this.waiting.waitingCounter.updatedAt).getTime()
+    )
+  }
+
   // 現時点での数字を元に、目標のポイントまでの秒数を返す
   // WIP
   public remainingSecondsToGoalTotalPoint(goalTotalPoint: number) {

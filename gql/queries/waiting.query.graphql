@@ -19,5 +19,8 @@ query waiting($uniqueKey: String!) {
         ...RewardField
       }
     }
+    waitingCounter {
+      ...WaitingCounterField
+    }
   }
 }

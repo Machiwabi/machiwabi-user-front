@@ -19,5 +19,8 @@ query waitingSiblings($eventUniqueKey: String!) {
         ...RewardField
       }
     }
+    waitingCounter {
+      ...WaitingCounterField
+    }
   }
 }
