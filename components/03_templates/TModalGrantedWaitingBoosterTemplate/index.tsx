@@ -37,11 +37,22 @@ const Component: FC<Props> = ({ booster, isOpen, setIsOpen }) => {
         }}
         showCloseButton={true}
       >
-        <EHeading.Page ta="center">
-          ミッション達成！
-          <Box fz={20}>{booster.name}</Box>
-          を獲得しました！
-        </EHeading.Page>
+        {booster.name === 'フラワー' ? (
+          <>
+            {/* TODO 負債なおす */}
+            <EHeading.Page ta="center">
+              ミッション達成！
+              <Box fz={20}>「ホーム」見に来てね！</Box>
+              いいことあるかも
+            </EHeading.Page>
+          </>
+        ) : (
+          <EHeading.Page ta="center">
+            ミッション達成！
+            <Box fz={20}>{booster.name}</Box>
+            を獲得しました！
+          </EHeading.Page>
+        )}
         <Flex justify="center">
           <Image
             src={
