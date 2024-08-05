@@ -28,19 +28,15 @@ const Component: FC<Props> = ({
 
   useFrame(({ clock }) => {
     if (materialRef.current) {
-      if (
-        // !isRepeat &&
-        clock.getElapsedTime() + initialTime >
-        maxSeconds
-        // clock.getElapsedTime() + initialTime > denominatorSeconds
-      ) {
-        // 繰り返ししない場合は、
-        ;(materialRef.current as THREE.ShaderMaterial).uniforms.time.value =
-          denominatorSeconds - 0.01
-      } else {
-        ;(materialRef.current as THREE.ShaderMaterial).uniforms.time.value =
-          initialTime + clock.getElapsedTime()
+      const elapsedTime = clock.getElapsedTime()
+      let currentTime = (initialTime + elapsedTime) % denominatorSeconds
+
+      if (!isRepeat && currentTime > maxSeconds) {
+        currentTime = maxSeconds - 0.01
       }
+
+      ;(materialRef.current as THREE.ShaderMaterial).uniforms.time.value =
+        currentTime
     }
   })
 

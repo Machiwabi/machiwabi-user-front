@@ -1,13 +1,13 @@
 import { Container } from '@mantine/core'
 import { FC, JSXElementConstructor, ReactElement, ReactNode } from 'react'
 import { RecoilRoot } from 'recoil'
+import { applicationProperties } from '../../../constants/applicationProperties'
 import { useAnimateTriggerStore } from '../../../recoil/animateTriggerStore/useAnimateTriggerStore'
 import { useAnimateTriggerTimer } from '../../../recoil/animateTriggerStore/useAnimateTriggerTimer'
 import { OHeaderNav } from '../../02_organisms/OHeaderNav'
 import { SOverlayedMenuScreen } from '../../04_screens/SOverlayedMenuScreen'
-import { applicationProperties } from '../../../constants/applicationProperties'
 
-export default function LGuestUserLayout(
+export default function LApplicationLayout(
   page: ReactElement<any, string | JSXElementConstructor<any>>
 ) {
   return (
@@ -30,7 +30,7 @@ const MainBlock: FC<MainBlockProps> = ({ children }) => {
   return (
     <>
       <SOverlayedMenuScreen />
-      <OHeaderNav />
+      <OHeaderNav bannerDisplayable={false} />
       <Container
         maw={applicationProperties.CONTENT_MAX_WIDTH}
         pt={56}

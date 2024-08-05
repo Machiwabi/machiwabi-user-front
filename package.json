@@ -55,6 +55,7 @@
     "siwe": "2.1.4",
     "swr": "^2.1.5",
     "three": "^0.163.0",
+    "ua-parser-js": "^1.0.38",
     "wagmi": "2",
     "workbox-window": "^7.1.0",
     "zod": "^3.22.2"
@@ -74,6 +75,7 @@
     "@types/react-dom": "18.0.6",
     "@types/testing-library__user-event": "^4.2.0",
     "@types/three": "^0.163.0",
+    "@types/ua-parser-js": "^0.7.39",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "@typescript-eslint/parser": "^7.4.0",
     "@vitejs/plugin-react": "^4.0.0",

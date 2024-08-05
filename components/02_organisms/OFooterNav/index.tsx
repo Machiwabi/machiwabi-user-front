@@ -36,7 +36,6 @@ const GuideFloatButton: FC = () => {
         w={68}
         h={68}
         onClick={() => {
-          ga4PushEvent(GA4_CUSTOM_EVENT.PRESS_HOME_SCEEEN)
           setIsOpen(true)
         }}
         style={{

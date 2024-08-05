@@ -19,5 +19,8 @@ query waitingsAll {
         ...RewardField
       }
     }
+    waitingCounter {
+      ...WaitingCounterField
+    }
   }
 }

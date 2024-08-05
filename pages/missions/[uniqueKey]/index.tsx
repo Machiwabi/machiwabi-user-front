@@ -1,5 +1,5 @@
 import { SWRConfig, unstable_serialize } from 'swr'
-import LGuestUserLayout from '../../../components/00_layouts/LGuestUserLayout'
+import LApplicationLayout from '../../../components/00_layouts/LApplicationLayout'
 import { SMissionScreen } from '../../../components/04_screens/SMissionScreen'
 import { BoosterEntity } from '../../../generated/graphql'
 import { BoosterRepository } from '../../../repositories/BoosterRepository'
@@ -47,7 +47,7 @@ const Page: NextPageWithLayout<Props> = ({ uniqueKey, fallback }) => {
   )
 }
 
-Page.getLayout = LGuestUserLayout
+Page.getLayout = LApplicationLayout
 
 export default Page
 

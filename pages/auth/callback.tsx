@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next'
 import { useEffect } from 'react'
-import LGuestUserLayout from '../../components/00_layouts/LGuestUserLayout'
+import LGuestLayout from '../../components/00_layouts/LGuestLayout'
 import { TLoadingTemplate } from '../../components/03_templates/TLoadingTemplate'
 import { Seo } from '../../components/99_seo/auth/callback/Seo'
 import { GA4_CUSTOM_EVENT } from '../../constants/ga4CustomEvent'
@@ -39,7 +39,7 @@ const Page: NextPageWithLayout<PageProps> = ({ notRegisterEmail }) => {
   )
 }
 
-Page.getLayout = LGuestUserLayout
+Page.getLayout = LGuestLayout
 
 export default Page
 

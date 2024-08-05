@@ -1,5 +1,5 @@
 import { SWRConfig, unstable_serialize } from 'swr'
-import LGuestUserLayout from '../../../components/00_layouts/LGuestUserLayout'
+import LApplicationLayout from '../../../components/00_layouts/LApplicationLayout'
 import { SWaitingTabsScreen } from '../../../components/04_screens/SWaitingTabsScreen'
 import { WaitingRepository } from '../../../repositories/WaitingRepository'
 import { NextPageWithLayout } from '../../_app'
@@ -36,7 +36,7 @@ const Page: NextPageWithLayout<Props> = ({
   )
 }
 
-Page.getLayout = LGuestUserLayout
+Page.getLayout = LApplicationLayout
 
 export default Page
 
