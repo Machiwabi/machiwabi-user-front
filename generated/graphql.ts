@@ -52,6 +52,24 @@ export type BoosterUseableDurationEntity = {
   leftRecoveryDuration: Scalars['Float']['output'];
 };
 
+export type CastButtonUrlAndTextEntity = {
+  __typename?: 'CastButtonUrlAndTextEntity';
+  url: Scalars['String']['output'];
+  value: Scalars['String']['output'];
+};
+
+export type CastEntity = {
+  __typename?: 'CastEntity';
+  pageButtonUrlAndTexts: Array<CastButtonUrlAndTextEntity>;
+  pageDescription: Scalars['String']['output'];
+  pageImageUrl: Scalars['String']['output'];
+  pageMetaDescription?: Maybe<Scalars['String']['output']>;
+  pageMetaTitle?: Maybe<Scalars['String']['output']>;
+  pageOgpImageUrl?: Maybe<Scalars['String']['output']>;
+  pageTitle: Scalars['String']['output'];
+  uniqueKey: Scalars['String']['output'];
+};
+
 export type CreateRewardInput = {
   aquiredImageUrl: Scalars['String']['input'];
   content: Scalars['String']['input'];
@@ -184,6 +202,7 @@ export type Query = {
   boosterUseableDuration: BoosterUseableDurationEntity;
   boosters: Array<BoosterEntity>;
   boostersAll: Array<BoosterEntity>;
+  cast: CastEntity;
   checkEventJoinable: Scalars['Boolean']['output'];
   event: EventEntity;
   events: Array<EventEntity>;
@@ -215,6 +234,11 @@ export type QueryBoosterUseableDurationArgs = {
 
 export type QueryBoostersArgs = {
   eventUniqueKey: Scalars['String']['input'];
+};
+
+
+export type QueryCastArgs = {
+  uniqueKey: Scalars['String']['input'];
 };
 
 
@@ -375,6 +399,8 @@ export type BoosterUseableDurationFieldFragment = { __typename?: 'BoosterUseable
 
 export type BoosterFieldFragment = { __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null };
 
+export type CastFieldFragment = { __typename?: 'CastEntity', uniqueKey: string, pageTitle: string, pageImageUrl: string, pageDescription: string, pageOgpImageUrl?: string | null, pageMetaTitle?: string | null, pageMetaDescription?: string | null, pageButtonUrlAndTexts: Array<{ __typename?: 'CastButtonUrlAndTextEntity', value: string, url: string }> };
+
 export type EventFieldFragment = { __typename?: 'EventEntity', uniqueKey: string, waitingStartAt: any, startAt: any, endAt: any, name?: string | null, description?: string | null, mdxContent?: string | null, detailMdxContent?: string | null, isJoinable: boolean, lat?: number | null, lng?: number | null, onlineUrl?: string | null, placeName?: string | null, imageUrl?: string | null };
 
 export type JoinedWaitingFieldFragment = { __typename?: 'JoinedWaitingEntity', uniqueKey: string, waitingName?: string | null, waitingMessage?: string | null, joinAt: any };
@@ -486,6 +512,13 @@ export type BoostersQueryVariables = Exact<{
 
 
 export type BoostersQuery = { __typename?: 'Query', boosters: Array<{ __typename?: 'BoosterEntity', uniqueKey: string, boosterType: BoosterType, name: string, description?: string | null, content?: string | null, durationSeconds: number, multiplier: number, emoji: string, iconUrl?: string | null, missionName?: string | null, missionDescription?: string | null, missionMdxContent?: string | null, price?: number | null, recoveryDurationSeconds: number, order?: number | null }> };
+
+export type CastQueryVariables = Exact<{
+  uniqueKey: Scalars['String']['input'];
+}>;
+
+
+export type CastQuery = { __typename?: 'Query', cast: { __typename?: 'CastEntity', uniqueKey: string, pageTitle: string, pageImageUrl: string, pageDescription: string, pageOgpImageUrl?: string | null, pageMetaTitle?: string | null, pageMetaDescription?: string | null, pageButtonUrlAndTexts: Array<{ __typename?: 'CastButtonUrlAndTextEntity', value: string, url: string }> } };
 
 export type CheckEventJoinableQueryVariables = Exact<{
   uniqueKey: Scalars['String']['input'];
@@ -605,6 +638,21 @@ export const BoosterFieldFragmentDoc = gql`
   price
   recoveryDurationSeconds
   order
+}
+    `;
+export const CastFieldFragmentDoc = gql`
+    fragment CastField on CastEntity {
+  uniqueKey
+  pageTitle
+  pageImageUrl
+  pageDescription
+  pageButtonUrlAndTexts {
+    value
+    url
+  }
+  pageOgpImageUrl
+  pageMetaTitle
+  pageMetaDescription
 }
     `;
 export const EventFieldFragmentDoc = gql`
@@ -856,6 +904,13 @@ export const BoostersDocument = gql`
   }
 }
     ${BoosterFieldFragmentDoc}`;
+export const CastDocument = gql`
+    query cast($uniqueKey: String!) {
+  cast(uniqueKey: $uniqueKey) {
+    ...CastField
+  }
+}
+    ${CastFieldFragmentDoc}`;
 export const CheckEventJoinableDocument = gql`
     query checkEventJoinable($uniqueKey: String!) {
   checkEventJoinable(uniqueKey: $uniqueKey)
@@ -1121,6 +1176,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     boosters(variables: BoostersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<BoostersQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<BoostersQuery>(BoostersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'boosters', 'query');
+    },
+    cast(variables: CastQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CastQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CastQuery>(CastDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'cast', 'query');
     },
     checkEventJoinable(variables: CheckEventJoinableQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CheckEventJoinableQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<CheckEventJoinableQuery>(CheckEventJoinableDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'checkEventJoinable', 'query');

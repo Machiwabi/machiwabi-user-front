@@ -1,0 +1,5 @@
+query cast($uniqueKey: String!) {
+  cast(uniqueKey: $uniqueKey) {
+    ...CastField
+  }
+}

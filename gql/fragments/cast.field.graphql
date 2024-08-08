@@ -1,0 +1,13 @@
+fragment CastField on CastEntity {
+  uniqueKey
+  pageTitle
+  pageImageUrl
+  pageDescription
+  pageButtonUrlAndTexts {
+    value
+    url
+  }
+  pageOgpImageUrl
+  pageMetaTitle
+  pageMetaDescription
+}
