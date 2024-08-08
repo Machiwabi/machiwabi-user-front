@@ -203,6 +203,7 @@ export type Query = {
   boosters: Array<BoosterEntity>;
   boostersAll: Array<BoosterEntity>;
   cast: CastEntity;
+  casts: Array<CastEntity>;
   checkEventJoinable: Scalars['Boolean']['output'];
   event: EventEntity;
   events: Array<EventEntity>;
@@ -519,6 +520,11 @@ export type CastQueryVariables = Exact<{
 
 
 export type CastQuery = { __typename?: 'Query', cast: { __typename?: 'CastEntity', uniqueKey: string, pageTitle: string, pageImageUrl: string, pageDescription: string, pageOgpImageUrl?: string | null, pageMetaTitle?: string | null, pageMetaDescription?: string | null, pageButtonUrlAndTexts: Array<{ __typename?: 'CastButtonUrlAndTextEntity', value: string, url: string }> } };
+
+export type CastsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CastsQuery = { __typename?: 'Query', casts: Array<{ __typename?: 'CastEntity', uniqueKey: string, pageTitle: string, pageImageUrl: string, pageDescription: string, pageOgpImageUrl?: string | null, pageMetaTitle?: string | null, pageMetaDescription?: string | null, pageButtonUrlAndTexts: Array<{ __typename?: 'CastButtonUrlAndTextEntity', value: string, url: string }> }> };
 
 export type CheckEventJoinableQueryVariables = Exact<{
   uniqueKey: Scalars['String']['input'];
@@ -911,6 +917,13 @@ export const CastDocument = gql`
   }
 }
     ${CastFieldFragmentDoc}`;
+export const CastsDocument = gql`
+    query casts {
+  casts {
+    ...CastField
+  }
+}
+    ${CastFieldFragmentDoc}`;
 export const CheckEventJoinableDocument = gql`
     query checkEventJoinable($uniqueKey: String!) {
   checkEventJoinable(uniqueKey: $uniqueKey)
@@ -1179,6 +1192,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     cast(variables: CastQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CastQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<CastQuery>(CastDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'cast', 'query');
+    },
+    casts(variables?: CastsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CastsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CastsQuery>(CastsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'casts', 'query');
     },
     checkEventJoinable(variables: CheckEventJoinableQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CheckEventJoinableQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<CheckEventJoinableQuery>(CheckEventJoinableDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'checkEventJoinable', 'query');

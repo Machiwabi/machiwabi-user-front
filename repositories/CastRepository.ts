@@ -5,6 +5,9 @@ import {
   CastEntity,
   CastQuery,
   CastQueryVariables,
+  CastsDocument,
+  CastsQuery,
+  CastsQueryVariables,
 } from '../generated/graphql'
 
 const findOne = async (variables: CastQueryVariables): Promise<CastEntity> => {
@@ -22,4 +25,10 @@ const findOne = async (variables: CastQueryVariables): Promise<CastEntity> => {
   }
 }
 
-export const CastRepository = { findOne }
+const findAll = async (): Promise<CastEntity[]> => {
+  const castQuery = await graphqlApiClient().request<CastsQuery>(CastsDocument)
+
+  return castQuery.casts
+}
+
+export const CastRepository = { findOne, findAll }
