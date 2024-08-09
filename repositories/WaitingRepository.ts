@@ -6,6 +6,9 @@ import {
   UpdateWaitingMessageMutationVariables,
   WaitingDocument,
   WaitingEntity,
+  WaitingFromBoosterDocument,
+  WaitingFromBoosterQuery,
+  WaitingFromBoosterQueryVariables,
   WaitingQuery,
   WaitingQueryVariables,
   WaitingSiblingsDocument,
@@ -74,10 +77,29 @@ const updateWaitingMessage = async (
   return mutation.updateWaitingMessage
 }
 
+const findByBooster = async (
+  variables: WaitingFromBoosterQueryVariables,
+  accessToken: string
+): Promise<WaitingEntity | null> => {
+  try {
+    const query = await graphqlApiClient(
+      accessToken
+    ).request<WaitingFromBoosterQuery>(WaitingFromBoosterDocument, variables)
+
+    return query.waitingFromBooster || null
+  } catch (e: any) {
+    if (e.response.errors[0].extensions.code === 'NOT_FOUND_ERROR')
+      throw new NotFoundError('Project not found')
+
+    throw e
+  }
+}
+
 export const WaitingRepository = {
   all,
   findMany,
   findOne,
+  findByBooster,
   siblings,
   updateWaitingMessage,
 }

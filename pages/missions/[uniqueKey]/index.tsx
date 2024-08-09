@@ -5,6 +5,8 @@ import { BoosterEntity } from '../../../generated/graphql'
 import { BoosterRepository } from '../../../repositories/BoosterRepository'
 import { NextPageWithLayout } from '../../_app'
 import { useRouter } from 'next/router'
+import { useWaitingFromBooster } from '../../../hooks/resources/useWaitingFromBooster'
+import { useEffect } from 'react'
 
 type SWRFallbackValue = {
   [key: string]: BoosterEntity
@@ -22,6 +24,17 @@ type Props = {
 const Page: NextPageWithLayout<Props> = ({ uniqueKey, fallback }) => {
   const router = useRouter()
   const { waitingUniqueKey } = router.query
+  const { waiting } = useWaitingFromBooster({ boosterUniqueKey: uniqueKey })
+
+  useEffect(() => {
+    // getParamaterのwaitingUniqueKeyがない　かつ　waitingが存在する場合
+    // waitingUniqueKeyを設定してリダイレクトする
+    if (waitingUniqueKey === undefined && waiting) {
+      router.push(
+        `/missions/${uniqueKey}?waitingUniqueKey=${waiting?.uniqueKey}`
+      )
+    }
+  }, [waiting])
 
   if (waitingUniqueKey === undefined) {
     return (

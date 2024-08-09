@@ -1,0 +1,26 @@
+query waitingFromBooster($boosterUniqueKey: String!) {
+  waitingFromBooster(boosterUniqueKey: $boosterUniqueKey) {
+    ...WaitingField
+    event {
+      ...EventField
+    }
+    user {
+      ...UserPublicField
+    }
+    waitingBoosters {
+      ...WaitingBoosterField
+      booster {
+        ...BoosterField
+      }
+    }
+    waitingRewards {
+      ...WaitingRewardField
+      reward {
+        ...RewardField
+      }
+    }
+    waitingCounter {
+      ...WaitingCounterField
+    }
+  }
+}
