@@ -1,10 +1,9 @@
 import { SWRConfig, unstable_serialize } from 'swr'
 import LApplicationLayout from '../../../components/00_layouts/LApplicationLayout'
-import { SEventScreen } from '../../../components/04_screens/SEventScreen'
-import { CastEntity, EventEntity } from '../../../generated/graphql'
-import { EventRepository } from '../../../repositories/EventRepository'
-import { NextPageWithLayout } from '../../_app'
+import { SCastScreen } from '../../../components/04_screens/SCastScreen'
+import { CastEntity } from '../../../generated/graphql'
 import { CastRepository } from '../../../repositories/CastRepository'
+import { NextPageWithLayout } from '../../_app'
 
 type SWRFallbackValue = {
   [key: string]: CastEntity
@@ -18,10 +17,9 @@ type Props = {
 const Page: NextPageWithLayout<Props> = ({ uniqueKey, fallback }) => {
   return (
     <>
-      {/* <SWRConfig value={{ fallback }}> */}
-      {/* <SEventScreen uniqueKey={uniqueKey} /> */}
-      {uniqueKey}
-      {/* </SWRConfig> */}
+      <SWRConfig value={{ fallback }}>
+        <SCastScreen uniqueKey={uniqueKey} />
+      </SWRConfig>
     </>
   )
 }
@@ -46,7 +44,7 @@ export const getStaticProps = async ({ params }: Params) => {
     { uniqueKey: params.uniqueKey },
   ])
 
-  if (!event) {
+  if (!cast) {
     return {
       notFound: true,
     }

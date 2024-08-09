@@ -11,8 +11,8 @@ export const useCast = (variables: CastQueryVariables) => {
   )
 
   return {
-    event: data,
-    eventError: error,
-    eventIsLoading: isLoading,
+    cast: data,
+    castError: error,
+    castIsLoading: isLoading,
   }
 }
